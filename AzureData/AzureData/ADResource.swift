@@ -312,4 +312,4 @@ public struct ADResourceUri {
 		let link = "offers/\(offerId)"
 		return (URL(string:"\(baseUri)/\(link)")!, link)
 	}
-}
+} 

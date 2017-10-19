@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		// Override point for customization after application launch.
 		
-		AzureData.setup("mobile", key: "Np4cUd6IO3rFM6EMMoXBeGv4LKVrkfFDmws51nBpDFypym90IVPdjMQcy6SjmFMJklTwWglBhSAtoK07IwK7kg==", keyType: .master)
+//		AzureData.setup("mobile", key: "Np4cUd6IO3rFM6EMMoXBeGv4LKVrkfFDmws51nBpDFypym90IVPdjMQcy6SjmFMJklTwWglBhSAtoK07IwK7kg==", keyType: .master)
 		
 		//AzureData.setup("producerdocumentdb", key: "m8sKmtiotoEoZqRr65LcBCr6v2VxJyoKHbrWhjSTYlosgT2oc127VGGkEyA4n8Zjkdfb9ZoUpKoKjw1zktAcdw==", keyType: .master)
 		

@@ -37,4 +37,16 @@ public class ADDocumentCollection: ADResource {
 		if let triggersLink 			= dict[triggersLinkKey] 			as? String { self.triggersLink = triggersLink }
 		if let userDefinedFunctionsLink = dict[userDefinedFunctionsLinkKey] as? String { self.userDefinedFunctionsLink = userDefinedFunctionsLink }
 	}
+	
+	open override var dictionary: [String : Any] {
+		return super.dictionary.merging([
+			conflictsLinkKey:conflictsLink,
+			documentsLinkKey:documentsLink,
+			indexingPolicyKey:indexingPolicy,
+			partitionKeyKey:partitionKey,
+			storedProceduresLinkKey:storedProceduresLink,
+			triggersLinkKey:triggersLink,
+			userDefinedFunctionsLinkKey:userDefinedFunctionsLink])
+		{ (_, new) in new }
+	}
 }

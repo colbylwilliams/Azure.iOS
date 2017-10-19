@@ -9,6 +9,10 @@
 import Foundation
 import AzureData
 
+class CustomDocument: ADDocument {
+	
+}
+
 class Person: ADDocument {
 	
 	var firstName: 	String = ""

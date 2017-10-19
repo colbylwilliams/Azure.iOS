@@ -21,8 +21,8 @@ public struct ADResourceUri {
 	func database(_ databaseId: String? = nil) -> (URL, String) {
 		let noId = databaseId == nil || databaseId!.isEmpty
 		let fragment = noId ? empty : "/\(databaseId!)"
-		let baseLink = "dbs"
-		let itemLink = "\(baseLink)\(fragment)"
+		let baseLink = ""
+		let itemLink = "dbs\(fragment)"
 		return (URL(string:"\(baseUri)/\(itemLink)")!, noId ? baseLink : itemLink)
 	}
 	
@@ -93,8 +93,8 @@ public struct ADResourceUri {
 	func offer(_ offerId: String? = nil) -> (URL, String) {
 		let noId = offerId == nil || offerId!.isEmpty
 		let fragment = noId ? empty : "/\(offerId!)"
-		let baseLink = "offers"
-		let itemLink = "\(baseLink)\(fragment)"
+		let baseLink = ""
+		let itemLink = "offers\(fragment)"
 		return (URL(string:"\(baseUri)/\(itemLink)")!, noId ? baseLink : itemLink)
 	}
 }

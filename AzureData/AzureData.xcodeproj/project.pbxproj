@@ -21,6 +21,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		B5619EB81F99357800D01EAD /* ADResourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EB71F99357800D01EAD /* ADResourceList.swift */; };
+		B5619EBA1F994FB800D01EAD /* DatabaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EB91F994FB800D01EAD /* DatabaseTableViewController.swift */; };
+		B5619EBC1F994FE300D01EAD /* CollectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EBB1F994FE300D01EAD /* CollectionTableViewController.swift */; };
+		B5619EBE1F994FF100D01EAD /* DocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EBD1F994FF100D01EAD /* DocumentTableViewController.swift */; };
 		B5958A051F9903F10023C0AF /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A041F9903F10023C0AF /* Models.swift */; };
 		B5958A081F992C560023C0AF /* ADDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A071F992C560023C0AF /* ADDatabase.swift */; };
 		B5958A0A1F992C9A0023C0AF /* ADResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A091F992C9A0023C0AF /* ADResource.swift */; };
@@ -112,6 +116,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B5619EB71F99357800D01EAD /* ADResourceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResourceList.swift; sourceTree = "<group>"; };
+		B5619EB91F994FB800D01EAD /* DatabaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseTableViewController.swift; sourceTree = "<group>"; };
+		B5619EBB1F994FE300D01EAD /* CollectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewController.swift; sourceTree = "<group>"; };
+		B5619EBD1F994FF100D01EAD /* DocumentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTableViewController.swift; sourceTree = "<group>"; };
 		B5958A041F9903F10023C0AF /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		B5958A071F992C560023C0AF /* ADDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabase.swift; sourceTree = "<group>"; };
 		B5958A091F992C9A0023C0AF /* ADResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResource.swift; sourceTree = "<group>"; };
@@ -218,6 +226,7 @@
 				B5958A1F1F992D240023C0AF /* ADTrigger.swift */,
 				B5958A211F992D2E0023C0AF /* ADUser.swift */,
 				B5958A231F992D3A0023C0AF /* ADUserDefinedFunction.swift */,
+				B5619EB71F99357800D01EAD /* ADResourceList.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -282,6 +291,9 @@
 				B5F76C711F96ACA5001E8B11 /* LaunchScreen.storyboard */,
 				B5F76C741F96ACA5001E8B11 /* Info.plist */,
 				B5958A041F9903F10023C0AF /* Models.swift */,
+				B5619EB91F994FB800D01EAD /* DatabaseTableViewController.swift */,
+				B5619EBB1F994FE300D01EAD /* CollectionTableViewController.swift */,
+				B5619EBD1F994FF100D01EAD /* DocumentTableViewController.swift */,
 			);
 			path = AzureDataApp;
 			sourceTree = "<group>";
@@ -549,6 +561,7 @@
 				B5958A0A1F992C9A0023C0AF /* ADResource.swift in Sources */,
 				B5958A1C1F992D0E0023C0AF /* ADPermissions.swift in Sources */,
 				B5958A1E1F992D190023C0AF /* ADStoredProcedure.swift in Sources */,
+				B5619EB81F99357800D01EAD /* ADResourceList.swift in Sources */,
 				B5958A261F992D520023C0AF /* ADResourceType.swift in Sources */,
 				B5958A201F992D240023C0AF /* ADTrigger.swift in Sources */,
 				B5958A0C1F992CAB0023C0AF /* ADDocument.swift in Sources */,
@@ -579,6 +592,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5619EBE1F994FF100D01EAD /* DocumentTableViewController.swift in Sources */,
+				B5619EBA1F994FB800D01EAD /* DatabaseTableViewController.swift in Sources */,
+				B5619EBC1F994FE300D01EAD /* CollectionTableViewController.swift in Sources */,
 				B5958A051F9903F10023C0AF /* Models.swift in Sources */,
 				B5F76C6B1F96ACA5001E8B11 /* ViewController.swift in Sources */,
 				B5F76C691F96ACA5001E8B11 /* AppDelegate.swift in Sources */,

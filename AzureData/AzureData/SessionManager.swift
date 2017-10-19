@@ -144,17 +144,13 @@ open class SessionManager {
 		
 		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: .database)
 		
-		UIApplication.shared.isNetworkActivityIndicatorVisible = true
-		
 		session.dataTask(with: request) { (data, response, error) in
-			
-			DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
 			
 			if let error = error {
 				print(error.localizedDescription)
 			}
 			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
-				// print(json)
+				print(json)
 				DispatchQueue.main.async { callback(ADDatabase(fromJson: json)) }
 			} else {
 				DispatchQueue.main.async { callback(nil) }
@@ -162,23 +158,42 @@ open class SessionManager {
 		}.resume()
 	}
 
+	
+	public func databases (callback: @escaping (ADResourceList<ADDatabase>?) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).database()
+		
+		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: .database)
+		
+		session.dataTask(with: request) { (data, response, error) in
+			
+			if let error = error {
+				print(error.localizedDescription)
+			}
+			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
+				print(json)
+				DispatchQueue.main.async { callback(ADResourceList<ADDatabase>.init("Databases", json: json)) }
+			} else {
+				print("nope")
+				DispatchQueue.main.async { callback(nil) }
+			}
+		}.resume()
+	}
+
+	
 	public func documentCollection (_ databaseId: String, collectionId: String, callback: @escaping (ADDocumentCollection?) -> ()) {
 
 		let resourceUri = ADResourceUri(resourceName).collection(databaseId, collectionId: collectionId)
 		
 		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: .collection)
 
-		UIApplication.shared.isNetworkActivityIndicatorVisible = true
-		
 		session.dataTask(with: request) { (data, response, error) in
-			
-			DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
 			
 			if let error = error {
 				print(error.localizedDescription)
 			}
 			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
-				// print(json)
+				print(json)
 				DispatchQueue.main.async { callback(ADDocumentCollection(fromJson: json)) }
 			} else {
 				DispatchQueue.main.async { callback(nil) }
@@ -186,23 +201,41 @@ open class SessionManager {
 		}.resume()
 	}
 
+	
+	public func documentCollections (_ databaseId: String, callback: @escaping (ADResourceList<ADDocumentCollection>?) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).collection(databaseId)
+		
+		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: .collection)
+		
+		session.dataTask(with: request) { (data, response, error) in
+			
+			if let error = error {
+				print(error.localizedDescription)
+			}
+			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
+				print(json)
+				DispatchQueue.main.async { callback(ADResourceList<ADDocumentCollection>("DocumentCollections", json: json)) }
+			} else {
+				DispatchQueue.main.async { callback(nil) }
+			}
+		}.resume()
+	}
+
+	
 	public func document<T: ADDocument> (_ databaseId: String, collectionId: String, documentId: String, callback: @escaping (T?) -> ()) {
 
 		let resourceUri = ADResourceUri(resourceName).document(databaseId, collectionId: collectionId, documentId: documentId)
 		
 		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: .document)
 		
-		UIApplication.shared.isNetworkActivityIndicatorVisible = true
-		
 		session.dataTask(with: request) { (data, response, error) in
-			
-			DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
 			
 			if let error = error {
 				print(error.localizedDescription)
 			}
 			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
-				// print(json)
+				print(json)
 				DispatchQueue.main.async { callback(T(fromJson: json)) }
 			} else {
 				DispatchQueue.main.async { callback(nil) }
@@ -236,7 +269,7 @@ open class SessionManager {
 				print(error.localizedDescription)
 			}
 			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
-				// print(json)
+				print(json)
 				DispatchQueue.main.async { callback(T(fromJson: json)) }
 			} else {
 				DispatchQueue.main.async { callback(nil) }
@@ -244,4 +277,25 @@ open class SessionManager {
 		}.resume()
 	}
 
+	public func documents<T: ADDocument> (_ databaseId: String, collectionId: String, _:T.Type, callback: @escaping (ADResourceList<T>?) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).document(databaseId, collectionId: collectionId)
+		
+		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: .document)
+		
+		session.dataTask(with: request) { (data, response, error) in
+			
+			if let error = error {
+				print(error.localizedDescription)
+			}
+			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
+				print(json)
+				DispatchQueue.main.async { callback(ADResourceList<T>("Documents", json: json)) }
+			} else {
+				DispatchQueue.main.async { callback(nil) }
+			}
+		}.resume()
+	}
+
+	
 }

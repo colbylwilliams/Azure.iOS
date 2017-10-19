@@ -56,8 +56,6 @@ public class ADTokenProvider {
 		
 		let signiture = payload.hmac(algorithm: .SHA256, key: key)
 		
-		print(signiture)
-		
 		let authString = "type=\(keyType)&ver=\(tokenVersion)&sig=\(signiture)"
 		
 		let authStringEncoded = authString.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics)!

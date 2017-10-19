@@ -8,6 +8,8 @@
 
 import Foundation
 
+public typealias HTTPHeaders = [String: String]
+
 // https://docs.microsoft.com/en-us/rest/api/documentdb/http-status-codes-for-documentdb
 public enum ADStatusCode : Int {
 	case ok                     = 200
@@ -53,6 +55,8 @@ public enum ADHttpRequestHeader {
 	case xMSVersion
 	case aIM
 	case xMSDocumentdbPartitionKeyRangeId
+	case acceptEncoding
+	case acceptLanguage
 	
 	var key: String {
 		switch self {
@@ -72,6 +76,8 @@ public enum ADHttpRequestHeader {
 		case .xMSVersion: 						return "x-ms-version"
 		case .aIM: 								return "A-IM"
 		case .xMSDocumentdbPartitionKeyRangeId: return "x-ms-documentdb-partitionkeyrangeid"
+		case .acceptEncoding:					return "Accept-Encoding"
+		case .acceptLanguage:					return "Accept-Language"
 		}
 	}
 	
@@ -86,6 +92,15 @@ public enum ADHttpRequestHeader {
 		}
 	}
 }
+
+extension Dictionary where Key == ADHttpRequestHeader, Value == String  {
+	var strings: [String:String] {
+		return Dictionary<String, String>.init(uniqueKeysWithValues: self.map{ (k, v) in
+			(k.key, v)
+		})
+	}
+}
+
 
 // https://docs.microsoft.com/en-us/rest/api/documentdb/common-documentdb-rest-response-headers
 public enum ADResponseHeader {

@@ -25,7 +25,7 @@ class ViewController: UIViewController {
 		
 		AzureData.database("Content") { database in
 			if let b = database {
-				b.printPretty()
+				b.printLog()
 			} else {
 				print("poop")
 			}
@@ -34,16 +34,30 @@ class ViewController: UIViewController {
 		AzureData.documentCollection("Content", collectionId: "Items") { collection in
 //		AzureData.documentCollection("Content", collectionId: "AvContent") { collection in
 			if let c = collection {
-				c.printPretty()
+				c.printLog()
+			} else {
+				print("poop")
+			}
+		}
+
+		AzureData.document("Content", collectionId: "Items", documentId: "11f656df-15e6-4e5f-8b5b-d17e0d43243e") { document in
+//		AzureData.document("Content", collectionId: "AvContent", documentId: "fec11285-6b4f-4691-84ef-752f672e07bc") { document in
+			if let d = document {
+				d.printLog()
 			} else {
 				print("poop")
 			}
 		}
 		
-		AzureData.document("Content", collectionId: "Items", documentId: "11f656df-15e6-4e5f-8b5b-d17e0d43243e") { document in
-//		AzureData.document("Content", collectionId: "AvContent", documentId: "fec11285-6b4f-4691-84ef-752f672e07bc") { document in
-			if let d = document {
-				d.printPretty()
+		let person = Person()
+		person.firstName = "Colby"
+		person.lastName = "Williams"
+		person.email = "colbyw@microsoft.com"
+		person.age = 29
+		
+		AzureData.document("Content", collectionId: "Items", document: person) { person in
+			if let p = person {
+				p.printLog()
 			} else {
 				print("poop")
 			}

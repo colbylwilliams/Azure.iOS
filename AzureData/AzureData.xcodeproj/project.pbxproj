@@ -21,6 +21,24 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		B5958A051F9903F10023C0AF /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A041F9903F10023C0AF /* Models.swift */; };
+		B5958A081F992C560023C0AF /* ADDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A071F992C560023C0AF /* ADDatabase.swift */; };
+		B5958A0A1F992C9A0023C0AF /* ADResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A091F992C9A0023C0AF /* ADResource.swift */; };
+		B5958A0C1F992CAB0023C0AF /* ADDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A0B1F992CAB0023C0AF /* ADDocument.swift */; };
+		B5958A0E1F992CB90023C0AF /* ADDocumentCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A0D1F992CB90023C0AF /* ADDocumentCollection.swift */; };
+		B5958A101F992CC50023C0AF /* ADAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A0F1F992CC50023C0AF /* ADAttachment.swift */; };
+		B5958A121F992CD10023C0AF /* ADConflict.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A111F992CD10023C0AF /* ADConflict.swift */; };
+		B5958A141F992CDD0023C0AF /* ADDatabaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A131F992CDD0023C0AF /* ADDatabaseAccount.swift */; };
+		B5958A161F992CE90023C0AF /* ADError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A151F992CE90023C0AF /* ADError.swift */; };
+		B5958A181F992CF60023C0AF /* ADOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A171F992CF60023C0AF /* ADOffer.swift */; };
+		B5958A1A1F992D020023C0AF /* ADPartitionKeyRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A191F992D020023C0AF /* ADPartitionKeyRange.swift */; };
+		B5958A1C1F992D0E0023C0AF /* ADPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A1B1F992D0E0023C0AF /* ADPermissions.swift */; };
+		B5958A1E1F992D190023C0AF /* ADStoredProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A1D1F992D190023C0AF /* ADStoredProcedure.swift */; };
+		B5958A201F992D240023C0AF /* ADTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A1F1F992D240023C0AF /* ADTrigger.swift */; };
+		B5958A221F992D2E0023C0AF /* ADUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A211F992D2E0023C0AF /* ADUser.swift */; };
+		B5958A241F992D3A0023C0AF /* ADUserDefinedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A231F992D3A0023C0AF /* ADUserDefinedFunction.swift */; };
+		B5958A261F992D520023C0AF /* ADResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A251F992D520023C0AF /* ADResourceType.swift */; };
+		B5958A281F992D5E0023C0AF /* ADResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A271F992D5E0023C0AF /* ADResourceUri.swift */; };
 		B5DA1DFB1F977EAF00C300D3 /* ADResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA1DFA1F977EAF00C300D3 /* ADResponse.swift */; };
 		B5DA1DFD1F978C0A00C300D3 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA1DFC1F978C0A00C300D3 /* SessionManager.swift */; };
 		B5DA1DFF1F97D64500C300D3 /* ADHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA1DFE1F97D64500C300D3 /* ADHttp.swift */; };
@@ -30,7 +48,6 @@
 		B5F76C541F96A7F3001E8B11 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C531F96A7F3001E8B11 /* NetworkReachabilityManager.swift */; };
 		B5F76C561F96A80B001E8B11 /* AzureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C551F96A80B001E8B11 /* AzureData.swift */; };
 		B5F76C5F1F96A91C001E8B11 /* ADTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C5E1F96A91C001E8B11 /* ADTokenProvider.swift */; };
-		B5F76C611F96AA4B001E8B11 /* ADResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C601F96AA4B001E8B11 /* ADResource.swift */; };
 		B5F76C691F96ACA5001E8B11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C681F96ACA5001E8B11 /* AppDelegate.swift */; };
 		B5F76C6B1F96ACA5001E8B11 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C6A1F96ACA5001E8B11 /* ViewController.swift */; };
 		B5F76C6E1F96ACA5001E8B11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F76C6C1F96ACA5001E8B11 /* Main.storyboard */; };
@@ -95,6 +112,24 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B5958A041F9903F10023C0AF /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		B5958A071F992C560023C0AF /* ADDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabase.swift; sourceTree = "<group>"; };
+		B5958A091F992C9A0023C0AF /* ADResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResource.swift; sourceTree = "<group>"; };
+		B5958A0B1F992CAB0023C0AF /* ADDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDocument.swift; sourceTree = "<group>"; };
+		B5958A0D1F992CB90023C0AF /* ADDocumentCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDocumentCollection.swift; sourceTree = "<group>"; };
+		B5958A0F1F992CC50023C0AF /* ADAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADAttachment.swift; sourceTree = "<group>"; };
+		B5958A111F992CD10023C0AF /* ADConflict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADConflict.swift; sourceTree = "<group>"; };
+		B5958A131F992CDD0023C0AF /* ADDatabaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabaseAccount.swift; sourceTree = "<group>"; };
+		B5958A151F992CE90023C0AF /* ADError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADError.swift; sourceTree = "<group>"; };
+		B5958A171F992CF60023C0AF /* ADOffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADOffer.swift; sourceTree = "<group>"; };
+		B5958A191F992D020023C0AF /* ADPartitionKeyRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPartitionKeyRange.swift; sourceTree = "<group>"; };
+		B5958A1B1F992D0E0023C0AF /* ADPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPermissions.swift; sourceTree = "<group>"; };
+		B5958A1D1F992D190023C0AF /* ADStoredProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADStoredProcedure.swift; sourceTree = "<group>"; };
+		B5958A1F1F992D240023C0AF /* ADTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADTrigger.swift; sourceTree = "<group>"; };
+		B5958A211F992D2E0023C0AF /* ADUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADUser.swift; sourceTree = "<group>"; };
+		B5958A231F992D3A0023C0AF /* ADUserDefinedFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADUserDefinedFunction.swift; sourceTree = "<group>"; };
+		B5958A251F992D520023C0AF /* ADResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResourceType.swift; sourceTree = "<group>"; };
+		B5958A271F992D5E0023C0AF /* ADResourceUri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResourceUri.swift; sourceTree = "<group>"; };
 		B5DA1DFA1F977EAF00C300D3 /* ADResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResponse.swift; sourceTree = "<group>"; };
 		B5DA1DFC1F978C0A00C300D3 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
 		B5DA1DFE1F97D64500C300D3 /* ADHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHttp.swift; sourceTree = "<group>"; };
@@ -107,7 +142,6 @@
 		B5F76C531F96A7F3001E8B11 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
 		B5F76C551F96A80B001E8B11 /* AzureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureData.swift; sourceTree = "<group>"; };
 		B5F76C5E1F96A91C001E8B11 /* ADTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADTokenProvider.swift; sourceTree = "<group>"; };
-		B5F76C601F96AA4B001E8B11 /* ADResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResource.swift; sourceTree = "<group>"; };
 		B5F76C661F96ACA5001E8B11 /* AzureDataApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AzureDataApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F76C681F96ACA5001E8B11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B5F76C6A1F96ACA5001E8B11 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +198,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B5958A061F992BFB0023C0AF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B5958A0F1F992CC50023C0AF /* ADAttachment.swift */,
+				B5958A111F992CD10023C0AF /* ADConflict.swift */,
+				B5958A071F992C560023C0AF /* ADDatabase.swift */,
+				B5958A131F992CDD0023C0AF /* ADDatabaseAccount.swift */,
+				B5958A0B1F992CAB0023C0AF /* ADDocument.swift */,
+				B5958A0D1F992CB90023C0AF /* ADDocumentCollection.swift */,
+				B5958A151F992CE90023C0AF /* ADError.swift */,
+				B5958A171F992CF60023C0AF /* ADOffer.swift */,
+				B5958A191F992D020023C0AF /* ADPartitionKeyRange.swift */,
+				B5958A1B1F992D0E0023C0AF /* ADPermissions.swift */,
+				B5958A091F992C9A0023C0AF /* ADResource.swift */,
+				B5958A251F992D520023C0AF /* ADResourceType.swift */,
+				B5958A271F992D5E0023C0AF /* ADResourceUri.swift */,
+				B5958A1D1F992D190023C0AF /* ADStoredProcedure.swift */,
+				B5958A1F1F992D240023C0AF /* ADTrigger.swift */,
+				B5958A211F992D2E0023C0AF /* ADUser.swift */,
+				B5958A231F992D3A0023C0AF /* ADUserDefinedFunction.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		B5F76C2F1F96A7AF001E8B11 = {
 			isa = PBXGroup;
 			children = (
@@ -192,12 +250,12 @@
 		B5F76C3B1F96A7AF001E8B11 /* AzureData */ = {
 			isa = PBXGroup;
 			children = (
+				B5958A061F992BFB0023C0AF /* Models */,
 				B5F76C3C1F96A7AF001E8B11 /* AzureData.h */,
 				B5F76C3D1F96A7AF001E8B11 /* Info.plist */,
 				B5F76C531F96A7F3001E8B11 /* NetworkReachabilityManager.swift */,
 				B5F76C551F96A80B001E8B11 /* AzureData.swift */,
 				B5F76C5E1F96A91C001E8B11 /* ADTokenProvider.swift */,
-				B5F76C601F96AA4B001E8B11 /* ADResource.swift */,
 				B5DA1DFA1F977EAF00C300D3 /* ADResponse.swift */,
 				B5DA1DFC1F978C0A00C300D3 /* SessionManager.swift */,
 				B5DA1DFE1F97D64500C300D3 /* ADHttp.swift */,
@@ -223,6 +281,7 @@
 				B5F76C6F1F96ACA5001E8B11 /* Assets.xcassets */,
 				B5F76C711F96ACA5001E8B11 /* LaunchScreen.storyboard */,
 				B5F76C741F96ACA5001E8B11 /* Info.plist */,
+				B5958A041F9903F10023C0AF /* Models.swift */,
 			);
 			path = AzureDataApp;
 			sourceTree = "<group>";
@@ -483,12 +542,28 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5DA1DFF1F97D64500C300D3 /* ADHttp.swift in Sources */,
-				B5F76C611F96AA4B001E8B11 /* ADResource.swift in Sources */,
+				B5958A121F992CD10023C0AF /* ADConflict.swift in Sources */,
+				B5958A281F992D5E0023C0AF /* ADResourceUri.swift in Sources */,
+				B5958A221F992D2E0023C0AF /* ADUser.swift in Sources */,
+				B5958A1A1F992D020023C0AF /* ADPartitionKeyRange.swift in Sources */,
+				B5958A0A1F992C9A0023C0AF /* ADResource.swift in Sources */,
+				B5958A1C1F992D0E0023C0AF /* ADPermissions.swift in Sources */,
+				B5958A1E1F992D190023C0AF /* ADStoredProcedure.swift in Sources */,
+				B5958A261F992D520023C0AF /* ADResourceType.swift in Sources */,
+				B5958A201F992D240023C0AF /* ADTrigger.swift in Sources */,
+				B5958A0C1F992CAB0023C0AF /* ADDocument.swift in Sources */,
+				B5958A0E1F992CB90023C0AF /* ADDocumentCollection.swift in Sources */,
 				B5F76C541F96A7F3001E8B11 /* NetworkReachabilityManager.swift in Sources */,
+				B5958A161F992CE90023C0AF /* ADError.swift in Sources */,
 				B5DA1DFD1F978C0A00C300D3 /* SessionManager.swift in Sources */,
+				B5958A101F992CC50023C0AF /* ADAttachment.swift in Sources */,
+				B5958A241F992D3A0023C0AF /* ADUserDefinedFunction.swift in Sources */,
 				B5DA1DFB1F977EAF00C300D3 /* ADResponse.swift in Sources */,
+				B5958A081F992C560023C0AF /* ADDatabase.swift in Sources */,
+				B5958A141F992CDD0023C0AF /* ADDatabaseAccount.swift in Sources */,
 				B5F76C5F1F96A91C001E8B11 /* ADTokenProvider.swift in Sources */,
 				B5F76C561F96A80B001E8B11 /* AzureData.swift in Sources */,
+				B5958A181F992CF60023C0AF /* ADOffer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +579,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5958A051F9903F10023C0AF /* Models.swift in Sources */,
 				B5F76C6B1F96ACA5001E8B11 /* ViewController.swift in Sources */,
 				B5F76C691F96ACA5001E8B11 /* AppDelegate.swift in Sources */,
 			);

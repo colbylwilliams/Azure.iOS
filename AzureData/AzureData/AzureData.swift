@@ -25,3 +25,7 @@ public func documentCollection (_ databaseId: String, collectionId: String, call
 public func document<T: ADDocument> (_ databaseId: String, collectionId: String, documentId: String, callback: @escaping (T?) -> ()) {
 	return SessionManager.default.document(databaseId, collectionId: collectionId, documentId: documentId, callback: callback)
 }
+
+public func document<T: ADDocument> (_ databaseId: String, collectionId: String, document: T, callback: @escaping (T?) -> ()) {
+	return SessionManager.default.document(databaseId, collectionId: collectionId, document: document, callback: callback)
+}

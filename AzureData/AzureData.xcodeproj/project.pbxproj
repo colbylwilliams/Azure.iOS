@@ -21,6 +21,8 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		B53BF7761F9A2F9400B7A187 /* ADIndexingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53BF7751F9A2F9400B7A187 /* ADIndexingPolicy.swift */; };
+		B53BF7781F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53BF7771F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift */; };
 		B5619EB81F99357800D01EAD /* ADResourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EB71F99357800D01EAD /* ADResourceList.swift */; };
 		B5619EBA1F994FB800D01EAD /* DatabaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EB91F994FB800D01EAD /* DatabaseTableViewController.swift */; };
 		B5619EBC1F994FE300D01EAD /* CollectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EBB1F994FE300D01EAD /* CollectionTableViewController.swift */; };
@@ -116,6 +118,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B53BF7751F9A2F9400B7A187 /* ADIndexingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADIndexingPolicy.swift; sourceTree = "<group>"; };
+		B53BF7771F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPartitionKeyDefinition.swift; sourceTree = "<group>"; };
 		B5619EB71F99357800D01EAD /* ADResourceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResourceList.swift; sourceTree = "<group>"; };
 		B5619EB91F994FB800D01EAD /* DatabaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseTableViewController.swift; sourceTree = "<group>"; };
 		B5619EBB1F994FE300D01EAD /* CollectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewController.swift; sourceTree = "<group>"; };
@@ -216,17 +220,19 @@
 				B5958A0B1F992CAB0023C0AF /* ADDocument.swift */,
 				B5958A0D1F992CB90023C0AF /* ADDocumentCollection.swift */,
 				B5958A151F992CE90023C0AF /* ADError.swift */,
+				B53BF7751F9A2F9400B7A187 /* ADIndexingPolicy.swift */,
 				B5958A171F992CF60023C0AF /* ADOffer.swift */,
 				B5958A191F992D020023C0AF /* ADPartitionKeyRange.swift */,
 				B5958A1B1F992D0E0023C0AF /* ADPermissions.swift */,
 				B5958A091F992C9A0023C0AF /* ADResource.swift */,
+				B5619EB71F99357800D01EAD /* ADResourceList.swift */,
 				B5958A251F992D520023C0AF /* ADResourceType.swift */,
 				B5958A271F992D5E0023C0AF /* ADResourceUri.swift */,
 				B5958A1D1F992D190023C0AF /* ADStoredProcedure.swift */,
 				B5958A1F1F992D240023C0AF /* ADTrigger.swift */,
 				B5958A211F992D2E0023C0AF /* ADUser.swift */,
 				B5958A231F992D3A0023C0AF /* ADUserDefinedFunction.swift */,
-				B5619EB71F99357800D01EAD /* ADResourceList.swift */,
+				B53BF7771F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -553,6 +559,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B53BF7781F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift in Sources */,
 				B5DA1DFF1F97D64500C300D3 /* ADHttp.swift in Sources */,
 				B5958A121F992CD10023C0AF /* ADConflict.swift in Sources */,
 				B5958A281F992D5E0023C0AF /* ADResourceUri.swift in Sources */,
@@ -565,6 +572,7 @@
 				B5958A261F992D520023C0AF /* ADResourceType.swift in Sources */,
 				B5958A201F992D240023C0AF /* ADTrigger.swift in Sources */,
 				B5958A0C1F992CAB0023C0AF /* ADDocument.swift in Sources */,
+				B53BF7761F9A2F9400B7A187 /* ADIndexingPolicy.swift in Sources */,
 				B5958A0E1F992CB90023C0AF /* ADDocumentCollection.swift in Sources */,
 				B5F76C541F96A7F3001E8B11 /* NetworkReachabilityManager.swift in Sources */,
 				B5958A161F992CE90023C0AF /* ADError.swift in Sources */,

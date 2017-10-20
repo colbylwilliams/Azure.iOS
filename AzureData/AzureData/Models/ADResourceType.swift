@@ -34,4 +34,19 @@ public enum ADResourceType : String {
 		case .offer: 			return "offers"
 		}
 	}
+	
+	var key: String {
+		switch self {
+		case .database: 		return "Databases"
+		case .user: 			return "Users"
+		case .permission: 		return "Permissions"
+		case .collection: 		return "DocumentCollections"
+		case .storedProcedure: 	return "StoredProcedures"
+		case .trigger: 			return "Triggers"
+		case .udf: 				return "UserDefinedFunctions"
+		case .document: 		return "Documents"
+		case .attachment: 		return "Attachments"
+		case .offer: 			return "Offers"
+		}
+	}
 }

@@ -11,34 +11,71 @@ import AzureData
 
 class DatabaseTableViewController: UITableViewController {
 
+	
 	var databases: [ADDatabase] = []
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		AzureData.setup("mobile", key: "Np4cUd6IO3rFM6EMMoXBeGv4LKVrkfFDmws51nBpDFypym90IVPdjMQcy6SjmFMJklTwWglBhSAtoK07IwK7kg==", keyType: .master)
-		
-		AzureData.databases { list in
-			if let dbs = list?.items {
-				self.databases = dbs
-				self.tableView.reloadData()
-			} else {
-				print("poop")
+		refreshData()
+    }
+	
+	func refreshData() {
+		if AzureData.isSetup() {
+			AzureData.databases { list in
+				if let dbs = list?.items {
+					self.databases = dbs
+					self.tableView.reloadData()
+				}
+				if self.refreshControl?.isRefreshing ?? false {
+					self.refreshControl!.endRefreshing()
+				}
 			}
 		}
-    }
+	}
 
-    // MARK: - Table view data source
+	
+	@IBAction func refreshControlValueChanged(_ sender: Any) { refreshData() }
+	
+	
+	@IBAction func addButtonTouchUpInside(_ sender: Any) { showNewResourceAlert() }
+	
+	
+	func showNewResourceAlert() {
+		
+		let alertController = UIAlertController(title: "New Database", message: "Enter an ID for the Azure Cosmos DB database", preferredStyle: .alert)
+		
+		alertController.addTextField() { textField in
+			textField.placeholder = "Database ID"
+			textField.returnKeyType = .done
+		}
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+		alertController.addAction(UIAlertAction(title: "Create", style: .default) { a in
+			
+			if let name = alertController.textFields?.first?.text {
+				
+				AzureData.createDatabase(name) { database in
+					if let database = database {
+						self.databases.append(database)
+						self.tableView.reloadData()
+					}
+				}
+			}
+		})
+		
+		present(alertController, animated: true) { }
+	}
+	
+	
+	// MARK: - Table view data source
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return databases.count
-    }
+    override func numberOfSections(in tableView: UITableView) -> Int { return 1 }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+	
+	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return databases.count }
+
+	
+	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "databaseCell", for: indexPath)
 		
 		let database = databases[indexPath.row]
@@ -49,26 +86,49 @@ class DatabaseTableViewController: UITableViewController {
         return cell
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
+	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
+			let item = self.databases[indexPath.row]
+			AzureData.database(item.id) { database in
+				database?.printLog()
+				tableView.reloadRows(at: [indexPath], with: .automatic)
+				callback(false)
+			}
+		}
+		action.backgroundColor = UIColor.blue
+		
+		return UISwipeActionsConfiguration(actions: [ action ] );
+	}
+	
+	
+	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+		let action = UIContextualAction.init(style: .destructive, title: "Delete") { (action, view, callback) in
+			let item = self.databases[indexPath.row]
+			AzureData.delete(item) { success in
+				if success {
+					self.databases.remove(at: indexPath.row)
+					tableView.deleteRows(at: [indexPath], with: .automatic)
+				}
+				callback(success)
+			}
+		}
+		return UISwipeActionsConfiguration(actions: [ action ] );
+	}
 
+	
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+		if editingStyle == .delete {
+			let item = self.databases[indexPath.row]
+			AzureData.delete(item) { success in
+				if success {
+					self.databases.remove(at: indexPath.row)
+					tableView.deleteRows(at: [indexPath], with: .automatic)
+				}
+			}
+		}
+	}
+	
 	
     // MARK: - Navigation
 

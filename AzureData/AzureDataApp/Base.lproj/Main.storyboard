@@ -5,42 +5,13 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
-            <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="AzureDataApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OKa-hl-0N3">
-                                <rect key="frame" x="164" y="318" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="buttonTouched:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aGe-8E-bLg"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="OKa-hl-0N3" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="O8i-Lc-pwM"/>
-                            <constraint firstItem="OKa-hl-0N3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Wae-49-NJ0"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="137" y="-606"/>
-        </scene>
-        <!--Database Table View Controller-->
+        <!--Databases-->
         <scene sceneID="u4n-qg-6HB">
             <objects>
-                <tableViewController storyboardIdentifier="DatabaseTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fLY-Gn-nWy" customClass="DatabaseTableViewController" customModule="AzureDataApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="DatabaseTableViewController" title="Databases" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fLY-Gn-nWy" customClass="DatabaseTableViewController" customModule="AzureDataApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ude-kA-PP7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -79,16 +50,28 @@
                             <outlet property="delegate" destination="fLY-Gn-nWy" id="Hh8-OZ-Bw6"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="1W6-Bu-VKh"/>
+                    <navigationItem key="navigationItem" title="Databases" id="1W6-Bu-VKh">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Mt8-8d-tJI">
+                            <connections>
+                                <action selector="addButtonTouchUpInside:" destination="fLY-Gn-nWy" id="Trn-Wu-NxS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="gOi-Dq-itm">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refreshControlValueChanged:" destination="fLY-Gn-nWy" eventType="valueChanged" id="aec-EJ-JRy"/>
+                        </connections>
+                    </refreshControl>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ryC-B6-GQP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1089" y="134"/>
         </scene>
-        <!--Collection Table View Controller-->
+        <!--Collections-->
         <scene sceneID="eeY-wY-Z73">
             <objects>
-                <tableViewController storyboardIdentifier="CollectionTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Exf-et-TTs" customClass="CollectionTableViewController" customModule="AzureDataApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="CollectionTableViewController" title="Collections" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Exf-et-TTs" customClass="CollectionTableViewController" customModule="AzureDataApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="reh-9Q-B8I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -127,15 +110,29 @@
                             <outlet property="delegate" destination="Exf-et-TTs" id="6eU-Of-GS8"/>
                         </connections>
                     </tableView>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="Zza-Ze-Ilp">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refreshControlValueChanged:" destination="Exf-et-TTs" eventType="valueChanged" id="U8N-U3-4nP"/>
+                        </connections>
+                    </refreshControl>
+                    <connections>
+                        <outlet property="addButton" destination="rv5-2W-Pgs" id="naE-OW-qhf"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Wsq-h1-Q17" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem systemItem="add" id="rv5-2W-Pgs">
+                    <connections>
+                        <action selector="addButtonTouchUpInside:" destination="Exf-et-TTs" id="PL0-Ns-ieF"/>
+                    </connections>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="1823" y="134"/>
         </scene>
-        <!--Document Table View Controller-->
+        <!--Documents-->
         <scene sceneID="Jhz-gD-M0C">
             <objects>
-                <tableViewController storyboardIdentifier="DocumentTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yGr-k6-DzK" customClass="DocumentTableViewController" customModule="AzureDataApp" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="DocumentTableViewController" title="Documents" useStoryboardIdentifierAsRestorationIdentifier="YES" id="yGr-k6-DzK" customClass="DocumentTableViewController" customModule="AzureDataApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="USg-3W-v0e">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -164,6 +161,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="d4a-gx-b7o" kind="show" id="ANF-Np-d7R"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -171,15 +171,73 @@
                             <outlet property="delegate" destination="yGr-k6-DzK" id="Rqb-ow-dde"/>
                         </connections>
                     </tableView>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="rRA-bB-9BF">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refreshControlValueChanged:" destination="yGr-k6-DzK" eventType="valueChanged" id="3e2-H9-e99"/>
+                        </connections>
+                    </refreshControl>
+                    <connections>
+                        <outlet property="addButton" destination="zkQ-9z-CDK" id="NFc-S9-umC"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cJg-nG-zAb" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <barButtonItem systemItem="add" id="zkQ-9z-CDK">
+                    <connections>
+                        <action selector="addButtonTouchUpInside:" destination="yGr-k6-DzK" id="7SQ-I8-cpX"/>
+                    </connections>
+                </barButtonItem>
             </objects>
             <point key="canvasLocation" x="2548" y="134"/>
+        </scene>
+        <!--Document Detail Table View Controller-->
+        <scene sceneID="3cV-lG-leE">
+            <objects>
+                <tableViewController storyboardIdentifier="DocumentDetailTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="d4a-gx-b7o" customClass="DocumentDetailTableViewController" customModule="AzureDataApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="wmi-5a-7go">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="documentDetailCell" textLabel="moD-fE-xi6" detailTextLabel="oh7-4h-uur" style="IBUITableViewCellStyleSubtitle" id="EwY-HZ-IfA">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EwY-HZ-IfA" id="bIx-oY-keA">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="moD-fE-xi6">
+                                            <rect key="frame" x="16" y="5" width="33.5" height="20.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Detail" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="oh7-4h-uur">
+                                            <rect key="frame" x="16" y="25.5" width="33" height="14.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="d4a-gx-b7o" id="Rtc-b1-1TY"/>
+                            <outlet property="delegate" destination="d4a-gx-b7o" id="PhX-Q2-Dg7"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0wF-Jo-gVj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3274" y="134"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="N1b-jW-RUd">
             <objects>
-                <navigationController id="zgn-kw-HJ9" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="zgn-kw-HJ9" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="f9s-rd-mBp">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -190,7 +248,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bCH-1L-E7a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137" y="134"/>
+            <point key="canvasLocation" x="358" y="134"/>
         </scene>
     </scenes>
 </document>

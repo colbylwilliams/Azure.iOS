@@ -11,38 +11,67 @@ import AzureData
 
 class DocumentTableViewController: UITableViewController {
 
+	@IBOutlet var addButton: UIBarButtonItem!
+	
 	var databaseId: String?
 	var documentCollectionId: String?
 	
-	var documents:[ADDocument] = []
+	//var documents:[Person] = []
+	var documents:[CustomDocument] = []
 	
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		if let database = databaseId, let documentCollection = documentCollectionId {
+		refreshData()
+		
+		navigationItem.rightBarButtonItems = [addButton, editButtonItem]
+    }
 
-			AzureData.documents(database, collectionId: documentCollection, documentType: CustomDocument.self) { list in
+	func refreshData() {
+		if let database = databaseId, let documentCollection = documentCollectionId {
+			
+			//AzureData.documents(Person.self, databaseId: database, collectionId: documentCollection) { list in
+			AzureData.documents(CustomDocument.self, databaseId: database, collectionId: documentCollection) { list in
 				if let items = list?.items {
+					//for item in items { item.printLog()	}
 					self.documents = items
+					self.tableView.reloadData()
+				}
+				if self.refreshControl?.isRefreshing ?? false {
+					self.refreshControl!.endRefreshing()
+				}
+			}
+		}
+	}
+
+	
+	@IBAction func refreshControlValueChanged(_ sender: Any) { refreshData() }
+	
+	
+	@IBAction func addButtonTouchUpInside(_ sender: Any) {
+		if let databaseId = databaseId, let documentCollectionId = documentCollectionId {
+			AzureData.createDocument(databaseId, collectionId: documentCollectionId, document: CustomDocument()) { document in
+				if let document = document {
+					self.documents.append(document)
 					self.tableView.reloadData()
 				}
 			}
 		}
+	}
 
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-
-
-    // MARK: - Table view data source
+	
+	// MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
 
+	
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return documents.count
     }
 
+	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "documentCell", for: indexPath)
 
@@ -54,34 +83,56 @@ class DocumentTableViewController: UITableViewController {
         return cell
     }
 
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // MARK: - Navigation
+	
+	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
+			let item = self.documents[indexPath.row]
+			AzureData.document(CustomDocument.self, databaseId: self.databaseId!, collectionId: self.documentCollectionId!, documentId: item.id) { document in
+				document?.printLog()
+				tableView.reloadRows(at: [indexPath], with: .automatic)
+				callback(false)
+			}
+		}
+		action.backgroundColor = UIColor.blue
+		
+		return UISwipeActionsConfiguration(actions: [ action ] );
+	}
+	
+	
+	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+		let action = UIContextualAction.init(style: .destructive, title: "Delete") { (action, view, callback) in
+			let item = self.documents[indexPath.row]
+			AzureData.delete(item, databaseId: self.databaseId!, collectionId: self.documentCollectionId!) { success in
+				if success {
+					self.documents.remove(at: indexPath.row)
+					tableView.deleteRows(at: [indexPath], with: .automatic)
+				}
+				callback(success)
+			}
+		}
+		return UISwipeActionsConfiguration(actions: [ action ] );
+	}
 
 	
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+		if editingStyle == .delete {
+			let item = self.documents[indexPath.row]
+			AzureData.delete(item, databaseId: self.databaseId!, collectionId: self.documentCollectionId!) { success in
+				if success {
+					self.documents.remove(at: indexPath.row)
+					tableView.deleteRows(at: [indexPath], with: .automatic)
+				}
+			}
+		}
+	}
+	
+
+    // MARK: - Navigation
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+		if let cell = sender as? UITableViewCell, let index = tableView.indexPath(for: cell), let destinationViewController = segue.destination as? DocumentDetailTableViewController {
+			destinationViewController.documentDictionary = documents[index.row].dictionary
+		}
     }
-    */
 
 }

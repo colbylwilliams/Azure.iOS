@@ -23,6 +23,7 @@
 /* Begin PBXBuildFile section */
 		B53BF7761F9A2F9400B7A187 /* ADIndexingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53BF7751F9A2F9400B7A187 /* ADIndexingPolicy.swift */; };
 		B53BF7781F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53BF7771F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift */; };
+		B53BF77A1F9A7AE700B7A187 /* DocumentDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53BF7791F9A7AE700B7A187 /* DocumentDetailTableViewController.swift */; };
 		B5619EB81F99357800D01EAD /* ADResourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EB71F99357800D01EAD /* ADResourceList.swift */; };
 		B5619EBA1F994FB800D01EAD /* DatabaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EB91F994FB800D01EAD /* DatabaseTableViewController.swift */; };
 		B5619EBC1F994FE300D01EAD /* CollectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EBB1F994FE300D01EAD /* CollectionTableViewController.swift */; };
@@ -55,7 +56,6 @@
 		B5F76C561F96A80B001E8B11 /* AzureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C551F96A80B001E8B11 /* AzureData.swift */; };
 		B5F76C5F1F96A91C001E8B11 /* ADTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C5E1F96A91C001E8B11 /* ADTokenProvider.swift */; };
 		B5F76C691F96ACA5001E8B11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C681F96ACA5001E8B11 /* AppDelegate.swift */; };
-		B5F76C6B1F96ACA5001E8B11 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C6A1F96ACA5001E8B11 /* ViewController.swift */; };
 		B5F76C6E1F96ACA5001E8B11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F76C6C1F96ACA5001E8B11 /* Main.storyboard */; };
 		B5F76C701F96ACA5001E8B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F76C6F1F96ACA5001E8B11 /* Assets.xcassets */; };
 		B5F76C731F96ACA5001E8B11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F76C711F96ACA5001E8B11 /* LaunchScreen.storyboard */; };
@@ -120,6 +120,7 @@
 /* Begin PBXFileReference section */
 		B53BF7751F9A2F9400B7A187 /* ADIndexingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADIndexingPolicy.swift; sourceTree = "<group>"; };
 		B53BF7771F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPartitionKeyDefinition.swift; sourceTree = "<group>"; };
+		B53BF7791F9A7AE700B7A187 /* DocumentDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDetailTableViewController.swift; sourceTree = "<group>"; };
 		B5619EB71F99357800D01EAD /* ADResourceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResourceList.swift; sourceTree = "<group>"; };
 		B5619EB91F994FB800D01EAD /* DatabaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseTableViewController.swift; sourceTree = "<group>"; };
 		B5619EBB1F994FE300D01EAD /* CollectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewController.swift; sourceTree = "<group>"; };
@@ -156,7 +157,6 @@
 		B5F76C5E1F96A91C001E8B11 /* ADTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADTokenProvider.swift; sourceTree = "<group>"; };
 		B5F76C661F96ACA5001E8B11 /* AzureDataApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AzureDataApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F76C681F96ACA5001E8B11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B5F76C6A1F96ACA5001E8B11 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		B5F76C6D1F96ACA5001E8B11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B5F76C6F1F96ACA5001E8B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5F76C721F96ACA5001E8B11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -222,6 +222,7 @@
 				B5958A151F992CE90023C0AF /* ADError.swift */,
 				B53BF7751F9A2F9400B7A187 /* ADIndexingPolicy.swift */,
 				B5958A171F992CF60023C0AF /* ADOffer.swift */,
+				B53BF7771F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift */,
 				B5958A191F992D020023C0AF /* ADPartitionKeyRange.swift */,
 				B5958A1B1F992D0E0023C0AF /* ADPermissions.swift */,
 				B5958A091F992C9A0023C0AF /* ADResource.swift */,
@@ -232,7 +233,6 @@
 				B5958A1F1F992D240023C0AF /* ADTrigger.swift */,
 				B5958A211F992D2E0023C0AF /* ADUser.swift */,
 				B5958A231F992D3A0023C0AF /* ADUserDefinedFunction.swift */,
-				B53BF7771F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -265,15 +265,15 @@
 		B5F76C3B1F96A7AF001E8B11 /* AzureData */ = {
 			isa = PBXGroup;
 			children = (
-				B5958A061F992BFB0023C0AF /* Models */,
-				B5F76C3C1F96A7AF001E8B11 /* AzureData.h */,
-				B5F76C3D1F96A7AF001E8B11 /* Info.plist */,
-				B5F76C531F96A7F3001E8B11 /* NetworkReachabilityManager.swift */,
-				B5F76C551F96A80B001E8B11 /* AzureData.swift */,
-				B5F76C5E1F96A91C001E8B11 /* ADTokenProvider.swift */,
-				B5DA1DFA1F977EAF00C300D3 /* ADResponse.swift */,
-				B5DA1DFC1F978C0A00C300D3 /* SessionManager.swift */,
 				B5DA1DFE1F97D64500C300D3 /* ADHttp.swift */,
+				B5DA1DFA1F977EAF00C300D3 /* ADResponse.swift */,
+				B5F76C5E1F96A91C001E8B11 /* ADTokenProvider.swift */,
+				B5F76C3C1F96A7AF001E8B11 /* AzureData.h */,
+				B5F76C551F96A80B001E8B11 /* AzureData.swift */,
+				B5F76C3D1F96A7AF001E8B11 /* Info.plist */,
+				B5958A061F992BFB0023C0AF /* Models */,
+				B5F76C531F96A7F3001E8B11 /* NetworkReachabilityManager.swift */,
+				B5DA1DFC1F978C0A00C300D3 /* SessionManager.swift */,
 			);
 			path = AzureData;
 			sourceTree = "<group>";
@@ -291,7 +291,6 @@
 			isa = PBXGroup;
 			children = (
 				B5F76C681F96ACA5001E8B11 /* AppDelegate.swift */,
-				B5F76C6A1F96ACA5001E8B11 /* ViewController.swift */,
 				B5F76C6C1F96ACA5001E8B11 /* Main.storyboard */,
 				B5F76C6F1F96ACA5001E8B11 /* Assets.xcassets */,
 				B5F76C711F96ACA5001E8B11 /* LaunchScreen.storyboard */,
@@ -300,6 +299,7 @@
 				B5619EB91F994FB800D01EAD /* DatabaseTableViewController.swift */,
 				B5619EBB1F994FE300D01EAD /* CollectionTableViewController.swift */,
 				B5619EBD1F994FF100D01EAD /* DocumentTableViewController.swift */,
+				B53BF7791F9A7AE700B7A187 /* DocumentDetailTableViewController.swift */,
 			);
 			path = AzureDataApp;
 			sourceTree = "<group>";
@@ -601,10 +601,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5619EBE1F994FF100D01EAD /* DocumentTableViewController.swift in Sources */,
+				B53BF77A1F9A7AE700B7A187 /* DocumentDetailTableViewController.swift in Sources */,
 				B5619EBA1F994FB800D01EAD /* DatabaseTableViewController.swift in Sources */,
 				B5619EBC1F994FE300D01EAD /* CollectionTableViewController.swift in Sources */,
 				B5958A051F9903F10023C0AF /* Models.swift in Sources */,
-				B5F76C6B1F96ACA5001E8B11 /* ViewController.swift in Sources */,
 				B5F76C691F96ACA5001E8B11 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

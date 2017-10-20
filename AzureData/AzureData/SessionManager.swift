@@ -18,7 +18,6 @@ open class SessionManager {
 		//return SessionManager()
 	}()
 	
-	//init() {}
 	
 	public init(configuration: URLSessionConfiguration = URLSessionConfiguration.default/*, delegate: SessionDelegate = SessionDelegate(), serverTrustPolicyManager: ServerTrustPolicyManager? = nil*/)
 	{
@@ -29,6 +28,7 @@ open class SessionManager {
 		//commonInit(serverTrustPolicyManager: serverTrustPolicyManager)
 	}
 	
+	public var setup = false
 	
 	var resourceName: String!
 	var tokenProvider: ADTokenProvider!
@@ -36,6 +36,7 @@ open class SessionManager {
 	public func setup (_ name: String, key: String, keyType: ADTokenType) {
 		resourceName = name
 		tokenProvider = ADTokenProvider(key: key, keyType: keyType, tokenVersion: "1.0")
+		setup = true
 	}
 
 	
@@ -116,138 +117,141 @@ open class SessionManager {
 	open let session: URLSession
 
 	
-	fileprivate func dataRequest(_ method: ADHttpMethod, resourceUri: (url:URL, link:String), resourceType: ADResourceType) -> URLRequest {
+	public func delete (_ resourceType: ADResourceType, resourceId: String, parentId: String? = nil, grandparentId: String? = nil, greatgrandparentId: String? = nil, callback: @escaping (Bool) -> ()) {
 		
-		let (token, date) = tokenProvider.getToken(verb: method, resourceType: resourceType, resourceLink: resourceUri.link)
+		let uri = ADResourceUri(resourceName)
 		
-		var request = URLRequest(url: resourceUri.url)
+		var resourceUri: (URL, String)?
 		
-		request.method = method
-		
-		request.addValue(date, forHTTPHeaderField: .xMSDate)
-		request.addValue(token, forHTTPHeaderField: .authorization)
-		
-		if method == .post || method == .put {
-			// For POST on query operations, it must be application/query+json
-			// For attachments, must be set to the Mime type of the attachment.
-			// For all other tasks, must be application/json.
-			request.addValue("application/json", forHTTPHeaderField: .contentType)
+		switch resourceType {
+		case .database: 		resourceUri = uri.database(resourceId)
+		case .user: 			resourceUri = uri.user(parentId!, userId: resourceId)
+		case .permission: 		resourceUri = uri.permission(grandparentId!, userId: parentId!, permissionId: resourceId)
+		case .collection: 		resourceUri = uri.collection(parentId!, collectionId: resourceId)
+		case .storedProcedure: 	resourceUri = uri.storedProcedure(grandparentId!, collectionId: parentId!, storedProcedureId: resourceId)
+		case .trigger: 			resourceUri = uri.trigger(grandparentId!, collectionId: parentId!, triggerId: resourceId)
+		case .udf: 				resourceUri = uri.udf(grandparentId!, collectionId: parentId!, udfId: resourceId)
+		case .document: 		resourceUri = uri.document(grandparentId!, collectionId: parentId!, documentId: resourceId)
+		case .attachment: 		resourceUri = uri.attachment(greatgrandparentId!, collectionId: grandparentId!, documentId: parentId!, attachmentId: resourceId)
+		case .offer: 			resourceUri = uri.offer(resourceId)
 		}
-
-		return request
+		
+		if let resourceUri = resourceUri {
+			return delete(resourceUri: resourceUri, resourceType: resourceType, callback: callback)
+		} else {
+			DispatchQueue.main.async { callback(false) }
+		}
 	}
+
 	
 	
+	// MARK: - Database
+	
+	// get
 	public func database (_ databaseId: String, callback: @escaping (ADDatabase?) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).database(databaseId)
 		
-		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: .database)
-		
-		session.dataTask(with: request) { (data, response, error) in
-			
-			if let error = error {
-				print(error.localizedDescription)
-			}
-			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
-				print(json)
-				DispatchQueue.main.async { callback(ADDatabase(fromJson: json)) }
-			} else {
-				DispatchQueue.main.async { callback(nil) }
-			}
-		}.resume()
+		return resource(resourceUri: resourceUri, resourceType: .database, callback: callback)
 	}
 
-	
+	// list
 	public func databases (callback: @escaping (ADResourceList<ADDatabase>?) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).database()
 		
-		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: .database)
-		
-		session.dataTask(with: request) { (data, response, error) in
-			
-			if let error = error {
-				print(error.localizedDescription)
-			}
-			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
-				print(json)
-				DispatchQueue.main.async { callback(ADResourceList<ADDatabase>.init("Databases", json: json)) }
-			} else {
-				print("nope")
-				DispatchQueue.main.async { callback(nil) }
-			}
-		}.resume()
+		return resources(resourceUri: resourceUri, resourceType: .database, callback: callback)
 	}
 
+	// create
+	public func createDatabase (_ databaseId: String, callback: @escaping (ADDatabase?) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).database()
+		
+		guard let httpBody = try? JSONSerialization.data(withJSONObject: ["id":databaseId], options: []) else {
+			print("Error: Could not serialize document to JSON")
+			callback(nil)
+			return
+		}
+		
+		return create(resourceUri: resourceUri, resourceType: .database, httpBody: httpBody, callback: callback)
+	}
 	
+	// delete
+	public func delete (_ resource: ADDatabase, callback: @escaping (Bool) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).database(resource.id)
+		
+		return delete(resourceUri: resourceUri, resourceType: .database, callback: callback)
+	}
+	
+	
+	
+	// MARK: - DocumentCollection
+	
+	// get
 	public func documentCollection (_ databaseId: String, collectionId: String, callback: @escaping (ADDocumentCollection?) -> ()) {
 
 		let resourceUri = ADResourceUri(resourceName).collection(databaseId, collectionId: collectionId)
 		
-		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: .collection)
-
-		session.dataTask(with: request) { (data, response, error) in
-			
-			if let error = error {
-				print(error.localizedDescription)
-			}
-			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
-				print(json)
-				DispatchQueue.main.async { callback(ADDocumentCollection(fromJson: json)) }
-			} else {
-				DispatchQueue.main.async { callback(nil) }
-			}
-		}.resume()
+		return resource(resourceUri: resourceUri, resourceType: .collection, callback: callback)
 	}
 
-	
+	// list
 	public func documentCollections (_ databaseId: String, callback: @escaping (ADResourceList<ADDocumentCollection>?) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).collection(databaseId)
 		
-		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: .collection)
+		return resources(resourceUri: resourceUri, resourceType: .collection, callback: callback)
+	}
+
+	// create
+	public func createDocumentCollection (_ databaseId: String, collectionId: String, callback: @escaping (ADDocumentCollection?) -> ()) {
 		
-		session.dataTask(with: request) { (data, response, error) in
-			
-			if let error = error {
-				print(error.localizedDescription)
-			}
-			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
-				print(json)
-				DispatchQueue.main.async { callback(ADResourceList<ADDocumentCollection>("DocumentCollections", json: json)) }
-			} else {
-				DispatchQueue.main.async { callback(nil) }
-			}
-		}.resume()
+		let resourceUri = ADResourceUri(resourceName).collection(databaseId)
+		
+		guard let httpBody = try? JSONSerialization.data(withJSONObject: ["id":collectionId], options: []) else {
+			print("Error: Could not serialize document to JSON")
+			callback(nil)
+			return
+		}
+		
+		return create(resourceUri: resourceUri, resourceType: .collection, httpBody: httpBody, callback: callback)
+	}
+	
+	// delete
+	public func delete (_ resource: ADDocumentCollection, databaseId: String, callback: @escaping (Bool) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).collection(databaseId, collectionId: resource.id)
+		
+		return delete(resourceUri: resourceUri, resourceType: .collection, callback: callback)
 	}
 
 	
-	public func document<T: ADDocument> (_ databaseId: String, collectionId: String, documentId: String, callback: @escaping (T?) -> ()) {
+	
+	
+	// MARK: - Document
+	
+	// get
+	public func document<T: ADDocument> (_ documentType:T.Type, databaseId: String, collectionId: String, documentId: String, callback: @escaping (T?) -> ()) {
 
 		let resourceUri = ADResourceUri(resourceName).document(databaseId, collectionId: collectionId, documentId: documentId)
 		
-		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: .document)
-		
-		session.dataTask(with: request) { (data, response, error) in
-			
-			if let error = error {
-				print(error.localizedDescription)
-			}
-			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
-				print(json)
-				DispatchQueue.main.async { callback(T(fromJson: json)) }
-			} else {
-				DispatchQueue.main.async { callback(nil) }
-			}
-		}.resume()
+		return resource(resourceUri: resourceUri, resourceType: .document, callback: callback)
 	}
-	
-	public func document<T: ADDocument> (_ databaseId: String, collectionId: String, document: T, callback: @escaping (T?) -> ()) {
+
+	// list
+	public func documents<T: ADDocument> (_ documentType:T.Type, databaseId: String, collectionId: String, callback: @escaping (ADResourceList<T>?) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).document(databaseId, collectionId: collectionId)
 		
-		var request = dataRequest(.post, resourceUri: resourceUri, resourceType: .document)
+		return resources(resourceUri: resourceUri, resourceType: .document, callback: callback)
+	}
+
+	// create
+	public func createDocument<T: ADDocument> (_ databaseId: String, collectionId: String, document: T, callback: @escaping (T?) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).document(databaseId, collectionId: collectionId)
 		
 		guard let httpBody = try? JSONSerialization.data(withJSONObject: document.dictionary, options: []) else {
 			print("Error: Could not serialize document to JSON")
@@ -255,9 +259,60 @@ open class SessionManager {
 			return
 		}
 		
-		print(httpBody)
+		return create(resourceUri: resourceUri, resourceType: .document, httpBody: httpBody, callback: callback)
+	}
+
+	// delete
+	public func delete (_ resource: ADDocument, databaseId: String, collectionId: String, callback: @escaping (Bool) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).document(databaseId, collectionId: collectionId, documentId: resource.id)
+		
+		return delete(resourceUri: resourceUri, resourceType: .document, callback: callback)
+	}
+
+	
+	
+	// MARK: - Resources
+	
+	// get
+	fileprivate func resource<T:ADResource>(resourceUri: (URL, String), resourceType: ADResourceType, callback: @escaping (T?) -> ()) {
+		
+		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: resourceType)
+		
+		return sendRequest(request, callback: callback)
+	}
+	
+	// list
+	fileprivate func resources<T> (resourceUri: (URL, String), resourceType: ADResourceType, callback: @escaping (ADResourceList<T>?) -> ()) {
+
+		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: resourceType)
+		
+		return sendRequest(request, resourceType: resourceType, callback: callback)
+	}
+
+	// create
+	fileprivate func create<T:ADResource> (resourceUri: (URL, String), resourceType: ADResourceType, httpBody: Data, callback: @escaping (T?) -> ()) {
+		
+		var request = dataRequest(.post, resourceUri: resourceUri, resourceType: resourceType)
 		
 		request.httpBody = httpBody
+		
+		return sendRequest(request, callback: callback)
+	}
+	
+	// delete
+	fileprivate func delete(resourceUri: (URL, String), resourceType: ADResourceType, callback: @escaping (Bool) -> ()) {
+		
+		let request = dataRequest(.delete, resourceUri: resourceUri, resourceType: resourceType)
+		
+		return sendRequest(request, callback: callback)
+	}
+	
+	
+	
+	// MARK: - Request
+	
+	fileprivate func sendRequest<T:ADResource> (_ request:URLRequest, callback: @escaping (T?) -> ()) {
 		
 		UIApplication.shared.isNetworkActivityIndicatorVisible = true
 		
@@ -277,20 +332,21 @@ open class SessionManager {
 		}.resume()
 	}
 
-	public func documents<T: ADDocument> (_ databaseId: String, collectionId: String, _:T.Type, callback: @escaping (ADResourceList<T>?) -> ()) {
+	
+	fileprivate func sendRequest<T> (_ request:URLRequest, resourceType: ADResourceType, callback: @escaping (ADResourceList<T>?) -> ()) {
 		
-		let resourceUri = ADResourceUri(resourceName).document(databaseId, collectionId: collectionId)
-		
-		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: .document)
+		UIApplication.shared.isNetworkActivityIndicatorVisible = true
 		
 		session.dataTask(with: request) { (data, response, error) in
+			
+			DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
 			
 			if let error = error {
 				print(error.localizedDescription)
 			}
 			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
 				print(json)
-				DispatchQueue.main.async { callback(ADResourceList<T>("Documents", json: json)) }
+				DispatchQueue.main.async { callback(ADResourceList<T>(resourceType, json: json)) }
 			} else {
 				DispatchQueue.main.async { callback(nil) }
 			}
@@ -298,4 +354,42 @@ open class SessionManager {
 	}
 
 	
+	fileprivate func sendRequest (_ request:URLRequest, callback: @escaping (Bool) -> ()) {
+		
+		UIApplication.shared.isNetworkActivityIndicatorVisible = true
+		
+		session.dataTask(with: request) { (data, response, error) in
+			
+			DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
+			
+			if let error = error {
+				print(error.localizedDescription)
+				DispatchQueue.main.async { callback(false) }
+			} else {
+				DispatchQueue.main.async { callback(true) }
+			}
+		}.resume()
+	}
+
+	
+	fileprivate func dataRequest(_ method: ADHttpMethod, resourceUri: (url:URL, link:String), resourceType: ADResourceType) -> URLRequest {
+		
+		let (token, date) = tokenProvider.getToken(verb: method, resourceType: resourceType, resourceLink: resourceUri.link)
+		
+		var request = URLRequest(url: resourceUri.url)
+		
+		request.method = method
+		
+		request.addValue(date, forHTTPHeaderField: .xMSDate)
+		request.addValue(token, forHTTPHeaderField: .authorization)
+		
+		if method == .post || method == .put {
+			// For POST on query operations, it must be application/query+json
+			// For attachments, must be set to the Mime type of the attachment.
+			// For all other tasks, must be application/json.
+			request.addValue("application/json", forHTTPHeaderField: .contentType)
+		}
+		
+		return request
+	}
 }

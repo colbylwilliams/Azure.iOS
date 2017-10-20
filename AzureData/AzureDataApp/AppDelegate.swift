@@ -16,37 +16,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-		// Override point for customization after application launch.
 		
-//		AzureData.setup("mobile", key: "Np4cUd6IO3rFM6EMMoXBeGv4LKVrkfFDmws51nBpDFypym90IVPdjMQcy6SjmFMJklTwWglBhSAtoK07IwK7kg==", keyType: .master)
+		AzureData.setup("mobile", key: "Np4cUd6IO3rFM6EMMoXBeGv4LKVrkfFDmws51nBpDFypym90IVPdjMQcy6SjmFMJklTwWglBhSAtoK07IwK7kg==", keyType: .master)
 		
 		//AzureData.setup("producerdocumentdb", key: "m8sKmtiotoEoZqRr65LcBCr6v2VxJyoKHbrWhjSTYlosgT2oc127VGGkEyA4n8Zjkdfb9ZoUpKoKjw1zktAcdw==", keyType: .master)
 		
+		// AzureData.setup("<Database Name>", key: "<Database Key>", keyType: .master)
 		return true
 	}
 
-	func applicationWillResignActive(_ application: UIApplication) {
-		// Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-		// Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-	}
-
-	func applicationDidEnterBackground(_ application: UIApplication) {
-		// Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-		// If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-	}
-
-	func applicationWillEnterForeground(_ application: UIApplication) {
-		// Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-	}
-
 	func applicationDidBecomeActive(_ application: UIApplication) {
-		// Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+		showApiKeyAlert(application)
 	}
 
-	func applicationWillTerminate(_ application: UIApplication) {
-		// Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+	func showApiKeyAlert(_ application: UIApplication) {
+		
+		if !AzureData.isSetup() {
+			
+			let alertController = UIAlertController(title: "Configure App", message: "Enter a Azure Cosmos DB account name and read-write key. Or add the key in code in `didFinishLaunchingWithOptions`", preferredStyle: .alert)
+
+			alertController.addTextField() { textField in
+				textField.placeholder = "Database Name"
+				textField.returnKeyType = .next
+			}
+
+			alertController.addTextField() { textField in
+				textField.placeholder = "Read-write Key"
+				textField.returnKeyType = .done
+			}
+			
+			alertController.addAction(UIAlertAction(title: "Get Key", style: .default) { a in
+				if let getKeyUrl = URL(string: "https://ms.portal.azure.com/#blade/HubsExtension/Resources/resourceType/Microsoft.DocumentDb%2FdatabaseAccounts") {
+					UIApplication.shared.open(getKeyUrl, options: [:]) { opened in
+						print("Opened GetKey url successfully: \(opened)")
+					}
+				}
+			})
+			
+			alertController.addAction(UIAlertAction(title: "Done", style: .default) { a in
+				
+				if let name = alertController.textFields?.first?.text, let key = alertController.textFields?.last?.text {
+					print("name: \(name)")
+					print("key: \(key)")
+
+					AzureData.setup(name, key: key, keyType: .master)
+				} else {
+					self.showApiKeyAlert(application)
+				}
+			})
+			
+			window?.rootViewController?.present(alertController, animated: true) { }
+		}
 	}
-
-
 }
 

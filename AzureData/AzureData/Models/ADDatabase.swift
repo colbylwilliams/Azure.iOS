@@ -22,4 +22,11 @@ public class ADDatabase: ADResource {
 		if let collectionsLink  = dict[collectionsLinkKey] 	as? String { self.collectionsLink = collectionsLink }
 		if let usersLink 		= dict[usersLinkKey] 		as? String { self.usersLink = usersLink }
 	}
+	
+	override public var dictionary: [String : Any] {
+		return super.dictionary.merging([
+			collectionsLinkKey:collectionsLink,
+			usersLinkKey:usersLink])
+		{ (_, new) in new }
+	}
 }

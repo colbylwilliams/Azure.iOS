@@ -17,14 +17,17 @@ public class ADResourceList<T:ADResource> {
 	public var count		= 0
 	public var items:[T]	= []
 	
-	init(_ listName: String, json dict: [String:Any]) {
-		
+	init(_ resourceType: String, json dict: [String:Any]) {
 		if let resourceId = dict[resourceIdKey] as? String { self.resourceId = resourceId }
 		if let count = dict[countKey] as? Int { self.count = count }
-		if let resources = dict[listName] as? [[String:Any]] {
+		if let resources = dict[resourceType] as? [[String:Any]] {
 			for resource in resources {
 				self.items.append(T(fromJson: resource))
 			}
 		}
+	}
+	
+	convenience init(_ resourceType: ADResourceType, json dict: [String:Any]) {
+		self.init(resourceType.key, json: dict)
 	}
 }

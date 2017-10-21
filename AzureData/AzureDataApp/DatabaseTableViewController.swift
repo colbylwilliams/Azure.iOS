@@ -53,7 +53,6 @@ class DatabaseTableViewController: UITableViewController {
 		alertController.addAction(UIAlertAction(title: "Create", style: .default) { a in
 			
 			if let name = alertController.textFields?.first?.text {
-				
 				AzureData.createDatabase(name) { database in
 					if let database = database {
 						self.databases.append(database)
@@ -62,7 +61,6 @@ class DatabaseTableViewController: UITableViewController {
 				}
 			}
 		})
-		
 		present(alertController, animated: true) { }
 	}
 	
@@ -89,8 +87,7 @@ class DatabaseTableViewController: UITableViewController {
 
 	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
-			let item = self.databases[indexPath.row]
-			AzureData.database(item.id) { database in
+			AzureData.database(self.databases[indexPath.row].id) { database in
 				database?.printLog()
 				tableView.reloadRows(at: [indexPath], with: .automatic)
 				callback(false)
@@ -104,8 +101,7 @@ class DatabaseTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .destructive, title: "Delete") { (action, view, callback) in
-			let item = self.databases[indexPath.row]
-			AzureData.delete(item) { success in
+			AzureData.delete(self.databases[indexPath.row]) { success in
 				if success {
 					self.databases.remove(at: indexPath.row)
 					tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -119,8 +115,7 @@ class DatabaseTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
-			let item = self.databases[indexPath.row]
-			AzureData.delete(item) { success in
+			AzureData.delete(self.databases[indexPath.row]) { success in
 				if success {
 					self.databases.remove(at: indexPath.row)
 					tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -128,6 +123,7 @@ class DatabaseTableViewController: UITableViewController {
 			}
 		}
 	}
+	
 	
 	
     // MARK: - Navigation

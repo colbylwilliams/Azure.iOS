@@ -25,6 +25,7 @@ class CollectionTableViewController: UITableViewController {
 		navigationItem.rightBarButtonItems = [addButton, editButtonItem]
     }
 
+	
 	func refreshData() {
 		if let database = databaseId {
 			AzureData.documentCollections(database) { list in
@@ -58,7 +59,6 @@ class CollectionTableViewController: UITableViewController {
 		alertController.addAction(UIAlertAction(title: "Create", style: .default) { a in
 			
 			if let name = alertController.textFields?.first?.text {
-				
 				AzureData.createDocumentCollection(self.databaseId!, collectionId: name) { collection in
 					if let collection = collection {
 						self.documentCollections.append(collection)
@@ -67,7 +67,6 @@ class CollectionTableViewController: UITableViewController {
 				}
 			}
 		})
-		
 		present(alertController, animated: true) { }
 	}
 
@@ -94,8 +93,7 @@ class CollectionTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
-			let item = self.documentCollections[indexPath.row]
-			AzureData.documentCollection(self.databaseId!, collectionId: item.id) { collection in
+			AzureData.documentCollection(self.databaseId!, collectionId: self.documentCollections[indexPath.row].id) { collection in
 				collection?.printLog()
 				tableView.reloadRows(at: [indexPath], with: .automatic)
 				callback(false)
@@ -109,8 +107,7 @@ class CollectionTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .destructive, title: "Delete") { (action, view, callback) in
-			let item = self.documentCollections[indexPath.row]
-			AzureData.delete(item, databaseId: self.databaseId!) { success in
+			AzureData.delete(self.documentCollections[indexPath.row], databaseId: self.databaseId!) { success in
 				if success {
 					self.documentCollections.remove(at: indexPath.row)
 					tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -124,8 +121,7 @@ class CollectionTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
-			let item = self.documentCollections[indexPath.row]
-			AzureData.delete(item, databaseId: self.databaseId!) { success in
+			AzureData.delete(self.documentCollections[indexPath.row], databaseId: self.databaseId!) { success in
 				if success {
 					self.documentCollections.remove(at: indexPath.row)
 					tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -133,6 +129,7 @@ class CollectionTableViewController: UITableViewController {
 			}
 		}
 	}
+	
 	
 
     // MARK: - Navigation

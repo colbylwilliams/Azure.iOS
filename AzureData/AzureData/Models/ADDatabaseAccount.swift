@@ -9,11 +9,11 @@
 import Foundation
 
 public class ADDatabaseAccount: ADResource {
-	public var consistencyPolicy: 		String = ""
-	public var databasesLink: 			String = ""
-	public var maxMediaStorageUsageInMB:String = ""
-	public var mediaLink: 				String = ""
-	public var mediaStorageUsageInMB: 	String = ""
-	public var readableLocations: 		String = ""
-	public var writableLocation: 		String = ""
+	public private(set) var consistencyPolicy: 			String?
+	public private(set) var databasesLink: 				String?
+	public private(set) var maxMediaStorageUsageInMB:	String?
+	public private(set) var mediaLink: 				 	String?
+	public private(set) var mediaStorageUsageInMB: 		String?
+	public private(set) var readableLocations: 			String?
+	public private(set) var writableLocation: 			String?
 }

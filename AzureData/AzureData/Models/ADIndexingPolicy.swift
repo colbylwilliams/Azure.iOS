@@ -15,10 +15,10 @@ public class ADIndexingPolicy {
 	let includedPathsKey 	= "includedPaths"
 	let indexingModeKey 	= "indexingMode"
 	
-	public var automatic: Bool?
-	public var excludedPaths: [ADExcludedPath] = []
-	public var includedPaths: [ADIncludedPath] = []
-	public var indexingMode: ADIndexMode?
+	public private(set) var automatic: 		Bool?
+	public private(set) var excludedPaths: 	[ADExcludedPath] = []
+	public private(set) var includedPaths: 	[ADIncludedPath] = []
+	public private(set) var indexingMode: 	ADIndexMode?
 	
 	public init(fromJson dict: [String:Any]) {
 		if let automatic 		= dict[automaticKey] 	 as? Bool { self.automatic = automatic }
@@ -50,30 +50,26 @@ public class ADPath {
 	
 	let pathKey = "path"
 	
-	public var path = ""
+	public private(set) var path: String?
 
 	public init(fromJson dict: [String:Any]) {
-		if let path = dict[pathKey] as? String { self.path = path }
+		path = dict[pathKey] as? String
 	}
 	
 	public var dictionary: [String : Any] {
-		return [
-			pathKey:path
-		]
+		return [ pathKey:path ?? ""	]
 	}
 }
 
 
-public class ADExcludedPath: ADPath {
-	
-}
+public class ADExcludedPath: ADPath { }
 
 
 public class ADIncludedPath: ADPath {
 	
 	let indexesKey = "indexes"
 	
-	public var indexes: [ADIndex] = []
+	public private(set) var indexes: [ADIndex] = []
 
 	public override init(fromJson dict: [String:Any]) {
 		super.init(fromJson: dict)
@@ -86,7 +82,7 @@ public class ADIncludedPath: ADPath {
 	
 	public override var dictionary: [String : Any] {
 		return [
-			pathKey:path,
+			pathKey:path ?? "",
 			indexesKey:indexes.map{ $0.dictionary }
 		]
 	}
@@ -98,9 +94,9 @@ public class ADIndex {
 	let dataTypeKey  = "dataType"
 	let precisionKey = "precision"
 	
-	public var kind: 	 	ADIndexKind?
-	public var dataType: 	ADDataType?
-	public var precision: 	Int16?
+	public private(set) var kind: 	 	ADIndexKind?
+	public private(set) var dataType: 	ADDataType?
+	public private(set) var precision: 	Int16?
 
 	
 	public init(_ indexKind:String, type: ADDataType? = nil) {

@@ -21,10 +21,6 @@ class Person: ADDocument {
 	var email:		String = ""
 
 	
-	override init () {
-		super.init()
-	}
-
 	override var dictionary: [String : Any] {
 		return super.dictionary.merging([
 			"firstName":firstName,

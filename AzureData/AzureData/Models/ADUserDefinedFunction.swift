@@ -9,5 +9,6 @@
 import Foundation
 
 public class ADUserDefinedFunction: ADResource {
-	public var body: 					String = ""
+	public private(set) var body: String?
 }
+ 

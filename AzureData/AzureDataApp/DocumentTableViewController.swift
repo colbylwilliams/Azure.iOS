@@ -17,7 +17,8 @@ class DocumentTableViewController: UITableViewController {
 	var documentCollectionId: String?
 	
 	//var documents:[Person] = []
-	var documents:[CustomDocument] = []
+	//var documents:[CustomDocument] = []
+	var documents: [ADDocument] = []
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,9 +30,9 @@ class DocumentTableViewController: UITableViewController {
 
 	func refreshData() {
 		if let database = databaseId, let documentCollection = documentCollectionId {
-			
 			//AzureData.documents(Person.self, databaseId: database, collectionId: documentCollection) { list in
-			AzureData.documents(CustomDocument.self, databaseId: database, collectionId: documentCollection) { list in
+			//AzureData.documents(CustomDocument.self, databaseId: database, collectionId: documentCollection) { list in
+			AzureData.documents(ADDocument.self, databaseId: database, collectionId: documentCollection) { list in
 				if let items = list?.items {
 					//for item in items { item.printLog()	}
 					self.documents = items
@@ -50,7 +51,15 @@ class DocumentTableViewController: UITableViewController {
 	
 	@IBAction func addButtonTouchUpInside(_ sender: Any) {
 		if let databaseId = databaseId, let documentCollectionId = documentCollectionId {
-			AzureData.createDocument(databaseId, collectionId: documentCollectionId, document: CustomDocument()) { document in
+			
+			let doc = ADDocument()
+			
+			doc["testNumber"] = 1_500_000
+			doc["testString"] = "Yeah baby\nRock n Roll"
+//			doc["id"] = "foo"
+			doc["testDate"]   = Date().timeIntervalSince1970
+			
+			AzureData.createDocument(databaseId, collectionId: documentCollectionId, document: doc) { document in
 				if let document = document {
 					self.documents.append(document)
 					self.tableView.reloadData()
@@ -62,14 +71,10 @@ class DocumentTableViewController: UITableViewController {
 	
 	// MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
+    override func numberOfSections(in tableView: UITableView) -> Int { return 1 }
 
 	
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return documents.count
-    }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return documents.count }
 
 	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -86,8 +91,7 @@ class DocumentTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
-			let item = self.documents[indexPath.row]
-			AzureData.document(CustomDocument.self, databaseId: self.databaseId!, collectionId: self.documentCollectionId!, documentId: item.id) { document in
+			AzureData.document(CustomDocument.self, databaseId: self.databaseId!, collectionId: self.documentCollectionId!, documentId: self.documents[indexPath.row].id) { document in
 				document?.printLog()
 				tableView.reloadRows(at: [indexPath], with: .automatic)
 				callback(false)
@@ -101,8 +105,7 @@ class DocumentTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .destructive, title: "Delete") { (action, view, callback) in
-			let item = self.documents[indexPath.row]
-			AzureData.delete(item, databaseId: self.databaseId!, collectionId: self.documentCollectionId!) { success in
+			AzureData.delete(self.documents[indexPath.row], databaseId: self.databaseId!, collectionId: self.documentCollectionId!) { success in
 				if success {
 					self.documents.remove(at: indexPath.row)
 					tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -116,8 +119,7 @@ class DocumentTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
-			let item = self.documents[indexPath.row]
-			AzureData.delete(item, databaseId: self.databaseId!, collectionId: self.documentCollectionId!) { success in
+			AzureData.delete(self.documents[indexPath.row], databaseId: self.databaseId!, collectionId: self.documentCollectionId!) { success in
 				if success {
 					self.documents.remove(at: indexPath.row)
 					tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -134,5 +136,4 @@ class DocumentTableViewController: UITableViewController {
 			destinationViewController.documentDictionary = documents[index.row].dictionary
 		}
     }
-
 }

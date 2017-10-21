@@ -9,8 +9,8 @@
 import Foundation
 
 public class ADPermissions: ADResource {
-	public var permissionMode: 			String = ""
-	public var resourceLink: 			String = ""
-	public var resourcePartitionKey:	String = ""
-	public var token: 					String = ""
+	public private(set) var permissionMode: 		String?
+	public private(set) var resourceLink: 			String?
+	public private(set) var resourcePartitionKey:	String?
+	public private(set) var token: 					String?
 }

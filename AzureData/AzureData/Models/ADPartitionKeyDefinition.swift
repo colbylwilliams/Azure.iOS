@@ -12,7 +12,7 @@ public class ADPartitionKeyDefinition {
 	
 	let pathsKey = "paths"
 	
-	public var paths: [String] = []
+	public private(set) var paths: [String] = []
 	
 	public init(fromJson dict: [String:Any]) {
 		if let paths = dict[pathsKey] as? [String] {
@@ -23,8 +23,6 @@ public class ADPartitionKeyDefinition {
 	}
 	
 	public var dictionary: [String:Any] {
-		return [
-			pathsKey:paths
-		]
+		return [ pathsKey:paths	]
 	}
 }

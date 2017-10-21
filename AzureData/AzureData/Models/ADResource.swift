@@ -10,35 +10,39 @@ import Foundation
 
 open class ADResource {
 	
-	let idKey = 						"id"
-	let resourceIdKey = 				"_rid"
-	let selfLinkKey = 					"_self"
-	let etagKey = 						"_etag"
-	let timestampKey = 					"_ts"
+	static let idKey = 			"id"
+	static let resourceIdKey = 	"_rid"
+	static let selfLinkKey = 	"_self"
+	static let etagKey = 		"_etag"
+	static let timestampKey = 	"_ts"
 	
-	open var id: 						String = ""
-	public var resourceId: 				String = ""
-	public var selfLink: 				String = ""
-	public var etag: 					String = ""
-	public var timestamp: 				Date?
+	open private(set) 	var id: String
+	public private(set) var resourceId:	String?
+	public private(set) var selfLink: 	String?
+	public private(set) var etag: 		String?
+	public private(set) var timestamp: 	Date?
 	
-	public init () { }
+	public init () { id = UUID().uuidString }
+	
+	public init (_ id: String) { self.id = id }
 	
 	required public init(fromJson dict: [String:Any]) {
-		if let id 			= dict[idKey] 			as? String { self.id = id }
-		if let resourceId 	= dict[resourceIdKey] 	as? String { self.resourceId = resourceId }
-		if let selfLink 	= dict[selfLinkKey] 	as? String { self.selfLink = selfLink }
-		if let etag 		= dict[etagKey] 		as? String { self.etag = etag }
-		if let timestamp	= dict[timestampKey] 	as? Double { self.timestamp = Date(timeIntervalSince1970: timestamp) }
+		if let id 	= dict[ADResource.idKey] as? String { self.id = id } else { id = "" }
+		resourceId 	= dict[ADResource.resourceIdKey] 	as? String
+		selfLink 	= dict[ADResource.selfLinkKey] 		as? String
+		etag 		= dict[ADResource.etagKey] 			as? String
+		if let time	= dict[ADResource.timestampKey] 	as? Double {
+			self.timestamp = Date(timeIntervalSince1970: time)
+		}
 	}
 	
 	open var dictionary: [String:Any] {
 		return [
-			idKey		 :id,
-			resourceIdKey:resourceId,
-			selfLinkKey	 :selfLink,
-			etagKey		 :etag,
-			timestampKey :timestamp?.timeIntervalSince1970 ?? 0
+			ADResource.idKey		:id,
+			ADResource.resourceIdKey:resourceId.valueOrEmpty,
+			ADResource.selfLinkKey	:selfLink.valueOrEmpty,
+			ADResource.etagKey		:etag.valueOrEmpty,
+			ADResource.timestampKey	:timestamp?.timeIntervalSince1970 ?? 0
 		]
 	}
 	

@@ -9,5 +9,5 @@
 import Foundation
 
 public class ADUser: ADResource {
-	public var permissionsLink: 		String = ""
+	public private(set) var permissionsLink: String?
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 public class ADTrigger: ADResource {
-	public var body: 					String = ""
-	public var triggerOpertation:		String = ""
-	public var triggerType: 			String = ""
+	public private(set) var body: 				String?
+	public private(set) var triggerOpertation:	String?
+	public private(set) var triggerType: 		String?
 }

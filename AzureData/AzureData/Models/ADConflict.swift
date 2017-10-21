@@ -9,7 +9,7 @@
 import Foundation
 
 public class ADConflict: ADResource {
-	public var operationKind: 			String = ""
-	public var resourceType: 			String = ""
-	public var sourceResourceId:		String = ""
+	public private(set) var operationKind: 	 String?
+	public private(set) var resourceType: 	 String?
+	public private(set) var sourceResourceId:String?
 }

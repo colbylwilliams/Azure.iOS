@@ -9,6 +9,6 @@
 import Foundation
 
 public class ADError: ADResource {
-	public var code: 					String = ""
-	public var message:					String = ""
+	public private(set) var code:	 String?
+	public private(set) var message: String?
 }

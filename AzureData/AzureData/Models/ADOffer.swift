@@ -9,7 +9,7 @@
 import Foundation
 
 public class ADOffer: ADResource {
-	public var offerType: 				String = ""
-	public var offerVersion:			String = ""
-	public var resourceLink:			String = ""
+	public private(set) var offerType: 		String?
+	public private(set) var offerVersion:	String?
+	public private(set) var resourceLink:	String?
 }

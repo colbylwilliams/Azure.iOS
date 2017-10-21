@@ -9,5 +9,6 @@
 import Foundation
 
 public class ADPartitionKeyRange: ADResource {
-	public var parents: 				String = ""
+	
+	public private(set) var parents: String?
 }

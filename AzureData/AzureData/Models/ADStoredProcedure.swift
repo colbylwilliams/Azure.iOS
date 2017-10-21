@@ -9,5 +9,5 @@
 import Foundation
 
 public class ADStoredProcedure: ADResource {
-	public var body: 					String = ""
+	public private(set) var body: String?
 }

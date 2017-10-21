@@ -9,6 +9,6 @@
 import Foundation
 
 public class ADAttachment: ADResource {
-	public var contentType: 			String = ""
-	public var mediaLink: 				String = ""
+	public private(set) var contentType:String?
+	public private(set) var mediaLink: 	String?
 }

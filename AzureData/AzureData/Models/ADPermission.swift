@@ -1,5 +1,5 @@
 //
-//  ADPermissions.swift
+//  ADPermission.swift
 //  AzureData
 //
 //  Created by Colby Williams on 10/19/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ADPermissions: ADResource {
+public class ADPermission: ADResource {
 	public private(set) var permissionMode: 		String?
 	public private(set) var resourceLink: 			String?
 	public private(set) var resourcePartitionKey:	String?

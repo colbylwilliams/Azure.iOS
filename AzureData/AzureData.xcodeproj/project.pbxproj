@@ -40,7 +40,7 @@
 		B5958A161F992CE90023C0AF /* ADError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A151F992CE90023C0AF /* ADError.swift */; };
 		B5958A181F992CF60023C0AF /* ADOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A171F992CF60023C0AF /* ADOffer.swift */; };
 		B5958A1A1F992D020023C0AF /* ADPartitionKeyRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A191F992D020023C0AF /* ADPartitionKeyRange.swift */; };
-		B5958A1C1F992D0E0023C0AF /* ADPermissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A1B1F992D0E0023C0AF /* ADPermissions.swift */; };
+		B5958A1C1F992D0E0023C0AF /* ADPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A1B1F992D0E0023C0AF /* ADPermission.swift */; };
 		B5958A1E1F992D190023C0AF /* ADStoredProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A1D1F992D190023C0AF /* ADStoredProcedure.swift */; };
 		B5958A201F992D240023C0AF /* ADTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A1F1F992D240023C0AF /* ADTrigger.swift */; };
 		B5958A221F992D2E0023C0AF /* ADUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A211F992D2E0023C0AF /* ADUser.swift */; };
@@ -138,7 +138,7 @@
 		B5958A151F992CE90023C0AF /* ADError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADError.swift; sourceTree = "<group>"; };
 		B5958A171F992CF60023C0AF /* ADOffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADOffer.swift; sourceTree = "<group>"; };
 		B5958A191F992D020023C0AF /* ADPartitionKeyRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPartitionKeyRange.swift; sourceTree = "<group>"; };
-		B5958A1B1F992D0E0023C0AF /* ADPermissions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPermissions.swift; sourceTree = "<group>"; };
+		B5958A1B1F992D0E0023C0AF /* ADPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPermission.swift; sourceTree = "<group>"; };
 		B5958A1D1F992D190023C0AF /* ADStoredProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADStoredProcedure.swift; sourceTree = "<group>"; };
 		B5958A1F1F992D240023C0AF /* ADTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADTrigger.swift; sourceTree = "<group>"; };
 		B5958A211F992D2E0023C0AF /* ADUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADUser.swift; sourceTree = "<group>"; };
@@ -226,7 +226,7 @@
 				B5958A171F992CF60023C0AF /* ADOffer.swift */,
 				B53BF7771F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift */,
 				B5958A191F992D020023C0AF /* ADPartitionKeyRange.swift */,
-				B5958A1B1F992D0E0023C0AF /* ADPermissions.swift */,
+				B5958A1B1F992D0E0023C0AF /* ADPermission.swift */,
 				B5958A091F992C9A0023C0AF /* ADResource.swift */,
 				B5619EB71F99357800D01EAD /* ADResourceList.swift */,
 				B5958A251F992D520023C0AF /* ADResourceType.swift */,
@@ -570,7 +570,7 @@
 				B5958A221F992D2E0023C0AF /* ADUser.swift in Sources */,
 				B5958A1A1F992D020023C0AF /* ADPartitionKeyRange.swift in Sources */,
 				B5958A0A1F992C9A0023C0AF /* ADResource.swift in Sources */,
-				B5958A1C1F992D0E0023C0AF /* ADPermissions.swift in Sources */,
+				B5958A1C1F992D0E0023C0AF /* ADPermission.swift in Sources */,
 				B5958A1E1F992D190023C0AF /* ADStoredProcedure.swift in Sources */,
 				B5619EB81F99357800D01EAD /* ADResourceList.swift in Sources */,
 				B5958A261F992D520023C0AF /* ADResourceType.swift in Sources */,

@@ -5,6 +5,303 @@
 | AzureData  | ![Build status][app-data-build-status] |
 
 
+## API
+
+### Databases
+
+#### Create
+
+```c#
+// TODO...
+```
+
+#### List
+
+```c#
+// TODO...
+```
+
+#### Get
+
+```c#
+// TODO...
+```
+
+#### Delete
+
+```c#
+// TODO...
+```
+
+### DocumentCollections
+
+#### Create
+
+```c#
+// TODO...
+```
+
+#### List
+
+```c#
+// TODO...
+```
+
+#### Get
+
+```c#
+// TODO...
+```
+
+#### Delete
+
+```c#
+// TODO...
+```
+
+#### Replace
+
+```c#
+// TODO...
+```
+
+### Documents
+
+#### Create
+
+```c#
+// TODO...
+```
+
+#### List
+
+```c#
+// TODO...
+```
+
+#### Get
+
+```c#
+// TODO...
+```
+
+#### Delete
+
+```c#
+// TODO...
+```
+
+#### Replace
+
+```c#
+// TODO...
+```
+
+#### Query
+
+```c#
+// TODO...
+```
+
+### Attachments
+
+#### Create
+
+```c#
+// TODO...
+```
+
+#### List
+
+```c#
+// TODO...
+```
+
+#### Delete
+
+```c#
+// TODO...
+```
+
+#### Replace
+
+```c#
+// TODO...
+```
+
+### Stored Procedures
+
+#### Create
+
+```c#
+// TODO...
+```
+
+#### List
+
+```c#
+// TODO...
+```
+
+#### Delete
+
+```c#
+// TODO...
+```
+
+#### Replace
+
+```c#
+// TODO...
+```
+
+#### Execute
+
+```c#
+// TODO...
+```
+
+### User Defined Functions
+
+#### Create
+
+```c#
+// TODO...
+```
+
+#### List
+
+```c#
+// TODO...
+```
+
+#### Delete
+
+```c#
+// TODO...
+```
+
+#### Replace
+
+```c#
+// TODO...
+```
+
+### Triggers
+
+#### Create
+
+```c#
+// TODO...
+```
+
+#### List
+
+```c#
+// TODO...
+```
+
+#### Delete
+
+```c#
+// TODO...
+```
+
+#### Replace
+
+```c#
+// TODO...
+```
+
+### Users	
+
+#### Create
+
+```c#
+// TODO...
+```
+
+#### List
+
+```c#
+// TODO...
+```
+
+#### Get
+
+```c#
+// TODO...
+```
+
+#### Delete
+
+```c#
+// TODO...
+```
+
+#### Replace
+
+```c#
+// TODO...
+```
+
+### Permissions	
+
+#### Create
+
+```c#
+// TODO...
+```
+
+#### List
+
+```c#
+// TODO...
+```
+
+#### Get
+
+```c#
+// TODO...
+```
+
+#### Delete
+
+```c#
+// TODO...
+```
+
+#### Replace
+
+```c#
+// TODO...
+```
+
+### Offers
+
+#### List
+
+```c#
+// TODO...
+```
+
+#### Get
+
+```c#
+// TODO...
+```
+
+#### Replace
+
+```c#
+// TODO...
+```
+
+#### Query
+
+```c#
+// TODO...
+```
 
 
 

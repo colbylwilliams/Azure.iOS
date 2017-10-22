@@ -5,30 +5,48 @@
 | AzureData  | ![Build status][app-data-build-status] |
 
 
-## API
+# API
+
+## Setup
+
+```swift
+AzureData.setup("cosmosDb name", key: "read-write key", keyType: .master)
+```
+
 
 ## Databases
 
 #### Create
 
 ```swift
+AzureData.createDatabase(newDatabaseId) { database in
+    // do stuff
+}
 ```
 
 #### List
 
 ```swift
+AzureData.databases { list in
+    let count = list?.count
+    let databases = list?.items
+}
 ```
 
 #### Get
 
 ```swift
-// TODO...
+AzureData.database(databaseId) { database in
+    // do stuff
+}
 ```
 
 #### Delete
 
 ```swift
-// TODO...
+AzureData.delete(databaseId) { success in
+    if success { // successfully deleted  }
+}
 ```
 
 ## DocumentCollections
@@ -36,25 +54,34 @@
 #### Create
 
 ```swift
-// TODO...
+AzureData.createDocumentCollection(databaseId, collectionId: newCollectionId) { collection in
+    // do stuff
+}
 ```
 
 #### List
 
 ```swift
-// TODO...
+AzureData.documentCollections(databaseId) { list in
+    let count = list?.count
+    let collections = list?.items
+}
 ```
 
 #### Get
 
 ```swift
-// TODO...
+AzureData.documentCollection(databaseId, collectionId: collectionId) { collection in
+    // do stuff
+}
 ```
 
 #### Delete
 
 ```swift
-// TODO...
+AzureData.delete(collection, databaseId: databaseId) { success in
+    if success { // successfully deleted  }
+}
 ```
 
 #### Replace
@@ -62,6 +89,8 @@
 ```swift
 // TODO...
 ```
+
+
 
 ## Documents
 
@@ -90,7 +119,7 @@ AzureData.documents(ADDocument.self, databaseId: databaseId, collectionId: colle
 #### Get
 
 ```swift
-AzureData.document(ADDocument.self, databaseId: databaseId, collectionId: collectionId!, documentId: documentId) { document in
+AzureData.document(ADDocument.self, databaseId: databaseId, collectionId: collectionId, documentId: documentId) { document in
     // do stuff
 }
 ```
@@ -99,9 +128,7 @@ AzureData.document(ADDocument.self, databaseId: databaseId, collectionId: collec
 
 ```swift
 AzureData.delete(document, databaseId: databaseId, collectionId: collectionId) { success in
-    if success { 
-        // document deleted 
-    }
+    if success { // successfully deleted  }
 }
 ```
 
@@ -119,6 +146,8 @@ AzureData.replace(databaseId, collectionId: collectionId, document: newDocument)
 // TODO...
 ```
 
+
+
 ## Attachments
 
 #### Create
@@ -130,13 +159,18 @@ AzureData.replace(databaseId, collectionId: collectionId, document: newDocument)
 #### List
 
 ```swift
-// TODO...
+AzureData.attachemnts(databaseId, collectionId: collectionId, documentId: documentId) { list in
+    let count = list?.count
+    let attachments = list?.items
+}
 ```
 
 #### Delete
 
 ```swift
-// TODO...
+AzureData.delete (attachment, databaseId: databaseId, collectionId: collectionId, documentId: documentId) { success in
+    if success { // successfully deleted  }
+}
 ```
 
 #### Replace
@@ -144,6 +178,8 @@ AzureData.replace(databaseId, collectionId: collectionId, document: newDocument)
 ```swift
 // TODO...
 ```
+
+
 
 ## Stored Procedures
 
@@ -156,13 +192,19 @@ AzureData.replace(databaseId, collectionId: collectionId, document: newDocument)
 #### List
 
 ```swift
-// TODO...
+AzureData.storedProcedures(databaseId, collectionId: collectionId) { list in
+    let count = list?.count
+    let storedProcedures = list?.items
+}
 ```
 
 #### Delete
 
 ```swift
-// TODO...
+AzureData.delete(storedProcedure, databaseId: databaseId, collectionId: collectionId) { success in
+    if success { // successfully deleted  }
+}
+
 ```
 
 #### Replace
@@ -177,6 +219,8 @@ AzureData.replace(databaseId, collectionId: collectionId, document: newDocument)
 // TODO...
 ```
 
+
+
 ## User Defined Functions
 
 #### Create
@@ -188,13 +232,18 @@ AzureData.replace(databaseId, collectionId: collectionId, document: newDocument)
 #### List
 
 ```swift
-// TODO...
+AzureData.userDefinedFunctions(databaseId, collectionId: collectionId) { list in
+    let count = list?.count
+    let udfs = list?.items
+}
 ```
 
 #### Delete
 
 ```swift
-// TODO...
+AzureData.delete(udf, databaseId: databaseId, collectionId: collectionId) { success in
+    if success { // successfully deleted  }
+}
 ```
 
 #### Replace
@@ -202,6 +251,8 @@ AzureData.replace(databaseId, collectionId: collectionId, document: newDocument)
 ```swift
 // TODO...
 ```
+
+
 
 ## Triggers
 
@@ -214,13 +265,18 @@ AzureData.replace(databaseId, collectionId: collectionId, document: newDocument)
 #### List
 
 ```swift
-// TODO...
+AzureData.triggers(databaseId, collectionId: collectionId) { list in
+    let count = list?.count
+    let triggers = list?.items
+}
 ```
 
 #### Delete
 
 ```swift
-// TODO...
+AzureData.delete(trigger, databaseId: databaseId, collectionId: collectionId) { success in
+    if success { // successfully deleted  }
+}
 ```
 
 #### Replace
@@ -228,6 +284,8 @@ AzureData.replace(databaseId, collectionId: collectionId, document: newDocument)
 ```swift
 // TODO...
 ```
+
+
 
 ## Users	
 
@@ -240,19 +298,26 @@ AzureData.replace(databaseId, collectionId: collectionId, document: newDocument)
 #### List
 
 ```swift
-// TODO...
+AzureData.users(databaseId) { list in
+    let count = list?.count
+    let users = list?.items
+}
 ```
 
 #### Get
 
 ```swift
-// TODO...
+AzureData.user(databaseId, userId: userId) { user in
+    // do stuff
+}
 ```
 
 #### Delete
 
 ```swift
-// TODO...
+AzureData.delete(user, databaseId: databaseId) { success in
+    if success { // successfully deleted  }
+}
 ```
 
 #### Replace
@@ -260,6 +325,8 @@ AzureData.replace(databaseId, collectionId: collectionId, document: newDocument)
 ```swift
 // TODO...
 ```
+
+
 
 ## Permissions	
 
@@ -272,19 +339,26 @@ AzureData.replace(databaseId, collectionId: collectionId, document: newDocument)
 #### List
 
 ```swift
-// TODO...
+AzureData.permissions (databaseId, userId: databaseId) { list in 
+    let count = list?.count
+    let permissions = list?.items
+}
 ```
 
 #### Get
 
 ```swift
-// TODO...
+AzureData.permission (databaseId, userId: String, permissionId: permissionId) { permission in
+    // do stuff
+}
 ```
 
 #### Delete
 
 ```swift
-// TODO...
+AzureData.delete(permission, databaseId: databaseId, collectionId: collectionId, userId: userId) { success in
+    if success { // successfully deleted  }
+}
 ```
 
 #### Replace
@@ -298,13 +372,18 @@ AzureData.replace(databaseId, collectionId: collectionId, document: newDocument)
 #### List
 
 ```swift
-// TODO...
+AzureData.offers { list in
+    let count = list?.count
+    let offers = list?.items
+}
 ```
 
 #### Get
 
 ```swift
-// TODO...
+AzureData.offer(offerId) { offer in
+    // do stuff
+}
 ```
 
 #### Replace

@@ -318,7 +318,7 @@ open class SessionManager {
 	// create
 	
 	// list
-	public func storedProcedures (databaseId: String, collectionId: String, callback: @escaping (ADResourceList<ADStoredProcedure>?) -> ()) {
+	public func storedProcedures (_ databaseId: String, collectionId: String, callback: @escaping (ADResourceList<ADStoredProcedure>?) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).storedProcedure(databaseId, collectionId: collectionId)
 		
@@ -344,7 +344,7 @@ open class SessionManager {
 	// create
 	
 	// list
-	public func userDefinedFunctions (databaseId: String, collectionId: String, callback: @escaping (ADResourceList<ADUserDefinedFunction>?) -> ()) {
+	public func userDefinedFunctions (_ databaseId: String, collectionId: String, callback: @escaping (ADResourceList<ADUserDefinedFunction>?) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).udf(databaseId, collectionId: collectionId)
 		
@@ -369,7 +369,7 @@ open class SessionManager {
 	// create
 	
 	// list
-	public func triggers (databaseId: String, collectionId: String, callback: @escaping (ADResourceList<ADTrigger>?) -> ()) {
+	public func triggers (_ databaseId: String, collectionId: String, callback: @escaping (ADResourceList<ADTrigger>?) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).trigger(databaseId, collectionId: collectionId)
 		
@@ -394,7 +394,7 @@ open class SessionManager {
 	// create
 	
 	// list
-	public func users (databaseId: String, callback: @escaping (ADResourceList<ADUser>?) -> ()) {
+	public func users (_ databaseId: String, callback: @escaping (ADResourceList<ADUser>?) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).user(databaseId)
 		
@@ -427,7 +427,7 @@ open class SessionManager {
 	// create
 	
 	// list
-	public func permissions (databaseId: String, userId: String, callback: @escaping (ADResourceList<ADPermission>?) -> ()) {
+	public func permissions (_ databaseId: String, userId: String, callback: @escaping (ADResourceList<ADPermission>?) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).permission(databaseId, userId: userId)
 		

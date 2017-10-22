@@ -7,299 +7,309 @@
 
 ## API
 
-### Databases
+## Databases
 
 #### Create
 
-```c#
-// TODO...
+```swift
+let newDocument = ADDocument()
+			
+newDocument["aNumber"] = 1_500_000
+newDocument["aString"] = "Hello!"
+			
+AzureData.createDocument(databaseId, collectionId: collectionId, document: newDocument) { document in
+    // do stuff
+}
 ```
 
 #### List
 
-```c#
-// TODO...
+```swift
+AzureData.documents(ADDocument.self, databaseId: databaseId, collectionId: collectionId) { list in
+    let count = list?.count
+    let documents = list?.items
+}
 ```
 
 #### Get
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Delete
 
-```c#
+```swift
 // TODO...
 ```
 
-### DocumentCollections
+## DocumentCollections
 
 #### Create
 
-```c#
+```swift
 // TODO...
 ```
 
 #### List
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Get
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Delete
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Replace
 
-```c#
+```swift
 // TODO...
 ```
 
-### Documents
+## Documents
 
 #### Create
 
-```c#
+```swift
 // TODO...
 ```
 
 #### List
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Get
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Delete
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Replace
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Query
 
-```c#
+```swift
 // TODO...
 ```
 
-### Attachments
+## Attachments
 
 #### Create
 
-```c#
+```swift
 // TODO...
 ```
 
 #### List
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Delete
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Replace
 
-```c#
+```swift
 // TODO...
 ```
 
-### Stored Procedures
+## Stored Procedures
 
 #### Create
 
-```c#
+```swift
 // TODO...
 ```
 
 #### List
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Delete
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Replace
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Execute
 
-```c#
+```swift
 // TODO...
 ```
 
-### User Defined Functions
+## User Defined Functions
 
 #### Create
 
-```c#
+```swift
 // TODO...
 ```
 
 #### List
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Delete
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Replace
 
-```c#
+```swift
 // TODO...
 ```
 
-### Triggers
+## Triggers
 
 #### Create
 
-```c#
+```swift
 // TODO...
 ```
 
 #### List
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Delete
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Replace
 
-```c#
+```swift
 // TODO...
 ```
 
-### Users	
+## Users	
 
 #### Create
 
-```c#
+```swift
 // TODO...
 ```
 
 #### List
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Get
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Delete
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Replace
 
-```c#
+```swift
 // TODO...
 ```
 
-### Permissions	
+## Permissions	
 
 #### Create
 
-```c#
+```swift
 // TODO...
 ```
 
 #### List
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Get
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Delete
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Replace
 
-```c#
+```swift
 // TODO...
 ```
 
-### Offers
+## Offers
 
 #### List
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Get
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Replace
 
-```c#
+```swift
 // TODO...
 ```
 
 #### Query
 
-```c#
+```swift
 // TODO...
 ```
 

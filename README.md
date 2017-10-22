@@ -12,23 +12,11 @@
 #### Create
 
 ```swift
-let newDocument = ADDocument()
-			
-newDocument["aNumber"] = 1_500_000
-newDocument["aString"] = "Hello!"
-			
-AzureData.createDocument(databaseId, collectionId: collectionId, document: newDocument) { document in
-    // do stuff
-}
 ```
 
 #### List
 
 ```swift
-AzureData.documents(ADDocument.self, databaseId: databaseId, collectionId: collectionId) { list in
-    let count = list?.count
-    let documents = list?.items
-}
 ```
 
 #### Get
@@ -80,31 +68,49 @@ AzureData.documents(ADDocument.self, databaseId: databaseId, collectionId: colle
 #### Create
 
 ```swift
-// TODO...
+let newDocument = ADDocument()
+			
+newDocument["aNumber"] = 1_500_000
+newDocument["aString"] = "Hello!"
+			
+AzureData.createDocument(databaseId, collectionId: collectionId, document: newDocument) { document in
+    // do stuff
+}
 ```
 
 #### List
 
 ```swift
-// TODO...
+AzureData.documents(ADDocument.self, databaseId: databaseId, collectionId: collectionId) { list in
+    let count = list?.count
+    let documents = list?.items
+}
 ```
 
 #### Get
 
 ```swift
-// TODO...
+AzureData.document(ADDocument.self, databaseId: databaseId, collectionId: collectionId!, documentId: documentId) { document in
+    // do stuff
+}
 ```
 
 #### Delete
 
 ```swift
-// TODO...
+AzureData.delete(document, databaseId: databaseId, collectionId: collectionId) { success in
+    if success { 
+        // document deleted 
+    }
+}
 ```
 
 #### Replace
 
 ```swift
-// TODO...
+AzureData.replace(databaseId, collectionId: collectionId, document: newDocument) { document in
+    // do stuff
+}
 ```
 
 #### Query

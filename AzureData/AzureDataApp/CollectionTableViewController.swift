@@ -36,6 +36,7 @@ class CollectionTableViewController: UITableViewController {
 		if let database = databaseId {
 			if !fromUser || collectionsSelected {
 				AzureData.documentCollections(database) { response in
+					debugPrint(response.result)
 					if let items = response.resource?.items {
 						self.documentCollections = items
 						self.tableView.reloadData()
@@ -49,6 +50,7 @@ class CollectionTableViewController: UITableViewController {
 			}
 			if !fromUser || !collectionsSelected {
 				AzureData.users(database) { response in
+					debugPrint(response.result)
 					if let items = response.resource?.items {
 						self.users = items
 						self.tableView.reloadData()
@@ -89,7 +91,7 @@ class CollectionTableViewController: UITableViewController {
 			if let name = alertController.textFields?.first?.text {
 				if self.collectionsSelected {
 					AzureData.createDocumentCollection(self.databaseId!, collectionId: name) { response in
-						print(response.result)
+						debugPrint(response.result)
 						if let collection = response.resource {
 							self.documentCollections.append(collection)
 							self.tableView.reloadData()
@@ -97,7 +99,7 @@ class CollectionTableViewController: UITableViewController {
 					}
 				} else {
 					AzureData.createUser(self.databaseId!, userId: name) { response in
-						print(response.result)
+						debugPrint(response.result)
 						if let user = response.resource {
 							self.users.append(user)
 							self.tableView.reloadData()
@@ -135,14 +137,14 @@ class CollectionTableViewController: UITableViewController {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
 			if self.collectionsSelected {
 				AzureData.documentCollection(self.databaseId!, collectionId: self.documentCollections[indexPath.row].id) { response in
-					print(response.result)
+					debugPrint(response.result)
 					response.resource?.printLog()
 					tableView.reloadRows(at: [indexPath], with: .automatic)
 					callback(false)
 				}
 			} else {
 				AzureData.user(self.databaseId!, userId: self.users[indexPath.row].id) { response in
-					print(response.result)
+					debugPrint(response.result)
 					tableView.reloadRows(at: [indexPath], with: .automatic)
 					callback(false)
 				}

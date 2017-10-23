@@ -11,6 +11,7 @@ import AzureData
 
 class PermissionTableViewController: UITableViewController {
 
+	@IBOutlet weak var addButton: UIBarButtonItem!
 	
 	var userId: String?
 	var databaseId: String?
@@ -18,13 +19,16 @@ class PermissionTableViewController: UITableViewController {
 	var permissions: [ADPermission] = []
 	
     override func viewDidLoad() {
-        super.viewDidLoad()
+		super.viewDidLoad()
+		refreshData()
+		navigationItem.rightBarButtonItems = [addButton, editButtonItem]
     }
 	
 	
 	func refreshData() {
 		if let database = databaseId, let user = userId {
 			AzureData.permissions(database, userId: user) { response in
+				debugPrint(response.result)
 				if let items = response.resource?.items {
 					self.permissions = items
 					self.tableView.reloadData()
@@ -38,9 +42,16 @@ class PermissionTableViewController: UITableViewController {
 		}
 	}
 
+	@IBAction func addButtonTouchUpInside(_ sender: Any) {
+	}
 	
-    // MARK: - Table view data source
 
+	@IBAction func refreshControlValueChanged(_ sender: Any) { refreshData() }
+	
+	
+	// MARK: - Table view data source
+	
+	
 	override func numberOfSections(in tableView: UITableView) -> Int { return 1 }
 
 	
@@ -61,7 +72,8 @@ class PermissionTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
-			AzureData.permission(self.databaseId!, userId: self.userId!, permissionId: self.permissions[indexPath.row].id) { permission in
+			AzureData.permission(self.databaseId!, userId: self.userId!, permissionId: self.permissions[indexPath.row].id) { response in
+				debugPrint(response.result)
 				tableView.reloadRows(at: [indexPath], with: .automatic)
 				callback(false)
 			}

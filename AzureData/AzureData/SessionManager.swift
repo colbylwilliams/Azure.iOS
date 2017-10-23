@@ -30,6 +30,8 @@ open class SessionManager {
 	
 	public var setup = false
 	
+	public var printResponseJson = false
+	
 	var resourceName: String!
 	var tokenProvider: ADTokenProvider!
 	
@@ -546,11 +548,11 @@ open class SessionManager {
 			DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
 			
 			if let error = error {
-				print(error.localizedDescription)
+				if self.printResponseJson { print(error.localizedDescription) }
 				DispatchQueue.main.async { callback(ADResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(error:error)))) }
 			}
 			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
-				print(json)
+				if self.printResponseJson { print(json) }
 				
 				var result: ADResult<T>?
 				
@@ -581,12 +583,11 @@ open class SessionManager {
 			DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
 			
 			if let error = error {
-				print(error.localizedDescription)
-				
+				if self.printResponseJson { print(error.localizedDescription) }
 				DispatchQueue.main.async { callback(ADListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(error:error)))) }
 			}
 			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
-				print(json)
+				if self.printResponseJson { print(json) }
 				
 				var result: ADListResult<T>?
 				
@@ -617,7 +618,7 @@ open class SessionManager {
 			DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
 			
 			if let error = error {
-				print(error.localizedDescription)
+				if self.printResponseJson { print(error.localizedDescription) }
 				DispatchQueue.main.async { callback(false) }
 			} else {
 				DispatchQueue.main.async { callback(true) }

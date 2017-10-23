@@ -11,6 +11,8 @@ import Foundation
 
 public func isSetup() -> Bool { return SessionManager.default.setup }
 
+public func printResponseJson(_ print: Bool) { SessionManager.default.printResponseJson = print }
+
 // setup
 public func setup (_ name: String, key: String, keyType: ADTokenType) {
 	return SessionManager.default.setup(name, key: key, keyType: keyType)

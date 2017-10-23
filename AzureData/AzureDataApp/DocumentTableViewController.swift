@@ -33,6 +33,7 @@ class DocumentTableViewController: UITableViewController {
 			//AzureData.documents(Person.self, databaseId: database, collectionId: documentCollection) { list in
 			//AzureData.documents(CustomDocument.self, databaseId: database, collectionId: documentCollection) { list in
 			AzureData.documents(ADDocument.self, databaseId: database, collectionId: documentCollection) { response in
+				print(response.result)
 				if let items = response.resource?.items {
 					//for item in items { item.printLog()	}
 					self.documents = items
@@ -62,6 +63,7 @@ class DocumentTableViewController: UITableViewController {
 			doc["testDate"]   = Date().timeIntervalSince1970
 			
 			AzureData.createDocument(databaseId, collectionId: documentCollectionId, document: doc) { response in
+				debugPrint(response.result)
 				if let document = response.resource {
 					self.documents.append(document)
 					self.tableView.reloadData()
@@ -94,6 +96,7 @@ class DocumentTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
 			AzureData.document(CustomDocument.self, databaseId: self.databaseId!, collectionId: self.documentCollectionId!, documentId: self.documents[indexPath.row].id) { response in
+				debugPrint(response.result)
 				response.resource?.printLog()
 				tableView.reloadRows(at: [indexPath], with: .automatic)
 				callback(false)

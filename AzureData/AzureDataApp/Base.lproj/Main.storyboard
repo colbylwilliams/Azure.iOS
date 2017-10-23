@@ -200,9 +200,22 @@
                             <outlet property="delegate" destination="U3O-lv-jjR" id="ly9-3u-HBy"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="Permissions" id="UT4-wS-1aB">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Tur-1S-ttQ">
+                            <connections>
+                                <action selector="addButtonTouchUpInside:" destination="U3O-lv-jjR" id="KNs-o7-UZm"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="bhF-kW-83a">
                         <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refreshControlValueChanged:" destination="U3O-lv-jjR" eventType="valueChanged" id="v4r-Ru-Edn"/>
+                        </connections>
                     </refreshControl>
+                    <connections>
+                        <outlet property="addButton" destination="Tur-1S-ttQ" id="eQ3-Z4-iGv"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0oV-y1-5rd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

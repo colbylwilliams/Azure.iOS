@@ -34,6 +34,7 @@ class DatabaseTableViewController: UITableViewController {
 		if AzureData.isSetup() {
 			if !fromUser || databasesSelected {
 				AzureData.databases { response in
+					debugPrint(response.result)
 					if let databases = response.resource?.items {
 						self.databases = databases
 						if self.databasesSelected {
@@ -49,6 +50,7 @@ class DatabaseTableViewController: UITableViewController {
 			}
 			if !fromUser || !databasesSelected {
 				AzureData.offers { response in
+					debugPrint(response.result)
 					if let offers = response.resource?.items {
 						self.offers = offers
 						if !self.databasesSelected {
@@ -126,14 +128,14 @@ class DatabaseTableViewController: UITableViewController {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
 			if self.databasesSelected {
 				AzureData.database(self.databases[indexPath.row].id) { response in
-					print(response.result)
+					debugPrint(response.result)
 					response.resource?.printLog()
 					tableView.reloadRows(at: [indexPath], with: .automatic)
 					callback(false)
 				}
 			} else {
 				AzureData.offer(self.offers[indexPath.row].id) { response in
-					print(response.result)
+					debugPrint(response.result)
 					tableView.reloadRows(at: [indexPath], with: .automatic)
 					callback(false)
 				}

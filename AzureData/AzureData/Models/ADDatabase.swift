@@ -16,7 +16,7 @@ public class ADDatabase: ADResource {
 	public private(set) var collectionsLink: String?
 	public private(set) var usersLink: 		 String?
 	
-	required public init(fromJson dict: [String:Any]) {
+	required public init?(fromJson dict: [String:Any]) {
 		super.init(fromJson: dict)
 		
 		collectionsLink = dict[collectionsLinkKey] 	as? String

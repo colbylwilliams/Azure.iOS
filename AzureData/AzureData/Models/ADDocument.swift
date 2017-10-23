@@ -28,7 +28,7 @@ open class ADDocument: ADResource {
 	
 	public override init(_ id: String) { super.init(id) }
 	
-	required public init(fromJson dict: [String:Any]) {
+	required public init?(fromJson dict: [String:Any]) {
 		super.init(fromJson: dict)
 		
 		attachmentsLink = dict[ADDocument.attachmentsLinkKey] as? String

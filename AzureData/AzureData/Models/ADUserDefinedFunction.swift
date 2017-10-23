@@ -9,6 +9,15 @@
 import Foundation
 
 public class ADUserDefinedFunction: ADResource {
+
+	let bodyKey = "body"
+
 	public private(set) var body: String?
+
+	required public init?(fromJson dict: [String:Any]) {
+		super.init(fromJson: dict)
+
+		body = dict[bodyKey] as? String
+	}
 }
  

@@ -26,8 +26,8 @@ open class ADResource {
 	
 	public init (_ id: String) { self.id = id }
 	
-	required public init(fromJson dict: [String:Any]) {
-		if let id 	= dict[ADResource.idKey] as? String { self.id = id } else { id = "" }
+	required public init?(fromJson dict: [String:Any]) {
+		if let id 	= dict[ADResource.idKey] as? String { self.id = id } else { return nil }
 		resourceId 	= dict[ADResource.resourceIdKey] 	as? String
 		selfLink 	= dict[ADResource.selfLinkKey] 		as? String
 		etag 		= dict[ADResource.etagKey] 			as? String

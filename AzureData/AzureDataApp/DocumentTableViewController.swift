@@ -32,11 +32,13 @@ class DocumentTableViewController: UITableViewController {
 		if let database = databaseId, let documentCollection = documentCollectionId {
 			//AzureData.documents(Person.self, databaseId: database, collectionId: documentCollection) { list in
 			//AzureData.documents(CustomDocument.self, databaseId: database, collectionId: documentCollection) { list in
-			AzureData.documents(ADDocument.self, databaseId: database, collectionId: documentCollection) { list in
-				if let items = list?.items {
+			AzureData.documents(ADDocument.self, databaseId: database, collectionId: documentCollection) { response in
+				if let items = response.resource?.items {
 					//for item in items { item.printLog()	}
 					self.documents = items
 					self.tableView.reloadData()
+				} else {
+					response.error?.printLog()
 				}
 				if self.refreshControl?.isRefreshing ?? false {
 					self.refreshControl!.endRefreshing()
@@ -59,11 +61,11 @@ class DocumentTableViewController: UITableViewController {
 //			doc["id"] = "foo"
 			doc["testDate"]   = Date().timeIntervalSince1970
 			
-			AzureData.createDocument(databaseId, collectionId: documentCollectionId, document: doc) { document in
-				if let document = document {
+			AzureData.createDocument(databaseId, collectionId: documentCollectionId, document: doc) { response in
+				if let document = response.resource {
 					self.documents.append(document)
 					self.tableView.reloadData()
-				}
+				} else { response.error?.printLog() }
 			}
 		}
 	}
@@ -91,8 +93,8 @@ class DocumentTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
-			AzureData.document(CustomDocument.self, databaseId: self.databaseId!, collectionId: self.documentCollectionId!, documentId: self.documents[indexPath.row].id) { document in
-				document?.printLog()
+			AzureData.document(CustomDocument.self, databaseId: self.databaseId!, collectionId: self.documentCollectionId!, documentId: self.documents[indexPath.row].id) { response in
+				response.resource?.printLog()
 				tableView.reloadRows(at: [indexPath], with: .automatic)
 				callback(false)
 			}

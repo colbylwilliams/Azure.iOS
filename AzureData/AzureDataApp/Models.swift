@@ -30,7 +30,7 @@ class Person: ADDocument {
 		{ (_, new) in new }
 	}
 	
-	required init(fromJson dict: [String : Any]) {
+	required init?(fromJson dict: [String : Any]) {
 		super.init(fromJson: dict)
 		
 		if let firstName = dict["firstName"] as? String { self.firstName = firstName }

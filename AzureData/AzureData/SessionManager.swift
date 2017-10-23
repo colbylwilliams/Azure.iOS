@@ -148,13 +148,12 @@ open class SessionManager {
 	// MARK: - Databases
 
 	// create
-	public func createDatabase (_ databaseId: String, callback: @escaping (ADDatabase?) -> ()) {
+	public func createDatabase (_ databaseId: String, callback: @escaping (ADResponse<ADDatabase>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).database()
 		
 		guard let httpBody = try? JSONSerialization.data(withJSONObject: ["id":databaseId], options: []) else {
-			print("Error: Could not serialize document to JSON")
-			callback(nil)
+			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
 			return
 		}
 		
@@ -162,7 +161,7 @@ open class SessionManager {
 	}
 
 	// list
-	public func databases (callback: @escaping (ADResourceList<ADDatabase>?) -> ()) {
+	public func databases (callback: @escaping (ADListResponse<ADDatabase>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).database()
 		
@@ -170,7 +169,7 @@ open class SessionManager {
 	}
 
 	// get
-	public func database (_ databaseId: String, callback: @escaping (ADDatabase?) -> ()) {
+	public func database (_ databaseId: String, callback: @escaping (ADResponse<ADDatabase>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).database(databaseId)
 		
@@ -190,13 +189,12 @@ open class SessionManager {
 	// MARK: - DocumentCollections
 	
 	// create
-	public func createDocumentCollection (_ databaseId: String, collectionId: String, callback: @escaping (ADDocumentCollection?) -> ()) {
+	public func createDocumentCollection (_ databaseId: String, collectionId: String, callback: @escaping (ADResponse<ADDocumentCollection>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).collection(databaseId)
 		
 		guard let httpBody = try? JSONSerialization.data(withJSONObject: ["id":collectionId], options: []) else {
-			print("Error: Could not serialize document to JSON")
-			callback(nil)
+			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
 			return
 		}
 		
@@ -204,7 +202,7 @@ open class SessionManager {
 	}
 
 	// list
-	public func documentCollections (_ databaseId: String, callback: @escaping (ADResourceList<ADDocumentCollection>?) -> ()) {
+	public func documentCollections (_ databaseId: String, callback: @escaping (ADListResponse<ADDocumentCollection>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).collection(databaseId)
 		
@@ -212,7 +210,7 @@ open class SessionManager {
 	}
 
 	// get
-	public func documentCollection (_ databaseId: String, collectionId: String, callback: @escaping (ADDocumentCollection?) -> ()) {
+	public func documentCollection (_ databaseId: String, collectionId: String, callback: @escaping (ADResponse<ADDocumentCollection>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).collection(databaseId, collectionId: collectionId)
 		
@@ -234,13 +232,12 @@ open class SessionManager {
 	// MARK: - Documents
 	
 	// create
-	public func createDocument<T: ADDocument> (_ databaseId: String, collectionId: String, document: T, callback: @escaping (T?) -> ()) {
+	public func createDocument<T: ADDocument> (_ databaseId: String, collectionId: String, document: T, callback: @escaping (ADResponse<T>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).document(databaseId, collectionId: collectionId)
 		
 		guard let httpBody = try? JSONSerialization.data(withJSONObject: document.dictionary, options: []) else {
-			print("Error: Could not serialize document to JSON")
-			callback(nil)
+			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
 			return
 		}
 		
@@ -248,7 +245,7 @@ open class SessionManager {
 	}
 
 	// list
-	public func documents<T: ADDocument> (_ documentType:T.Type, databaseId: String, collectionId: String, callback: @escaping (ADResourceList<T>?) -> ()) {
+	public func documents<T: ADDocument> (_ documentType:T.Type, databaseId: String, collectionId: String, callback: @escaping (ADListResponse<T>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).document(databaseId, collectionId: collectionId)
 		
@@ -256,7 +253,7 @@ open class SessionManager {
 	}
 
 	// get
-	public func document<T: ADDocument> (_ documentType:T.Type, databaseId: String, collectionId: String, documentId: String, callback: @escaping (T?) -> ()) {
+	public func document<T: ADDocument> (_ documentType:T.Type, databaseId: String, collectionId: String, documentId: String, callback: @escaping (ADResponse<T>) -> ()) {
 
 		let resourceUri = ADResourceUri(resourceName).document(databaseId, collectionId: collectionId, documentId: documentId)
 		
@@ -272,13 +269,12 @@ open class SessionManager {
 	}
 
 	// replace
-	public func replace<T: ADDocument> (_ databaseId: String, collectionId: String, document: T, callback: @escaping (T?) -> ()) {
+	public func replace<T: ADDocument> (_ databaseId: String, collectionId: String, document: T, callback: @escaping (ADResponse<T>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).document(databaseId, collectionId: collectionId, documentId: document.id)
 		
 		guard let httpBody = try? JSONSerialization.data(withJSONObject: document.dictionary, options: []) else {
-			print("Error: Could not serialize document to JSON")
-			callback(nil)
+			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
 			return
 		}
 		
@@ -294,7 +290,7 @@ open class SessionManager {
 	// create
 	
 	// list
-	public func attachments (_ databaseId: String, collectionId: String, documentId: String, callback: @escaping (ADResourceList<ADAttachment>?) -> ()) {
+	public func attachments (_ databaseId: String, collectionId: String, documentId: String, callback: @escaping (ADListResponse<ADAttachment>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).attachment(databaseId, collectionId: collectionId, documentId: documentId)
 		
@@ -318,7 +314,7 @@ open class SessionManager {
 	// create
 	
 	// list
-	public func storedProcedures (_ databaseId: String, collectionId: String, callback: @escaping (ADResourceList<ADStoredProcedure>?) -> ()) {
+	public func storedProcedures (_ databaseId: String, collectionId: String, callback: @escaping (ADListResponse<ADStoredProcedure>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).storedProcedure(databaseId, collectionId: collectionId)
 		
@@ -344,7 +340,7 @@ open class SessionManager {
 	// create
 	
 	// list
-	public func userDefinedFunctions (_ databaseId: String, collectionId: String, callback: @escaping (ADResourceList<ADUserDefinedFunction>?) -> ()) {
+	public func userDefinedFunctions (_ databaseId: String, collectionId: String, callback: @escaping (ADListResponse<ADUserDefinedFunction>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).udf(databaseId, collectionId: collectionId)
 		
@@ -369,7 +365,7 @@ open class SessionManager {
 	// create
 	
 	// list
-	public func triggers (_ databaseId: String, collectionId: String, callback: @escaping (ADResourceList<ADTrigger>?) -> ()) {
+	public func triggers (_ databaseId: String, collectionId: String, callback: @escaping (ADListResponse<ADTrigger>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).trigger(databaseId, collectionId: collectionId)
 		
@@ -392,9 +388,20 @@ open class SessionManager {
 	// MARK: - Users
 	
 	// create
-	
+	public func createUser (_ databaseId: String, userId: String, callback: @escaping (ADResponse<ADUser>) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).user(databaseId)
+		
+		guard let httpBody = try? JSONSerialization.data(withJSONObject: ["id":userId], options: []) else {
+			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
+			return
+		}
+		
+		return create(resourceUri: resourceUri, resourceType: .user, httpBody: httpBody, callback: callback)
+	}
+
 	// list
-	public func users (_ databaseId: String, callback: @escaping (ADResourceList<ADUser>?) -> ()) {
+	public func users (_ databaseId: String, callback: @escaping (ADListResponse<ADUser>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).user(databaseId)
 		
@@ -402,7 +409,7 @@ open class SessionManager {
 	}
 
 	// get
-	public func user (_ databaseId: String, userId: String, callback: @escaping (ADUser?) -> ()) {
+	public func user (_ databaseId: String, userId: String, callback: @escaping (ADResponse<ADUser>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).user(databaseId, userId: userId)
 		
@@ -427,7 +434,7 @@ open class SessionManager {
 	// create
 	
 	// list
-	public func permissions (_ databaseId: String, userId: String, callback: @escaping (ADResourceList<ADPermission>?) -> ()) {
+	public func permissions (_ databaseId: String, userId: String, callback: @escaping (ADListResponse<ADPermission>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).permission(databaseId, userId: userId)
 		
@@ -435,7 +442,7 @@ open class SessionManager {
 	}
 
 	// get
-	public func permission (_ databaseId: String, userId: String, permissionId: String, callback: @escaping (ADPermission?) -> ()) {
+	public func permission (_ databaseId: String, userId: String, permissionId: String, callback: @escaping (ADResponse<ADPermission>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).permission(databaseId, userId: userId, permissionId: permissionId)
 		
@@ -458,7 +465,7 @@ open class SessionManager {
 	// MARK: - Offers
 	
 	// list
-	public func offers (callback: @escaping (ADResourceList<ADOffer>?) -> ()) {
+	public func offers (callback: @escaping (ADListResponse<ADOffer>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).offer()
 		
@@ -466,7 +473,7 @@ open class SessionManager {
 	}
 
 	// get
-	public func offer (_ offerId: String, callback: @escaping (ADOffer?) -> ()) {
+	public func offer (_ offerId: String, callback: @escaping (ADResponse<ADOffer>) -> ()) {
 		
 		let resourceUri = ADResourceUri(resourceName).offer(offerId)
 		
@@ -482,7 +489,7 @@ open class SessionManager {
 	// MARK: - Resources
 	
 	// create
-	fileprivate func create<T:ADResource> (resourceUri: (URL, String), resourceType: ADResourceType, httpBody: Data, callback: @escaping (T?) -> ()) {
+	fileprivate func create<T> (resourceUri: (URL, String), resourceType: ADResourceType, httpBody: Data, callback: @escaping (ADResponse<T>) -> ()) {
 		
 		var request = dataRequest(.post, resourceUri: resourceUri, resourceType: resourceType)
 		
@@ -492,7 +499,7 @@ open class SessionManager {
 	}
 	
 	// list
-	fileprivate func resources<T> (resourceUri: (URL, String), resourceType: ADResourceType, callback: @escaping (ADResourceList<T>?) -> ()) {
+	fileprivate func resources<T> (resourceUri: (URL, String), resourceType: ADResourceType, callback: @escaping (ADListResponse<T>) -> ()) {
 
 		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: resourceType)
 		
@@ -500,7 +507,7 @@ open class SessionManager {
 	}
 	
 	// get
-	fileprivate func resource<T:ADResource>(resourceUri: (URL, String), resourceType: ADResourceType, callback: @escaping (T?) -> ()) {
+	fileprivate func resource<T>(resourceUri: (URL, String), resourceType: ADResourceType, callback: @escaping (ADResponse<T>) -> ()) {
 		
 		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: resourceType)
 		
@@ -516,7 +523,7 @@ open class SessionManager {
 	}
 	
 	// replace
-	fileprivate func replace<T:ADResource> (resourceUri: (URL, String), resourceType: ADResourceType, httpBody: Data, callback: @escaping (T?) -> ()) {
+	fileprivate func replace<T> (resourceUri: (URL, String), resourceType: ADResourceType, httpBody: Data, callback: @escaping (ADResponse<T>) -> ()) {
 		
 		var request = dataRequest(.put, resourceUri: resourceUri, resourceType: resourceType)
 		
@@ -530,7 +537,7 @@ open class SessionManager {
 	
 	// MARK: - Request
 	
-	fileprivate func sendRequest<T:ADResource> (_ request:URLRequest, callback: @escaping (T?) -> ()) {
+	fileprivate func sendRequest<T> (_ request:URLRequest, callback: @escaping (ADResponse<T>) -> ()) {
 		
 		UIApplication.shared.isNetworkActivityIndicatorVisible = true
 		
@@ -540,18 +547,32 @@ open class SessionManager {
 			
 			if let error = error {
 				print(error.localizedDescription)
+				DispatchQueue.main.async { callback(ADResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(error:error)))) }
 			}
 			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
 				print(json)
-				DispatchQueue.main.async { callback(T(fromJson: json)) }
+				
+				var result: ADResult<T>?
+				
+				if let resource = T(fromJson: json) {
+					result = .success(resource)
+				} else if let adError = ADError(fromJson: json) {
+					result = .failure(adError)
+				}
+				
+				if let result = result {
+					DispatchQueue.main.async { callback(ADResponse(request: request, response: response as? HTTPURLResponse, data: data, result: result)) }
+				} else {
+					DispatchQueue.main.async { callback(ADResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError()))) }
+				}
 			} else {
-				DispatchQueue.main.async { callback(nil) }
+				DispatchQueue.main.async { callback(ADResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError()))) }
 			}
 		}.resume()
 	}
 
 	
-	fileprivate func sendRequest<T> (_ request:URLRequest, resourceType: ADResourceType, callback: @escaping (ADResourceList<T>?) -> ()) {
+	fileprivate func sendRequest<T> (_ request:URLRequest, resourceType: ADResourceType, callback: @escaping (ADListResponse<T>) -> ()) {
 		
 		UIApplication.shared.isNetworkActivityIndicatorVisible = true
 		
@@ -561,12 +582,27 @@ open class SessionManager {
 			
 			if let error = error {
 				print(error.localizedDescription)
+				
+				DispatchQueue.main.async { callback(ADListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(error:error)))) }
 			}
 			if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
 				print(json)
-				DispatchQueue.main.async { callback(ADResourceList<T>(resourceType, json: json)) }
+				
+				var result: ADListResult<T>?
+				
+				if let resource = ADResourceList<T>(resourceType, json: json) {
+					result = .success(resource)
+				} else if let adError = ADError(fromJson: json) {
+					result = .failure(adError)
+				}
+
+				if let result = result {
+					DispatchQueue.main.async { callback(ADListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: result)) }
+				} else {
+					DispatchQueue.main.async { callback(ADListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError()))) }
+				}
 			} else {
-				DispatchQueue.main.async { callback(nil) }
+				DispatchQueue.main.async { callback(ADListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError()))) }
 			}
 		}.resume()
 	}

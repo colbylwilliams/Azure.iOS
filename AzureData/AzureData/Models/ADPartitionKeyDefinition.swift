@@ -14,7 +14,7 @@ public class ADPartitionKeyDefinition {
 	
 	public private(set) var paths: [String] = []
 	
-	public init(fromJson dict: [String:Any]) {
+	public init?(fromJson dict: [String:Any]) {
 		if let paths = dict[pathsKey] as? [String] {
 			for path in paths {
 				self.paths.append(path)

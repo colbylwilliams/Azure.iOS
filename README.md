@@ -292,7 +292,9 @@ AzureData.delete(trigger, databaseId: databaseId, collectionId: collectionId) { 
 #### Create
 
 ```swift
-// TODO...
+AzureData.createUser(databaseId, userId: newUserId) { user in
+    // do stuff
+}
 ```
 
 #### List

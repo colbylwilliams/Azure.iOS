@@ -26,7 +26,7 @@ public class ADDocumentCollection: ADResource {
 	public private(set) var triggersLink: 			 String?
 	public private(set) var userDefinedFunctionsLink:String?
 	
-	required public init(fromJson dict: [String:Any]) {
+	required public init?(fromJson dict: [String:Any]) {
 		super.init(fromJson: dict)
 		
 		conflictsLink 				= dict[conflictsLinkKey] 			as? String

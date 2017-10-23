@@ -49,4 +49,20 @@ public enum ADResourceType : String {
 		case .offer: 			return "Offers"
 		}
 	}
+
+	init?(fromResource resource: ADResource) {
+		switch resource {
+		case is ADDatabase:				self = .database
+		case is ADUser: 				self = .user
+		case is ADPermission: 			self = .permission
+		case is ADDocumentCollection: 	self = .collection
+		case is ADStoredProcedure: 		self = .storedProcedure
+		case is ADTrigger: 				self = .trigger
+		case is ADUserDefinedFunction: 	self = .udf
+		case is ADDocument: 			self = .document
+		case is ADAttachment: 			self = .attachment
+		case is ADOffer: 				self = .offer
+		default: return nil
+		}
+	}
 }

@@ -11,6 +11,8 @@ import AzureData
 
 class DatabaseTableViewController: UITableViewController {
 
+	let selectedSegmentIndexKey = "DatabaseTableViewController.selectedSegmentIndex"
+	
 	@IBOutlet weak var addButton: UIBarButtonItem!
 	@IBOutlet weak var segmentedControl: UISegmentedControl!
 	
@@ -23,6 +25,8 @@ class DatabaseTableViewController: UITableViewController {
 	
     override func viewDidLoad() {
         super.viewDidLoad()
+		
+		segmentedControl.selectedSegmentIndex = UserDefaults.standard.integer(forKey: selectedSegmentIndexKey)
 		
 		addButton.isEnabled = databasesSelected
 		
@@ -69,6 +73,7 @@ class DatabaseTableViewController: UITableViewController {
 
 	
 	@IBAction func segmentedControlValueChanged(_ sender: Any) {
+		UserDefaults.standard.set(segmentedControl.selectedSegmentIndex, forKey: selectedSegmentIndexKey)
 		addButton.isEnabled = databasesSelected
 		tableView.reloadData()
 	}
@@ -193,7 +198,7 @@ class DatabaseTableViewController: UITableViewController {
 
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if let cell = sender as? UITableViewCell, let index = tableView.indexPath(for: cell), let destinationViewController = segue.destination as? CollectionTableViewController {
-			destinationViewController.databaseId = databases[index.row].id
+			destinationViewController.database = databases[index.row]
 		}
     }
 }

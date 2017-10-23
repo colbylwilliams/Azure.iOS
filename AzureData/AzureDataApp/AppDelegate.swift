@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		//AzureData.setup("producerdocumentdb", key: "m8sKmtiotoEoZqRr65LcBCr6v2VxJyoKHbrWhjSTYlosgT2oc127VGGkEyA4n8Zjkdfb9ZoUpKoKjw1zktAcdw==", keyType: .master)
 		
 		// AzureData.setup("<Database Name>", key: "<Database Key>", keyType: .master)
-		//AZureData.printResponseJson(true)
+		AzureData.printResponseJson(true)
 		return true
 	}
 

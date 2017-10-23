@@ -213,6 +213,9 @@ public func delete (_ resource: ADUser, databaseId: String, callback: @escaping 
 // MARK: - Permissions
 
 // create
+public func createPermission (_ resource: ADResource, databaseId: String, userId: String, permissionId: String, permissionMode: ADPermissionMode, callback: @escaping (ADResponse<ADPermission>) -> ()) {
+	SessionManager.default.createPermission(resource, databaseId: databaseId, userId: userId, permissionId: permissionId, permissionMode: permissionMode, callback: callback)
+}
 
 // list
 public func permissions (_ databaseId: String, userId: String, callback: @escaping (ADListResponse<ADPermission>) -> ()) {

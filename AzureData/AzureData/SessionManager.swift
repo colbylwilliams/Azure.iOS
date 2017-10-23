@@ -32,7 +32,14 @@ open class SessionManager {
 	
 	public var printResponseJson = false
 	
-	var resourceName: String!
+	var baseUri: ADResourceUri!
+	
+	var resourceName: String! {
+		willSet {
+			baseUri = ADResourceUri(newValue)
+		}
+	}
+	
 	var tokenProvider: ADTokenProvider!
 	
 	public func setup (_ name: String, key: String, keyType: ADTokenType) {
@@ -154,7 +161,9 @@ open class SessionManager {
 		
 		let resourceUri = ADResourceUri(resourceName).database()
 		
-		guard let httpBody = try? JSONSerialization.data(withJSONObject: ["id":databaseId], options: []) else {
+		let body = ["id":databaseId]
+		
+		guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
 			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
 			return
 		}
@@ -195,7 +204,9 @@ open class SessionManager {
 		
 		let resourceUri = ADResourceUri(resourceName).collection(databaseId)
 		
-		guard let httpBody = try? JSONSerialization.data(withJSONObject: ["id":collectionId], options: []) else {
+		let body = ["id":collectionId]
+		
+		guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
 			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
 			return
 		}
@@ -238,7 +249,9 @@ open class SessionManager {
 		
 		let resourceUri = ADResourceUri(resourceName).document(databaseId, collectionId: collectionId)
 		
-		guard let httpBody = try? JSONSerialization.data(withJSONObject: document.dictionary, options: []) else {
+		let body = document.dictionary
+		
+		guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
 			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
 			return
 		}
@@ -275,7 +288,9 @@ open class SessionManager {
 		
 		let resourceUri = ADResourceUri(resourceName).document(databaseId, collectionId: collectionId, documentId: document.id)
 		
-		guard let httpBody = try? JSONSerialization.data(withJSONObject: document.dictionary, options: []) else {
+		let body = document.dictionary
+		
+		guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
 			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
 			return
 		}
@@ -394,7 +409,9 @@ open class SessionManager {
 		
 		let resourceUri = ADResourceUri(resourceName).user(databaseId)
 		
-		guard let httpBody = try? JSONSerialization.data(withJSONObject: ["id":userId], options: []) else {
+		let body = ["id":userId]
+		
+		guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
 			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
 			return
 		}
@@ -434,6 +451,19 @@ open class SessionManager {
 	// MARK: - Permissions
 	
 	// create
+	public func createPermission (_ resource: ADResource, databaseId: String, userId: String, permissionId: String,  permissionMode: ADPermissionMode, callback: @escaping (ADResponse<ADPermission>) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).permission(databaseId, userId: userId)
+
+		let body = ["id":permissionId, "permissionMode": permissionMode.rawValue, "resource":resource.selfLink!]
+		
+		guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
+			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
+			return
+		}
+		
+		return create(resourceUri: resourceUri, resourceType: .permission, httpBody: httpBody, callback: callback)
+	}
 	
 	// list
 	public func permissions (_ databaseId: String, userId: String, callback: @escaping (ADListResponse<ADPermission>) -> ()) {
@@ -483,6 +513,7 @@ open class SessionManager {
 	}
 
 	// replace
+	
 	// query
 	
 

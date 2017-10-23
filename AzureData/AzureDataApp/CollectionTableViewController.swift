@@ -11,10 +11,12 @@ import AzureData
 
 class CollectionTableViewController: UITableViewController {
 
+	let selectedSegmentIndexKey = "CollectionTableViewController.selectedSegmentIndex"
+	
 	@IBOutlet var addButton: UIBarButtonItem!
 	@IBOutlet weak var segmentedControl: UISegmentedControl!
 	
-	var databaseId: String?
+	var database: ADDatabase?
 	
 	var users: [ADUser] = []
 	var documentCollections: [ADDocumentCollection] = []
@@ -26,6 +28,8 @@ class CollectionTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+		segmentedControl.selectedSegmentIndex = UserDefaults.standard.integer(forKey: selectedSegmentIndexKey)
+		
 		refreshData()
 		
 		navigationItem.rightBarButtonItems = [addButton, editButtonItem]
@@ -33,9 +37,9 @@ class CollectionTableViewController: UITableViewController {
 
 	
 	func refreshData(fromUser: Bool = false) {
-		if let database = databaseId {
+		if let databaseId = database?.id {
 			if !fromUser || collectionsSelected {
-				AzureData.documentCollections(database) { response in
+				AzureData.documentCollections(databaseId) { response in
 					debugPrint(response.result)
 					if let items = response.resource?.items {
 						self.documentCollections = items
@@ -49,7 +53,7 @@ class CollectionTableViewController: UITableViewController {
 				}
 			}
 			if !fromUser || !collectionsSelected {
-				AzureData.users(database) { response in
+				AzureData.users(databaseId) { response in
 					debugPrint(response.result)
 					if let items = response.resource?.items {
 						self.users = items
@@ -66,7 +70,10 @@ class CollectionTableViewController: UITableViewController {
 	}
 	
 	
-	@IBAction func segmentedControlValueChanged(_ sender: Any) { tableView.reloadData()	}
+	@IBAction func segmentedControlValueChanged(_ sender: Any) {
+		UserDefaults.standard.set(segmentedControl.selectedSegmentIndex, forKey: selectedSegmentIndexKey)
+		tableView.reloadData()
+	}
 	
 	
 	@IBAction func refreshControlValueChanged(_ sender: Any) { refreshData(fromUser: true) }
@@ -90,7 +97,7 @@ class CollectionTableViewController: UITableViewController {
 			
 			if let name = alertController.textFields?.first?.text {
 				if self.collectionsSelected {
-					AzureData.createDocumentCollection(self.databaseId!, collectionId: name) { response in
+					AzureData.createDocumentCollection(self.database!.id, collectionId: name) { response in
 						debugPrint(response.result)
 						if let collection = response.resource {
 							self.documentCollections.append(collection)
@@ -100,7 +107,7 @@ class CollectionTableViewController: UITableViewController {
 						}
 					}
 				} else {
-					AzureData.createUser(self.databaseId!, userId: name) { response in
+					AzureData.createUser(self.database!.id, userId: name) { response in
 						debugPrint(response.result)
 						if let user = response.resource {
 							self.users.append(user)
@@ -147,7 +154,7 @@ class CollectionTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
 			if self.collectionsSelected {
-				AzureData.documentCollection(self.databaseId!, collectionId: self.documentCollections[indexPath.row].id) { response in
+				AzureData.documentCollection(self.database!.id, collectionId: self.documentCollections[indexPath.row].id) { response in
 					if response.result.isSuccess {
 						debugPrint(response.result)
 						response.resource?.printLog()
@@ -159,7 +166,7 @@ class CollectionTableViewController: UITableViewController {
 					}
 				}
 			} else {
-				AzureData.user(self.databaseId!, userId: self.users[indexPath.row].id) { response in
+				AzureData.user(self.database!.id, userId: self.users[indexPath.row].id) { response in
 					if response.result.isSuccess {
 						debugPrint(response.result)
 						tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -180,7 +187,7 @@ class CollectionTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .destructive, title: "Delete") { (action, view, callback) in
 			if self.collectionsSelected {
-				AzureData.delete(self.documentCollections[indexPath.row], databaseId: self.databaseId!) { success in
+				AzureData.delete(self.documentCollections[indexPath.row], databaseId: self.database!.id) { success in
 					if success {
 						self.documentCollections.remove(at: indexPath.row)
 						tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -188,7 +195,7 @@ class CollectionTableViewController: UITableViewController {
 					callback(success)
 				}
 			} else {
-				AzureData.delete(self.users[indexPath.row], databaseId: self.databaseId!) { success in
+				AzureData.delete(self.users[indexPath.row], databaseId: self.database!.id) { success in
 					if success {
 						self.users.remove(at: indexPath.row)
 						tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -204,14 +211,14 @@ class CollectionTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
 			if self.collectionsSelected {
-				AzureData.delete(self.documentCollections[indexPath.row], databaseId: self.databaseId!) { success in
+				AzureData.delete(self.documentCollections[indexPath.row], databaseId: self.database!.id) { success in
 					if success {
 						self.documentCollections.remove(at: indexPath.row)
 						tableView.deleteRows(at: [indexPath], with: .automatic)
 					}
 				}
 			} else {
-				AzureData.delete(self.users[indexPath.row], databaseId: self.databaseId!) { success in
+				AzureData.delete(self.users[indexPath.row], databaseId: self.database!.id) { success in
 					if success {
 						self.users.remove(at: indexPath.row)
 						tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -232,11 +239,12 @@ class CollectionTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if let cell = sender as? UITableViewCell, let index = tableView.indexPath(for: cell) {
 			if segue.identifier == "documentsSegue", let destinationViewController = segue.destination as? DocumentTableViewController {
-				destinationViewController.databaseId = databaseId
-				destinationViewController.documentCollectionId = documentCollections[index.row].id
+				destinationViewController.database = database
+				destinationViewController.documentCollection = documentCollections[index.row]
 			} else if segue.identifier == "permissionSegue", let destinationViewController = segue.destination as? PermissionTableViewController {
-				destinationViewController.databaseId = databaseId
-				destinationViewController.userId = users[index.row].id
+				destinationViewController.database = database
+				destinationViewController.user = users[index.row]
+				destinationViewController.documentCollection = documentCollections[0]
 			}
 		}
     }

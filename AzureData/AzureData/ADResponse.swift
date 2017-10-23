@@ -95,6 +95,19 @@ public enum ADResult<T:ADResource> {
 	case success(T)
 	case failure(ADError)
 	
+	/// Returns `true` if the result is a success, `false` otherwise.
+	public var isSuccess: Bool {
+		switch self {
+		case .success: return true
+		case .failure: return false
+		}
+	}
+	
+	/// Returns `true` if the result is a failure, `false` otherwise.
+	public var isFailure: Bool {
+		return !isSuccess
+	}
+
 	/// Returns the associated value if the result is a success, `nil` otherwise.
 	public var resource: T? {
 		switch self {
@@ -117,6 +130,19 @@ public enum ADListResult<T:ADResource> {
 	case success(ADResourceList<T>)
 	case failure(ADError)
 	
+	/// Returns `true` if the result is a success, `false` otherwise.
+	public var isSuccess: Bool {
+		switch self {
+		case .success: return true
+		case .failure: return false
+		}
+	}
+	
+	/// Returns `true` if the result is a failure, `false` otherwise.
+	public var isFailure: Bool {
+		return !isSuccess
+	}
+
 	/// Returns the associated value if the result is a success, `nil` otherwise.
 	public var resource: ADResourceList<T>? {
 		switch self {

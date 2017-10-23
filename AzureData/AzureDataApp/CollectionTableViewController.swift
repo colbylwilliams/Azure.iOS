@@ -40,8 +40,8 @@ class CollectionTableViewController: UITableViewController {
 					if let items = response.resource?.items {
 						self.documentCollections = items
 						self.tableView.reloadData()
-					} else {
-						response.error?.printLog()
+					} else if let error = response.error {
+						self.showErrorAlert(error)
 					}
 					if self.refreshControl?.isRefreshing ?? false {
 						self.refreshControl!.endRefreshing()
@@ -54,8 +54,8 @@ class CollectionTableViewController: UITableViewController {
 					if let items = response.resource?.items {
 						self.users = items
 						self.tableView.reloadData()
-					} else {
-						response.error?.printLog()
+					} else if let error = response.error {
+						self.showErrorAlert(error)
 					}
 					if self.refreshControl?.isRefreshing ?? false {
 						self.refreshControl!.endRefreshing()
@@ -95,7 +95,9 @@ class CollectionTableViewController: UITableViewController {
 						if let collection = response.resource {
 							self.documentCollections.append(collection)
 							self.tableView.reloadData()
-						} else { response.error?.printLog() }
+						} else if let error = response.error {
+							self.showErrorAlert(error)
+						}
 					}
 				} else {
 					AzureData.createUser(self.databaseId!, userId: name) { response in
@@ -103,12 +105,21 @@ class CollectionTableViewController: UITableViewController {
 						if let user = response.resource {
 							self.users.append(user)
 							self.tableView.reloadData()
-						} else { response.error?.printLog() }
+						} else if let error = response.error {
+							self.showErrorAlert(error)
+						}
 					}
 				}
 			}
 		})
 		
+		present(alertController, animated: true) { }
+	}
+
+	
+	func showErrorAlert (_ error: ADError) {
+		let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+		alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
 		present(alertController, animated: true) { }
 	}
 
@@ -137,16 +148,26 @@ class CollectionTableViewController: UITableViewController {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
 			if self.collectionsSelected {
 				AzureData.documentCollection(self.databaseId!, collectionId: self.documentCollections[indexPath.row].id) { response in
-					debugPrint(response.result)
-					response.resource?.printLog()
-					tableView.reloadRows(at: [indexPath], with: .automatic)
-					callback(false)
+					if response.result.isSuccess {
+						debugPrint(response.result)
+						response.resource?.printLog()
+						tableView.reloadRows(at: [indexPath], with: .automatic)
+						callback(false)
+					} else if let error = response.error {
+						self.showErrorAlert(error)
+						callback(false)
+					}
 				}
 			} else {
 				AzureData.user(self.databaseId!, userId: self.users[indexPath.row].id) { response in
-					debugPrint(response.result)
-					tableView.reloadRows(at: [indexPath], with: .automatic)
-					callback(false)
+					if response.result.isSuccess {
+						debugPrint(response.result)
+						tableView.reloadRows(at: [indexPath], with: .automatic)
+						callback(false)
+					} else if let error = response.error {
+						self.showErrorAlert(error)
+						callback(false)
+					}
 				}
 			}
 		}

@@ -28,18 +28,19 @@ class DocumentTableViewController: UITableViewController {
 		navigationItem.rightBarButtonItems = [addButton, editButtonItem]
     }
 
+	
 	func refreshData() {
 		if let database = databaseId, let documentCollection = documentCollectionId {
 			//AzureData.documents(Person.self, databaseId: database, collectionId: documentCollection) { list in
 			//AzureData.documents(CustomDocument.self, databaseId: database, collectionId: documentCollection) { list in
 			AzureData.documents(ADDocument.self, databaseId: database, collectionId: documentCollection) { response in
-				print(response.result)
+				debugPrint(response.result)
 				if let items = response.resource?.items {
 					//for item in items { item.printLog()	}
 					self.documents = items
 					self.tableView.reloadData()
-				} else {
-					response.error?.printLog()
+				} else if let error = response.error {
+					self.showErrorAlert(error)
 				}
 				if self.refreshControl?.isRefreshing ?? false {
 					self.refreshControl!.endRefreshing()
@@ -67,9 +68,18 @@ class DocumentTableViewController: UITableViewController {
 				if let document = response.resource {
 					self.documents.append(document)
 					self.tableView.reloadData()
-				} else { response.error?.printLog() }
+				} else if let error = response.error {
+					self.showErrorAlert(error)
+				}
 			}
 		}
+	}
+	
+	
+	func showErrorAlert (_ error: ADError) {
+		let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+		alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
+		present(alertController, animated: true) { }
 	}
 
 	
@@ -96,10 +106,15 @@ class DocumentTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
 			AzureData.document(CustomDocument.self, databaseId: self.databaseId!, collectionId: self.documentCollectionId!, documentId: self.documents[indexPath.row].id) { response in
-				debugPrint(response.result)
-				response.resource?.printLog()
-				tableView.reloadRows(at: [indexPath], with: .automatic)
-				callback(false)
+				if response.result.isSuccess {
+					debugPrint(response.result)
+					response.resource?.printLog()
+					tableView.reloadRows(at: [indexPath], with: .automatic)
+					callback(false)
+				} else if let error = response.error {
+					self.showErrorAlert(error)
+					callback(false)
+				}
 			}
 		}
 		action.backgroundColor = UIColor.blue

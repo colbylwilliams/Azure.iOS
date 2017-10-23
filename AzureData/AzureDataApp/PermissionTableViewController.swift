@@ -32,8 +32,8 @@ class PermissionTableViewController: UITableViewController {
 				if let items = response.resource?.items {
 					self.permissions = items
 					self.tableView.reloadData()
-				} else {
-					response.error?.printLog()
+				} else if let error = response.error {
+					self.showErrorAlert(error)
 				}
 				if self.refreshControl?.isRefreshing ?? false {
 					self.refreshControl!.endRefreshing()
@@ -42,6 +42,14 @@ class PermissionTableViewController: UITableViewController {
 		}
 	}
 
+	
+	func showErrorAlert (_ error: ADError) {
+		let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+		alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
+		present(alertController, animated: true) { }
+	}
+
+	
 	@IBAction func addButtonTouchUpInside(_ sender: Any) {
 	}
 	

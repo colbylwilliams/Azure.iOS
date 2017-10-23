@@ -40,8 +40,8 @@ class DatabaseTableViewController: UITableViewController {
 						if self.databasesSelected {
 							self.tableView.reloadData()
 						}
-					} else {
-						response.error?.printLog()
+					} else if let error = response.error {
+						self.showErrorAlert(error)
 					}
 					if self.refreshControl?.isRefreshing ?? false {
 						self.refreshControl!.endRefreshing()
@@ -56,8 +56,8 @@ class DatabaseTableViewController: UITableViewController {
 						if !self.databasesSelected {
 							self.tableView.reloadData()
 						}
-					} else {
-						response.error?.printLog()
+					} else if let error = response.error {
+						self.showErrorAlert(error)
 					}
 					if self.refreshControl?.isRefreshing ?? false {
 						self.refreshControl!.endRefreshing()
@@ -96,13 +96,22 @@ class DatabaseTableViewController: UITableViewController {
 					if let database = response.resource {
 						self.databases.append(database)
 						self.tableView.reloadData()
-					} else { response.error?.printLog() }
+					} else if let error = response.error {
+						self.showErrorAlert(error)
+					}
 				}
 			}
 		})
 		present(alertController, animated: true) { }
 	}
 	
+	
+	func showErrorAlert (_ error: ADError) {
+		let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+		alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
+		present(alertController, animated: true) { }
+	}
+
 	
 	// MARK: - Table view data source
 

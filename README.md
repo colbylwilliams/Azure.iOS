@@ -32,8 +32,8 @@ AzureData.createDatabase(newDatabaseId) { response in
 
 ```swift
 AzureData.databases { response in
-    if let resources = response.resource?.items {
-        print(resources)
+    if let databases = response.resource?.items {
+        print(databases)
     } else if let error = response.error {
         error.printLog()
     }
@@ -78,8 +78,8 @@ AzureData.createDocumentCollection(databaseId, collectionId: newCollectionId) { 
 
 ```swift
 AzureData.documentCollections(databaseId) { response in
-    if let resources = response.resource?.items {
-        print(resources)
+    if let collections = response.resource?.items {
+        print(collections)
     } else if let error = response.error {
         error.printLog()
     }
@@ -137,8 +137,8 @@ AzureData.createDocument(databaseId, collectionId: collectionId, document: newDo
 
 ```swift
 AzureData.documents(ADDocument.self, databaseId: databaseId, collectionId: collectionId) { response in
-    if let resources = response.resource?.items {
-        print(resources)
+    if let documents = response.resource?.items {
+        print(documents)
     } else if let error = response.error {
         error.printLog()
     }
@@ -212,8 +212,8 @@ AzureData.query(databaseId, collectionId: documentCollectionId, query: query) { 
 
 ```swift
 AzureData.attachemnts(databaseId, collectionId: collectionId, documentId: documentId) { response in
-    if let resources = response.resource?.items {
-        print(resources)
+    if let attachments = response.resource?.items {
+        print(attachments)
     } else if let error = response.error {
         error.printLog()
     }
@@ -248,8 +248,8 @@ AzureData.delete (attachment, databaseId: databaseId, collectionId: collectionId
 
 ```swift
 AzureData.storedProcedures(databaseId, collectionId: collectionId) { response in
-    if let resources = response.resource?.items {
-        print(resources)
+    if let storedProcedures = response.resource?.items {
+        print(storedProcedures)
     } else if let error = response.error {
         error.printLog()
     }
@@ -291,8 +291,8 @@ AzureData.delete(storedProcedure, databaseId: databaseId, collectionId: collecti
 
 ```swift
 AzureData.userDefinedFunctions(databaseId, collectionId: collectionId) { response in
-    if let resources = response.resource?.items {
-        print(resources)
+    if let udfs = response.resource?.items {
+        print(udfs)
     } else if let error = response.error {
         error.printLog()
     }
@@ -327,8 +327,8 @@ AzureData.delete(udf, databaseId: databaseId, collectionId: collectionId) { succ
 
 ```swift
 AzureData.triggers(databaseId, collectionId: collectionId) { response in
-    if let resources = response.resource?.items {
-        print(resources)
+    if let triggers = response.resource?.items {
+        print(triggers)
     } else if let error = response.error {
         error.printLog()
     }
@@ -369,8 +369,8 @@ AzureData.createUser(databaseId, userId: newUserId) { response in
 
 ```swift
 AzureData.users(databaseId) { response in
-    if let resources = response.resource?.items {
-        print(resources)
+    if let users = response.resource?.items {
+        print(users)
     } else if let error = response.error {
         error.printLog()
     }
@@ -417,8 +417,8 @@ AzureData.delete(user, databaseId: databaseId) { success in
 
 ```swift
 AzureData.permissions (databaseId, userId: databaseId) { response in
-    if let resources = response.resource?.items {
-        print(resources)
+    if let permissions = response.resource?.items {
+        print(permissions)
     } else if let error = response.error {
         error.printLog()
     }
@@ -457,8 +457,8 @@ AzureData.delete(permission, databaseId: databaseId, collectionId: collectionId,
 
 ```swift
 AzureData.offers { response in
-    if let resources = response.resource?.items {
-        print(resources)
+    if let offers = response.resource?.items {
+        print(offers)
     } else if let error = response.error {
         error.printLog()
     }

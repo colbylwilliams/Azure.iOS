@@ -19,25 +19,36 @@ AzureData.setup("cosmosDb name", key: "read-write key", keyType: .master)
 #### Create
 
 ```swift
-AzureData.createDatabase(newDatabaseId) { database in
-    // do stuff
+AzureData.createDatabase(newDatabaseId) { response in
+    if let database = response.resource {
+        print(database)
+    } else if let error = response.error {
+        error.pringLog()
+    }
 }
 ```
 
 #### List
 
 ```swift
-AzureData.databases { list in
-    let count = list?.count
-    let databases = list?.items
+AzureData.databases { response in
+    if let resources = response.resource?.items {
+        print(resources)
+    } else if let error = response.error {
+        error.printLog()
+    }
 }
 ```
 
 #### Get
 
 ```swift
-AzureData.database(databaseId) { database in
-    // do stuff
+AzureData.database(databaseId) { response in
+    if let database = response.resource {
+        print(database)
+    } else if let error = response.error {
+        error.pringLog()
+    }
 }
 ```
 
@@ -54,25 +65,36 @@ AzureData.delete(databaseId) { success in
 #### Create
 
 ```swift
-AzureData.createDocumentCollection(databaseId, collectionId: newCollectionId) { collection in
-    // do stuff
+AzureData.createDocumentCollection(databaseId, collectionId: newCollectionId) { response in
+    if let collection = response.resource {
+        print(collection)
+    } else if let error = response.error {
+        error.pringLog()
+    }
 }
 ```
 
 #### List
 
 ```swift
-AzureData.documentCollections(databaseId) { list in
-    let count = list?.count
-    let collections = list?.items
+AzureData.documentCollections(databaseId) { response in
+    if let resources = response.resource?.items {
+        print(resources)
+    } else if let error = response.error {
+        error.printLog()
+    }
 }
 ```
 
 #### Get
 
 ```swift
-AzureData.documentCollection(databaseId, collectionId: collectionId) { collection in
-    // do stuff
+AzureData.documentCollection(databaseId, collectionId: collectionId) { response in
+    if let collection = response.resource {
+        print(collection)
+    } else if let error = response.error {
+        error.pringLog()
+    }
 }
 ```
 
@@ -102,25 +124,36 @@ let newDocument = ADDocument()
 newDocument["aNumber"] = 1_500_000
 newDocument["aString"] = "Hello!"
 			
-AzureData.createDocument(databaseId, collectionId: collectionId, document: newDocument) { document in
-    // do stuff
+AzureData.createDocument(databaseId, collectionId: collectionId, document: newDocument) { response in
+    if let document = response.resource {
+        print(document)
+    } else if let error = response.error {
+        error.pringLog()
+    }
 }
 ```
 
 #### List
 
 ```swift
-AzureData.documents(ADDocument.self, databaseId: databaseId, collectionId: collectionId) { list in
-    let count = list?.count
-    let documents = list?.items
+AzureData.documents(ADDocument.self, databaseId: databaseId, collectionId: collectionId) { response in
+    if let resources = response.resource?.items {
+        print(resources)
+    } else if let error = response.error {
+        error.printLog()
+    }
 }
 ```
 
 #### Get
 
 ```swift
-AzureData.document(ADDocument.self, databaseId: databaseId, collectionId: collectionId, documentId: documentId) { document in
-    // do stuff
+AzureData.document(ADDocument.self, databaseId: databaseId, collectionId: collectionId, documentId: documentId) { response in
+    if let document = response.resource {
+        print(document)
+    } else if let error = response.error {
+        error.pringLog()
+    }
 }
 ```
 
@@ -135,8 +168,12 @@ AzureData.delete(document, databaseId: databaseId, collectionId: collectionId) {
 #### Replace
 
 ```swift
-AzureData.replace(databaseId, collectionId: collectionId, document: newDocument) { document in
-    // do stuff
+AzureData.replace(databaseId, collectionId: collectionId, document: newDocument) { response in
+    if let document = response.resource {
+        print(document)
+    } else if let error = response.error {
+        error.pringLog()
+    }
 }
 ```
 
@@ -174,9 +211,12 @@ AzureData.query(databaseId, collectionId: documentCollectionId, query: query) { 
 #### List
 
 ```swift
-AzureData.attachemnts(databaseId, collectionId: collectionId, documentId: documentId) { list in
-    let count = list?.count
-    let attachments = list?.items
+AzureData.attachemnts(databaseId, collectionId: collectionId, documentId: documentId) { response in
+    if let resources = response.resource?.items {
+        print(resources)
+    } else if let error = response.error {
+        error.printLog()
+    }
 }
 ```
 
@@ -207,9 +247,12 @@ AzureData.delete (attachment, databaseId: databaseId, collectionId: collectionId
 #### List
 
 ```swift
-AzureData.storedProcedures(databaseId, collectionId: collectionId) { list in
-    let count = list?.count
-    let storedProcedures = list?.items
+AzureData.storedProcedures(databaseId, collectionId: collectionId) { response in
+    if let resources = response.resource?.items {
+        print(resources)
+    } else if let error = response.error {
+        error.printLog()
+    }
 }
 ```
 
@@ -247,9 +290,12 @@ AzureData.delete(storedProcedure, databaseId: databaseId, collectionId: collecti
 #### List
 
 ```swift
-AzureData.userDefinedFunctions(databaseId, collectionId: collectionId) { list in
-    let count = list?.count
-    let udfs = list?.items
+AzureData.userDefinedFunctions(databaseId, collectionId: collectionId) { response in
+    if let resources = response.resource?.items {
+        print(resources)
+    } else if let error = response.error {
+        error.printLog()
+    }
 }
 ```
 
@@ -280,9 +326,12 @@ AzureData.delete(udf, databaseId: databaseId, collectionId: collectionId) { succ
 #### List
 
 ```swift
-AzureData.triggers(databaseId, collectionId: collectionId) { list in
-    let count = list?.count
-    let triggers = list?.items
+AzureData.triggers(databaseId, collectionId: collectionId) { response in
+    if let resources = response.resource?.items {
+        print(resources)
+    } else if let error = response.error {
+        error.printLog()
+    }
 }
 ```
 
@@ -307,25 +356,36 @@ AzureData.delete(trigger, databaseId: databaseId, collectionId: collectionId) { 
 #### Create
 
 ```swift
-AzureData.createUser(databaseId, userId: newUserId) { user in
-    // do stuff
+AzureData.createUser(databaseId, userId: newUserId) { response in
+    if let user = response.resource {
+        print(user)
+    } else if let error = response.error {
+        error.pringLog()
+    }
 }
 ```
 
 #### List
 
 ```swift
-AzureData.users(databaseId) { list in
-    let count = list?.count
-    let users = list?.items
+AzureData.users(databaseId) { response in
+    if let resources = response.resource?.items {
+        print(resources)
+    } else if let error = response.error {
+        error.printLog()
+    }
 }
 ```
 
 #### Get
 
 ```swift
-AzureData.user(databaseId, userId: userId) { user in
-    // do stuff
+AzureData.user(databaseId, userId: userId) { response in
+    if let user = response.resource {
+        print(user)
+    } else if let error = response.error {
+        error.pringLog()
+    }
 }
 ```
 
@@ -356,17 +416,24 @@ AzureData.delete(user, databaseId: databaseId) { success in
 #### List
 
 ```swift
-AzureData.permissions (databaseId, userId: databaseId) { list in 
-    let count = list?.count
-    let permissions = list?.items
+AzureData.permissions (databaseId, userId: databaseId) { response in
+    if let resources = response.resource?.items {
+        print(resources)
+    } else if let error = response.error {
+        error.printLog()
+    }
 }
 ```
 
 #### Get
 
 ```swift
-AzureData.permission (databaseId, userId: String, permissionId: permissionId) { permission in
-    // do stuff
+AzureData.permission (databaseId, userId: String, permissionId: permissionId) { response in
+    if let permission = response.resource {
+        print(permission)
+    } else if let error = response.error {
+        error.pringLog()
+    }
 }
 ```
 
@@ -389,17 +456,24 @@ AzureData.delete(permission, databaseId: databaseId, collectionId: collectionId,
 #### List
 
 ```swift
-AzureData.offers { list in
-    let count = list?.count
-    let offers = list?.items
+AzureData.offers { response in
+    if let resources = response.resource?.items {
+        print(resources)
+    } else if let error = response.error {
+        error.printLog()
+    }
 }
 ```
 
 #### Get
 
 ```swift
-AzureData.offer(offerId) { offer in
-    // do stuff
+AzureData.offer(offerId) { response in
+    if let offer = response.resource {
+        print(offer)
+    } else if let error = response.error {
+        error.pringLog()
+    }
 }
 ```
 

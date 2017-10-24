@@ -143,7 +143,22 @@ AzureData.replace(databaseId, collectionId: collectionId, document: newDocument)
 #### Query
 
 ```swift
-// TODO...
+let query = ADQuery.select("firstName", "lastName", ...)
+                   .from("People")
+                   .where("firstName", is: "Colby")
+                   .and("lastName", is: "Williams")
+                   .and("age", isGreaterThanOrEqualTo: 20)
+                   .orderBy("_etag", descending: true)
+
+AzureData.query(databaseId, collectionId: documentCollectionId, query: query) { response in
+    if let items = response.resource?.items {
+        for item in items {
+            print(item)
+        }
+    } else if let error = response.error {
+        error.printLog()
+    }
+}
 ```
 
 

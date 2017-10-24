@@ -127,7 +127,7 @@ class DatabaseTableViewController: UITableViewController {
 
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "databaseCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "resourceCell", for: indexPath)
 		
 		let resource: ADResource = databasesSelected ? databases[indexPath.row] : offers[indexPath.row]
 		

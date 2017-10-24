@@ -242,6 +242,7 @@ open class SessionManager {
 	
 	
 	
+	
 	// MARK: - Documents
 	
 	// create
@@ -318,6 +319,7 @@ open class SessionManager {
     }
 	
 	
+	
     
 	// MARK: - Attachments
 	
@@ -343,10 +345,24 @@ open class SessionManager {
 	
 	
 	
+	
 	// MARK: - Stored Procedures
 	
 	// create
-	
+	public func createStoredProcedure (_ databaseId: String, collectionId: String, storedProcedureId: String, body procedure: String, callback: @escaping (ADResponse<ADStoredProcedure>) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).storedProcedure(databaseId, collectionId: collectionId)
+		
+		let body = ["id":storedProcedureId, "body":procedure]
+		
+		guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
+			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
+			return
+		}
+
+		return create(resourceUri: resourceUri, resourceType: .storedProcedure, httpBody: httpBody, callback: callback)
+	}
+
 	// list
 	public func storedProcedures (_ databaseId: String, collectionId: String, callback: @escaping (ADListResponse<ADStoredProcedure>) -> ()) {
 		
@@ -364,15 +380,56 @@ open class SessionManager {
 	}
 
 	// replace
+	public func replace (_ databaseId: String, collectionId: String, storedProcedureId: String, body procedure: String, callback: @escaping (ADResponse<ADStoredProcedure>) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).storedProcedure(databaseId, collectionId: collectionId, storedProcedureId: storedProcedureId)
+		
+		let body = ["id":storedProcedureId, "body":procedure]
+		
+		guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
+			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
+			return
+		}
+		
+		return replace(resourceUri: resourceUri, resourceType: .storedProcedure, httpBody: httpBody, callback: callback)
+	}
 	
 	// execute
+	public func execute (_ databaseId: String, collectionId: String, storedProcedureId: String, parameters: [String]?, callback: @escaping (Data?) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).storedProcedure(databaseId, collectionId: collectionId, storedProcedureId: storedProcedureId)
+		
+		let body = parameters ?? []
+		
+		guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
+			//DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
+			DispatchQueue.main.async { callback(nil) }
+			return
+		}
+		
+		return execute(resourceUri: resourceUri, resourceType: .storedProcedure, httpBody: httpBody, callback: callback)
+	}
+
 	
 	
 	
 	// MARK: - User Defined Functions
 	
 	// create
-	
+	public func createUserDefinedFunction (_ databaseId: String, collectionId: String, functionId: String, body function: String, callback: @escaping (ADResponse<ADUserDefinedFunction>) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).udf(databaseId, collectionId: collectionId)
+		
+		let body = ["id":functionId, "body":function]
+		
+		guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
+			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
+			return
+		}
+		
+		return create(resourceUri: resourceUri, resourceType: .udf, httpBody: httpBody, callback: callback)
+	}
+
 	// list
 	public func userDefinedFunctions (_ databaseId: String, collectionId: String, callback: @escaping (ADListResponse<ADUserDefinedFunction>) -> ()) {
 		
@@ -390,14 +447,40 @@ open class SessionManager {
 	}
 
 	// replace
-	
+	public func replace (_ databaseId: String, collectionId: String, functionId: String, body function: String, callback: @escaping (ADResponse<ADUserDefinedFunction>) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).udf(databaseId, collectionId: collectionId, udfId: functionId)
+		
+		let body = ["id":functionId, "body":function]
+		
+		guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
+			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
+			return
+		}
+		
+		return replace(resourceUri: resourceUri, resourceType: .udf, httpBody: httpBody, callback: callback)
+	}
+
 	
 	
 	
 	// MARK: - Triggers
 	
 	// create
-	
+	public func createTrigger (_ databaseId: String, collectionId: String, triggerId: String, triggerBody: String, operation: ADTriggerOperation, triggerType: ADTriggerType, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).trigger(databaseId, collectionId: collectionId)
+		
+		let body = ADTrigger.jsonDict(triggerId, body: triggerBody, operation: operation, type: triggerType)
+		
+		guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
+			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
+			return
+		}
+		
+		return create(resourceUri: resourceUri, resourceType: .trigger, httpBody: httpBody, callback: callback)
+	}
+
 	// list
 	public func triggers (_ databaseId: String, collectionId: String, callback: @escaping (ADListResponse<ADTrigger>) -> ()) {
 		
@@ -415,6 +498,19 @@ open class SessionManager {
 	}
 
 	// replace
+	public func replace (_ databaseId: String, collectionId: String, triggerId: String, triggerBody: String, operation: ADTriggerOperation, triggerType: ADTriggerType, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).trigger(databaseId, collectionId: collectionId, triggerId: triggerId)
+		
+		let body = ADTrigger.jsonDict(triggerId, body: triggerBody, operation: operation, type: triggerType)
+		
+		guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
+			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
+			return
+		}
+		
+		return replace(resourceUri: resourceUri, resourceType: .trigger, httpBody: httpBody, callback: callback)
+	}
 
 	
 	
@@ -461,9 +557,23 @@ open class SessionManager {
 	}
 
 	// replace
+	public func replace (_ databaseId: String, userId: String, newUserId: String, callback: @escaping (ADResponse<ADUser>) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).user(databaseId, userId: userId)
+		
+		let body = ["id":newUserId]
+		
+		guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
+			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
+			return
+		}
+		
+		return replace(resourceUri: resourceUri, resourceType: .user, httpBody: httpBody, callback: callback)
+	}
 
 	
 	
+
 	
 	// MARK: - Permissions
 	
@@ -507,7 +617,20 @@ open class SessionManager {
 	}
 
 	// replace
-	
+	public func replace (_ databaseId: String, userId: String, permissionId: String,  permissionMode: ADPermissionMode, resource: String, callback: @escaping (ADResponse<ADPermission>) -> ()) {
+		
+		let resourceUri = ADResourceUri(resourceName).permission(databaseId, userId: userId, permissionId: permissionId)
+		
+		let body = ["id":permissionId, "permissionMode": permissionMode.rawValue, "resource":resource]
+		
+		guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
+			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
+			return
+		}
+		
+		return replace(resourceUri: resourceUri, resourceType: .permission, httpBody: httpBody, callback: callback)
+	}
+
 	
 	
 	
@@ -592,6 +715,16 @@ open class SessionManager {
         return sendRequest(request, resourceType: resourceType, callback: callback)
     }
 
+	// execute
+	fileprivate func execute (resourceUri: (URL, String), resourceType: ADResourceType, httpBody: Data, callback: @escaping (Data?) -> ()) {
+		
+		var request = dataRequest(.post, resourceUri: resourceUri, resourceType: resourceType)
+		
+		request.httpBody = httpBody
+		
+		return sendRequest(request, callback: callback)
+	}
+
 	
 	
 	
@@ -662,6 +795,24 @@ open class SessionManager {
 				}
 			} else {
 				DispatchQueue.main.async { callback(ADListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError()))) }
+			}
+		}.resume()
+	}
+
+
+	fileprivate func sendRequest (_ request:URLRequest, callback: @escaping (Data?) -> ()) {
+		
+		UIApplication.shared.isNetworkActivityIndicatorVisible = true
+		
+		session.dataTask(with: request) { (data, response, error) in
+			
+			DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
+			
+			if let error = error {
+				if self.printResponseJson { print(error.localizedDescription) }
+				DispatchQueue.main.async { callback(nil) }
+			} else {
+				DispatchQueue.main.async { callback(data) }
 			}
 		}.resume()
 	}

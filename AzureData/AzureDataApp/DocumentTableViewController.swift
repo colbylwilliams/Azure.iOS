@@ -19,28 +19,6 @@ class DocumentTableViewController: UITableViewController {
 	//var documents:[Person] = []
 	//var documents:[CustomDocument] = []
 	var documents: 			[ADDocument] = []
-	var storedProcedures: 	[ADStoredProcedure] = []
-	var triggers: 			[ADTrigger] = []
-	var udfs: 				[ADUserDefinedFunction] = []
-
-	func resourceCollectionTitle(_ section: Int) -> String {
-		switch section {
-		case 0: return "Documents"
-		case 1: return "Stored Procedures"
-		case 2: return "Triggers"
-		case 3: return "User Defined Functions"
-		default: return ""
-		}
-	}
-	func resourceCollection(_ section: Int) -> [ADResource] {
-		switch section {
-		case 0: return documents
-		case 1: return storedProcedures
-		case 2: return triggers
-		case 3: return udfs
-		default: return []
-		}
-	}
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,45 +38,6 @@ class DocumentTableViewController: UITableViewController {
 				if let items = response.resource?.items {
 					//for item in items { item.printLog()	}
 					self.documents = items
-					self.tableView.reloadData()
-				} else if let error = response.error {
-					self.showErrorAlert(error)
-				}
-				if self.refreshControl?.isRefreshing ?? false {
-					self.refreshControl!.endRefreshing()
-				}
-			}
-			AzureData.storedProcedures(databaseId, collectionId: documentCollectionId) { response in
-				debugPrint(response.result)
-				if let items = response.resource?.items {
-					//for item in items { item.printLog()	}
-					self.storedProcedures = items
-					self.tableView.reloadData()
-				} else if let error = response.error {
-					self.showErrorAlert(error)
-				}
-				if self.refreshControl?.isRefreshing ?? false {
-					self.refreshControl!.endRefreshing()
-				}
-			}
-			AzureData.triggers(databaseId, collectionId: documentCollectionId) { response in
-				debugPrint(response.result)
-				if let items = response.resource?.items {
-					//for item in items { item.printLog()	}
-					self.triggers = items
-					self.tableView.reloadData()
-				} else if let error = response.error {
-					self.showErrorAlert(error)
-				}
-				if self.refreshControl?.isRefreshing ?? false {
-					self.refreshControl!.endRefreshing()
-				}
-			}
-			AzureData.userDefinedFunctions(databaseId, collectionId: documentCollectionId) { response in
-				debugPrint(response.result)
-				if let items = response.resource?.items {
-					//for item in items { item.printLog()	}
-					self.udfs = items
 					self.tableView.reloadData()
 				} else if let error = response.error {
 					self.showErrorAlert(error)
@@ -162,16 +101,16 @@ class DocumentTableViewController: UITableViewController {
 	
 	// MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int { return 4 }
+    override func numberOfSections(in tableView: UITableView) -> Int { return 1 }
 
 	
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return resourceCollection(section).count }
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return documents.count }
 
 	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "documentCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "resourceCell", for: indexPath)
 
-		let resource = resourceCollection(indexPath.section)[indexPath.row]
+		let resource = documents[indexPath.row]
 		
 		cell.textLabel?.text = resource.id
 		cell.detailTextLabel?.text = resource.resourceId
@@ -223,10 +162,6 @@ class DocumentTableViewController: UITableViewController {
 				}
 			}
 		}
-	}
-	
-	override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-		return resourceCollectionTitle(section)
 	}
 	
 	

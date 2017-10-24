@@ -10,19 +10,42 @@ import Foundation
 
 public class ADTrigger: ADResource {
 
-	let bodyKey 				= "body"
-	let triggerOpertationKey 	= "triggerOpertation"
-	let triggerTypeKey 			= "triggerType"
+	static let bodyKey 				= "body"
+	static let triggerOperationKey 	= "triggerOperation"
+	static let triggerTypeKey 			= "triggerType"
 
 	public private(set) var body: 				String?
-	public private(set) var triggerOpertation:	String?
-	public private(set) var triggerType: 		String?
+	public private(set) var triggerOperation:	ADTriggerOperation?
+	public private(set) var triggerType: 		ADTriggerType?
 
 	required public init?(fromJson dict: [String:Any]) {
 		super.init(fromJson: dict)
 
-		body = dict[bodyKey] as? String
-		triggerOpertation = dict[triggerOpertationKey] as? String
-		triggerType = dict[triggerTypeKey] as? String
+		body = dict[ADTrigger.bodyKey] as? String
+		if let triggerOperation = dict[ADTrigger.triggerOperationKey] as? String { self.triggerOperation = ADTriggerOperation(rawValue: triggerOperation)}
+		if let triggerType = dict[ADTrigger.triggerTypeKey] as? String { self.triggerType = ADTriggerType(rawValue: triggerType)}
 	}
+	
+	public static func jsonDict(_ id: String, body: String, operation: ADTriggerOperation, type: ADTriggerType) -> [String: Any] {
+		return [
+			idKey:id,
+			bodyKey:body,
+			triggerOperationKey:operation.rawValue,
+			triggerTypeKey:type.rawValue
+		]
+	}
+}
+
+
+public enum ADTriggerOperation: String {
+	case All		= "All"
+	case Insert		= "Insert"
+	case Replace	= "Replace"
+	case Delete		= "Delete"
+}
+
+
+public enum ADTriggerType: String {
+	case Pre  = "Pre"
+	case Post = "Post"
 }

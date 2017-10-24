@@ -140,7 +140,7 @@ class CollectionTableViewController: UITableViewController {
 
 	
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "collectionCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "resourceCell", for: indexPath)
 
 		let resource: ADResource = collectionsSelected ? documentCollections[indexPath.row] : users[indexPath.row]
 		
@@ -230,7 +230,7 @@ class CollectionTableViewController: UITableViewController {
 	
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		performSegue(withIdentifier: collectionsSelected ? "documentsSegue" : "permissionSegue", sender: tableView.cellForRow(at: indexPath))
+		performSegue(withIdentifier: collectionsSelected ? "collectionResourceSegue" : "permissionSegue", sender: tableView.cellForRow(at: indexPath))
 	}
 	
 
@@ -238,7 +238,7 @@ class CollectionTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if let cell = sender as? UITableViewCell, let index = tableView.indexPath(for: cell) {
-			if segue.identifier == "documentsSegue", let destinationViewController = segue.destination as? DocumentTableViewController {
+			if segue.identifier == "collectionResourceSegue", let destinationViewController = segue.destination as? CollectionResourceTableViewController {
 				destinationViewController.database = database
 				destinationViewController.documentCollection = documentCollections[index.row]
 			} else if segue.identifier == "permissionSegue", let destinationViewController = segue.destination as? PermissionTableViewController {
@@ -249,3 +249,4 @@ class CollectionTableViewController: UITableViewController {
 		}
     }
 }
+

@@ -101,7 +101,7 @@ class PermissionTableViewController: UITableViewController {
 
 
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "permissionCell", for: indexPath)
+		let cell = tableView.dequeueReusableCell(withIdentifier: "resourceCell", for: indexPath)
 		
 		let permission = permissions[indexPath.row]
 		

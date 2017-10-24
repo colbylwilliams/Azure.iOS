@@ -129,6 +129,9 @@ public func delete (_ resource: ADAttachment, databaseId: String, collectionId: 
 // MARK: - Stored Procedures
 
 // create
+public func createStoredProcedure (_ databaseId: String, collectionId: String, storedProcedureId: String, body: String, callback: @escaping (ADResponse<ADStoredProcedure>) -> ()) {
+	return SessionManager.default.createStoredProcedure(databaseId, collectionId: collectionId, storedProcedureId: storedProcedureId, body: body, callback: callback)
+}
 
 // list
 public func storedProcedures (_ databaseId: String, collectionId: String, callback: @escaping (ADListResponse<ADStoredProcedure>) -> ()) {
@@ -141,15 +144,23 @@ public func delete (_ resource: ADStoredProcedure, databaseId: String, collectio
 }
 
 // replace
+public func replace (_ databaseId: String, collectionId: String, storedProcedureId: String, body: String, callback: @escaping (ADResponse<ADStoredProcedure>) -> ()) {
+	return SessionManager.default.replace(databaseId, collectionId: collectionId, storedProcedureId: storedProcedureId, body: body, callback: callback)
+}
 
 // execute
-
+public func execute (_ databaseId: String, collectionId: String, storedProcedureId: String, parameters: [String]?, callback: @escaping (Data?) -> ()) {
+	return SessionManager.default.execute(databaseId, collectionId: collectionId, storedProcedureId: storedProcedureId, parameters: parameters, callback: callback)
+}
 
 
 
 // MARK: - User Defined Functions
 
 // create
+public func createUserDefinedFunction (_ databaseId: String, collectionId: String, functionId: String, body: String, callback: @escaping (ADResponse<ADUserDefinedFunction>) -> ()) {
+	return SessionManager.default.createUserDefinedFunction(databaseId, collectionId: collectionId, functionId: functionId, body: body, callback: callback)
+}
 
 // list
 public func userDefinedFunctions (_ databaseId: String, collectionId: String, callback: @escaping (ADListResponse<ADUserDefinedFunction>) -> ()) {
@@ -162,13 +173,18 @@ public func delete (_ resource: ADUserDefinedFunction, databaseId: String, colle
 }
 
 // replace
-
+public func replace (_ databaseId: String, collectionId: String, functionId: String, body: String, callback: @escaping (ADResponse<ADUserDefinedFunction>) -> ()) {
+	return SessionManager.default.replace(databaseId, collectionId: collectionId, functionId: functionId, body: body, callback: callback)
+}
 
 
 
 // MARK: - Triggers
 
 // create
+public func createTrigger (_ databaseId: String, collectionId: String, triggerId: String, triggerBody: String, operation: ADTriggerOperation, triggerType: ADTriggerType, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
+	return SessionManager.default.createTrigger(databaseId, collectionId: collectionId, triggerId: triggerId, triggerBody: triggerBody, operation: operation, triggerType: triggerType, callback: callback)
+}
 
 // list
 public func triggers (_ databaseId: String, collectionId: String, callback: @escaping (ADListResponse<ADTrigger>) -> ()) {
@@ -181,7 +197,9 @@ public func delete (_ resource: ADTrigger, databaseId: String, collectionId: Str
 }
 
 // replace
-
+public func replace (_ databaseId: String, collectionId: String, triggerId: String, triggerBody: String, operation: ADTriggerOperation, triggerType: ADTriggerType, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
+	return SessionManager.default.replace(databaseId, collectionId: collectionId, triggerId: triggerId, triggerBody: triggerBody, operation: operation, triggerType: triggerType, callback: callback)
+}
 
 
 
@@ -208,7 +226,9 @@ public func delete (_ resource: ADUser, databaseId: String, callback: @escaping 
 }
 
 // replace
-
+public func replace (_ databaseId: String, userId: String, newUserId: String, callback: @escaping (ADResponse<ADUser>) -> ()) {
+	return SessionManager.default.replace(databaseId, userId: userId, newUserId: newUserId, callback: callback)
+}
 
 
 
@@ -235,7 +255,9 @@ public func delete (_ resource: ADPermission, databaseId: String, userId: String
 }
 
 // replace
-
+public func replace (_ databaseId: String, userId: String, permissionId: String,  permissionMode: ADPermissionMode, resource: String, callback: @escaping (ADResponse<ADPermission>) -> ()) {
+	return SessionManager.default.replace(databaseId, userId: userId, permissionId: permissionId, permissionMode: permissionMode, resource: resource, callback: callback)
+}
 
 
 

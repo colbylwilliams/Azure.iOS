@@ -10,15 +10,17 @@ import Foundation
 
 public class ADOffer: ADResource {
 
-	let offerTypeKey 	= "offerType"
-	let offerVersionKey = "offerVersion"
-	let resourceLinkKey = "resourceLink"
-	let contentKey 		= "content"
+	let offerTypeKey 	    = "offerType"
+	let offerVersionKey     = "offerVersion"
+	let resourceLinkKey     = "resource"
+    let offerResourceIdKey  = "offerResourceId"
+	let contentKey 		    = "content"
 
-	public private(set) var offerType: 		String?
-	public private(set) var offerVersion:	String?
-	public private(set) var resourceLink:	String?
-	public private(set) var content:		ADOfferContent?
+	public private(set) var offerType: 		 String?
+	public private(set) var offerVersion:	 String?
+	public private(set) var resourceLink:	 String?
+    public private(set) var offerResourceId: String?
+	public private(set) var content:		 ADOfferContent?
 
 	required public init?(fromJson dict: [String:Any]) {
 		super.init(fromJson: dict)
@@ -26,6 +28,7 @@ public class ADOffer: ADResource {
 		offerType = dict[offerTypeKey] as? String
 		offerVersion = dict[offerVersionKey] as? String
 		resourceLink = dict[resourceLinkKey] as? String
+        offerResourceId = dict[offerResourceIdKey] as? String
 		if let content = dict[contentKey] as? [String:Any] { self.content = ADOfferContent(fromJson: content) }
 	}
 }

@@ -115,13 +115,29 @@ class DocumentTableViewController: UITableViewController {
 	
 	
 	@IBAction func addButtonTouchUpInside(_ sender: Any) {
+        
 		if let databaseId = database?.id, let documentCollectionId = documentCollection?.id {
+		
+//             let query = ADQuery.select()
+//                                .from(documentCollectionId)
+//                                .where("firstName", is: "Colby")
+//                                .and("lastName", is: "Williams")
+//                                .and("age", isGreaterThanOrEqualTo: 20)
+//                                .orderBy("_etag", descending: true)
+
+//            AzureData.query(databaseId, collectionId: documentCollectionId, query: query) { response in
+//                debugPrint(response.result)
+//                if let items = response.resource?.items {
+//                    for item in items { item.printLog() }
+//                } else if let error = response.error {
+//                    self.showErrorAlert(error)
+//                }
+//            }
+            
+            let doc = ADDocument()
 			
-			let doc = ADDocument()
-			
-			doc["testNumber"] = 1_500_000
+			doc["testNumber"] = 1_000_000
 			doc["testString"] = "Yeah baby\nRock n Roll"
-//			doc["id"] = "foo"
 			doc["testDate"]   = Date().timeIntervalSince1970
 			
 			AzureData.createDocument(databaseId, collectionId: documentCollectionId, document: doc) { response in

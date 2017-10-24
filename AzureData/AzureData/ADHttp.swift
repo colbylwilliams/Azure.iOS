@@ -51,6 +51,7 @@ public enum ADHttpRequestHeader {
 	case xMSDate
 	case xMSMaxItemCount
 	case xMSDocumentdbPartitionkey
+    case xMSDocumentdbIsQuery
 	case xMSSessionToken
 	case xMSVersion
 	case aIM
@@ -72,6 +73,7 @@ public enum ADHttpRequestHeader {
 		case .xMSDate: 							return "x-ms-date"
 		case .xMSMaxItemCount: 					return "x-ms-max-item-count"
 		case .xMSDocumentdbPartitionkey: 		return "x-ms-documentdb-partitionkey"
+        case .xMSDocumentdbIsQuery:             return "x-ms-documentdb-isquery"
 		case .xMSSessionToken: 					return "x-ms-session-token"
 		case .xMSVersion: 						return "x-ms-version"
 		case .aIM: 								return "A-IM"

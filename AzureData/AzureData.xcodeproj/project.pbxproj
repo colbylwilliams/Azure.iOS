@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		B528A53D1F9EBF1C000586BE /* ADQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B528A53C1F9EBF1C000586BE /* ADQuery.swift */; };
 		B53BF7761F9A2F9400B7A187 /* ADIndexingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53BF7751F9A2F9400B7A187 /* ADIndexingPolicy.swift */; };
 		B53BF7781F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53BF7771F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift */; };
 		B53BF77A1F9A7AE700B7A187 /* DocumentDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53BF7791F9A7AE700B7A187 /* DocumentDetailTableViewController.swift */; };
@@ -120,6 +121,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B528A53C1F9EBF1C000586BE /* ADQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADQuery.swift; sourceTree = "<group>"; };
 		B53BF7751F9A2F9400B7A187 /* ADIndexingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADIndexingPolicy.swift; sourceTree = "<group>"; };
 		B53BF7771F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPartitionKeyDefinition.swift; sourceTree = "<group>"; };
 		B53BF7791F9A7AE700B7A187 /* DocumentDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -237,6 +239,7 @@
 				B5958A1F1F992D240023C0AF /* ADTrigger.swift */,
 				B5958A211F992D2E0023C0AF /* ADUser.swift */,
 				B5958A231F992D3A0023C0AF /* ADUserDefinedFunction.swift */,
+				B528A53C1F9EBF1C000586BE /* ADQuery.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -592,6 +595,7 @@
 				B5F76C5F1F96A91C001E8B11 /* ADTokenProvider.swift in Sources */,
 				B5F76C561F96A80B001E8B11 /* AzureData.swift in Sources */,
 				B5958A181F992CF60023C0AF /* ADOffer.swift in Sources */,
+				B528A53D1F9EBF1C000586BE /* ADQuery.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

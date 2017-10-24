@@ -101,7 +101,9 @@ public func replace<T: ADDocument> (_ databaseId: String, collectionId: String, 
 }
 
 // query
-
+public func query (_ databaseId: String, collectionId: String, query: ADQuery, callback: @escaping (ADListResponse<ADDocument>) -> ()) {
+    return SessionManager.default.query(databaseId, collectionId: collectionId, query: query, callback: callback)
+}
 
 
 

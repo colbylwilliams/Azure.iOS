@@ -299,9 +299,26 @@ open class SessionManager {
 	}
 
 	// query
+    public func query (_ databaseId: String, collectionId: String, query:ADQuery, callback: @escaping (ADListResponse<ADDocument>) -> ()) {
+
+        let resourceUri = baseUri.document(databaseId, collectionId: collectionId)
+        
+        query.printQuery()
+        
+        let body = query.dictionary
+        
+        guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
+            DispatchQueue.main.async { callback(ADListResponse(ADError("Error: Could not serialize document to JSON"))) }
+            return
+        }
+        
+        print(String(data: httpBody, encoding: .utf8)!)
+
+        return self.query(resourceUri: resourceUri, resourceType: .document, httpBody: httpBody, callback: callback)
+    }
 	
 	
-	
+    
 	// MARK: - Attachments
 	
 	// create
@@ -565,6 +582,16 @@ open class SessionManager {
 		return sendRequest(request, callback: callback)
 	}
 
+    // query
+    fileprivate func query<T> (resourceUri: (URL, String), resourceType: ADResourceType, httpBody: Data, callback: @escaping (ADListResponse<T>) -> ()) {
+        
+        var request = dataRequest(.post, resourceUri: resourceUri, resourceType: resourceType, forQuery: true)
+        
+        request.httpBody = httpBody
+        
+        return sendRequest(request, resourceType: resourceType, callback: callback)
+    }
+
 	
 	
 	
@@ -658,7 +685,7 @@ open class SessionManager {
 	}
 
 	
-	fileprivate func dataRequest(_ method: ADHttpMethod, resourceUri: (url:URL, link:String), resourceType: ADResourceType) -> URLRequest {
+    fileprivate func dataRequest(_ method: ADHttpMethod, resourceUri: (url:URL, link:String), resourceType: ADResourceType, forQuery: Bool = false) -> URLRequest {
 		
 		let (token, date) = tokenProvider.getToken(verb: method, resourceType: resourceType, resourceLink: resourceUri.link)
 		
@@ -669,7 +696,12 @@ open class SessionManager {
 		request.addValue(date, forHTTPHeaderField: .xMSDate)
 		request.addValue(token, forHTTPHeaderField: .authorization)
 		
-		if method == .post || method == .put {
+        if forQuery {
+        
+            request.addValue ("true", forHTTPHeaderField: .xMSDocumentdbIsQuery)
+            request.addValue("application/query+json", forHTTPHeaderField: .contentType)
+        
+        } else if method == .post || method == .put {
 			// For POST on query operations, it must be application/query+json
 			// For attachments, must be set to the Mime type of the attachment.
 			// For all other tasks, must be application/json.

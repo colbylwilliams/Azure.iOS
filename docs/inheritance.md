@@ -1,3 +1,5 @@
+https://docs.microsoft.com/en-us/azure/cosmos-db/documentdb-resources
+
 ```
 Cosmos DB
 ├── Database

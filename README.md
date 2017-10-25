@@ -175,10 +175,10 @@ AzureData.createDocument(databaseId, collectionId: collectionId, document: newDo
 
 Or directly from an instance of `ADDocumentCollection`
 ```swift
-collection.create<T: ADDocument> (document: newDocument) { response in
+collection.create (document: newDocument) { response in
     if let document = response.resource {
         print (document)
-    } else if error = response.error {
+    } else if let error = response.error {
         error.printLog()
     }
 }
@@ -198,10 +198,10 @@ AzureData.documents(ADDocument.self, databaseId: databaseId, collectionId: colle
 
 Or directly from an instance of `ADDocumentCollection`
 ```swift
-collection.get<T: ADDocument> (documentsAs: ADDocument.self) { response in
+collection.get (documentsAs: ADDocument.self) { response in
     if let documents in response.resource?.list {
         print(documents)
-    } else if error = response.error {
+    } else if let error = response.error {
         error.printLog()
     }
 }
@@ -224,7 +224,7 @@ Or directly from an instance of `ADDocumentCollection`
 collection.get(documentWithResourceId: documentId: as: ADDocument.self) { response in
     if let document = response.resource {
         print (document)
-    } else if error = response.error {
+    } else if let error = response.error {
         error.printLog()
     }
 }
@@ -262,7 +262,7 @@ Or directly from an instance of `ADDocumentCollection`
 collection.replace (document: document) { response in
     if let document = response.resource {
         print (document)
-    } else if error = response.error {
+    } else if let error = response.error {
         error.printLog()
     }
 }
@@ -294,7 +294,7 @@ Or directly from an instance of `ADDocumentCollection`
 collection.query (documentsWith: query) { response in
     if let documents in response.resource?.list {
         print(documents)
-    } else if error = response.error {
+    } else if let error = response.error {
         error.printLog()
     }
 }
@@ -350,7 +350,7 @@ Or directly from an instance of `ADDocumentCollection`
 collection.create (storedProcedureWithId: storedProcedureId, andBody: body) { response in
     if let storedProcedure = response.resource {
         print (storedProcedure)
-    } else if error = response.error {
+    } else if let error = response.error {
         error.printLog()
     }
 }
@@ -373,7 +373,7 @@ Or directly from an instance of `ADDocumentCollection`
 collection.getStoredProcedures () { response in
     if let storedProcedures in response.resource?.list {
         print(storedProcedures)
-    } else if error = response.error {
+    } else if let error = response.error {
         error.printLog()
     }
 }
@@ -405,7 +405,7 @@ Or directly from an instance of `ADDocumentCollection`
 collection.replace (storedProcedureWithId: storedProcedureId, andBody: body) { response in
     if let storedProcedure = response.resource {
         print (storedProcedure)
-    } else if error = response.error {
+    } else if let error = response.error {
         error.printLog()
     }
 }
@@ -438,7 +438,7 @@ Or directly from an instance of `ADDocumentCollection`
 collection.create (userDefinedFunctionWithId: userDefinedFunctionId, andBody: body) { response in
     if let userDefinedFunction = response.resource {
         print (userDefinedFunction)
-    } else if error = response.error {
+    } else if let error = response.error {
         error.printLog()
     }
 }
@@ -461,7 +461,7 @@ Or directly from an instance of `ADDocumentCollection`
 collection.getUserDefinedFunctions () { response in
     if let userDefinedFunctions in response.resource?.list {
         print(userDefinedFunctions)
-    } else if error = response.error {
+    } else if let error = response.error {
         error.printLog()
     }
 }
@@ -493,7 +493,7 @@ Or directly from an instance of `ADDocumentCollection`
 collection.replace (userDefinedFunctionWithId: userDefinedFunctionId, andBody: body) { response in
     if let userDefinedFunction = response.resource {
         print (userDefinedFunction)
-    } else if error = response.error {
+    } else if let error = response.error {
         error.printLog()
     }
 }
@@ -513,7 +513,7 @@ Or directly from an instance of `ADDocumentCollection`
 collection.create (triggerWithId: triggerId, andBody: body, operation: operation, type: type) { response in
     if let trigger = response.resource {
         print (trigger)
-    } else if error = response.error {
+    } else if let error = response.error {
         error.printLog()
     }
 }
@@ -536,7 +536,7 @@ Or directly from an instance of `ADDocumentCollection`
 collection.getTriggers () { response in
     if let triggers in response.resource?.list {
         print(triggers)
-    } else if error = response.error {
+    } else if let error = response.error {
         error.printLog()
     }
 }
@@ -568,7 +568,7 @@ Or directly from an instance of `ADDocumentCollection`
 collection.replace (triggerWithId: triggerId, andBody: body, operation: operation, type: type) { response in
     if let trigger = response.resource {
         print (trigger)
-    } else if error = response.error {
+    } else if let error = response.error {
         error.printLog()
     }
 }

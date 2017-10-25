@@ -96,12 +96,12 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "AZURE_COSMOS_DB_ACCOUNT_NAME"
-            value = ""
+            value = "$(AZURE_COSMOS_DB_ACCOUNT_NAME)"
             isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "AZURE_COSMOS_DB_ACCOUNT_KEY"
-            value = ""
+            value = "$(AZURE_COSMOS_DB_ACCOUNT_KEY)"
             isEnabled = "YES">
          </EnvironmentVariable>
       </EnvironmentVariables>

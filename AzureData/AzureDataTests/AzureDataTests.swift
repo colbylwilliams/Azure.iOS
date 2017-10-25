@@ -24,7 +24,13 @@ class AzureDataTests: XCTestCase {
 		
 		if let accountName = ProcessInfo.processInfo.environment["AZURE_COSMOS_DB_ACCOUNT_NAME"],
 			let accountKey  = ProcessInfo.processInfo.environment["AZURE_COSMOS_DB_ACCOUNT_KEY"] {
-				AzureData.setup(accountName, key: accountKey, verboseLogging: true)
+			
+			print(accountName)
+			print(accountKey)
+			
+			AzureData.setup(accountName, key: accountKey, verboseLogging: true)
+		} else {
+			print("colby")
 		}
 		
 		XCTAssert(AzureData.isSetup(), "AzureData setup failed")

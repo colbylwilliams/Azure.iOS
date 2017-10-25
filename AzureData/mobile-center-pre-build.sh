@@ -12,7 +12,7 @@ echo Source Directory: "$MOBILECENTER_SOURCE_DIRECTORY"
 
 frmkInfoPlist="$MOBILECENTER_SOURCE_DIRECTORY/AzureData/AzureData/Info.plist"
 appsInfoPlist="$MOBILECENTER_SOURCE_DIRECTORY/AzureData/AzureDataApp/Info.plist"
-testInfoPlist="$MOBILECENTER_SOURCE_DIRECTORY/AzureData/AzureDataTest/Info.plist"
+testInfoPlist="$MOBILECENTER_SOURCE_DIRECTORY/AzureData/AzureDataTests/Info.plist"
 
 
 echo Framework Info.plist Path: "$frmkInfoPlist"

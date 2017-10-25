@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 		
 		// AzureData.setup("<Database Name>", key: "<Database Key>", keyType: .master, verboseLogging: true)
 		
-		if let accountName = ProcessInfo.processInfo.environment["AZURE_COSMOS_DB_ACCOUNT_NAME"],
-			let accountKey  = ProcessInfo.processInfo.environment["AZURE_COSMOS_DB_ACCOUNT_KEY"] {
+		if let accountName = Bundle.main.infoDictionary?["ADDatabaseAccountName"] as? String,
+			let accountKey  = Bundle.main.infoDictionary?["ADDatabaseAccountKey"] as? String {
 			AzureData.setup(accountName, key: accountKey, verboseLogging: true)
 		}
 

@@ -44,7 +44,9 @@ class AzureDataTests: XCTestCase {
     
     
     func testDatabaseIsCreatedAndDeleted() {
-        
+		
+		XCTAssert(AzureData.isSetup(), "AzureData in not Setup")
+		
         let createExpectation = self.expectation(description: "should create and return database")
         let deleteExpectation = self.expectation(description: "should delete database")
         
@@ -74,7 +76,9 @@ class AzureDataTests: XCTestCase {
     
     
     func testCollectionIsCreatedAndDeleted() {
-        
+		
+		XCTAssert(AzureData.isSetup(), "AzureData in not Setup")
+		
         let createExpectation = self.expectation(description: "should create and return database")
         let deleteExpectation = self.expectation(description: "should delete database")
         
@@ -104,7 +108,9 @@ class AzureDataTests: XCTestCase {
 
     
     func testDocumentIsCreatedAndDeleted() {
-        
+		
+		XCTAssert(AzureData.isSetup(), "AzureData in not Setup")
+		
         let createExpectation = self.expectation(description: "should create and return database")
         let deleteExpectation = self.expectation(description: "should delete database")
         

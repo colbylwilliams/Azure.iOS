@@ -173,6 +173,17 @@ AzureData.createDocument(databaseId, collectionId: collectionId, document: newDo
 }
 ```
 
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.create<T: ADDocument> (document: newDocument) { response in
+    if let document = response.resource {
+        print (document)
+    } else if error = response.error {
+        error.printLog()
+    }
+}
+```
+
 ### List
 
 ```swift
@@ -180,6 +191,17 @@ AzureData.documents(ADDocument.self, databaseId: databaseId, collectionId: colle
     if let documents = response.resource?.items {
         print(documents)
     } else if let error = response.error {
+        error.printLog()
+    }
+}
+```
+
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.get<T: ADDocument> (documentsAs: ADDocument.self) { response in
+    if let documents in response.resource?.list {
+        print(documents)
+    } else if error = response.error {
         error.printLog()
     }
 }
@@ -197,10 +219,28 @@ AzureData.document(ADDocument.self, databaseId: databaseId, collectionId: collec
 }
 ```
 
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.get(documentWithResourceId: documentId: as: ADDocument.self) { response in
+    if let document = response.resource {
+        print (document)
+    } else if error = response.error {
+        error.printLog()
+    }
+}
+```
+
 ### Delete
 
 ```swift
 AzureData.delete(document, databaseId: databaseId, collectionId: collectionId) { success in
+    if success { /* successfully deleted */ }
+}
+```
+
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.delete (document: document) { success in
     if success { /* successfully deleted */ }
 }
 ```
@@ -213,6 +253,17 @@ AzureData.replace(databaseId, collectionId: collectionId, document: newDocument)
         print(document)
     } else if let error = response.error {
         error.pringLog()
+    }
+}
+```
+
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.replace (document: document) { response in
+    if let document = response.resource {
+        print (document)
+    } else if error = response.error {
+        error.printLog()
     }
 }
 ```
@@ -238,6 +289,16 @@ AzureData.query(databaseId, collectionId: documentCollectionId, query: query) { 
 }
 ```
 
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.query (documentsWith: query) { response in
+    if let documents in response.resource?.list {
+        print(documents)
+    } else if error = response.error {
+        error.printLog()
+    }
+}
+```
 
 
 ## Attachments
@@ -284,6 +345,17 @@ AzureData.delete (attachment, databaseId: databaseId, collectionId: collectionId
 // TODO...
 ```
 
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.create (storedProcedureWithId: storedProcedureId, andBody: body) { response in
+    if let storedProcedure = response.resource {
+        print (storedProcedure)
+    } else if error = response.error {
+        error.printLog()
+    }
+}
+```
+
 ### List
 
 ```swift
@@ -296,13 +368,30 @@ AzureData.storedProcedures(databaseId, collectionId: collectionId) { response in
 }
 ```
 
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.getStoredProcedures () { response in
+    if let storedProcedures in response.resource?.list {
+        print(storedProcedures)
+    } else if error = response.error {
+        error.printLog()
+    }
+}
+```
+
 ### Delete
 
 ```swift
 AzureData.delete(storedProcedure, databaseId: databaseId, collectionId: collectionId) { success in
     if success { /* successfully deleted */ }
 }
+```
 
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.delete (storedProcedure) { success in
+    if success { /* successfully deleted */ }
+}
 ```
 
 ### Replace
@@ -311,12 +400,29 @@ AzureData.delete(storedProcedure, databaseId: databaseId, collectionId: collecti
 // TODO...
 ```
 
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.replace (storedProcedureWithId: storedProcedureId, andBody: body) { response in
+    if let storedProcedure = response.resource {
+        print (storedProcedure)
+    } else if error = response.error {
+        error.printLog()
+    }
+}
+```
+
 ### Execute
 
 ```swift
 // TODO...
 ```
 
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.execute (storedProcedureWithId: storedProcedureId, usingParameters: parameters) { data in
+    
+}
+```
 
 
 ## User Defined Functions
@@ -325,6 +431,17 @@ AzureData.delete(storedProcedure, databaseId: databaseId, collectionId: collecti
 
 ```swift
 // TODO...
+```
+
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.create (userDefinedFunctionWithId: userDefinedFunctionId, andBody: body) { response in
+    if let userDefinedFunction = response.resource {
+        print (userDefinedFunction)
+    } else if error = response.error {
+        error.printLog()
+    }
+}
 ```
 
 ### List
@@ -339,10 +456,28 @@ AzureData.userDefinedFunctions(databaseId, collectionId: collectionId) { respons
 }
 ```
 
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.getUserDefinedFunctions () { response in
+    if let userDefinedFunctions in response.resource?.list {
+        print(userDefinedFunctions)
+    } else if error = response.error {
+        error.printLog()
+    }
+}
+```
+
 ### Delete
 
 ```swift
 AzureData.delete(udf, databaseId: databaseId, collectionId: collectionId) { success in
+    if success { /* successfully deleted */ }
+}
+```
+
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.delete (userDefinedFunction) { success in
     if success { /* successfully deleted */ }
 }
 ```
@@ -353,6 +488,16 @@ AzureData.delete(udf, databaseId: databaseId, collectionId: collectionId) { succ
 // TODO...
 ```
 
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.replace (userDefinedFunctionWithId: userDefinedFunctionId, andBody: body) { response in
+    if let userDefinedFunction = response.resource {
+        print (userDefinedFunction)
+    } else if error = response.error {
+        error.printLog()
+    }
+}
+```
 
 
 ## Triggers
@@ -361,6 +506,17 @@ AzureData.delete(udf, databaseId: databaseId, collectionId: collectionId) { succ
 
 ```swift
 // TODO...
+```
+
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.create (triggerWithId: triggerId, andBody: body, operation: operation, type: type) { response in
+    if let trigger = response.resource {
+        print (trigger)
+    } else if error = response.error {
+        error.printLog()
+    }
+}
 ```
 
 ### List
@@ -375,6 +531,17 @@ AzureData.triggers(databaseId, collectionId: collectionId) { response in
 }
 ```
 
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.getTriggers () { response in
+    if let triggers in response.resource?.list {
+        print(triggers)
+    } else if error = response.error {
+        error.printLog()
+    }
+}
+```
+
 ### Delete
 
 ```swift
@@ -383,10 +550,28 @@ AzureData.delete(trigger, databaseId: databaseId, collectionId: collectionId) { 
 }
 ```
 
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.delete (trigger) { success in
+    if success { /* successfully deleted */ }
+}
+```
+
 ### Replace
 
 ```swift
 // TODO...
+```
+
+Or directly from an instance of `ADDocumentCollection`
+```swift
+collection.replace (triggerWithId: triggerId, andBody: body, operation: operation, type: type) { response in
+    if let trigger = response.resource {
+        print (trigger)
+    } else if error = response.error {
+        error.printLog()
+    }
+}
 ```
 
 

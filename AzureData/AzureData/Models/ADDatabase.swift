@@ -16,6 +16,10 @@ public class ADDatabase: ADResource {
 	public private(set) var collectionsLink: String?
 	public private(set) var usersLink: 		 String?
 	
+    public override init(_ id: String) {
+        super.init(id)
+    }
+    
 	required public init?(fromJson dict: [String:Any]) {
 		super.init(fromJson: dict)
 		

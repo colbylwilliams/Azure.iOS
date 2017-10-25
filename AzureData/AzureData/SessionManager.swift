@@ -42,9 +42,10 @@ open class SessionManager {
 	
 	var tokenProvider: ADTokenProvider!
 	
-    public func setup (_ name: String, key: String, keyType: ADTokenType, verboseLogging: Bool = false) {
+    public func setup (_ name: String, key: String, keyType: ADTokenType, verboseLogging verbose: Bool = false) {
 		resourceName = name
 		tokenProvider = ADTokenProvider(key: key, keyType: keyType, tokenVersion: "1.0")
+        verboseLogging = verbose
 		setup = true
 	}
 
@@ -257,7 +258,7 @@ open class SessionManager {
 			return
 		}
 		
-		return create(resourceUri: (resourceUri.0, collectionId.lowercased()), resourceType: .document, httpBody: httpBody, callback: callback)
+		return create(resourceUri: resourceUri, resourceType: .document, httpBody: httpBody, callback: callback)
 	}
 
     public func createDocument<T: ADDocument> (_ document: T, atSelfLink selfLink: String, callback: @escaping (ADResponse<T>) -> ()) {

@@ -26,7 +26,7 @@ public class ADDocumentCollection: ADResource {
 	public private(set) var triggersLink: 			 String?
 	public private(set) var userDefinedFunctionsLink:String?
 	
-    public private(set) var databaseId:              String?
+    public override init(_ id: String) { super.init(id) }
     
 	required public init?(fromJson dict: [String:Any]) {
 		super.init(fromJson: dict)
@@ -38,26 +38,8 @@ public class ADDocumentCollection: ADResource {
 		storedProceduresLink 		= dict[storedProceduresLinkKey] 	as? String
 		triggersLink 				= dict[triggersLinkKey] 			as? String
 		userDefinedFunctionsLink	= dict[userDefinedFunctionsLinkKey] as? String
-        
-//        databaseId = "Content"
-        if let selfLink = selfLink {
-            debugPrint("selfLink: \(selfLink)")
-            if selfLink.starts(with: "dbs") {
-                let array = selfLink.split(separator: "/")
-                debugPrint("array: \(array)")
-                if array.count >= 2 {
-                    databaseId = String(array[1])
-                    debugPrint("databaseId: \(databaseId!)")
-                }
-            }
-        }
 	}
     
-    public convenience init?(fromJson dict: [String:Any], databaseId: String) {
-        self.init(fromJson: dict)
-        self.databaseId = databaseId
-    }
-	
 	open override var dictionary: [String : Any] {
 		return super.dictionary.merging([
 			conflictsLinkKey:conflictsLink.valueOrEmpty,

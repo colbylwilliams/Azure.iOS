@@ -12,7 +12,7 @@ import Foundation
 public func isSetup() -> Bool { return SessionManager.default.setup }
 
 // setup
-public func setup (_ name: String, key: String, keyType: ADTokenType, verboseLogging: Bool = false) {
+public func setup (_ name: String, key: String, keyType: ADTokenType = .master, verboseLogging: Bool = false) {
     return SessionManager.default.setup(name, key: key, keyType: keyType, verboseLogging: verboseLogging)
 }
 

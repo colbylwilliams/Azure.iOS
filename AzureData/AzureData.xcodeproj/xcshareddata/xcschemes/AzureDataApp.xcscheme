@@ -49,6 +49,16 @@
                ReferencedContainer = "container:AzureData.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B5F76C411F96A7AF001E8B11"
+               BuildableName = "AzureDataTests.xctest"
+               BlueprintName = "AzureDataTests"
+               ReferencedContainer = "container:AzureData.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

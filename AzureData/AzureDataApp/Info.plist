@@ -44,8 +44,8 @@
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>ADDatabaseAccountName</key>
-	<string></string>
+	<string>$(AZURE_COSMOS_DB_ACCOUNT)</string>
 	<key>ADDatabaseAccountKey</key>
-	<string></string>
+	<string>$(AZURE_COSMOS_DB_KEY)</string>
 </dict>
 </plist>

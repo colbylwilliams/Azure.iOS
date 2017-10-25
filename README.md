@@ -56,7 +56,7 @@ AzureData.database(databaseId) { response in
 
 ```swift
 AzureData.delete(databaseId) { success in
-    if success { // successfully deleted  }
+    if success { /* successfully deleted */ }
 }
 ```
 
@@ -74,7 +74,6 @@ AzureData.createDocumentCollection(databaseId, collectionId: newCollectionId) { 
 }
 
 // or directly from an instance of `ADDatabase`
-
 database.create(collectionWithId: newCollectionId) { response in
     if let collection = response.resource {
         print(collection)
@@ -112,7 +111,7 @@ AzureData.documentCollection(databaseId, collectionId: collectionId) { response 
 
 ```swift
 AzureData.delete(collection, databaseId: databaseId) { success in
-    if success { // successfully deleted  }
+    if success { /* successfully deleted */ }
 }
 ```
 
@@ -171,7 +170,7 @@ AzureData.document(ADDocument.self, databaseId: databaseId, collectionId: collec
 
 ```swift
 AzureData.delete(document, databaseId: databaseId, collectionId: collectionId) { success in
-    if success { // successfully deleted  }
+    if success { /* successfully deleted */ }
 }
 ```
 
@@ -234,7 +233,7 @@ AzureData.attachemnts(databaseId, collectionId: collectionId, documentId: docume
 
 ```swift
 AzureData.delete (attachment, databaseId: databaseId, collectionId: collectionId, documentId: documentId) { success in
-    if success { // successfully deleted  }
+    if success { /* successfully deleted */ }
 }
 ```
 
@@ -270,7 +269,7 @@ AzureData.storedProcedures(databaseId, collectionId: collectionId) { response in
 
 ```swift
 AzureData.delete(storedProcedure, databaseId: databaseId, collectionId: collectionId) { success in
-    if success { // successfully deleted  }
+    if success { /* successfully deleted */ }
 }
 
 ```
@@ -313,7 +312,7 @@ AzureData.userDefinedFunctions(databaseId, collectionId: collectionId) { respons
 
 ```swift
 AzureData.delete(udf, databaseId: databaseId, collectionId: collectionId) { success in
-    if success { // successfully deleted  }
+    if success { /* successfully deleted */ }
 }
 ```
 
@@ -349,7 +348,7 @@ AzureData.triggers(databaseId, collectionId: collectionId) { response in
 
 ```swift
 AzureData.delete(trigger, databaseId: databaseId, collectionId: collectionId) { success in
-    if success { // successfully deleted  }
+    if success { /* successfully deleted */ }
 }
 ```
 
@@ -403,7 +402,7 @@ AzureData.user(databaseId, userId: userId) { response in
 
 ```swift
 AzureData.delete(user, databaseId: databaseId) { success in
-    if success { // successfully deleted  }
+    if success { /* successfully deleted */ }
 }
 ```
 
@@ -451,7 +450,7 @@ AzureData.permission (databaseId, userId: String, permissionId: permissionId) { 
 
 ```swift
 AzureData.delete(permission, databaseId: databaseId, collectionId: collectionId, userId: userId) { success in
-    if success { // successfully deleted  }
+    if success { /* successfully deleted */ }
 }
 ```
 

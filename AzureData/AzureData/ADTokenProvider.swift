@@ -35,10 +35,10 @@ public class ADTokenProvider {
 		return formatter
 	}()
 	
-	public init(key k: String, keyType type: ADTokenType = .master, tokenVersion token: String = "1.0") {
+	public init(key k: String, keyType type: ADTokenType = .master, tokenVersion version: String = "1.0") {
 		key = k
 		keyType = type.rawValue
-		tokenVersion = token
+		tokenVersion = version
 	}
 	
 	// https://docs.microsoft.com/en-us/rest/api/documentdb/access-control-on-documentdb-resources#constructkeytoken
@@ -52,7 +52,7 @@ public class ADTokenProvider {
 		
 		let payload = "\(verb.lowercased())\n\(resourceType.lowercased())\n\(resourceLink)\n\(dateString.lowercased())\n\n"
 		
-		//print(payload)
+		print(payload)
 		
 		let signiture = payload.hmac(algorithm: .SHA256, key: key)
 		

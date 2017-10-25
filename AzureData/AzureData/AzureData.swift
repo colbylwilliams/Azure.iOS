@@ -11,11 +11,9 @@ import Foundation
 
 public func isSetup() -> Bool { return SessionManager.default.setup }
 
-public func printResponseJson(_ print: Bool) { SessionManager.default.printResponseJson = print }
-
 // setup
-public func setup (_ name: String, key: String, keyType: ADTokenType) {
-	return SessionManager.default.setup(name, key: key, keyType: keyType)
+public func setup (_ name: String, key: String, keyType: ADTokenType, verboseLogging: Bool = false) {
+    return SessionManager.default.setup(name, key: key, keyType: keyType, verboseLogging: verboseLogging)
 }
 
 
@@ -102,7 +100,7 @@ public func replace<T: ADDocument> (_ databaseId: String, collectionId: String, 
 
 // query
 public func query (_ databaseId: String, collectionId: String, query: ADQuery, callback: @escaping (ADListResponse<ADDocument>) -> ()) {
-    return SessionManager.default.query(databaseId, collectionId: collectionId, query: query, callback: callback)
+	return SessionManager.default.query(databaseId, collectionId: collectionId, query: query, callback: callback)
 }
 
 
@@ -110,6 +108,13 @@ public func query (_ databaseId: String, collectionId: String, query: ADQuery, c
 // MARK: - Attachments
 
 // create
+public func createAttachment(_ databaseId: String, collectionId: String, documentId: String, attachmentId: String, contentType: String, mediaUrl: URL, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+    return SessionManager.default.createAttachment(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId, contentType: contentType, mediaUrl: mediaUrl, callback: callback)
+}
+
+public func createAttachment(_ databaseId: String, collectionId: String, documentId: String, contentType: String, mediaName: String, media:Data, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+    return SessionManager.default.createAttachment(databaseId, collectionId: collectionId, documentId: documentId, contentType: contentType, mediaName: mediaName, media: media, callback: callback)
+}
 
 // list
 public func attachments (_ databaseId: String, collectionId: String, documentId: String, callback: @escaping (ADListResponse<ADAttachment>) -> ()) {
@@ -122,6 +127,13 @@ public func delete (_ resource: ADAttachment, databaseId: String, collectionId: 
 }
 
 // replace
+public func replace(_ databaseId: String, collectionId: String, documentId: String, attachmentId: String, contentType: String, mediaUrl: URL, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+    SessionManager.default.replace(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId, contentType: contentType, mediaUrl: mediaUrl, callback: callback)
+}
+
+public func replace(_ databaseId: String, collectionId: String, documentId: String, attachmentId: String, contentType: String, mediaName: String, media:Data, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+    SessionManager.default.replace(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId, contentType: contentType, mediaName: mediaName, media: media, callback: callback)
+}
 
 
 

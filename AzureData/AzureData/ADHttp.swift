@@ -58,6 +58,7 @@ public enum ADHttpRequestHeader {
 	case xMSDocumentdbPartitionKeyRangeId
 	case acceptEncoding
 	case acceptLanguage
+    case slug
 	
 	var key: String {
 		switch self {
@@ -80,6 +81,7 @@ public enum ADHttpRequestHeader {
 		case .xMSDocumentdbPartitionKeyRangeId: return "x-ms-documentdb-partitionkeyrangeid"
 		case .acceptEncoding:					return "Accept-Encoding"
 		case .acceptLanguage:					return "Accept-Language"
+        case .slug:                             return "Slug"
 		}
 	}
 	

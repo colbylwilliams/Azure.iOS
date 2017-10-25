@@ -35,40 +35,38 @@ class DatabaseTableViewController: UITableViewController {
 	
 	
 	func refreshData(fromUser: Bool = false) {
-		if AzureData.isSetup() {
-			if !fromUser || databasesSelected {
-				AzureData.databases { response in
-					debugPrint(response.result)
-					if let databases = response.resource?.items {
-						self.databases = databases
-						if self.databasesSelected {
-							self.tableView.reloadData()
-						}
-					} else if let error = response.error {
-						self.showErrorAlert(error)
-					}
-					if self.refreshControl?.isRefreshing ?? false {
-						self.refreshControl!.endRefreshing()
-					}
-				}
-			}
-			if !fromUser || !databasesSelected {
-				AzureData.offers { response in
-					debugPrint(response.result)
-					if let offers = response.resource?.items {
-						self.offers = offers
-						if !self.databasesSelected {
-							self.tableView.reloadData()
-						}
-					} else if let error = response.error {
-						self.showErrorAlert(error)
-					}
-					if self.refreshControl?.isRefreshing ?? false {
-						self.refreshControl!.endRefreshing()
-					}
-				}
-			}
-		}
+        if !fromUser || databasesSelected {
+            AzureData.databases { r in
+                debugPrint(r.result)
+                if let databases = r.resource?.items {
+                    self.databases = databases
+                    if self.databasesSelected {
+                        self.tableView.reloadData()
+                    }
+                } else if let error = r.error {
+                    self.showErrorAlert(error)
+                }
+                if self.refreshControl?.isRefreshing ?? false {
+                    self.refreshControl!.endRefreshing()
+                }
+            }
+        }
+        if !fromUser || !databasesSelected {
+            AzureData.offers { r in
+                debugPrint(r.result)
+                if let offers = r.resource?.items {
+                    self.offers = offers
+                    if !self.databasesSelected {
+                        self.tableView.reloadData()
+                    }
+                } else if let error = r.error {
+                    self.showErrorAlert(error)
+                }
+                if self.refreshControl?.isRefreshing ?? false {
+                    self.refreshControl!.endRefreshing()
+                }
+            }
+        }
 	}
 
 	
@@ -97,11 +95,11 @@ class DatabaseTableViewController: UITableViewController {
 		alertController.addAction(UIAlertAction(title: "Create", style: .default) { a in
 			
 			if let name = alertController.textFields?.first?.text {
-				AzureData.createDatabase(name) { response in
-					if let database = response.resource {
+				AzureData.createDatabase(name) { r in
+					if let database = r.resource {
 						self.databases.append(database)
 						self.tableView.reloadData()
-					} else if let error = response.error {
+					} else if let error = r.error {
 						self.showErrorAlert(error)
 					}
 				}
@@ -141,15 +139,15 @@ class DatabaseTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
 			if self.databasesSelected {
-				AzureData.database(self.databases[indexPath.row].id) { response in
-					debugPrint(response.result)
-					response.resource?.printLog()
+				AzureData.database(self.databases[indexPath.row].id) { r in
+					debugPrint(r.result)
+					r.resource?.printLog()
 					tableView.reloadRows(at: [indexPath], with: .automatic)
 					callback(false)
 				}
 			} else {
-				AzureData.offer(self.offers[indexPath.row].id) { response in
-					debugPrint(response.result)
+				AzureData.offer(self.offers[indexPath.row].id) { r in
+					debugPrint(r.result)
 					tableView.reloadRows(at: [indexPath], with: .automatic)
 					callback(false)
 				}

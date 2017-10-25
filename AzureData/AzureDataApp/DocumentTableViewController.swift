@@ -13,12 +13,10 @@ class DocumentTableViewController: UITableViewController {
 
 	@IBOutlet var addButton: UIBarButtonItem!
 	
-	var database: ADDatabase?
-	var documentCollection: ADDocumentCollection?
+	var database: ADDatabase!
+	var collection: ADDocumentCollection!
 	
-	//var documents:[Person] = []
-	//var documents:[CustomDocument] = []
-	var documents: 			[ADDocument] = []
+	var documents: [ADDocument] = []
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,23 +28,20 @@ class DocumentTableViewController: UITableViewController {
 
 	
 	func refreshData() {
-		if let databaseId = database?.id, let documentCollectionId = documentCollection?.id {
-			//AzureData.documents(Person.self, databaseId: database, collectionId: documentCollection) { list in
-			//AzureData.documents(CustomDocument.self, databaseId: database, collectionId: documentCollection) { list in
-			AzureData.documents(ADDocument.self, databaseId: databaseId, collectionId: documentCollectionId) { response in
-				debugPrint(response.result)
-				if let items = response.resource?.items {
-					//for item in items { item.printLog()	}
-					self.documents = items
-					self.tableView.reloadData()
-				} else if let error = response.error {
-					self.showErrorAlert(error)
-				}
-				if self.refreshControl?.isRefreshing ?? false {
-					self.refreshControl!.endRefreshing()
-				}
-			}
-		}
+        
+        collection.get(documentsAs: ADDocument.self) { response in
+            debugPrint(response.result)
+            if let items = response.resource?.items {
+                //for item in items { item.printLog() }
+                self.documents = items
+                self.tableView.reloadData()
+            } else if let error = response.error {
+                self.showErrorAlert(error)
+            }
+            if self.refreshControl?.isRefreshing ?? false {
+                self.refreshControl!.endRefreshing()
+            }
+        }
 	}
 
 	
@@ -55,40 +50,41 @@ class DocumentTableViewController: UITableViewController {
 	
 	@IBAction func addButtonTouchUpInside(_ sender: Any) {
         
-		if let databaseId = database?.id, let documentCollectionId = documentCollection?.id {
-		
-//             let query = ADQuery.select()
-//                                .from(documentCollectionId)
-//                                .where("firstName", is: "Colby")
-//                                .and("lastName", is: "Williams")
-//                                .and("age", isGreaterThanOrEqualTo: 20)
-//                                .orderBy("_etag", descending: true)
-
-//            AzureData.query(databaseId, collectionId: documentCollectionId, query: query) { response in
-//                debugPrint(response.result)
-//                if let items = response.resource?.items {
-//                    for item in items { item.printLog() }
-//                } else if let error = response.error {
-//                    self.showErrorAlert(error)
-//                }
+//        let query =  ADQuery.select()
+//                            .from(collection.id)
+//                            .where("firstName", is: "Colby")
+//                            .and("lastName", is: "Williams")
+//                            .and("age", isGreaterThanOrEqualTo: 20)
+//                            .orderBy("_etag", descending: true)
+//        
+//        //AzureData.query(database.id, collectionId: collection.id, query: query) { r in
+//        collection.queryDocuments(with: query) { r in
+//            debugPrint(r.result)
+//            if let items = r.resource?.items {
+//                for item in items { item.printLog() }
+//            } else if let error = r.error {
+//                self.showErrorAlert(error)
 //            }
-            
-            let doc = ADDocument()
-			
-			doc["testNumber"] = 1_000_000
-			doc["testString"] = "Yeah baby\nRock n Roll"
-			doc["testDate"]   = Date().timeIntervalSince1970
-			
-			AzureData.createDocument(databaseId, collectionId: documentCollectionId, document: doc) { response in
-				debugPrint(response.result)
-				if let document = response.resource {
-					self.documents.append(document)
-					self.tableView.reloadData()
-				} else if let error = response.error {
-					self.showErrorAlert(error)
-				}
-			}
-		}
+//        }
+//        
+//        return
+        
+        let doc = ADDocument()
+        
+        doc["testNumber"] = 1_000_000
+        doc["testString"] = "Yeah baby\nRock n Roll"
+        doc["testDate"]   = Date().timeIntervalSince1970
+        
+        //AzureData.createDocument(database.id, collectionId: collection.id, document: doc) { r in
+        collection.create(document: doc) { r in
+            debugPrint(r.result)
+            if let document = r.resource {
+                self.documents.append(document)
+                self.tableView.reloadData()
+            } else if let error = r.error {
+                self.showErrorAlert(error)
+            }
+        }
 	}
 	
 	
@@ -121,13 +117,14 @@ class DocumentTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
-			AzureData.document(CustomDocument.self, databaseId: self.database!.id, collectionId: self.documentCollection!.id, documentId: self.documents[indexPath.row].id) { response in
-				if response.result.isSuccess {
-					debugPrint(response.result)
-					response.resource?.printLog()
+			//AzureData.document(ADDocument.self, databaseId: self.database.id, collectionId: self.collection.id, documentId: self.documents[indexPath.row].id) { r in
+            self.collection.get(documentWithResourceId: self.documents[indexPath.row].resourceId, as: ADDocument.self) { r in
+				if r.result.isSuccess {
+					debugPrint(r.result)
+					r.resource?.printLog()
 					tableView.reloadRows(at: [indexPath], with: .automatic)
 					callback(false)
-				} else if let error = response.error {
+				} else if let error = r.error {
 					self.showErrorAlert(error)
 					callback(false)
 				}
@@ -141,13 +138,7 @@ class DocumentTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .destructive, title: "Delete") { (action, view, callback) in
-			AzureData.delete(self.documents[indexPath.row], databaseId: self.database!.id, collectionId: self.documentCollection!.id) { success in
-				if success {
-					self.documents.remove(at: indexPath.row)
-					tableView.deleteRows(at: [indexPath], with: .automatic)
-				}
-				callback(success)
-			}
+            self.deleteResource(at: indexPath, from: tableView, callback: callback)
 		}
 		return UISwipeActionsConfiguration(actions: [ action ] );
 	}
@@ -155,14 +146,21 @@ class DocumentTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
 		if editingStyle == .delete {
-			AzureData.delete(self.documents[indexPath.row], databaseId: self.database!.id, collectionId: self.documentCollection!.id) { success in
-				if success {
-					self.documents.remove(at: indexPath.row)
-					tableView.deleteRows(at: [indexPath], with: .automatic)
-				}
-			}
+            deleteResource(at: indexPath, from: tableView)
 		}
 	}
+    
+    
+    func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
+        //AzureData.delete(documents[indexPath.row], databaseId: database.id, collectionId: collection.id) { success in
+        collection.delete(document: documents[indexPath.row]) { success in
+            if success {
+                self.documents.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            callback?(success)
+        }
+    }
 	
 	
 	override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {

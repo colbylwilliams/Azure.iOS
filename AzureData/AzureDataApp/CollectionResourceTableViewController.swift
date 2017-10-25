@@ -10,13 +10,10 @@ import UIKit
 import AzureData
 
 class CollectionResourceTableViewController: UITableViewController {
-
 	
-	var database: ADDatabase?
-	var documentCollection: ADDocumentCollection?
+	var database: ADDatabase!
+	var collection: ADDocumentCollection!
 	
-	//var documents:[Person] = []
-	//var documents:[CustomDocument] = []
 	var documents: 			[ADDocument] = []
 	var storedProcedures: 	[ADStoredProcedure] = []
 	var triggers: 			[ADTrigger] = []
@@ -45,69 +42,72 @@ class CollectionResourceTableViewController: UITableViewController {
 		super.viewDidLoad()
 		
 		refreshData()
-		
-		//navigationItem.rightBarButtonItems = [addButton, editButtonItem]
 	}
 	
-	
+	var refreshCount = 4
+    
 	func refreshData() {
-		if let databaseId = database?.id, let documentCollectionId = documentCollection?.id {
-			//AzureData.documents(Person.self, databaseId: database, collectionId: documentCollection) { list in
-			//AzureData.documents(CustomDocument.self, databaseId: database, collectionId: documentCollection) { list in
-			AzureData.documents(ADDocument.self, databaseId: databaseId, collectionId: documentCollectionId) { response in
-				debugPrint(response.result)
-				if let items = response.resource?.items {
-					//for item in items { item.printLog()	}
-					self.documents = items
-					self.tableView.reloadData()
-				} else if let error = response.error {
-					self.showErrorAlert(error)
-				}
-				if self.refreshControl?.isRefreshing ?? false {
-					self.refreshControl!.endRefreshing()
-				}
-			}
-			AzureData.storedProcedures(databaseId, collectionId: documentCollectionId) { response in
-				debugPrint(response.result)
-				if let items = response.resource?.items {
-					//for item in items { item.printLog()	}
-					self.storedProcedures = items
-					self.tableView.reloadData()
-				} else if let error = response.error {
-					self.showErrorAlert(error)
-				}
-				if self.refreshControl?.isRefreshing ?? false {
-					self.refreshControl!.endRefreshing()
-				}
-			}
-			AzureData.triggers(databaseId, collectionId: documentCollectionId) { response in
-				debugPrint(response.result)
-				if let items = response.resource?.items {
-					//for item in items { item.printLog()	}
-					self.triggers = items
-					self.tableView.reloadData()
-				} else if let error = response.error {
-					self.showErrorAlert(error)
-				}
-				if self.refreshControl?.isRefreshing ?? false {
-					self.refreshControl!.endRefreshing()
-				}
-			}
-			AzureData.userDefinedFunctions(databaseId, collectionId: documentCollectionId) { response in
-				debugPrint(response.result)
-				if let items = response.resource?.items {
-					//for item in items { item.printLog()	}
-					self.udfs = items
-					self.tableView.reloadData()
-				} else if let error = response.error {
-					self.showErrorAlert(error)
-				}
-				if self.refreshControl?.isRefreshing ?? false {
-					self.refreshControl!.endRefreshing()
-				}
-			}
-		}
+        //AzureData.documents(ADDocument.self, databaseId: database.id, collectionId: collection.id) { r in
+        collection.get(documentsAs: ADDocument.self) { r in
+            debugPrint(r.result)
+            if let items = r.resource?.items {
+                //for item in items { item.printLog()    }
+                self.documents = items
+                self.tableView.reloadData()
+            } else if let error = r.error {
+                self.showErrorAlert(error)
+            }
+            self.finishedRefresh()
+        }
+        //AzureData.storedProcedures(database.id, collectionId: collection.id) { r in
+        collection.getStoredProcedures() { r in
+            debugPrint(r.result)
+            if let items = r.resource?.items {
+                //for item in items { item.printLog()    }
+                self.storedProcedures = items
+                self.tableView.reloadData()
+            } else if let error = r.error {
+                self.showErrorAlert(error)
+            }
+            self.finishedRefresh()
+        }
+        //AzureData.triggers(database.id, collectionId: collection.id) { r in
+        collection.getTriggers() { r in
+            debugPrint(r.result)
+            if let items = r.resource?.items {
+                //for item in items { item.printLog()    }
+                self.triggers = items
+                self.tableView.reloadData()
+            } else if let error = r.error {
+                self.showErrorAlert(error)
+            }
+            self.finishedRefresh()
+        }
+        //AzureData.userDefinedFunctions(database.id, collectionId: collection.id) { r in
+        collection.getUserDefinedFunctions() { r in
+            debugPrint(r.result)
+            if let items = r.resource?.items {
+                //for item in items { item.printLog()    }
+                self.udfs = items
+                self.tableView.reloadData()
+            } else if let error = r.error {
+                self.showErrorAlert(error)
+            }
+            self.finishedRefresh()
+        }
 	}
+    
+    
+    func finishedRefresh() {
+        if self.refreshControl?.isRefreshing ?? false {
+            refreshCount -= 1
+            if refreshCount <= 0 {
+                self.refreshControl!.endRefreshing()
+                refreshCount = 4
+            }
+        }
+        print("refreshCount = \(refreshCount)")
+    }
 	
 
 	func showErrorAlert (_ error: ADError) {
@@ -154,24 +154,24 @@ class CollectionResourceTableViewController: UITableViewController {
 			case collectionSegue.document.rawValue:
 				if let destinationViewController = segue.destination as? DocumentTableViewController {
 					destinationViewController.database = database
-					destinationViewController.documentCollection = documentCollection
+					destinationViewController.collection = collection
 				}
 			case collectionSegue.storedProcedure.rawValue:
 				if let destinationViewController = segue.destination as? StoredProcedureTableViewController {
 					destinationViewController.database = database
-					destinationViewController.documentCollection = documentCollection
+					destinationViewController.collection = collection
 					destinationViewController.resources = storedProcedures
 				}
 			case collectionSegue.trigger.rawValue:
 				if let destinationViewController = segue.destination as? TriggerTableViewController {
 					destinationViewController.database = database
-					destinationViewController.documentCollection = documentCollection
+					destinationViewController.collection = collection
 					destinationViewController.resources = triggers
 				}
 			case collectionSegue.userDefinedFunction.rawValue:
 				if let destinationViewController = segue.destination as? UserDefinedFunctionTableViewController {
 					destinationViewController.database = database
-					destinationViewController.documentCollection = documentCollection
+					destinationViewController.collection = collection
 					destinationViewController.resources = udfs
 				}
 			default: return

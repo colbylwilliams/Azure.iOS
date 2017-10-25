@@ -287,12 +287,12 @@
 				B5F76C5E1F96A91C001E8B11 /* ADTokenProvider.swift */,
 				B5F76C3C1F96A7AF001E8B11 /* AzureData.h */,
 				B5F76C551F96A80B001E8B11 /* AzureData.swift */,
+				B587C71E1F9FACC4004A76F6 /* AzureDataExtensions.swift */,
 				B5F76C3D1F96A7AF001E8B11 /* Info.plist */,
 				B5958A061F992BFB0023C0AF /* Models */,
 				B5F76C531F96A7F3001E8B11 /* NetworkReachabilityManager.swift */,
 				B5DA1DFC1F978C0A00C300D3 /* SessionManager.swift */,
 				B57C36A31F9B00E90035A106 /* UtilityExtensions.swift */,
-				B587C71E1F9FACC4004A76F6 /* AzureDataExtensions.swift */,
 			);
 			path = AzureData;
 			sourceTree = "<group>";
@@ -309,21 +309,21 @@
 		B5F76C671F96ACA5001E8B11 /* AzureDataApp */ = {
 			isa = PBXGroup;
 			children = (
-				B5F76C681F96ACA5001E8B11 /* AppDelegate.swift */,
-				B5F76C6C1F96ACA5001E8B11 /* Main.storyboard */,
-				B5F76C6F1F96ACA5001E8B11 /* Assets.xcassets */,
-				B5F76C711F96ACA5001E8B11 /* LaunchScreen.storyboard */,
 				B5F76C741F96ACA5001E8B11 /* Info.plist */,
-				B5958A041F9903F10023C0AF /* Models.swift */,
-				B5619EB91F994FB800D01EAD /* DatabaseTableViewController.swift */,
+				B5F76C681F96ACA5001E8B11 /* AppDelegate.swift */,
+				B5AEF9001F9F783A006E4905 /* CollectionResourceTableViewController.swift */,
 				B5619EBB1F994FE300D01EAD /* CollectionTableViewController.swift */,
-				B5619EBD1F994FF100D01EAD /* DocumentTableViewController.swift */,
+				B5619EB91F994FB800D01EAD /* DatabaseTableViewController.swift */,
 				B53BF7791F9A7AE700B7A187 /* DocumentDetailTableViewController.swift */,
+				B5619EBD1F994FF100D01EAD /* DocumentTableViewController.swift */,
+				B5958A041F9903F10023C0AF /* Models.swift */,
 				B5BEF1AF1F9E41120018CEC9 /* PermissionTableViewController.swift */,
 				B5AEF8FA1F9F7565006E4905 /* StoredProcedureTableViewController.swift */,
 				B5AEF8FC1F9F7572006E4905 /* TriggerTableViewController.swift */,
 				B5AEF8FE1F9F7589006E4905 /* UserDefinedFunctionTableViewController.swift */,
-				B5AEF9001F9F783A006E4905 /* CollectionResourceTableViewController.swift */,
+				B5F76C6F1F96ACA5001E8B11 /* Assets.xcassets */,
+				B5F76C711F96ACA5001E8B11 /* LaunchScreen.storyboard */,
+				B5F76C6C1F96ACA5001E8B11 /* Main.storyboard */,
 			);
 			path = AzureDataApp;
 			sourceTree = "<group>";

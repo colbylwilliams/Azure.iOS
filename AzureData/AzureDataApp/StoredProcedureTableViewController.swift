@@ -13,8 +13,8 @@ class StoredProcedureTableViewController: UITableViewController {
 
 	@IBOutlet var addButton: UIBarButtonItem!
 	
-	var database: ADDatabase?
-	var documentCollection: ADDocumentCollection?
+	var database: ADDatabase!
+	var collection: ADDocumentCollection!
 
 	var resources: 	[ADStoredProcedure] = []
 
@@ -28,21 +28,19 @@ class StoredProcedureTableViewController: UITableViewController {
 
 	
 	func refreshData() {
-		if let databaseId = database?.id, let documentCollectionId = documentCollection?.id {
-			AzureData.storedProcedures(databaseId, collectionId: documentCollectionId) { response in
-				debugPrint(response.result)
-				if let items = response.resource?.items {
-					//for item in items { item.printLog()	}
-					self.resources = items
-					self.tableView.reloadData()
-				} else if let error = response.error {
-					self.showErrorAlert(error)
-				}
-				if self.refreshControl?.isRefreshing ?? false {
-					self.refreshControl!.endRefreshing()
-				}
-			}
-		}
+        AzureData.storedProcedures(database.id, collectionId: collection.id) { r in
+            debugPrint(r.result)
+            if let items = r.resource?.items {
+                //for item in items { item.printLog()    }
+                self.resources = items
+                self.tableView.reloadData()
+            } else if let error = r.error {
+                self.showErrorAlert(error)
+            }
+            if self.refreshControl?.isRefreshing ?? false {
+                self.refreshControl!.endRefreshing()
+            }
+        }
 	}
 
 	
@@ -58,23 +56,21 @@ class StoredProcedureTableViewController: UITableViewController {
 		let storedProcedure = """
 		function () {
 			var context = getContext();
-			var response = context.getResponse();
+			var r = context.getResponse();
 
-			response.setBody(\"Hello World!\");
+			r.setBody(\"Hello World!\");
 		}
 		"""
 		
-		if let databaseId = database?.id, let documentCollectionId = documentCollection?.id {
-			AzureData.createStoredProcedure(databaseId, collectionId: documentCollectionId, storedProcedureId: "helloWorld", body: storedProcedure) { response in
-				debugPrint(response.result)
-				if let storedProcedure = response.resource {
-					self.resources.append(storedProcedure)
-					self.tableView.reloadData()
-				} else if let error = response.error {
-					self.showErrorAlert(error)
-				}
-			}
-		}
+        AzureData.createStoredProcedure(database.id, collectionId: collection.id, storedProcedureId: "helloWorld", body: storedProcedure) { r in
+            debugPrint(r.result)
+            if let storedProcedure = r.resource {
+                self.resources.append(storedProcedure)
+                self.tableView.reloadData()
+            } else if let error = r.error {
+                self.showErrorAlert(error)
+            }
+        }
 	}
 	
 	
@@ -101,36 +97,37 @@ class StoredProcedureTableViewController: UITableViewController {
 	}
 	
 
-	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-		let action = UIContextualAction.init(style: .destructive, title: "Delete") { (action, view, callback) in
-			AzureData.delete(self.resources[indexPath.row], databaseId: self.database!.id, collectionId: self.documentCollection!.id) { success in
-				if success {
-					self.resources.remove(at: indexPath.row)
-					tableView.deleteRows(at: [indexPath], with: .automatic)
-				}
-				callback(success)
-			}
-		}
-		return UISwipeActionsConfiguration(actions: [ action ] );
-	}
-	
-	
-	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-		if editingStyle == .delete {
-			AzureData.delete(self.resources[indexPath.row], databaseId: self.database!.id, collectionId: self.documentCollection!.id) { success in
-				if success {
-					self.resources.remove(at: indexPath.row)
-					tableView.deleteRows(at: [indexPath], with: .automatic)
-				}
-			}
-		}
-	}
-	
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let action = UIContextualAction.init(style: .destructive, title: "Delete") { (action, view, callback) in
+            self.deleteResource(at: indexPath, from: tableView, callback: callback)
+        }
+        return UISwipeActionsConfiguration(actions: [ action ] );
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            deleteResource(at: indexPath, from: tableView)
+        }
+    }
+    
+    
+    func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
+        AzureData.delete(resources[indexPath.row], databaseId: database.id, collectionId: collection.id) { success in
+            //collection.deleteDocument(self.documents[indexPath.row]) { success in
+            if success {
+                self.resources.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            callback?(success)
+        }
+    }
+
 	
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let procedure = resources[indexPath.row]
 		
-		AzureData.execute(database!.id, collectionId: documentCollection!.id, storedProcedureId: procedure.id, parameters: nil) { data in
+		AzureData.execute(database.id, collectionId: collection.id, storedProcedureId: procedure.id, parameters: nil) { data in
 			if let data = data {
 				if let string = String(data: data, encoding: .utf8) {
 					print(string)

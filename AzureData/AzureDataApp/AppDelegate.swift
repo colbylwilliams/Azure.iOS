@@ -17,12 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 	func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 		
-		AzureData.setup("mobile", key: "Np4cUd6IO3rFM6EMMoXBeGv4LKVrkfFDmws51nBpDFypym90IVPdjMQcy6SjmFMJklTwWglBhSAtoK07IwK7kg==", keyType: .master)
+        AzureData.setup("mobile", key: "Np4cUd6IO3rFM6EMMoXBeGv4LKVrkfFDmws51nBpDFypym90IVPdjMQcy6SjmFMJklTwWglBhSAtoK07IwK7kg==", keyType: .master, verboseLogging: true)
 		
 		//AzureData.setup("producerdocumentdb", key: "m8sKmtiotoEoZqRr65LcBCr6v2VxJyoKHbrWhjSTYlosgT2oc127VGGkEyA4n8Zjkdfb9ZoUpKoKjw1zktAcdw==", keyType: .master)
 		
-		// AzureData.setup("<Database Name>", key: "<Database Key>", keyType: .master)
-		AzureData.printResponseJson(true)
+		// AzureData.setup("<Database Name>", key: "<Database Key>", keyType: .master, verboseLogging: true)
 		return true
 	}
 

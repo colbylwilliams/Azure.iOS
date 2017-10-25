@@ -13,9 +13,9 @@ class PermissionTableViewController: UITableViewController {
 
 	@IBOutlet weak var addButton: UIBarButtonItem!
 	
-	var user: ADUser?
-	var documentCollection: ADDocumentCollection?
-	var database: ADDatabase?
+	var user: ADUser!
+	var collection: ADDocumentCollection!
+	var database: ADDatabase!
 	
 	var permissions: [ADPermission] = []
 	
@@ -27,20 +27,18 @@ class PermissionTableViewController: UITableViewController {
 	
 	
 	func refreshData() {
-		if let databaseId = database?.id, let userId = user?.id {
-			AzureData.permissions(databaseId, userId: userId) { response in
-				debugPrint(response.result)
-				if let items = response.resource?.items {
-					self.permissions = items
-					self.tableView.reloadData()
-				} else if let error = response.error {
-					self.showErrorAlert(error)
-				}
-				if self.refreshControl?.isRefreshing ?? false {
-					self.refreshControl!.endRefreshing()
-				}
-			}
-		}
+        AzureData.permissions(database.id, userId: user.id) { r in
+            debugPrint(r.result)
+            if let items = r.resource?.items {
+                self.permissions = items
+                self.tableView.reloadData()
+            } else if let error = r.error {
+                self.showErrorAlert(error)
+            }
+            if self.refreshControl?.isRefreshing ?? false {
+                self.refreshControl!.endRefreshing()
+            }
+        }
 	}
 	
 	
@@ -72,12 +70,12 @@ class PermissionTableViewController: UITableViewController {
 				debugPrint("id: \(id)")
 				debugPrint("mode: \(mode)")
 				
-				AzureData.createPermission(self.documentCollection!, databaseId: self.database!.id, userId: self.user!.id, permissionId: id, permissionMode: .read) { response in
-					debugPrint(response.result)
-					if let permission = response.resource {
+				AzureData.createPermission(self.collection, databaseId: self.database.id, userId: self.user.id, permissionId: id, permissionMode: .read) { r in
+					debugPrint(r.result)
+					if let permission = r.resource {
 						self.permissions.append(permission)
 						self.tableView.reloadData()
-					} else if let error = response.error {
+					} else if let error = r.error {
 						self.showErrorAlert(error)
 					}
 				}
@@ -114,8 +112,8 @@ class PermissionTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
-			AzureData.permission(self.database!.id, userId: self.user!.id, permissionId: self.permissions[indexPath.row].id) { response in
-				debugPrint(response.result)
+			AzureData.permission(self.database.id, userId: self.user.id, permissionId: self.permissions[indexPath.row].id) { r in
+				debugPrint(r.result)
 				tableView.reloadRows(at: [indexPath], with: .automatic)
 				callback(false)
 			}
@@ -128,26 +126,27 @@ class PermissionTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .destructive, title: "Delete") { (action, view, callback) in
-			AzureData.delete(self.permissions[indexPath.row], databaseId: self.database!.id, userId: self.user!.id) { success in
-				if success {
-					self.permissions.remove(at: indexPath.row)
-					tableView.deleteRows(at: [indexPath], with: .automatic)
-				}
-				callback(success)
-			}
+            self.deleteResource(at: indexPath, from: tableView, callback: callback)
 		}
 		return UISwipeActionsConfiguration(actions: [ action ] );
 	}
 	
-	
-	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-		if editingStyle == .delete {
-			AzureData.delete(self.permissions[indexPath.row], databaseId: self.database!.id, userId: self.user!.id) { success in
-				if success {
-					self.permissions.remove(at: indexPath.row)
-					tableView.deleteRows(at: [indexPath], with: .automatic)
-				}
-			}
-		}
-	}
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            deleteResource(at: indexPath, from: tableView)
+        }
+    }
+
+    
+    func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
+        AzureData.delete(permissions[indexPath.row], databaseId: database.id, userId: user.id) { success in
+        //collection.deleteDocument(self.documents[indexPath.row]) { success in
+            if success {
+                self.permissions.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            }
+            callback?(success)
+        }
+    }
 }

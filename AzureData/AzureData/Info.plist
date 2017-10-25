@@ -20,9 +20,5 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSPrincipalClass</key>
 	<string></string>
-	<key>ADDatabaseAccountName</key>
-	<string>$(AZURE_COSMOS_DB_ACCOUNT)</string>
-	<key>ADDatabaseAccountKey</key>
-	<string>$(AZURE_COSMOS_DB_KEY)</string>
 </dict>
 </plist>

@@ -20,10 +20,14 @@ class AzureDataTests: XCTestCase {
     override func setUp() {
         super.setUp()
 		
+		// AzureData.setup("<Database Name>", key: "<Database Key>", keyType: .master, verboseLogging: true)
+		
 		if let accountName = ProcessInfo.processInfo.environment["AZURE_COSMOS_DB_ACCOUNT_NAME"],
 			let accountKey  = ProcessInfo.processInfo.environment["AZURE_COSMOS_DB_ACCOUNT_KEY"] {
-			AzureData.setup(accountName, key: accountKey, verboseLogging: true)
+				AzureData.setup(accountName, key: accountKey, verboseLogging: true)
 		}
+		
+		XCTAssert(AzureData.isSetup(), "AzureData setup failed")
     }
     
     

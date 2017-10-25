@@ -97,6 +97,17 @@ AzureData.documentCollections(databaseId) { response in
 }
 ```
 
+Or directly from an instance of `ADDatabase`
+```swift
+database.getCollections () {
+    if let collections = response.resource?.items {
+        print(collections)
+    } else if let error = response.error {
+        error.printLog()
+    }
+}
+```
+
 ### Get
 
 ```swift
@@ -109,10 +120,28 @@ AzureData.documentCollection(databaseId, collectionId: collectionId) { response 
 }
 ```
 
+Or directly from an instance of `ADDatabase`
+```swift
+database.get (collectionWithId: newCollectionId) { response in
+    if let collection = response.resource {
+        print(collection)
+    } else if let error = response.error {
+        error.printLog()
+    }
+}
+```
+
 ### Delete
 
 ```swift
 AzureData.delete(collection, databaseId: databaseId) { success in
+    if success { /* successfully deleted */ }
+}
+```
+
+Or directly from an instance of `ADDatabase`
+```swift
+database.delete (collection: collection) { success in
     if success { /* successfully deleted */ }
 }
 ```
@@ -376,10 +405,32 @@ AzureData.createUser(databaseId, userId: newUserId) { response in
 }
 ```
 
+Or directly from an instance of `ADDatabase`
+```swift
+database.create (userWithId: newUserId) { response in
+    if let user = response.resource {
+        print(user)
+    } else if let error = response.error {
+        error.printLog()
+    }
+}
+```
+
 ### List
 
 ```swift
 AzureData.users(databaseId) { response in
+    if let users = response.resource?.items {
+        print(users)
+    } else if let error = response.error {
+        error.printLog()
+    }
+}
+```
+
+Or directly from an instance of `ADDatabase`
+```swift
+database.getUsers () {
     if let users = response.resource?.items {
         print(users)
     } else if let error = response.error {
@@ -400,10 +451,28 @@ AzureData.user(databaseId, userId: userId) { response in
 }
 ```
 
+Or directly from an instance of `ADDatabase`
+```swift
+database.get (userWithId: newUserId) { response in
+    if let user = response.resource {
+        print(user)
+    } else if let error = response.error {
+        error.printLog()
+    }
+}
+```
+
 ### Delete
 
 ```swift
 AzureData.delete(user, databaseId: databaseId) { success in
+    if success { /* successfully deleted */ }
+}
+```
+
+Or directly from an instance of `ADDatabase`
+```swift
+database.delete (user: user) { success in
     if success { /* successfully deleted */ }
 }
 ```

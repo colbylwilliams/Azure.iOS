@@ -72,10 +72,9 @@ AzureData.createDocumentCollection(databaseId, collectionId: newCollectionId) { 
         error.pringLog()
     }
 }
-```
 
-or directly from an instance of `ADDatabase`
-```swift
+// or directly from an instance of `ADDatabase`
+
 database.create(collectionWithId: newCollectionId) { response in
     if let collection = response.resource {
         print(collection)

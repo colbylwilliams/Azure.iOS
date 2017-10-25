@@ -21,8 +21,8 @@
 	<key>NSPrincipalClass</key>
 	<string></string>
 	<key>ADDatabaseAccountName</key>
-	<string>$(AZURE_COSMOS_DB_ACCOUNT_NAME)</string>
+	<string></string>
 	<key>ADDatabaseAccountKey</key>
-	<string>$(AZURE_COSMOS_DB_ACCOUNT_KEY)</string>
+	<string></string>
 </dict>
 </plist>

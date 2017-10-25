@@ -19,8 +19,11 @@ class AzureDataTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        
-        AzureData.setup("mobile", key: "Np4cUd6IO3rFM6EMMoXBeGv4LKVrkfFDmws51nBpDFypym90IVPdjMQcy6SjmFMJklTwWglBhSAtoK07IwK7kg==", verboseLogging: true)
+		
+		if let accountName = ProcessInfo.processInfo.environment["AZURE_COSMOS_DB_ACCOUNT_NAME"],
+			let accountKey  = ProcessInfo.processInfo.environment["AZURE_COSMOS_DB_ACCOUNT_KEY"] {
+			AzureData.setup(accountName, key: accountKey, verboseLogging: true)
+		}
     }
     
     

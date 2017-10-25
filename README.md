@@ -74,6 +74,17 @@ AzureData.createDocumentCollection(databaseId, collectionId: newCollectionId) { 
 }
 ```
 
+or directly from an instance of `ADDatabase`
+```swift
+database.create(collectionWithId: newCollectionId) { response in
+    if let collection = response.resource {
+        print(collection)
+    } else if let error = response.error {
+        error.pringLog()
+    }
+}
+```
+
 #### List
 
 ```swift

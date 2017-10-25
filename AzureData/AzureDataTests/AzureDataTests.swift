@@ -26,13 +26,8 @@ class AzureDataTests: XCTestCase {
 		
 		if let accountName = bundle.infoDictionary?["ADDatabaseAccountName"] as? String,
 			let accountKey  = bundle.infoDictionary?["ADDatabaseAccountKey"] as? String {
-			
-			print(accountName)
-			print(accountKey)
-			
+		
 			AzureData.setup(accountName, key: accountKey, verboseLogging: true)
-		} else {
-			print("colby")
 		}
 		
 		XCTAssert(AzureData.isSetup(), "AzureData setup failed")

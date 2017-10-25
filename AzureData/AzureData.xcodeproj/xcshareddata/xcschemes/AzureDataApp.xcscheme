@@ -20,6 +20,34 @@
                ReferencedContainer = "container:AzureData.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B5F76C781F96ACA5001E8B11"
+               BuildableName = "AzureDataAppTests.xctest"
+               BlueprintName = "AzureDataAppTests"
+               ReferencedContainer = "container:AzureData.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "NO"
+            buildForRunning = "NO"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "B5F76C831F96ACA6001E8B11"
+               BuildableName = "AzureDataAppUITests.xctest"
+               BlueprintName = "AzureDataAppUITests"
+               ReferencedContainer = "container:AzureData.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -29,26 +57,6 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B5F76C781F96ACA5001E8B11"
-               BuildableName = "AzureDataAppTests.xctest"
-               BlueprintName = "AzureDataAppTests"
-               ReferencedContainer = "container:AzureData.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B5F76C831F96ACA6001E8B11"
-               BuildableName = "AzureDataAppUITests.xctest"
-               BlueprintName = "AzureDataAppUITests"
-               ReferencedContainer = "container:AzureData.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
@@ -93,18 +101,6 @@
             ReferencedContainer = "container:AzureData.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "AZURE_COSMOS_DB_ACCOUNT_NAME"
-            value = "$(AZURE_COSMOS_DB_ACCOUNT_NAME)"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "AZURE_COSMOS_DB_ACCOUNT_KEY"
-            value = "$(AZURE_COSMOS_DB_ACCOUNT_KEY)"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>

@@ -21,9 +21,11 @@ class AzureDataTests: XCTestCase {
         super.setUp()
 		
 		// AzureData.setup("<Database Name>", key: "<Database Key>", keyType: .master, verboseLogging: true)
+
+		let bundle = Bundle(for: type(of: self))
 		
-		if let accountName = Bundle.main.infoDictionary?["ADDatabaseAccountName"] as? String,
-			let accountKey  = Bundle.main.infoDictionary?["ADDatabaseAccountKey"] as? String {
+		if let accountName = bundle.infoDictionary?["ADDatabaseAccountName"] as? String,
+			let accountKey  = bundle.infoDictionary?["ADDatabaseAccountKey"] as? String {
 			
 			print(accountName)
 			print(accountKey)

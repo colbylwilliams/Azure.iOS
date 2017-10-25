@@ -10,18 +10,24 @@ echo Account Key: "$accountKey"
 echo Source Directory: "$MOBILECENTER_SOURCE_DIRECTORY"
 
 
-fmkInfoPlist="$MOBILECENTER_SOURCE_DIRECTORY/AzureData/AzureData/Info.plist"
-appInfoPlist="$MOBILECENTER_SOURCE_DIRECTORY/AzureData/AzureDataApp/Info.plist"
+frmkInfoPlist="$MOBILECENTER_SOURCE_DIRECTORY/AzureData/AzureData/Info.plist"
+appsInfoPlist="$MOBILECENTER_SOURCE_DIRECTORY/AzureData/AzureDataApp/Info.plist"
+testInfoPlist="$MOBILECENTER_SOURCE_DIRECTORY/AzureData/AzureDataTest/Info.plist"
 
 
-echo Framework Info.plist Path: "$fmkInfoPlist"
-echo App Info.plist Path: "$appInfoPlist"
+echo Framework Info.plist Path: "$frmkInfoPlist"
+echo App Info.plist Path: "$appsInfoPlist"
+echo Test Info.plist Path: "$testInfoPlist"
 
 
-plutil -replace ADDatabaseAccountName -string "$accountName" "$fmkInfoPlist"
+plutil -replace ADDatabaseAccountName -string "$accountName" "$frmkInfoPlist"
 
-plutil -replace ADDatabaseAccountName -string "$accountName" "$appInfoPlist"
+plutil -replace ADDatabaseAccountName -string "$accountName" "$appsInfoPlist"
 
-plutil -replace ADDatabaseAccountKey -string "$accountKey" "$fmkInfoPlist"
+plutil -replace ADDatabaseAccountName -string "$accountName" "$testInfoPlist"
 
-plutil -replace ADDatabaseAccountKey -string "$accountKey" "$appInfoPlist"
+plutil -replace ADDatabaseAccountKey -string "$accountKey" "$frmkInfoPlist"
+
+plutil -replace ADDatabaseAccountKey -string "$accountKey" "$appsInfoPlist"
+
+plutil -replace ADDatabaseAccountKey -string "$accountKey" "$testInfoPlist"

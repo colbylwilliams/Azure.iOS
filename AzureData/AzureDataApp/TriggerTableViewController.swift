@@ -14,7 +14,7 @@ class TriggerTableViewController: UITableViewController {
 	@IBOutlet var addButton: UIBarButtonItem!
 	
 	var database: ADDatabase!
-	var collection: ADDocumentCollection!
+	var collection: ADCollection!
 
 	var resources: [ADTrigger] = []
 

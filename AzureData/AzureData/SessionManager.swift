@@ -198,10 +198,10 @@ open class SessionManager {
 	
 	
 	
-	// MARK: - DocumentCollections
+	// MARK: - Collections
 	
 	// create
-	public func createDocumentCollection (_ databaseId: String, collectionId: String, callback: @escaping (ADResponse<ADDocumentCollection>) -> ()) {
+	public func createCollection (_ databaseId: String, collectionId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
 		
 		let resourceUri = baseUri.collection(databaseId)
 		
@@ -216,7 +216,7 @@ open class SessionManager {
 	}
 
 	// list
-	public func documentCollections (_ databaseId: String, callback: @escaping (ADListResponse<ADDocumentCollection>) -> ()) {
+	public func collections (_ databaseId: String, callback: @escaping (ADListResponse<ADCollection>) -> ()) {
 		
 		let resourceUri = baseUri.collection(databaseId)
 		
@@ -224,7 +224,7 @@ open class SessionManager {
 	}
 
 	// get
-	public func documentCollection (_ databaseId: String, collectionId: String, callback: @escaping (ADResponse<ADDocumentCollection>) -> ()) {
+	public func collection (_ databaseId: String, collectionId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
 		
 		let resourceUri = baseUri.collection(databaseId, collectionId: collectionId)
 		
@@ -232,7 +232,7 @@ open class SessionManager {
 	}
 
 	// delete
-	public func delete (_ resource: ADDocumentCollection, databaseId: String, callback: @escaping (Bool) -> ()) {
+	public func delete (_ resource: ADCollection, databaseId: String, callback: @escaping (Bool) -> ()) {
 		
 		let resourceUri = baseUri.collection(databaseId, collectionId: resource.id)
 		

@@ -44,25 +44,25 @@ public func delete (_ resource: ADDatabase, callback: @escaping (Bool) -> ()) {
 
 
 
-// MARK: - DocumentCollection
+// MARK: - Collection
 
 //create
-public func createDocumentCollection (_ databaseId: String, collectionId: String, callback: @escaping (ADResponse<ADDocumentCollection>) -> ()) {
-	return SessionManager.default.createDocumentCollection(databaseId, collectionId: collectionId, callback: callback)
+public func createCollection (_ databaseId: String, collectionId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
+	return SessionManager.default.createCollection(databaseId, collectionId: collectionId, callback: callback)
 }
 
 // list
-public func documentCollections (_ databaseId: String, callback: @escaping (ADListResponse<ADDocumentCollection>) -> ()) {
-	return SessionManager.default.documentCollections(databaseId, callback: callback)
+public func collections (_ databaseId: String, callback: @escaping (ADListResponse<ADCollection>) -> ()) {
+	return SessionManager.default.collections(databaseId, callback: callback)
 }
 
 // get
-public func documentCollection (_ databaseId: String, collectionId: String, callback: @escaping (ADResponse<ADDocumentCollection>) -> ()) {
-	return SessionManager.default.documentCollection(databaseId, collectionId: collectionId, callback: callback)
+public func collection (_ databaseId: String, collectionId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
+	return SessionManager.default.collection(databaseId, collectionId: collectionId, callback: callback)
 }
 
 //delete
-public func delete (_ resource: ADDocumentCollection, databaseId: String, callback: @escaping (Bool) -> ()) {
+public func delete (_ resource: ADCollection, databaseId: String, callback: @escaping (Bool) -> ()) {
 	return SessionManager.default.delete(resource, databaseId: databaseId, callback: callback)
 }
 

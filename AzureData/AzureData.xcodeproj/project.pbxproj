@@ -35,7 +35,7 @@
 		B5958A081F992C560023C0AF /* ADDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A071F992C560023C0AF /* ADDatabase.swift */; };
 		B5958A0A1F992C9A0023C0AF /* ADResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A091F992C9A0023C0AF /* ADResource.swift */; };
 		B5958A0C1F992CAB0023C0AF /* ADDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A0B1F992CAB0023C0AF /* ADDocument.swift */; };
-		B5958A0E1F992CB90023C0AF /* ADDocumentCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A0D1F992CB90023C0AF /* ADDocumentCollection.swift */; };
+		B5958A0E1F992CB90023C0AF /* ADCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A0D1F992CB90023C0AF /* ADCollection.swift */; };
 		B5958A101F992CC50023C0AF /* ADAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A0F1F992CC50023C0AF /* ADAttachment.swift */; };
 		B5958A121F992CD10023C0AF /* ADConflict.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A111F992CD10023C0AF /* ADConflict.swift */; };
 		B5958A141F992CDD0023C0AF /* ADDatabaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A131F992CDD0023C0AF /* ADDatabaseAccount.swift */; };
@@ -140,7 +140,7 @@
 		B5958A071F992C560023C0AF /* ADDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabase.swift; sourceTree = "<group>"; };
 		B5958A091F992C9A0023C0AF /* ADResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResource.swift; sourceTree = "<group>"; };
 		B5958A0B1F992CAB0023C0AF /* ADDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDocument.swift; sourceTree = "<group>"; };
-		B5958A0D1F992CB90023C0AF /* ADDocumentCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDocumentCollection.swift; sourceTree = "<group>"; };
+		B5958A0D1F992CB90023C0AF /* ADCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollection.swift; sourceTree = "<group>"; };
 		B5958A0F1F992CC50023C0AF /* ADAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADAttachment.swift; sourceTree = "<group>"; };
 		B5958A111F992CD10023C0AF /* ADConflict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADConflict.swift; sourceTree = "<group>"; };
 		B5958A131F992CDD0023C0AF /* ADDatabaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabaseAccount.swift; sourceTree = "<group>"; };
@@ -234,7 +234,7 @@
 				B5958A071F992C560023C0AF /* ADDatabase.swift */,
 				B5958A131F992CDD0023C0AF /* ADDatabaseAccount.swift */,
 				B5958A0B1F992CAB0023C0AF /* ADDocument.swift */,
-				B5958A0D1F992CB90023C0AF /* ADDocumentCollection.swift */,
+				B5958A0D1F992CB90023C0AF /* ADCollection.swift */,
 				B5958A151F992CE90023C0AF /* ADError.swift */,
 				B53BF7751F9A2F9400B7A187 /* ADIndexingPolicy.swift */,
 				B5958A171F992CF60023C0AF /* ADOffer.swift */,
@@ -599,7 +599,7 @@
 				B5958A201F992D240023C0AF /* ADTrigger.swift in Sources */,
 				B5958A0C1F992CAB0023C0AF /* ADDocument.swift in Sources */,
 				B53BF7761F9A2F9400B7A187 /* ADIndexingPolicy.swift in Sources */,
-				B5958A0E1F992CB90023C0AF /* ADDocumentCollection.swift in Sources */,
+				B5958A0E1F992CB90023C0AF /* ADCollection.swift in Sources */,
 				B5F76C541F96A7F3001E8B11 /* NetworkReachabilityManager.swift in Sources */,
 				B5958A161F992CE90023C0AF /* ADError.swift in Sources */,
 				B5DA1DFD1F978C0A00C300D3 /* SessionManager.swift in Sources */,

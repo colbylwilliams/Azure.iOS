@@ -79,11 +79,11 @@ class AzureDataTests: XCTestCase {
         let createExpectation = self.expectation(description: "should create and return database")
         let deleteExpectation = self.expectation(description: "should delete database")
         
-        var createResponse: ADResponse<ADDocumentCollection>?
+        var createResponse: ADResponse<ADCollection>?
         var deleteSuccess = false
 
         // Create
-        AzureData.createDocumentCollection(collectionId, collectionId: collectionId) { r in
+        AzureData.createCollection(collectionId, collectionId: collectionId) { r in
             createResponse = r
             createExpectation.fulfill()
         }
@@ -93,7 +93,7 @@ class AzureDataTests: XCTestCase {
         XCTAssertNotNil(createResponse?.resource)
 
         // Delete
-        AzureData.delete(ADDocumentCollection(collectionId), databaseId: collectionId) { s in
+        AzureData.delete(ADCollection(collectionId), databaseId: collectionId) { s in
             deleteSuccess = s
             deleteExpectation.fulfill()
         }

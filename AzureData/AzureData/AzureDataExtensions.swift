@@ -14,22 +14,22 @@ public extension ADDatabase {
     // MARK - Document Collection
     
     //create
-    public func create (collectionWithId id: String, callback: @escaping (ADResponse<ADDocumentCollection>) -> ()) {
-        return SessionManager.default.createDocumentCollection(self.id, collectionId: id, callback: callback)
+    public func create (collectionWithId id: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
+        return SessionManager.default.createCollection(self.id, collectionId: id, callback: callback)
     }
     
     // list
-    public func getCollections (callback: @escaping (ADListResponse<ADDocumentCollection>) -> ()) {
-        return SessionManager.default.documentCollections(self.id, callback: callback)
+    public func getCollections (callback: @escaping (ADListResponse<ADCollection>) -> ()) {
+        return SessionManager.default.collections(self.id, callback: callback)
     }
     
     // get
-    public func get (collectionWithId id: String, callback: @escaping (ADResponse<ADDocumentCollection>) -> ()) {
-        return SessionManager.default.documentCollection(self.id, collectionId: id, callback: callback)
+    public func get (collectionWithId id: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
+        return SessionManager.default.collection(self.id, collectionId: id, callback: callback)
     }
     
     //delete
-    public func delete (collection resource: ADDocumentCollection, callback: @escaping (Bool) -> ()) {
+    public func delete (collection resource: ADCollection, callback: @escaping (Bool) -> ()) {
         return SessionManager.default.delete(resource, databaseId: self.id, callback: callback)
     }
     
@@ -58,7 +58,7 @@ public extension ADDatabase {
     }
 }
 
-public extension ADDocumentCollection {
+public extension ADCollection {
 	
     // MARK - Documents
     

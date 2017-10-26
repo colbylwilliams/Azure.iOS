@@ -1,5 +1,5 @@
 //
-//  ADDocumentCollection.swift
+//  ADCollection.swift
 //  AzureData
 //
 //  Created by Colby Williams on 10/19/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ADDocumentCollection: ADResource {
+public class ADCollection: ADResource {
 	
 	let conflictsLinkKey 				= "_conflicts"
 	let documentsLinkKey 				= "_docs"

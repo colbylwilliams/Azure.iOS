@@ -55,7 +55,7 @@ public enum ADResourceType : String {
 		case is ADDatabase:				self = .database
 		case is ADUser: 				self = .user
 		case is ADPermission: 			self = .permission
-		case is ADDocumentCollection: 	self = .collection
+		case is ADCollection: 	self = .collection
 		case is ADStoredProcedure: 		self = .storedProcedure
 		case is ADTrigger: 				self = .trigger
 		case is ADUserDefinedFunction: 	self = .udf

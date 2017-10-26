@@ -19,7 +19,7 @@ class CollectionTableViewController: UITableViewController {
 	var database: ADDatabase!
 	
 	var users: [ADUser] = []
-	var collections: [ADDocumentCollection] = []
+	var collections: [ADCollection] = []
 	
 	var collectionsSelected: Bool {
 		return segmentedControl.selectedSegmentIndex == 0
@@ -39,7 +39,7 @@ class CollectionTableViewController: UITableViewController {
 	func refreshData(fromUser: Bool = false) {
         if !fromUser || collectionsSelected {
             
-            //AzureData.documentCollections(database.id) { r in
+            //AzureData.collections(database.id) { r in
             database.getCollections() { r in
                 debugPrint(r.result)
                 if let items = r.resource?.items {
@@ -100,7 +100,7 @@ class CollectionTableViewController: UITableViewController {
 			if let name = alertController.textFields?.first?.text {
 				if self.collectionsSelected {
 					
-                    //AzureData.createDocumentCollection(self.database.id, collectionId: name) { r in
+                    //AzureData.createcollection(self.database.id, collectionId: name) { r in
                     self.database.create(collectionWithId: name) { r in
 						debugPrint(r.result)
 						if let collection = r.resource {
@@ -161,7 +161,7 @@ class CollectionTableViewController: UITableViewController {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
 			if self.collectionsSelected {
 				
-                //AzureData.documentCollection(self.database.id, collectionId: self.collections[indexPath.row].id) { r in
+                //AzureData.collection(self.database.id, collectionId: self.collections[indexPath.row].id) { r in
                 self.database.get(collectionWithId: self.collections[indexPath.row].id) { r in
 					if r.result.isSuccess {
 						debugPrint(r.result)

@@ -14,7 +14,7 @@ class PermissionTableViewController: UITableViewController {
 	@IBOutlet weak var addButton: UIBarButtonItem!
 	
 	var user: ADUser!
-	var collection: ADDocumentCollection!
+	var collection: ADCollection!
 	var database: ADDatabase!
 	
 	var permissions: [ADPermission] = []

@@ -12,7 +12,7 @@ import AzureData
 class CollectionResourceTableViewController: UITableViewController {
 	
 	var database: ADDatabase!
-	var collection: ADDocumentCollection!
+	var collection: ADCollection!
 	
 	var documents: 			[ADDocument] = []
 	var storedProcedures: 	[ADStoredProcedure] = []

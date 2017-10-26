@@ -521,7 +521,8 @@ AzureData.permissions (databaseId, userId: databaseId) { r in
 ```swift
 AzureData.permission (databaseId, userId: String, permissionId: permissionId) { r in
     // permission = r.resource
-```}
+}
+```
 
 #### Delete
 ```swift

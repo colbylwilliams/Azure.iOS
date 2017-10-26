@@ -29,7 +29,7 @@ class UserDefinedFunctionTableViewController: UITableViewController {
 	
 	
 	func refreshData() {
-        AzureData.userDefinedFunctions(database.id, collectionId: collection.id) { r in
+        AzureData.get(userDefinedFunctionsIn: collection.id, inDatabase: database.id) { r in
             debugPrint(r.result)
             if let items = r.resource?.items {
                 //for item in items { item.printLog()    }
@@ -94,7 +94,7 @@ class UserDefinedFunctionTableViewController: UITableViewController {
     
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
-        AzureData.delete(resources[indexPath.row], databaseId: database.id, collectionId: collection.id) { success in
+		AzureData.delete(resources[indexPath.row], fromCollection: collection.id, inDatabase: database.id) { success in
             //collection.deleteDocument(self.documents[indexPath.row]) { success in
             if success {
                 self.resources.remove(at: indexPath.row)

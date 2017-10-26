@@ -57,7 +57,7 @@ class DocumentTableViewController: UITableViewController {
 //                            .and("age", isGreaterThanOrEqualTo: 20)
 //                            .orderBy("_etag", descending: true)
 //        
-//        //AzureData.query(database.id, collectionId: collection.id, query: query) { r in
+        //AzureData.query(query(documentsIn: collection.id, inDatabase: database.id, with: query) { r in
 //        collection.queryDocuments(with: query) { r in
 //            debugPrint(r.result)
 //            if let items = r.resource?.items {
@@ -76,7 +76,7 @@ class DocumentTableViewController: UITableViewController {
         doc["testDate"]   = Date().timeIntervalSince1970
         
         //AzureData.createDocument(database.id, collectionId: collection.id, document: doc) { r in
-        collection.create(document: doc) { r in
+        collection.create(doc) { r in
             debugPrint(r.result)
             if let document = r.resource {
                 self.documents.append(document)
@@ -117,7 +117,7 @@ class DocumentTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
-			//AzureData.document(ADDocument.self, databaseId: self.database.id, collectionId: self.collection.id, documentId: self.documents[indexPath.row].id) { r in
+			//AzureData.get(documentWithId: self.documents[indexPath.row].id, as: ADDocument.self, inCollection: collection.id, inDatabase: database.id) { r in
             self.collection.get(documentWithResourceId: self.documents[indexPath.row].resourceId, as: ADDocument.self) { r in
 				if r.result.isSuccess {
 					debugPrint(r.result)
@@ -152,8 +152,8 @@ class DocumentTableViewController: UITableViewController {
     
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
-        //AzureData.delete(documents[indexPath.row], databaseId: database.id, collectionId: collection.id) { success in
-        collection.delete(document: documents[indexPath.row]) { success in
+		//AzureData.delete(documents[indexPath.row], fromCollection: collection.id, inDatabase: database.id) { success in
+        collection.delete(documents[indexPath.row]) { success in
             if success {
                 self.documents.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)

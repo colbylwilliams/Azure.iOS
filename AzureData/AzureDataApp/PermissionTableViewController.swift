@@ -27,7 +27,7 @@ class PermissionTableViewController: UITableViewController {
 	
 	
 	func refreshData() {
-        AzureData.permissions(database.id, userId: user.id) { r in
+        AzureData.get(permissionsFor: user.id, inDatabase: database.id) { r in
             debugPrint(r.result)
             if let items = r.resource?.items {
                 self.permissions = items
@@ -70,7 +70,7 @@ class PermissionTableViewController: UITableViewController {
 				debugPrint("id: \(id)")
 				debugPrint("mode: \(mode)")
 				
-				AzureData.createPermission(self.collection, databaseId: self.database.id, userId: self.user.id, permissionId: id, permissionMode: .read) { r in
+				AzureData.create(permissionWithId: id, mode: .read, in: self.collection, forUser: self.user.id, inDatabase: self.database.id) { r in
 					debugPrint(r.result)
 					if let permission = r.resource {
 						self.permissions.append(permission)
@@ -112,7 +112,7 @@ class PermissionTableViewController: UITableViewController {
 	
 	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
-			AzureData.permission(self.database.id, userId: self.user.id, permissionId: self.permissions[indexPath.row].id) { r in
+			AzureData.get(permissionWithId: self.permissions[indexPath.row].id, forUser: self.user.id, inDatabase: self.database.id) { r in
 				debugPrint(r.result)
 				tableView.reloadRows(at: [indexPath], with: .automatic)
 				callback(false)
@@ -140,8 +140,7 @@ class PermissionTableViewController: UITableViewController {
 
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
-        AzureData.delete(permissions[indexPath.row], databaseId: database.id, userId: user.id) { success in
-        //collection.deleteDocument(self.documents[indexPath.row]) { success in
+		AzureData.delete(permissions[indexPath.row], forUser: user.id, inDatabase: database.id) { success in
             if success {
                 self.permissions.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)

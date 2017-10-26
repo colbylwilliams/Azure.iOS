@@ -28,7 +28,8 @@ class StoredProcedureTableViewController: UITableViewController {
 
 	
 	func refreshData() {
-        AzureData.storedProcedures(database.id, collectionId: collection.id) { r in
+		//AzureData.get(storedProceduresIn: collection.id, inDatabase: database.id) { r in
+		collection.getStoredProcedures() { r in
             debugPrint(r.result)
             if let items = r.resource?.items {
                 //for item in items { item.printLog()    }
@@ -62,7 +63,8 @@ class StoredProcedureTableViewController: UITableViewController {
 		}
 		"""
 		
-        AzureData.createStoredProcedure(database.id, collectionId: collection.id, storedProcedureId: "helloWorld", body: storedProcedure) { r in
+        //AzureData.create(storedProcedureWithId: "helloWorld", andBody: storedProcedure, inCollection: collection.id, inDatabase: database.id) { r in
+		collection.create(storedProcedureWithId: "helloWorld", andBody: storedProcedure) { r in
             debugPrint(r.result)
             if let storedProcedure = r.resource {
                 self.resources.append(storedProcedure)
@@ -113,8 +115,8 @@ class StoredProcedureTableViewController: UITableViewController {
     
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
-        AzureData.delete(resources[indexPath.row], databaseId: database.id, collectionId: collection.id) { success in
-            //collection.deleteDocument(self.documents[indexPath.row]) { success in
+		AzureData.delete(resources[indexPath.row], fromCollection: collection.id, inDatabase: database.id) { success in
+		//collection.delete(self.resources[indexPath.row]) { success in
             if success {
                 self.resources.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -127,7 +129,7 @@ class StoredProcedureTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 		let procedure = resources[indexPath.row]
 		
-		AzureData.execute(database.id, collectionId: collection.id, storedProcedureId: procedure.id, parameters: nil) { data in
+		AzureData.execute(storedProcedureWithId: procedure.id, usingParameters: nil, inCollection: collection.id, inDatabase: database.id) { data in
 			if let data = data {
 				if let string = String(data: data, encoding: .utf8) {
 					print(string)

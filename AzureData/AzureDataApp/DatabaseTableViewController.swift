@@ -43,7 +43,7 @@ class DatabaseTableViewController: UITableViewController {
                     if self.databasesSelected {
                         self.tableView.reloadData()
                     }
-                } else if let error = r.error {
+                } else if let error = r.result.error {
                     self.showErrorAlert(error)
                 }
                 if self.refreshControl?.isRefreshing ?? false {
@@ -51,7 +51,7 @@ class DatabaseTableViewController: UITableViewController {
                 }
             }
         }
-        if !fromUser || !databasesSelected {
+        if fromUser || !databasesSelected {
             AzureData.offers { r in
                 debugPrint(r.result)
                 if let offers = r.resource?.items {
@@ -59,7 +59,7 @@ class DatabaseTableViewController: UITableViewController {
                     if !self.databasesSelected {
                         self.tableView.reloadData()
                     }
-                } else if let error = r.error {
+                } else if let error = r.result.error {
                     self.showErrorAlert(error)
                 }
                 if self.refreshControl?.isRefreshing ?? false {
@@ -108,11 +108,16 @@ class DatabaseTableViewController: UITableViewController {
 		present(alertController, animated: true) { }
 	}
 	
+	var presentingAlert = false
 	
 	func showErrorAlert (_ error: ADError) {
-		let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-		alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-		present(alertController, animated: true) { }
+		if !presentingAlert {
+		
+			presentingAlert = true
+			let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+			alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel) { a in self.presentingAlert = false })
+			present(alertController, animated: true) { }
+		}
 	}
 
 	
@@ -146,7 +151,7 @@ class DatabaseTableViewController: UITableViewController {
 					callback(false)
 				}
 			} else {
-				AzureData.offer(self.offers[indexPath.row].id) { r in
+				AzureData.get(offerWithId: self.offers[indexPath.row].id) { r in
 					debugPrint(r.result)
 					tableView.reloadRows(at: [indexPath], with: .automatic)
 					callback(false)

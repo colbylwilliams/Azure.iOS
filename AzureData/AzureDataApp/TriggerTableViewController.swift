@@ -28,7 +28,8 @@ class TriggerTableViewController: UITableViewController {
 
 	
 	func refreshData() {
-        AzureData.triggers(database.id, collectionId: collection.id) { r in
+        //AzureData.get(triggersIn: collection.id, inDatabase: database.id) { r in
+		collection.getTriggers() { r in
             debugPrint(r.result)
             if let items = r.resource?.items {
                 //for item in items { item.printLog()    }
@@ -93,8 +94,8 @@ class TriggerTableViewController: UITableViewController {
     
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
-        AzureData.delete(resources[indexPath.row], databaseId: database.id, collectionId: collection.id) { success in
-            //collection.deleteDocument(self.documents[indexPath.row]) { success in
+        //AzureData.delete(resources[indexPath.row], fromCollection: collection.id, inDatabase: database.id) { success in
+		collection.delete(self.resources[indexPath.row]) { success in
             if success {
                 self.resources.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)

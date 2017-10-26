@@ -28,25 +28,20 @@ open class SessionManager {
 		//commonInit(serverTrustPolicyManager: serverTrustPolicyManager)
 	}
 	
-	public var setup = false
+	let setupError = ADError("AzureData is not setup.  Must call AzureData.setup() before attempting CRUD operations on resources.")
+	
+	public var setup: Bool { return baseUri != nil }
 	
 	public var verboseLogging = false
 	
-	var baseUri: ADResourceUri!
-	
-	var resourceName: String! {
-		willSet {
-			baseUri = ADResourceUri(newValue)
-		}
-	}
+	var baseUri: ADResourceUri?
 	
 	var tokenProvider: ADTokenProvider!
 	
     public func setup (_ name: String, key: String, keyType: ADTokenType, verboseLogging verbose: Bool = false) {
-		resourceName = name
+		baseUri = ADResourceUri(name)
 		tokenProvider = ADTokenProvider(key: key, keyType: keyType, tokenVersion: "1.0")
         verboseLogging = verbose
-		setup = true
 	}
 
 	
@@ -127,31 +122,31 @@ open class SessionManager {
 	open let session: URLSession
 
 	
-	public func delete (_ resourceType: ADResourceType, resourceId: String, parentId: String? = nil, grandparentId: String? = nil, greatgrandparentId: String? = nil, callback: @escaping (Bool) -> ()) {
-		
-		let uri = ADResourceUri(resourceName)
-		
-		var resourceUri: (URL, String)?
-		
-		switch resourceType {
-		case .database: 		resourceUri = uri.database(resourceId)
-		case .user: 			resourceUri = uri.user(parentId!, userId: resourceId)
-		case .permission: 		resourceUri = uri.permission(grandparentId!, userId: parentId!, permissionId: resourceId)
-		case .collection: 		resourceUri = uri.collection(parentId!, collectionId: resourceId)
-		case .storedProcedure: 	resourceUri = uri.storedProcedure(grandparentId!, collectionId: parentId!, storedProcedureId: resourceId)
-		case .trigger: 			resourceUri = uri.trigger(grandparentId!, collectionId: parentId!, triggerId: resourceId)
-		case .udf: 				resourceUri = uri.udf(grandparentId!, collectionId: parentId!, udfId: resourceId)
-		case .document: 		resourceUri = uri.document(inDatabase: grandparentId!, inCollection: parentId!, withId: resourceId)
-		case .attachment: 		resourceUri = uri.attachment(greatgrandparentId!, collectionId: grandparentId!, documentId: parentId!, attachmentId: resourceId)
-		case .offer: 			resourceUri = uri.offer(resourceId)
-		}
-		
-		if let resourceUri = resourceUri {
-			return delete(resourceUri: resourceUri, resourceType: resourceType, callback: callback)
-		} else {
-			DispatchQueue.main.async { callback(false) }
-		}
-	}
+//	public func delete (_ resourceType: ADResourceType, resourceId: String, parentId: String? = nil, grandparentId: String? = nil, greatgrandparentId: String? = nil, callback: @escaping (Bool) -> ()) {
+//
+//		let uri = ADResourceUri(resourceName)
+//
+//		var resourceUri: (URL, String)?
+//
+//		switch resourceType {
+//		case .database: 		resourceUri = uri.database(resourceId)
+//		case .user: 			resourceUri = uri.user(parentId!, userId: resourceId)
+//		case .permission: 		resourceUri = uri.permission(grandparentId!, userId: parentId!, permissionId: resourceId)
+//		case .collection: 		resourceUri = uri.collection(parentId!, collectionId: resourceId)
+//		case .storedProcedure: 	resourceUri = uri.storedProcedure(grandparentId!, collectionId: parentId!, storedProcedureId: resourceId)
+//		case .trigger: 			resourceUri = uri.trigger(grandparentId!, collectionId: parentId!, triggerId: resourceId)
+//		case .udf: 				resourceUri = uri.udf(grandparentId!, collectionId: parentId!, udfId: resourceId)
+//		case .document: 		resourceUri = uri.document(inDatabase: grandparentId!, inCollection: parentId!, withId: resourceId)
+//		case .attachment: 		resourceUri = uri.attachment(greatgrandparentId!, collectionId: grandparentId!, documentId: parentId!, attachmentId: resourceId)
+//		case .offer: 			resourceUri = uri.offer(resourceId)
+//		}
+//
+//		if let resourceUri = resourceUri {
+//			return delete(resourceUri: resourceUri, resourceType: resourceType, callback: callback)
+//		} else {
+//			DispatchQueue.main.async { callback(false) }
+//		}
+//	}
 
 	
 	
@@ -160,7 +155,7 @@ open class SessionManager {
 	// create
 	public func create (databaseWithId databaseId: String, callback: @escaping (ADResponse<ADDatabase>) -> ()) {
 		
-		let resourceUri = baseUri.database()
+		let resourceUri = baseUri?.database()
 		
 		let body = ["id":databaseId]
 		
@@ -175,7 +170,7 @@ open class SessionManager {
 	// list
 	public func databases (callback: @escaping (ADListResponse<ADDatabase>) -> ()) {
 		
-		let resourceUri = baseUri.database()
+		let resourceUri = baseUri?.database()
 		
 		return resources(resourceUri: resourceUri, resourceType: .database, callback: callback)
 	}
@@ -183,27 +178,28 @@ open class SessionManager {
 	// get
 	public func get (databaseWithId databaseId: String, callback: @escaping (ADResponse<ADDatabase>) -> ()) {
 		
-		let resourceUri = baseUri.database(databaseId)
+		let resourceUri = baseUri?.database(databaseId)
 		
 		return resource(resourceUri: resourceUri, resourceType: .database, callback: callback)
 	}
 
 	// delete
-	public func delete (_ resource: ADDatabase, callback: @escaping (Bool) -> ()) {
+	public func delete (_ database: ADDatabase, callback: @escaping (Bool) -> ()) {
 		
-		let resourceUri = baseUri.database(resource.id)
+		let resourceUri = baseUri?.database(database.id)
 		
 		return delete(resourceUri: resourceUri, resourceType: .database, callback: callback)
 	}
 	
 	
 	
+	
 	// MARK: - Collections
 	
 	// create
-	public func create (collectionWithId collectionId: String, in databaseId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
+	public func create (collectionWithId collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
 		
-		let resourceUri = baseUri.collection(databaseId)
+		let resourceUri = baseUri?.collection(databaseId)
 		
 		let body = ["id":collectionId]
 		
@@ -218,23 +214,23 @@ open class SessionManager {
 	// list
 	public func get (collectionsIn databaseId: String, callback: @escaping (ADListResponse<ADCollection>) -> ()) {
 		
-		let resourceUri = baseUri.collection(databaseId)
+		let resourceUri = baseUri?.collection(databaseId)
 		
 		return resources(resourceUri: resourceUri, resourceType: .collection, callback: callback)
 	}
 
 	// get
-	public func get (collectionWithId collectionId: String, in databaseId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
+	public func get (collectionWithId collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
 		
-		let resourceUri = baseUri.collection(databaseId, collectionId: collectionId)
+		let resourceUri = baseUri?.collection(databaseId, collectionId: collectionId)
 		
 		return resource(resourceUri: resourceUri, resourceType: .collection, callback: callback)
 	}
 
 	// delete
-	public func delete (_ resource: ADCollection, from databaseId: String, callback: @escaping (Bool) -> ()) {
+	public func delete (_ collection: ADCollection, fromDatabase databaseId: String, callback: @escaping (Bool) -> ()) {
 		
-		let resourceUri = baseUri.collection(databaseId, collectionId: resource.id)
+		let resourceUri = baseUri?.collection(databaseId, collectionId: collection.id)
 		
 		return delete(resourceUri: resourceUri, resourceType: .collection, callback: callback)
 	}
@@ -247,9 +243,9 @@ open class SessionManager {
 	// MARK: - Documents
 	
 	// create
-	public func create<T: ADDocument> (_ document: T, inCollection collectionId: String, in databaseId: String, callback: @escaping (ADResponse<T>) -> ()) {
+	public func create<T: ADDocument> (_ document: T, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<T>) -> ()) {
 		
-		let resourceUri = baseUri.document(inDatabase: databaseId, inCollection: collectionId)
+		let resourceUri = baseUri?.document(inDatabase: databaseId, inCollection: collectionId)
 		
 		let body = document.dictionary
 		
@@ -263,7 +259,7 @@ open class SessionManager {
 
 	public func create<T: ADDocument> (_ document: T, in collection: ADCollection, callback: @escaping (ADResponse<T>) -> ()) {
         
-        let resourceUri = baseUri.document(atLink: collection.selfLink!)
+        let resourceUri = baseUri?.document(atLink: collection.selfLink!)
         
         let body = document.dictionary
         
@@ -276,55 +272,55 @@ open class SessionManager {
     }
 
 	// list
-	public func get<T: ADDocument> (documentsAs documentType:T.Type, inCollection collectionId: String, in databaseId: String, callback: @escaping (ADListResponse<T>) -> ()) {
+	public func get<T: ADDocument> (documentsAs documentType:T.Type, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADListResponse<T>) -> ()) {
 		
-		let resourceUri = baseUri.document(inDatabase: databaseId, inCollection: collectionId)
+		let resourceUri = baseUri?.document(inDatabase: databaseId, inCollection: collectionId)
 		
 		return resources(resourceUri: resourceUri, resourceType: .document, callback: callback)
 	}
 
 	public func get<T: ADDocument> (documentsAs documentType:T.Type, in collection: ADCollection, callback: @escaping (ADListResponse<T>) -> ()) {
         
-        let resourceUri = baseUri.document(atLink: collection.selfLink!)
+        let resourceUri = baseUri?.document(atLink: collection.selfLink!)
         
         return resources(resourceUri: resourceUri, resourceType: .document, callback: callback)
     }
 
 	// get
-	public func get<T: ADDocument> (documentWithId documentId: String, as documentType:T.Type, inCollection collectionId: String, in databaseId: String, callback: @escaping (ADResponse<T>) -> ()) {
+	public func get<T: ADDocument> (documentWithId documentId: String, as documentType:T.Type, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<T>) -> ()) {
         
-        let resourceUri = baseUri.document(inDatabase: databaseId, inCollection: collectionId, withId: documentId)
+        let resourceUri = baseUri?.document(inDatabase: databaseId, inCollection: collectionId, withId: documentId)
         
         return resource(resourceUri: resourceUri, resourceType: .document, callback: callback)
     }
 
 	public func get<T: ADDocument> (documentWithId resourceId: String, as documentType:T.Type, in collection: ADCollection, callback: @escaping (ADResponse<T>) -> ()) {
         
-        let resourceUri = baseUri.document(atLink: collection.selfLink!, withResourceId: resourceId)
+        let resourceUri = baseUri?.document(atLink: collection.selfLink!, withResourceId: resourceId)
         
         return resource(resourceUri: resourceUri, resourceType: .document, callback: callback)
     }
 
 	// delete
-	public func delete (_ document: ADDocument, fromCollection collectionId: String, in databaseId: String, callback: @escaping (Bool) -> ()) {
+	public func delete (_ document: ADDocument, fromCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (Bool) -> ()) {
 		
-		let resourceUri = baseUri.document(inDatabase: databaseId, inCollection: collectionId, withId: document.id)
+		let resourceUri = baseUri?.document(inDatabase: databaseId, inCollection: collectionId, withId: document.id)
 		
 		return delete(resourceUri: resourceUri, resourceType: .document, callback: callback)
 	}
 
 	public func delete (_ document: ADDocument, from collection: ADCollection, callback: @escaping (Bool) -> ()) {
         
-        let resourceUri = baseUri.document(atLink: collection.selfLink!, withResourceId: document.resourceId)
+        let resourceUri = baseUri?.document(atLink: collection.selfLink!, withResourceId: document.resourceId)
         
         return delete(resourceUri: resourceUri, resourceType: .document, callback: callback)
     }
 
     
 	// replace
-	public func replace<T: ADDocument> (_ document: T, inCollection collectionId: String, in databaseId: String, callback: @escaping (ADResponse<T>) -> ()) {
+	public func replace<T: ADDocument> (_ document: T, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<T>) -> ()) {
 		
-		let resourceUri = baseUri.document(inDatabase: databaseId, inCollection: collectionId, withId: document.id)
+		let resourceUri = baseUri?.document(inDatabase: databaseId, inCollection: collectionId, withId: document.id)
 		
 		let body = document.dictionary
 		
@@ -338,7 +334,7 @@ open class SessionManager {
 
 	public func replace<T: ADDocument> (_ document: T, in collection: ADCollection, callback: @escaping (ADResponse<T>) -> ()) {
         
-        let resourceUri = baseUri.document(atLink: collection.selfLink!, withResourceId: document.resourceId)
+        let resourceUri = baseUri?.document(atLink: collection.selfLink!, withResourceId: document.resourceId)
         
         let body = document.dictionary
         
@@ -352,9 +348,9 @@ open class SessionManager {
 
     
 	// query
-    public func query (documentsIn collectionId: String, in databaseId: String, with query: ADQuery, callback: @escaping (ADListResponse<ADDocument>) -> ()) {
+    public func query (documentsIn collectionId: String, inDatabase databaseId: String, with query: ADQuery, callback: @escaping (ADListResponse<ADDocument>) -> ()) {
 
-        let resourceUri = baseUri.document(inDatabase: databaseId, inCollection: collectionId)
+        let resourceUri = baseUri?.document(inDatabase: databaseId, inCollection: collectionId)
         
         query.printQuery()
         
@@ -372,7 +368,7 @@ open class SessionManager {
 
 	public func query (documentsIn collection: ADCollection, with query: ADQuery, callback: @escaping (ADListResponse<ADDocument>) -> ()) {
         
-        let resourceUri = baseUri.document(atLink: collection.selfLink!)
+        let resourceUri = baseUri?.document(atLink: collection.selfLink!)
         
         query.printQuery()
         
@@ -394,9 +390,9 @@ open class SessionManager {
 	// MARK: - Attachments
 	
 	// create
-    public func createAttachment(_ databaseId: String, collectionId: String, documentId: String, attachmentId: String, contentType: String, mediaUrl: URL, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+	public func create(attachmentWithId attachmentId: String, contentType: String, andMediaUrl mediaUrl: URL, onDocument documentId: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
         
-        let resourceUri = baseUri.attachment(databaseId, collectionId: collectionId, documentId: documentId)
+        let resourceUri = baseUri?.attachment(databaseId, collectionId: collectionId, documentId: documentId)
         
         let body = ADAttachment.jsonDict(attachmentId, contentType: contentType, media: mediaUrl)
         
@@ -408,9 +404,9 @@ open class SessionManager {
         return create(resourceUri: resourceUri, resourceType: .attachment, httpBody: httpBody, callback: callback)
     }
 
-    public func createAttachment(_ databaseId: String, collectionId: String, documentId: String, contentType: String, mediaName: String, media:Data, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+	public func create(attachmentWithId attachmentId: String, contentType: String, name mediaName: String, with media: Data, onDocument documentId: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
         
-        let resourceUri = baseUri.attachment(databaseId, collectionId: collectionId, documentId: documentId)
+        let resourceUri = baseUri?.attachment(databaseId, collectionId: collectionId, documentId: documentId)
         
         let headers: [String:ADHttpRequestHeader] = [
             contentType:.contentType,
@@ -421,25 +417,25 @@ open class SessionManager {
     }
 
 	// list
-	public func attachments (_ databaseId: String, collectionId: String, documentId: String, callback: @escaping (ADListResponse<ADAttachment>) -> ()) {
+	public func get (attachmentsOn documentId: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADListResponse<ADAttachment>) -> ()) {
 		
-		let resourceUri = baseUri.attachment(databaseId, collectionId: collectionId, documentId: documentId)
+		let resourceUri = baseUri?.attachment(databaseId, collectionId: collectionId, documentId: documentId)
 		
 		return resources(resourceUri: resourceUri, resourceType: .attachment, callback: callback)
 	}
 
 	// delete
-	public func delete (_ resource: ADAttachment, databaseId: String, collectionId: String, documentId: String, callback: @escaping (Bool) -> ()) {
+	public func delete (_ attachment: ADAttachment, onDocument documentId: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (Bool) -> ()) {
 		
-		let resourceUri = baseUri.attachment(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: resource.id)
+		let resourceUri = baseUri?.attachment(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachment.id)
 		
 		return delete(resourceUri: resourceUri, resourceType: .attachment, callback: callback)
 	}
 
 	// replace
-    public func replace(_ databaseId: String, collectionId: String, documentId: String, attachmentId: String, contentType: String, mediaUrl: URL, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+	public func replace(attachmentWithId attachmentId: String, contentType: String, andMediaUrl mediaUrl: URL, onDocument documentId: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
         
-        let resourceUri = baseUri.attachment(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId)
+        let resourceUri = baseUri?.attachment(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId)
         
         let body = ADAttachment.jsonDict(attachmentId, contentType: contentType, media: mediaUrl)
         
@@ -451,9 +447,9 @@ open class SessionManager {
         return replace(resourceUri: resourceUri, resourceType: .attachment, httpBody: httpBody, callback: callback)
     }
     
-    public func replace(_ databaseId: String, collectionId: String, documentId: String, attachmentId: String, contentType: String, mediaName: String, media:Data, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+    public func replace(attachmentWithId attachmentId: String, contentType: String, name mediaName: String, with media: Data, onDocument documentId: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
         
-        let resourceUri = baseUri.attachment(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId)
+        let resourceUri = baseUri?.attachment(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId)
         
         let headers: [String:ADHttpRequestHeader] = [
             contentType:.contentType,
@@ -469,9 +465,9 @@ open class SessionManager {
 	// MARK: - Stored Procedures
 	
 	// create
-	public func createStoredProcedure (_ databaseId: String, collectionId: String, storedProcedureId: String, body procedure: String, callback: @escaping (ADResponse<ADStoredProcedure>) -> ()) {
+	public func create (storedProcedureWithId storedProcedureId: String, andBody procedure: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADStoredProcedure>) -> ()) {
 		
-		let resourceUri = baseUri.storedProcedure(databaseId, collectionId: collectionId)
+		let resourceUri = baseUri?.storedProcedure(databaseId, collectionId: collectionId)
 		
 		let body = ["id":storedProcedureId, "body":procedure]
 		
@@ -483,9 +479,9 @@ open class SessionManager {
 		return create(resourceUri: resourceUri, resourceType: .storedProcedure, httpBody: httpBody, callback: callback)
 	}
 
-    public func createStoredProcedure (withId storedProcedureId: String, andBody procedure: String, atSelfLink selfLink: String, callback: @escaping (ADResponse<ADStoredProcedure>) -> ()) {
+	public func create (storedProcedureWithId storedProcedureId: String, andBody procedure: String, in collection: ADCollection, callback: @escaping (ADResponse<ADStoredProcedure>) -> ()) {
         
-        let resourceUri = baseUri.storedProcedure(atLink: selfLink)
+        let resourceUri = baseUri?.storedProcedure(atLink: collection.selfLink!)
         
         let body = ["id":storedProcedureId, "body":procedure]
         
@@ -498,39 +494,39 @@ open class SessionManager {
     }
 
 	// list
-	public func storedProcedures (_ databaseId: String, collectionId: String, callback: @escaping (ADListResponse<ADStoredProcedure>) -> ()) {
+	public func get (storedProceduresIn collectionId: String, inDatabase databaseId: String, callback: @escaping (ADListResponse<ADStoredProcedure>) -> ()) {
 		
-		let resourceUri = baseUri.storedProcedure(databaseId, collectionId: collectionId)
+		let resourceUri = baseUri?.storedProcedure(databaseId, collectionId: collectionId)
 		
 		return resources(resourceUri: resourceUri, resourceType: .storedProcedure, callback: callback)
 	}
 
-    public func storedProcedures (atSelfLink selfLink: String, callback: @escaping (ADListResponse<ADStoredProcedure>) -> ()) {
+	public func get (storedProceduresIn collection: ADCollection, callback: @escaping (ADListResponse<ADStoredProcedure>) -> ()) {
         
-        let resourceUri = baseUri.storedProcedure(atLink: selfLink)
+        let resourceUri = baseUri?.storedProcedure(atLink: collection.selfLink!)
         
         return resources(resourceUri: resourceUri, resourceType: .storedProcedure, callback: callback)
     }
 
 	// delete
-	public func delete (_ resource: ADStoredProcedure, databaseId: String, collectionId: String, callback: @escaping (Bool) -> ()) {
+	public func delete (_ storedProcedure: ADStoredProcedure, fromCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (Bool) -> ()) {
 		
-		let resourceUri = baseUri.storedProcedure(databaseId, collectionId: collectionId, storedProcedureId: resource.id)
+		let resourceUri = baseUri?.storedProcedure(databaseId, collectionId: collectionId, storedProcedureId: storedProcedure.id)
 		
 		return delete(resourceUri: resourceUri, resourceType: .storedProcedure, callback: callback)
 	}
 
-    public func delete (_ resource: ADStoredProcedure, atSelfLink selfLink:String, callback: @escaping (Bool) -> ()) {
+    public func delete (_ storedProcedure: ADStoredProcedure, from collection: ADCollection, callback: @escaping (Bool) -> ()) {
         
-        let resourceUri = baseUri.storedProcedure(atLink: selfLink, withResourceId: resource.id)
+        let resourceUri = baseUri?.storedProcedure(atLink: collection.selfLink!, withResourceId: storedProcedure.id)
         
         return delete(resourceUri: resourceUri, resourceType: .storedProcedure, callback: callback)
     }
 
 	// replace
-	public func replace (_ databaseId: String, collectionId: String, storedProcedureId: String, body procedure: String, callback: @escaping (ADResponse<ADStoredProcedure>) -> ()) {
+	public func replace (storedProcedureWithId storedProcedureId: String, andBody procedure: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADStoredProcedure>) -> ()) {
 		
-		let resourceUri = baseUri.storedProcedure(databaseId, collectionId: collectionId, storedProcedureId: storedProcedureId)
+		let resourceUri = baseUri?.storedProcedure(databaseId, collectionId: collectionId, storedProcedureId: storedProcedureId)
 		
 		let body = ["id":storedProcedureId, "body":procedure]
 		
@@ -542,9 +538,9 @@ open class SessionManager {
 		return replace(resourceUri: resourceUri, resourceType: .storedProcedure, httpBody: httpBody, callback: callback)
 	}
 
-    public func replace (storedProcedureWithId storedProcedureId: String, andBody procedure: String, atSelfLink selfLink:String, callback: @escaping (ADResponse<ADStoredProcedure>) -> ()) {
+	public func replace (storedProcedureWithId storedProcedureId: String, andBody procedure: String, in collection: ADCollection, callback: @escaping (ADResponse<ADStoredProcedure>) -> ()) {
         
-        let resourceUri = baseUri.storedProcedure(atLink: selfLink, withResourceId: storedProcedureId)
+        let resourceUri = baseUri?.storedProcedure(atLink: collection.selfLink!, withResourceId: storedProcedureId)
         
         let body = ["id":storedProcedureId, "body":procedure]
         
@@ -557,9 +553,9 @@ open class SessionManager {
     }
 
 	// execute
-	public func execute (_ databaseId: String, collectionId: String, storedProcedureId: String, parameters: [String]?, callback: @escaping (Data?) -> ()) {
+	public func execute (storedProcedureWithId storedProcedureId: String, usingParameters parameters: [String]?, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (Data?) -> ()) {
 		
-		let resourceUri = baseUri.storedProcedure(databaseId, collectionId: collectionId, storedProcedureId: storedProcedureId)
+		let resourceUri = baseUri?.storedProcedure(databaseId, collectionId: collectionId, storedProcedureId: storedProcedureId)
 		
 		let body = parameters ?? []
 		
@@ -572,9 +568,9 @@ open class SessionManager {
 		return execute(resourceUri: resourceUri, resourceType: .storedProcedure, httpBody: httpBody, callback: callback)
 	}
 
-    public func execute (storedProcedureWithId storedProcedureId: String, atSelfLink selfLink:String, usingParameters parameters: [String]?, callback: @escaping (Data?) -> ()) {
+	public func execute (storedProcedureWithId storedProcedureId: String, usingParameters parameters: [String]?, in collection: ADCollection, callback: @escaping (Data?) -> ()) {
         
-        let resourceUri = baseUri.storedProcedure(atLink: selfLink, withResourceId: storedProcedureId)
+        let resourceUri = baseUri?.storedProcedure(atLink: collection.selfLink!, withResourceId: storedProcedureId)
         
         let body = parameters ?? []
         
@@ -593,9 +589,9 @@ open class SessionManager {
 	// MARK: - User Defined Functions
 	
 	// create
-	public func createUserDefinedFunction (_ databaseId: String, collectionId: String, functionId: String, body function: String, callback: @escaping (ADResponse<ADUserDefinedFunction>) -> ()) {
+	public func create (userDefinedFunctionWithId functionId: String, andBody function: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADUserDefinedFunction>) -> ()) {
 		
-		let resourceUri = baseUri.udf(databaseId, collectionId: collectionId)
+		let resourceUri = baseUri?.udf(databaseId, collectionId: collectionId)
 		
 		let body = ["id":functionId, "body":function]
 		
@@ -607,9 +603,9 @@ open class SessionManager {
 		return create(resourceUri: resourceUri, resourceType: .udf, httpBody: httpBody, callback: callback)
 	}
 
-    public func createUserDefinedFunction (withId functionId: String, andBody function: String, atSelfLink selfLink: String, callback: @escaping (ADResponse<ADUserDefinedFunction>) -> ()) {
+    public func create (userDefinedFunctionWithId functionId: String, andBody function: String, in collection: ADCollection, callback: @escaping (ADResponse<ADUserDefinedFunction>) -> ()) {
         
-        let resourceUri = baseUri.udf(atLink: selfLink, withResourceId: functionId)
+        let resourceUri = baseUri?.udf(atLink: collection.selfLink!, withResourceId: functionId)
         
         let body = ["id":functionId, "body":function]
         
@@ -622,39 +618,39 @@ open class SessionManager {
     }
 
 	// list
-	public func userDefinedFunctions (_ databaseId: String, collectionId: String, callback: @escaping (ADListResponse<ADUserDefinedFunction>) -> ()) {
+	public func get (userDefinedFunctionsIn collectionId: String, inDatabase databaseId: String, callback: @escaping (ADListResponse<ADUserDefinedFunction>) -> ()) {
 		
-		let resourceUri = baseUri.udf(databaseId, collectionId: collectionId)
+		let resourceUri = baseUri?.udf(databaseId, collectionId: collectionId)
 		
 		return resources(resourceUri: resourceUri, resourceType: .udf, callback: callback)
 	}
 
-    public func userDefinedFunctions (atSelfLink selfLink:String, callback: @escaping (ADListResponse<ADUserDefinedFunction>) -> ()) {
+    public func get (userDefinedFunctionsIn collection: ADCollection, callback: @escaping (ADListResponse<ADUserDefinedFunction>) -> ()) {
         
-        let resourceUri = baseUri.udf(atLink: selfLink)
+        let resourceUri = baseUri?.udf(atLink: collection.selfLink!)
         
         return resources(resourceUri: resourceUri, resourceType: .udf, callback: callback)
     }
 
 	// delete
-	public func delete (_ resource: ADUserDefinedFunction, databaseId: String, collectionId: String, callback: @escaping (Bool) -> ()) {
+	public func delete (_ userDefinedFunction: ADUserDefinedFunction, fromCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (Bool) -> ()) {
 		
-		let resourceUri = baseUri.udf(databaseId, collectionId: collectionId, udfId: resource.id)
+		let resourceUri = baseUri?.udf(databaseId, collectionId: collectionId, udfId: userDefinedFunction.id)
 		
 		return delete(resourceUri: resourceUri, resourceType: .udf, callback: callback)
 	}
 
-    public func delete (_ resource: ADUserDefinedFunction, atSelfLink selfLink:String, callback: @escaping (Bool) -> ()) {
+    public func delete (_ userDefinedFunction: ADUserDefinedFunction, from collection: ADCollection, callback: @escaping (Bool) -> ()) {
         
-        let resourceUri = baseUri.udf(atLink: selfLink, withResourceId: resource.id)
+        let resourceUri = baseUri?.udf(atLink: collection.selfLink!, withResourceId: userDefinedFunction.id)
         
         return delete(resourceUri: resourceUri, resourceType: .udf, callback: callback)
     }
 
 	// replace
-	public func replace (_ databaseId: String, collectionId: String, functionId: String, body function: String, callback: @escaping (ADResponse<ADUserDefinedFunction>) -> ()) {
+	public func replace (userDefinedFunctionWithId functionId: String, andBody function: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADUserDefinedFunction>) -> ()) {
 		
-		let resourceUri = baseUri.udf(databaseId, collectionId: collectionId, udfId: functionId)
+		let resourceUri = baseUri?.udf(databaseId, collectionId: collectionId, udfId: functionId)
 		
 		let body = ["id":functionId, "body":function]
 		
@@ -666,9 +662,9 @@ open class SessionManager {
 		return replace(resourceUri: resourceUri, resourceType: .udf, httpBody: httpBody, callback: callback)
 	}
 
-    public func replace (userDefinedFunctionWithId functionId: String, andBody function: String, atSelfLink selfLink:String, callback: @escaping (ADResponse<ADUserDefinedFunction>) -> ()) {
+    public func replace (userDefinedFunctionWithId functionId: String, andBody function: String, from collection: ADCollection, callback: @escaping (ADResponse<ADUserDefinedFunction>) -> ()) {
         
-        let resourceUri = baseUri.udf(atLink: selfLink, withResourceId: functionId)
+        let resourceUri = baseUri?.udf(atLink: collection.selfLink!, withResourceId: functionId)
         
         let body = ["id":functionId, "body":function]
         
@@ -686,15 +682,15 @@ open class SessionManager {
 	// MARK: - Triggers
 	
 	// create
-	public func createTrigger (_ databaseId: String, collectionId: String, triggerId: String, triggerBody: String, operation: ADTriggerOperation, triggerType: ADTriggerType, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
-		return createTrigger(resourceUri: baseUri.trigger(databaseId, collectionId: collectionId), triggerId: triggerId, body: triggerBody, operation: operation, type: triggerType, callback: callback)
+	public func create (triggerWithId triggerId: String, operation: ADTriggerOperation, type triggerType: ADTriggerType, andBody triggerBody: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
+		return createTrigger(resourceUri: baseUri?.trigger(databaseId, collectionId: collectionId), triggerId: triggerId, body: triggerBody, operation: operation, type: triggerType, callback: callback)
 	}
 
-    public func createTrigger (withId triggerId: String, andBody body: String, operation: ADTriggerOperation, type: ADTriggerType, atSelfLink selfLink:String, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
-        return createTrigger(resourceUri: baseUri.trigger(atLink: selfLink, withResourceId: triggerId), triggerId: triggerId, body: body, operation: operation, type: type, callback: callback)
+    public func create (triggerWithId triggerId: String, operation: ADTriggerOperation, type: ADTriggerType, andBody triggerBody: String, in collection: ADCollection, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
+        return createTrigger(resourceUri: baseUri?.trigger(atLink: collection.selfLink!, withResourceId: triggerId), triggerId: triggerId, body: triggerBody, operation: operation, type: type, callback: callback)
     }
     
-    public func createTrigger (resourceUri: (URL, String), triggerId: String, body triggerBody: String, operation: ADTriggerOperation, type triggerType: ADTriggerType, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
+    fileprivate func createTrigger (resourceUri: (URL, String)?, triggerId: String, body triggerBody: String, operation: ADTriggerOperation, type triggerType: ADTriggerType, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
         
         let body = ADTrigger.jsonDict(triggerId, body: triggerBody, operation: operation, type: triggerType)
         
@@ -707,45 +703,45 @@ open class SessionManager {
     }
 
 	// list
-	public func triggers (_ databaseId: String, collectionId: String, callback: @escaping (ADListResponse<ADTrigger>) -> ()) {
+	public func get (triggersIn collectionId: String, inDatabase databaseId: String, callback: @escaping (ADListResponse<ADTrigger>) -> ()) {
 		
-		let resourceUri = baseUri.trigger(databaseId, collectionId: collectionId)
+		let resourceUri = baseUri?.trigger(databaseId, collectionId: collectionId)
 		
 		return resources(resourceUri: resourceUri, resourceType: .trigger, callback: callback)
 	}
 
-    public func triggers (atSelfLink selfLink:String, callback: @escaping (ADListResponse<ADTrigger>) -> ()) {
+    public func get (triggersIn collection: ADCollection, callback: @escaping (ADListResponse<ADTrigger>) -> ()) {
         
-        let resourceUri = baseUri.trigger(atLink: selfLink)
+        let resourceUri = baseUri?.trigger(atLink: collection.selfLink!)
         
         return resources(resourceUri: resourceUri, resourceType: .trigger, callback: callback)
     }
 
 	// delete
-	public func delete (_ resource: ADTrigger, databaseId: String, collectionId: String, callback: @escaping (Bool) -> ()) {
+	public func delete (_ trigger: ADTrigger, fromCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (Bool) -> ()) {
 		
-		let resourceUri = baseUri.trigger(databaseId, collectionId: collectionId, triggerId: resource.id)
+		let resourceUri = baseUri?.trigger(databaseId, collectionId: collectionId, triggerId: trigger.id)
 		
 		return delete(resourceUri: resourceUri, resourceType: .trigger, callback: callback)
 	}
 
-    public func delete (_ resource: ADTrigger, atSelfLink selfLink:String, callback: @escaping (Bool) -> ()) {
+    public func delete (_ trigger: ADTrigger, from collection: ADCollection, callback: @escaping (Bool) -> ()) {
         
-        let resourceUri = baseUri.trigger(atLink: selfLink, withResourceId: resource.id)
+        let resourceUri = baseUri?.trigger(atLink: collection.selfLink!, withResourceId: trigger.id)
         
         return delete(resourceUri: resourceUri, resourceType: .trigger, callback: callback)
     }
 
 	// replace
-	public func replace (_ databaseId: String, collectionId: String, triggerId: String, triggerBody body: String, operation: ADTriggerOperation, triggerType: ADTriggerType, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
-		return replace(resourceUri: baseUri.trigger(databaseId, collectionId: collectionId, triggerId: triggerId), triggerId: triggerId, body: body, operation: operation, type: triggerType, callback: callback)
+	public func replace (triggerWithId triggerId: String, operation: ADTriggerOperation, type triggerType: ADTriggerType, andBody triggerBody: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
+		return replace(resourceUri: baseUri?.trigger(databaseId, collectionId: collectionId, triggerId: triggerId), triggerId: triggerId, body: triggerBody, operation: operation, type: triggerType, callback: callback)
 	}
 
-    public func replace (triggerWithId triggerId: String, andBody body: String, operation: ADTriggerOperation, type triggerType: ADTriggerType, atSelfLink selfLink: String, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
-        return replace(resourceUri: baseUri.trigger(atLink: selfLink, withResourceId: triggerId), triggerId: triggerId, body: body, operation: operation, type: triggerType, callback: callback)
+    public func replace (triggerWithId triggerId: String, operation: ADTriggerOperation, type triggerType: ADTriggerType, andBody triggerBody: String, in collection: ADCollection, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
+        return replace(resourceUri: baseUri?.trigger(atLink: collection.selfLink!, withResourceId: triggerId), triggerId: triggerId, body: triggerBody, operation: operation, type: triggerType, callback: callback)
     }
     
-    public func replace (resourceUri: (URL, String), triggerId: String, body triggerBody: String, operation: ADTriggerOperation, type triggerType: ADTriggerType, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
+    fileprivate func replace (resourceUri: (URL, String)?, triggerId: String, body triggerBody: String, operation: ADTriggerOperation, type triggerType: ADTriggerType, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
         
         let body = ADTrigger.jsonDict(triggerId, body: triggerBody, operation: operation, type: triggerType)
         
@@ -758,12 +754,14 @@ open class SessionManager {
     }
 	
 	
+
+	
 	// MARK: - Users
 	
 	// create
-	public func createUser (_ databaseId: String, userId: String, callback: @escaping (ADResponse<ADUser>) -> ()) {
+	public func create (userWithId userId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADUser>) -> ()) {
 		
-		let resourceUri = baseUri.user(databaseId)
+		let resourceUri = baseUri?.user(databaseId)
 		
 		let body = ["id":userId]
 		
@@ -776,33 +774,33 @@ open class SessionManager {
 	}
 
 	// list
-	public func users (_ databaseId: String, callback: @escaping (ADListResponse<ADUser>) -> ()) {
+	public func get (usersIn databaseId: String, callback: @escaping (ADListResponse<ADUser>) -> ()) {
 		
-		let resourceUri = baseUri.user(databaseId)
+		let resourceUri = baseUri?.user(databaseId)
 		
 		return resources(resourceUri: resourceUri, resourceType: .user, callback: callback)
 	}
 
 	// get
-	public func user (_ databaseId: String, userId: String, callback: @escaping (ADResponse<ADUser>) -> ()) {
+	public func get (userWithId userId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADUser>) -> ()) {
 		
-		let resourceUri = baseUri.user(databaseId, userId: userId)
+		let resourceUri = baseUri?.user(databaseId, userId: userId)
 		
 		return resource(resourceUri: resourceUri, resourceType: .user, callback: callback)
 	}
 
 	// delete
-	public func delete (_ resource: ADUser, databaseId: String, callback: @escaping (Bool) -> ()) {
+	public func delete (_ user: ADUser, fromDatabase databaseId: String, callback: @escaping (Bool) -> ()) {
 		
-		let resourceUri = baseUri.user(databaseId, userId: resource.id)
+		let resourceUri = baseUri?.user(databaseId, userId: user.id)
 		
 		return delete(resourceUri: resourceUri, resourceType: .user, callback: callback)
 	}
 
 	// replace
-	public func replace (_ databaseId: String, userId: String, newUserId: String, callback: @escaping (ADResponse<ADUser>) -> ()) {
+	public func replace (userWithId userId: String, with newUserId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADUser>) -> ()) {
 		
-		let resourceUri = baseUri.user(databaseId, userId: userId)
+		let resourceUri = baseUri?.user(databaseId, userId: userId)
 		
 		let body = ["id":newUserId]
 		
@@ -821,9 +819,9 @@ open class SessionManager {
 	// MARK: - Permissions
 	
 	// create
-	public func createPermission (_ resource: ADResource, databaseId: String, userId: String, permissionId: String,  permissionMode: ADPermissionMode, callback: @escaping (ADResponse<ADPermission>) -> ()) {
+	public func create (permissionWithId permissionId: String, mode permissionMode: ADPermissionMode, in resource: ADResource, forUser userId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADPermission>) -> ()) {
 		
-		let resourceUri = baseUri.permission(databaseId, userId: userId)
+		let resourceUri = baseUri?.permission(databaseId, userId: userId)
 
 		let body = ["id":permissionId, "permissionMode": permissionMode.rawValue, "resource":resource.selfLink!]
 		
@@ -836,35 +834,35 @@ open class SessionManager {
 	}
 	
 	// list
-	public func permissions (_ databaseId: String, userId: String, callback: @escaping (ADListResponse<ADPermission>) -> ()) {
+	public func get (permissionsFor userId: String, inDatabase databaseId: String, callback: @escaping (ADListResponse<ADPermission>) -> ()) {
 		
-		let resourceUri = baseUri.permission(databaseId, userId: userId)
+		let resourceUri = baseUri?.permission(databaseId, userId: userId)
 		
 		return resources(resourceUri: resourceUri, resourceType: .permission, callback: callback)
 	}
 
 	// get
-	public func permission (_ databaseId: String, userId: String, permissionId: String, callback: @escaping (ADResponse<ADPermission>) -> ()) {
+	public func get (permissionWithId permissionId: String, forUser userId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADPermission>) -> ()) {
 		
-		let resourceUri = baseUri.permission(databaseId, userId: userId, permissionId: permissionId)
+		let resourceUri = baseUri?.permission(databaseId, userId: userId, permissionId: permissionId)
 		
 		return resource(resourceUri: resourceUri, resourceType: .permission, callback: callback)
 	}
 
 	// delete
-	public func delete (_ resource: ADPermission, databaseId: String, userId: String, callback: @escaping (Bool) -> ()) {
+	public func delete (_ permission: ADPermission, forUser userId: String, inDatabase databaseId: String, callback: @escaping (Bool) -> ()) {
 		
-		let resourceUri = baseUri.permission(databaseId, userId: userId, permissionId: resource.id)
+		let resourceUri = baseUri?.permission(databaseId, userId: userId, permissionId: permission.id)
 		
 		return delete(resourceUri: resourceUri, resourceType: .permission, callback: callback)
 	}
 
 	// replace
-	public func replace (_ databaseId: String, userId: String, permissionId: String,  permissionMode: ADPermissionMode, resource: String, callback: @escaping (ADResponse<ADPermission>) -> ()) {
+	public func replace (permissionWithId permissionId: String, mode permissionMode: ADPermissionMode, in resource: ADResource, forUser userId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADPermission>) -> ()) {
 		
-		let resourceUri = baseUri.permission(databaseId, userId: userId, permissionId: permissionId)
+		let resourceUri = baseUri?.permission(databaseId, userId: userId, permissionId: permissionId)
 		
-		let body = ["id":permissionId, "permissionMode": permissionMode.rawValue, "resource":resource]
+		let body: [String : Any] = ["id":permissionId, "permissionMode": permissionMode.rawValue, "resource": resource]
 		
 		guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
 			DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
@@ -877,20 +875,21 @@ open class SessionManager {
 	
 	
 	
+
 	// MARK: - Offers
 	
 	// list
 	public func offers (callback: @escaping (ADListResponse<ADOffer>) -> ()) {
 		
-		let resourceUri = baseUri.offer()
+		let resourceUri = baseUri?.offer()
 		
 		return resources(resourceUri: resourceUri, resourceType: .offer, callback: callback)
 	}
 
 	// get
-	public func offer (_ offerId: String, callback: @escaping (ADResponse<ADOffer>) -> ()) {
+	public func get (offerWithId offerId: String, callback: @escaping (ADResponse<ADOffer>) -> ()) {
 		
-		let resourceUri = baseUri.offer(offerId)
+		let resourceUri = baseUri?.offer(offerId)
 		
 		return resource(resourceUri: resourceUri, resourceType: .offer, callback: callback)
 	}
@@ -905,9 +904,11 @@ open class SessionManager {
 	// MARK: - Resources
 	
 	// create
-	fileprivate func create<T> (resourceUri: (URL, String), resourceType: ADResourceType, httpBody: Data, additionalHeaders: [String:ADHttpRequestHeader]? = nil, callback: @escaping (ADResponse<T>) -> ()) {
+	fileprivate func create<T> (resourceUri: (URL, String)?, resourceType: ADResourceType, httpBody: Data, additionalHeaders: [String:ADHttpRequestHeader]? = nil, callback: @escaping (ADResponse<T>) -> ()) {
 		
-		var request = dataRequest(.post, resourceUri: resourceUri, resourceType: resourceType, additionalHeaders: additionalHeaders)
+		if !setup { callback(ADResponse<T>(setupError)); return }
+		
+		var request = dataRequest(.post, resourceUri: resourceUri!, resourceType: resourceType, additionalHeaders: additionalHeaders)
 		
 		request.httpBody = httpBody
 		
@@ -915,33 +916,41 @@ open class SessionManager {
 	}
 	
 	// list
-	fileprivate func resources<T> (resourceUri: (URL, String), resourceType: ADResourceType, callback: @escaping (ADListResponse<T>) -> ()) {
+	fileprivate func resources<T> (resourceUri: (URL, String)?, resourceType: ADResourceType, callback: @escaping (ADListResponse<T>) -> ()) {
 
-		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: resourceType)
+		if !setup { callback(ADListResponse<T>(setupError)); return }
+		
+		let request = dataRequest(.get, resourceUri: resourceUri!, resourceType: resourceType)
 		
 		return sendRequest(request, resourceType: resourceType, callback: callback)
 	}
 	
 	// get
-	fileprivate func resource<T>(resourceUri: (URL, String), resourceType: ADResourceType, callback: @escaping (ADResponse<T>) -> ()) {
+	fileprivate func resource<T>(resourceUri: (URL, String)?, resourceType: ADResourceType, callback: @escaping (ADResponse<T>) -> ()) {
 		
-		let request = dataRequest(.get, resourceUri: resourceUri, resourceType: resourceType)
+		if !setup { callback(ADResponse<T>(setupError)); return }
+		
+		let request = dataRequest(.get, resourceUri: resourceUri!, resourceType: resourceType)
 		
 		return sendRequest(request, callback: callback)
 	}
 
 	// delete
-	fileprivate func delete(resourceUri: (URL, String), resourceType: ADResourceType, callback: @escaping (Bool) -> ()) {
+	fileprivate func delete(resourceUri: (URL, String)?, resourceType: ADResourceType, callback: @escaping (Bool) -> ()) {
 		
-		let request = dataRequest(.delete, resourceUri: resourceUri, resourceType: resourceType)
+		if !setup { callback(false); return }
+		
+		let request = dataRequest(.delete, resourceUri: resourceUri!, resourceType: resourceType)
 		
 		return sendRequest(request, callback: callback)
 	}
 	
 	// replace
-	fileprivate func replace<T> (resourceUri: (URL, String), resourceType: ADResourceType, httpBody: Data, additionalHeaders: [String:ADHttpRequestHeader]? = nil, callback: @escaping (ADResponse<T>) -> ()) {
+	fileprivate func replace<T> (resourceUri: (URL, String)?, resourceType: ADResourceType, httpBody: Data, additionalHeaders: [String:ADHttpRequestHeader]? = nil, callback: @escaping (ADResponse<T>) -> ()) {
 		
-		var request = dataRequest(.put, resourceUri: resourceUri, resourceType: resourceType, additionalHeaders: additionalHeaders)
+		if !setup { callback(ADResponse<T>(setupError)); return }
+		
+		var request = dataRequest(.put, resourceUri: resourceUri!, resourceType: resourceType, additionalHeaders: additionalHeaders)
 		
 		request.httpBody = httpBody
 		
@@ -949,9 +958,11 @@ open class SessionManager {
 	}
 
     // query
-    fileprivate func query<T> (resourceUri: (URL, String), resourceType: ADResourceType, httpBody: Data, callback: @escaping (ADListResponse<T>) -> ()) {
-        
-        var request = dataRequest(.post, resourceUri: resourceUri, resourceType: resourceType, forQuery: true)
+    fileprivate func query<T> (resourceUri: (URL, String)?, resourceType: ADResourceType, httpBody: Data, callback: @escaping (ADListResponse<T>) -> ()) {
+		
+		if !setup { callback(ADListResponse<T>(setupError)); return }
+		
+        var request = dataRequest(.post, resourceUri: resourceUri!, resourceType: resourceType, forQuery: true)
         
         request.httpBody = httpBody
         
@@ -959,9 +970,11 @@ open class SessionManager {
     }
 
 	// execute
-	fileprivate func execute (resourceUri: (URL, String), resourceType: ADResourceType, httpBody: Data, callback: @escaping (Data?) -> ()) {
+	fileprivate func execute (resourceUri: (URL, String)?, resourceType: ADResourceType, httpBody: Data, callback: @escaping (Data?) -> ()) {
 		
-		var request = dataRequest(.post, resourceUri: resourceUri, resourceType: resourceType)
+		if !setup { callback(nil); return }
+		
+		var request = dataRequest(.post, resourceUri: resourceUri!, resourceType: resourceType)
 		
 		request.httpBody = httpBody
 		
@@ -973,7 +986,7 @@ open class SessionManager {
 	
 	// MARK: - Request
 	
-	fileprivate func sendRequest<T> (_ request:URLRequest, callback: @escaping (ADResponse<T>) -> ()) {
+	fileprivate func sendRequest<T> (_ request: URLRequest, callback: @escaping (ADResponse<T>) -> ()) {
 		
 		UIApplication.shared.isNetworkActivityIndicatorVisible = true
 		
@@ -1008,7 +1021,7 @@ open class SessionManager {
 	}
 
 	
-	fileprivate func sendRequest<T> (_ request:URLRequest, resourceType: ADResourceType, callback: @escaping (ADListResponse<T>) -> ()) {
+	fileprivate func sendRequest<T> (_ request: URLRequest, resourceType: ADResourceType, callback: @escaping (ADListResponse<T>) -> ()) {
 		
 		UIApplication.shared.isNetworkActivityIndicatorVisible = true
 		

@@ -50,7 +50,7 @@ public struct ADResponse<T:ADResource> {
 	}
 	
 	public init (_ error: ADError) {
-		self.init(request: nil, response: nil, data: nil, result: .failure(ADError()))
+		self.init(request: nil, response: nil, data: nil, result: .failure(error))
 	}
 }
 
@@ -86,7 +86,7 @@ public struct ADListResponse<T:ADResource> {
 	}
 	
 	public init (_ error: ADError) {
-		self.init(request: nil, response: nil, data: nil, result: .failure(ADError()))
+		self.init(request: nil, response: nil, data: nil, result: .failure(error))
 	}
 }
 

@@ -57,8 +57,6 @@ AzureData.create (collectionWithId: id, inDatabase: databaseId) { r in
     // collection = r.resource
 }
 
-// or
-
 database.create (collectionWithId: id) { r in
     // collection = r.resource
 }
@@ -69,8 +67,6 @@ database.create (collectionWithId: id) { r in
 AzureData.get (collectionsIn: databaseId) { r in
     // collections = r.resource?.items
 }
-
-// or
 
 database.getCollections () { r in
     // collections = r.resource?.items
@@ -83,8 +79,6 @@ AzureData.get (collectionWithId: id, inDatabase: databaseId) { r in
     // collection = r.resource
 }
 
-// or
-
 database.get (collectionWithId: id) { r in
     // collection = r.resource
 }
@@ -95,8 +89,6 @@ database.get (collectionWithId: id) { r in
 AzureData.delete (collection, from: databaseId) { s in
     // s == successfully deleted
 }
-
-// or
 
 database.delete (collection) { s in
     // s == successfully deleted
@@ -123,13 +115,9 @@ AzureData.create (document, inCollection: collectionId, inDatabase: databaseId) 
     // document = r.resource
 }
 
-// or
-
 AzureData.create (document, in: collection) { r in
     // document = r.resource
 }
-
-// or
 
 collection.create (document) { r in
     // document = r.resource
@@ -142,13 +130,9 @@ AzureData.get (documentsAs: ADDocument.self, inCollection: collectionId, inDatab
     // documents = r.resource?.items
 }
 
-// or
-
 AzureData.get (documentsAs: ADDocument.self, in: collection) { r in
     // documents = r.resource?.items
 }
-
-// or
 
 collection.get (documentsAs: ADDocument.self) { r in
     // documents in r.resource?.list
@@ -161,13 +145,9 @@ AzureData.get (documentWithId: id, as: ADDocument.self, inCollection: collection
     // document = r.resource
 }
 
-// or
-
 AzureData.get (documentWithId: id, as: ADDocument.self, in: collection) { r in
     // document = r.resource
 }
-
-// or
 
 collection.get (documentWithResourceId: id: as: ADDocument.self) { r in
     // document = r.resource
@@ -180,13 +160,9 @@ AzureData.delete (document, fromCollection: collectionId, inDatabase: databaseId
     // document = r.resource
 }
 
-// or
-
 AzureData.delete (document, from: collection) { r in
     // document = r.resource
 }
-
-// or
 
 collection.delete (document) { s in
     // s == successfully deleted
@@ -199,13 +175,9 @@ AzureData.replace (document, inCollection: collectionId, inDatabase: databaseId)
     // document = r.resource
 }
 
-// or
-
 AzureData.replace (document, in: collection) { r in
     // document = r.resource
 }
-
-// or
 
 collection.replace (document) { r in
     // document = r.resource
@@ -225,13 +197,9 @@ AzureData.query(documentsIn: collectionId, inDatabase: databaseId, with: query) 
     // documents = r.resource?.items
 }
 
-// or
-
 AzureData.query(documentsIn: collection, with: query) { r in
     // documents = r.resource?.items
 }
-
-// or
 
 collection.query (documentsWith: query) { r in
     // documents in r.resource?.list
@@ -277,8 +245,6 @@ AzureData.replace(attachmentWithId: id, contentType: "image/png", andMediaUrl: u
 }
 
 
-// or upload the media directly:
-
 AzureData.replace(attachmentWithId: id, contentType: "image/png", name: "file.png", with: media, onDocument: documentId, inCollection: collectionId, inDatabase: databaseId) { r in
     // attachment = r.resource
 }
@@ -294,13 +260,9 @@ AzureData.create (storedProcedureWithId: id, andBody: body, inCollection: collec
     // storedProcedure = r.resource
 }
 
-// or
-
 AzureData.create (storedProcedureWithId: id, andBody: body, in: collection) { r in
     // storedProcedure = r.resource
 }
-
-// or
 
 collection.create (storedProcedureWithId: storedProcedureId, andBody: body) { r in
     // storedProcedure = r.resource
@@ -313,13 +275,9 @@ AzureData.get (storedProceduresIn: collectionId, inDatabase: databaseId) { r in
     // storedProcedures = r.resource?.items
 }
 
-// or
-
 AzureData.get (storedProceduresIn: collection) { r in
     // storedProcedures = r.resource?.items
 }
-
-// or
 
 collection.getStoredProcedures () { r in
     // storedProcedures in r.resource?.list
@@ -332,13 +290,9 @@ AzureData.delete (storedProcedure, fromCollection: collectionId, inDatabase: dat
     // s == successfully deleted
 }
 
-// or
-
 AzureData.delete (storedProcedure, from: collection) { s in
     // s == successfully deleted
 }
-
-// or
 
 collection.delete (storedProcedure) { s in
     // s == successfully deleted
@@ -351,13 +305,9 @@ AzureData.replace (storedProcedureWithId: id, andBody: body, inCollection: colle
     // storedProcedure = r.resource
 }
 
-// or
-
 AzureData.replace (storedProcedureWithId: id, andBody: body, in: collection) { r in
     // storedProcedure = r.resource
 }
-
-// or
 
 collection.replace (storedProcedureWithId: storedProcedureId, andBody: body) { r in
     // storedProcedure = r.resource
@@ -370,13 +320,9 @@ AzureData.execute (storedProcedureWithId: id, usingParameters: [], inCollection:
     // r = raw response data
 }
 
-// or
-
 AzureData.execute (storedProcedureWithId: id, usingParameters: [], in: collection) { r in
     // r = raw response data
 }
-
-// or
 
 collection.execute (storedProcedureWithId: storedProcedureId, usingParameters: parameters) { data in
     // data = response from stored procedure
@@ -393,13 +339,9 @@ AzureData.create (userDefinedFunctionWithId: id, andBody: body, inCollection: co
     // userDefinedFunction = r.resource
 }
 
-// or
-
 AzureData.create (userDefinedFunctionWithId: id, andBody: body, in: collection) { r in
     // userDefinedFunction = r.resource
 }
-
-// or
 
 collection.create (userDefinedFunctionWithId: userDefinedFunctionId, andBody: body) { r in
     // userDefinedFunction = r.resource
@@ -412,13 +354,9 @@ AzureData.get (userDefinedFunctionsIn: collectionId, inDatabase: databaseId) { r
     // userDefinedFunction = r.resource?.items
 }
 
-// or
-
 AzureData.get (userDefinedFunctionsIn: collection) { r in
     // userDefinedFunction = r.resource?.items
 }
-
-// or
 
 collection.getUserDefinedFunctions () { r in
     // userDefinedFunctions in r.resource?.list
@@ -431,13 +369,9 @@ AzureData.delete (userDefinedFunction, fromCollection: collectionId, inDatabase:
     // s == successfully deleted
 }
 
-// or
-
 AzureData.delete (userDefinedFunction, from: collection) { s in
     // s == successfully deleted
 }
-
-// or
 
 collection.delete (userDefinedFunction) { s in
     // s == successfully deleted
@@ -450,13 +384,9 @@ AzureData.replace (userDefinedFunctionWithId: id, andBody: body, inCollection: c
     // userDefinedFunction = r.resource
 }
 
-// or
-
 AzureData.replace (userDefinedFunctionWithId: id, andBody: body, from: collection) { r in
     // userDefinedFunction = r.resource
 }
-
-// or
 
 collection.replace (userDefinedFunctionWithId: userDefinedFunctionId, andBody: body) { r in
     // userDefinedFunction = r.resource
@@ -473,13 +403,9 @@ AzureData.create (triggerWithId: id, operation: .all, type: .pre, andBody: body,
     // trigger = r.resource
 }
 
-// or
-
 AzureData.create (triggerWithId: id, operation: .all, type: .pre, andBody: bosy, in: collection) { r in
     // trigger = r.resource
 }
-
-// or
 
 collection.create (triggerWithId: triggerId, andBody: body, operation: operation, type: type) { r in
     // trigger = r.resource
@@ -492,13 +418,9 @@ AzureData.get (triggersIn: collectionId, inDatabase: databaseId) { r in
     // triggers = r.resource?.items
 }
 
-// or
-
 AzureData.get (triggersIn: collection) { r in
     // triggers = r.resource?.items
 }
-
-// or
 
 collection.getTriggers () { r in
     // triggers in r.resource?.list
@@ -511,13 +433,9 @@ AzureData.delete (trigger, fromCollection: collectionId, inDatabase: databaseId)
     // s == successfully deleted
 }
 
-// or
-
 AzureData.delete (trigger, from: collection) { s in
     // s == successfully deleted
 }
-
-// or
 
 collection.delete (trigger) { s in
     // s == successfully deleted
@@ -530,13 +448,9 @@ AzureData.replace (triggerWithId: id, operation: .all, type: .pre, andBody: body
     // trigger = r.resource
 }
 
-// or
-
 AzureData.replace (triggerWithId: id, operation: .all, type: .pre, andBody: body, in: collection) { r in
     // trigger = r.resource
 }
-
-// or
 
 collection.replace (triggerWithId: triggerId, andBody: body, operation: operation, type: type) { r in
     // trigger = r.resource
@@ -553,8 +467,6 @@ AzureData.create (userWithId: id, inDatabase: databaseId) { r in
     // user = r.resource
 }
 
-// or
-
 database.create (userWithId: userId) { r in
     // user = r.resource
 }
@@ -565,8 +477,6 @@ database.create (userWithId: userId) { r in
 AzureData.get (usersIn: databaseId) { r in
     // users = r.resource?.items
 }
-
-// or
 
 database.getUsers () { r in
     // users = r.resource?.items
@@ -579,8 +489,6 @@ AzureData.get (userWithId: id, inDatabase: databaseId) { r in
     // user = r.resource
 }
 
-// or
-
 database.get (userWithId: userId) { r in
     // user = r.resource
 }
@@ -592,8 +500,6 @@ AzureData.delete (user, fromDatabase: databaseId) { s in
     // s == successfully deleted
 }
 
-// or
-
 database.delete (user: user) { s in
     // s == successfully deleted
 }
@@ -604,8 +510,6 @@ database.delete (user: user) { s in
 AzureData.replace (userWithId: id, with: newUserId, inDatabase: databaseId) { r in
     // user = r.resource
 }
-
-// or
 
 database.replace (userWithId: userId) { r in
     // user = r.resource

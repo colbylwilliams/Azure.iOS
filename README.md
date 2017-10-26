@@ -5,9 +5,7 @@
 | AzureData  | ![Build status][app-data-build-status] |
 
 
-# API
-
-The following usage examples are abbreviated, complete examples can be found in the [Wiki](/wiki/DocumentDB)
+# Usage
 
 
 ## Setup

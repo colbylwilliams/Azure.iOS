@@ -56,7 +56,9 @@ AzureData.delete (database) { s in
 AzureData.create (collectionWithId: id, inDatabase: databaseId) { r in
     // collection = r.resource
 }
+
 // or
+
 database.create (collectionWithId: id) { r in
     // collection = r.resource
 }
@@ -67,7 +69,9 @@ database.create (collectionWithId: id) { r in
 AzureData.get (collectionsIn: databaseId) { r in
     // collections = r.resource?.items
 }
+
 // or
+
 database.getCollections () { r in
     // collections = r.resource?.items
 }
@@ -78,7 +82,9 @@ database.getCollections () { r in
 AzureData.get (collectionWithId: id, inDatabase: databaseId) { r in
     // collection = r.resource
 }
+
 // or
+
 database.get (collectionWithId: id) { r in
     // collection = r.resource
 }
@@ -89,7 +95,9 @@ database.get (collectionWithId: id) { r in
 AzureData.delete (collection, from: databaseId) { s in
     // s == successfully deleted
 }
+
 // or
+
 database.delete (collection) { s in
     // s == successfully deleted
 }
@@ -107,18 +115,22 @@ database.delete (collection) { s in
 #### Create
 ```swift
 let newDocument = ADDocument()
-			
+            
 newDocument["aNumber"] = 1_500_000
 newDocument["aString"] = "Hello!"
-			
+            
 AzureData.create (document, inCollection: collectionId, inDatabase: databaseId) { r in
     // document = r.resource
 }
+
 // or
+
 AzureData.create (document, in: collection) { r in
     // document = r.resource
 }
+
 // or
+
 collection.create (document) { r in
     // document = r.resource
 }
@@ -129,11 +141,15 @@ collection.create (document) { r in
 AzureData.get (documentsAs: ADDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
     // documents = r.resource?.items
 }
+
 // or
+
 AzureData.get (documentsAs: ADDocument.self, in: collection) { r in
     // documents = r.resource?.items
 }
+
 // or
+
 collection.get (documentsAs: ADDocument.self) { r in
     // documents in r.resource?.list
 }
@@ -144,11 +160,15 @@ collection.get (documentsAs: ADDocument.self) { r in
 AzureData.get (documentWithId: id, as: ADDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
     // document = r.resource
 }
+
 // or
+
 AzureData.get (documentWithId: id, as: ADDocument.self, in: collection) { r in
     // document = r.resource
 }
+
 // or
+
 collection.get (documentWithResourceId: id: as: ADDocument.self) { r in
     // document = r.resource
 }
@@ -159,11 +179,15 @@ collection.get (documentWithResourceId: id: as: ADDocument.self) { r in
 AzureData.delete (document, fromCollection: collectionId, inDatabase: databaseId) { r in
     // document = r.resource
 }
+
 // or
+
 AzureData.delete (document, from: collection) { r in
     // document = r.resource
 }
+
 // or
+
 collection.delete (document) { s in
     // s == successfully deleted
 }
@@ -174,11 +198,15 @@ collection.delete (document) { s in
 AzureData.replace (document, inCollection: collectionId, inDatabase: databaseId) { r in
     // document = r.resource
 }
+
 // or
+
 AzureData.replace (document, in: collection) { r in
     // document = r.resource
 }
+
 // or
+
 collection.replace (document) { r in
     // document = r.resource
 }
@@ -196,11 +224,15 @@ let query = ADQuery.select("firstName", "lastName", ...)
 AzureData.query(documentsIn: collectionId, inDatabase: databaseId, with: query) { r in
     // documents = r.resource?.items
 }
+
 // or
+
 AzureData.query(documentsIn: collection, with: query) { r in
     // documents = r.resource?.items
 }
+
 // or
+
 collection.query (documentsWith: query) { r in
     // documents in r.resource?.list
 }
@@ -214,26 +246,26 @@ collection.query (documentsWith: query) { r in
 ```swift
 // link to existing media asset:
 AzureData.create (attachmentWithId: id, contentType: "image/png", andMediaUrl: url, onDocument: documentId, inCollection: collectionId, inDatabase: databaseId) { r in
-	// attachment = r.resource
+    // attachment = r.resource
 }
 
 //or upload the media directly:
 AzureData.create (attachmentWithId: id, contentType: "image/png", name: "file.png", with: media, onDocument: documentId, inCollection: collectionId, inDatabase: databaseId) { r in
-	// attachment = r.resource
+    // attachment = r.resource
 }
 ```
 
 #### List
 ```swift
 AzureData.get (attachmentsOn: documentId, inCollection: collectionId, inDatabase: databaseId) { r in
-	// attachments = r.resource
+    // attachments = r.resource
 }
 ```
 
 #### Delete
 ```swift
 AzureData.delete (attachment, onDocument: documentId, inCollection: collectionId, inDatabase: databaseId) { s in
-	// s == successfully deleted
+    // s == successfully deleted
 }
 ```
 
@@ -241,12 +273,14 @@ AzureData.delete (attachment, onDocument: documentId, inCollection: collectionId
 ```swift
 // link to existing media asset:
 AzureData.replace(attachmentWithId: id, contentType: "image/png", andMediaUrl: url, onDocument: documentId, inCollection: collectionId, inDatabase: databaseId) { r in
-	// attachment = r.resource
+    // attachment = r.resource
 }
 
+
 // or upload the media directly:
+
 AzureData.replace(attachmentWithId: id, contentType: "image/png", name: "file.png", with: media, onDocument: documentId, inCollection: collectionId, inDatabase: databaseId) { r in
-	// attachment = r.resource
+    // attachment = r.resource
 }
 ```
 
@@ -257,13 +291,17 @@ AzureData.replace(attachmentWithId: id, contentType: "image/png", name: "file.pn
 #### Create
 ```swift
 AzureData.create (storedProcedureWithId: id, andBody: body, inCollection: collectionId, inDatabase: databaseId) { r in
-	// storedProcedure = r.resource
+    // storedProcedure = r.resource
 }
 
-AzureData.create (storedProcedureWithId: id, andBody: body, in: collection) { r in
-	// storedProcedure = r.resource
-}
 // or
+
+AzureData.create (storedProcedureWithId: id, andBody: body, in: collection) { r in
+    // storedProcedure = r.resource
+}
+
+// or
+
 collection.create (storedProcedureWithId: storedProcedureId, andBody: body) { r in
     // storedProcedure = r.resource
 }
@@ -272,13 +310,17 @@ collection.create (storedProcedureWithId: storedProcedureId, andBody: body) { r 
 #### List
 ```swift
 AzureData.get (storedProceduresIn: collectionId, inDatabase: databaseId) { r in
-	// storedProcedures = r.resource?.items
+    // storedProcedures = r.resource?.items
 }
 
-AzureData.get (storedProceduresIn: collection) { r in
-	// storedProcedures = r.resource?.items
-}
 // or
+
+AzureData.get (storedProceduresIn: collection) { r in
+    // storedProcedures = r.resource?.items
+}
+
+// or
+
 collection.getStoredProcedures () { r in
     // storedProcedures in r.resource?.list
 }
@@ -287,13 +329,17 @@ collection.getStoredProcedures () { r in
 #### Delete
 ```swift
 AzureData.delete (storedProcedure, fromCollection: collectionId, inDatabase: databaseId) { s in
-	// s == successfully deleted
+    // s == successfully deleted
 }
 
-AzureData.delete (storedProcedure, from: collection) { s in
-	// s == successfully deleted
-}
 // or
+
+AzureData.delete (storedProcedure, from: collection) { s in
+    // s == successfully deleted
+}
+
+// or
+
 collection.delete (storedProcedure) { s in
     // s == successfully deleted
 }
@@ -302,13 +348,17 @@ collection.delete (storedProcedure) { s in
 #### Replace
 ```swift
 AzureData.replace (storedProcedureWithId: id, andBody: body, inCollection: collectionId, inDatabase: databaseId) { r in
-	// storedProcedure = r.resource
+    // storedProcedure = r.resource
 }
 
-AzureData.replace (storedProcedureWithId: id, andBody: body, in: collection) { r in
-	// storedProcedure = r.resource
-}
 // or
+
+AzureData.replace (storedProcedureWithId: id, andBody: body, in: collection) { r in
+    // storedProcedure = r.resource
+}
+
+// or
+
 collection.replace (storedProcedureWithId: storedProcedureId, andBody: body) { r in
     // storedProcedure = r.resource
 }
@@ -317,13 +367,17 @@ collection.replace (storedProcedureWithId: storedProcedureId, andBody: body) { r
 #### Execute
 ```swift
 AzureData.execute (storedProcedureWithId: id, usingParameters: [], inCollection: collectionId, inDatabase: databaseId) { r in
-	// r = raw response data
+    // r = raw response data
 }
 
-AzureData.execute (storedProcedureWithId: id, usingParameters: [], in: collection) { r in
-	// r = raw response data
-}
 // or
+
+AzureData.execute (storedProcedureWithId: id, usingParameters: [], in: collection) { r in
+    // r = raw response data
+}
+
+// or
+
 collection.execute (storedProcedureWithId: storedProcedureId, usingParameters: parameters) { data in
     // data = response from stored procedure
 }
@@ -336,13 +390,17 @@ collection.execute (storedProcedureWithId: storedProcedureId, usingParameters: p
 #### Create
 ```swift
 AzureData.create (userDefinedFunctionWithId: id, andBody: body, inCollection: collectionId, inDatabase: databaseId) { r in
-	// userDefinedFunction = r.resource
+    // userDefinedFunction = r.resource
 }
 
-AzureData.create (userDefinedFunctionWithId: id, andBody: body, in: collection) { r in
-	// userDefinedFunction = r.resource
-}
 // or
+
+AzureData.create (userDefinedFunctionWithId: id, andBody: body, in: collection) { r in
+    // userDefinedFunction = r.resource
+}
+
+// or
+
 collection.create (userDefinedFunctionWithId: userDefinedFunctionId, andBody: body) { r in
     // userDefinedFunction = r.resource
 }
@@ -351,13 +409,17 @@ collection.create (userDefinedFunctionWithId: userDefinedFunctionId, andBody: bo
 #### List
 ```swift
 AzureData.get (userDefinedFunctionsIn: collectionId, inDatabase: databaseId) { r in
-	// userDefinedFunction = r.resource?.items
+    // userDefinedFunction = r.resource?.items
 }
 
-AzureData.get (userDefinedFunctionsIn: collection) { r in
-	// userDefinedFunction = r.resource?.items
-}
 // or
+
+AzureData.get (userDefinedFunctionsIn: collection) { r in
+    // userDefinedFunction = r.resource?.items
+}
+
+// or
+
 collection.getUserDefinedFunctions () { r in
     // userDefinedFunctions in r.resource?.list
 }
@@ -366,13 +428,17 @@ collection.getUserDefinedFunctions () { r in
 #### Delete
 ```swift
 AzureData.delete (userDefinedFunction, fromCollection: collectionId, inDatabase: databaseId) { s in
-	// s == successfully deleted
+    // s == successfully deleted
 }
 
-AzureData.delete (userDefinedFunction, from: collection) { s in
-	// s == successfully deleted
-}
 // or
+
+AzureData.delete (userDefinedFunction, from: collection) { s in
+    // s == successfully deleted
+}
+
+// or
+
 collection.delete (userDefinedFunction) { s in
     // s == successfully deleted
 }
@@ -381,13 +447,17 @@ collection.delete (userDefinedFunction) { s in
 #### Replace
 ```swift
 AzureData.replace (userDefinedFunctionWithId: id, andBody: body, inCollection: collectionId, inDatabase: databaseId) { r in
-	// userDefinedFunction = r.resource
+    // userDefinedFunction = r.resource
 }
 
-AzureData.replace (userDefinedFunctionWithId: id, andBody: body, from: collection) { r in
-	// userDefinedFunction = r.resource
-}
 // or
+
+AzureData.replace (userDefinedFunctionWithId: id, andBody: body, from: collection) { r in
+    // userDefinedFunction = r.resource
+}
+
+// or
+
 collection.replace (userDefinedFunctionWithId: userDefinedFunctionId, andBody: body) { r in
     // userDefinedFunction = r.resource
 }
@@ -400,13 +470,17 @@ collection.replace (userDefinedFunctionWithId: userDefinedFunctionId, andBody: b
 #### Create
 ```swift
 AzureData.create (triggerWithId: id, operation: .all, type: .pre, andBody: body, inCollection: collectionId, inDatabase: databaseId) { r in
-	// trigger = r.resource
+    // trigger = r.resource
 }
 
-AzureData.create (triggerWithId: id, operation: .all, type: .pre, andBody: bosy, in: collection) { r in
-	// trigger = r.resource
-}
 // or
+
+AzureData.create (triggerWithId: id, operation: .all, type: .pre, andBody: bosy, in: collection) { r in
+    // trigger = r.resource
+}
+
+// or
+
 collection.create (triggerWithId: triggerId, andBody: body, operation: operation, type: type) { r in
     // trigger = r.resource
 }
@@ -415,13 +489,17 @@ collection.create (triggerWithId: triggerId, andBody: body, operation: operation
 #### List
 ```swift
 AzureData.get (triggersIn: collectionId, inDatabase: databaseId) { r in
-	// triggers = r.resource?.items
+    // triggers = r.resource?.items
 }
 
-AzureData.get (triggersIn: collection) { r in
-	// triggers = r.resource?.items
-}
 // or
+
+AzureData.get (triggersIn: collection) { r in
+    // triggers = r.resource?.items
+}
+
+// or
+
 collection.getTriggers () { r in
     // triggers in r.resource?.list
 }
@@ -430,13 +508,17 @@ collection.getTriggers () { r in
 #### Delete
 ```swift
 AzureData.delete (trigger, fromCollection: collectionId, inDatabase: databaseId) { s in
-	// s == successfully deleted
+    // s == successfully deleted
 }
 
-AzureData.delete (trigger, from: collection) { s in
-	// s == successfully deleted
-}
 // or
+
+AzureData.delete (trigger, from: collection) { s in
+    // s == successfully deleted
+}
+
+// or
+
 collection.delete (trigger) { s in
     // s == successfully deleted
 }
@@ -445,13 +527,17 @@ collection.delete (trigger) { s in
 #### Replace
 ```swift
 AzureData.replace (triggerWithId: id, operation: .all, type: .pre, andBody: body, inCollection: collectionId, inDatabase: databaseId) { r in
-	// trigger = r.resource
+    // trigger = r.resource
 }
 
-AzureData.replace (triggerWithId: id, operation: .all, type: .pre, andBody: body, in: collection) { r in
-	// trigger = r.resource
-}
 // or
+
+AzureData.replace (triggerWithId: id, operation: .all, type: .pre, andBody: body, in: collection) { r in
+    // trigger = r.resource
+}
+
+// or
+
 collection.replace (triggerWithId: triggerId, andBody: body, operation: operation, type: type) { r in
     // trigger = r.resource
 }
@@ -459,14 +545,16 @@ collection.replace (triggerWithId: triggerId, andBody: body, operation: operatio
 
 
 
-## Users	
+## Users    
 
 #### Create
 ```swift
 AzureData.create (userWithId: id, inDatabase: databaseId) { r in
-	// user = r.resource
+    // user = r.resource
 }
+
 // or
+
 database.create (userWithId: userId) { r in
     // user = r.resource
 }
@@ -475,9 +563,11 @@ database.create (userWithId: userId) { r in
 #### List
 ```swift
 AzureData.get (usersIn: databaseId) { r in
-	// users = r.resource?.items
+    // users = r.resource?.items
 }
+
 // or
+
 database.getUsers () { r in
     // users = r.resource?.items
 }
@@ -486,9 +576,11 @@ database.getUsers () { r in
 #### Get
 ```swift
 AzureData.get (userWithId: id, inDatabase: databaseId) { r in
-	// user = r.resource
+    // user = r.resource
 }
+
 // or
+
 database.get (userWithId: userId) { r in
     // user = r.resource
 }
@@ -497,9 +589,11 @@ database.get (userWithId: userId) { r in
 #### Delete
 ```swift
 AzureData.delete (user, fromDatabase: databaseId) { s in
-	// s == successfully deleted
+    // s == successfully deleted
 }
+
 // or
+
 database.delete (user: user) { s in
     // s == successfully deleted
 }
@@ -508,9 +602,11 @@ database.delete (user: user) { s in
 #### Replace
 ```swift
 AzureData.replace (userWithId: id, with: newUserId, inDatabase: databaseId) { r in
-	// user = r.resource
+    // user = r.resource
 }
+
 // or
+
 database.replace (userWithId: userId) { r in
     // user = r.resource
 }
@@ -518,40 +614,40 @@ database.replace (userWithId: userId) { r in
 
 
 
-## Permissions	
+## Permissions  
 
 #### Create
 ```swift
 AzureData.create (permissionWithId: id, mode: .read, in: resource, forUser: userId, inDatabase: databaseId) { r in
-	// permission = r.resource
+    // permission = r.resource
 }
 ```
 
 #### List
 ```swift
 AzureData.get (permissionsFor: userId, inDatabase: databaseId) { r in
-	// permissions = r.resource
+    // permissions = r.resource
 }
 ```
 
 #### Get
 ```swift
 AzureData.get (permissionWithId: id, forUser: userId, inDatabase: databaseId) { r in
-	// permission = r.resource
+    // permission = r.resource
 }
 ```
 
 #### Delete
 ```swift
 AzureData.delete (permission, forUser: userId, inDatabase: databaseId) { s in
-	// s == successfully deleted
+    // s == successfully deleted
 }
 ```
 
 #### Replace
 ```swift
 AzureData.replace (permissionWithId: id, mode: .read, in: resource, forUser: userId, inDatabase: databaseId) { r in
-	// permission = r.resource
+    // permission = r.resource
 }
 ```
 
@@ -569,7 +665,7 @@ AzureData.offers() { r in
 #### Get
 ```swift
 AzureData.get (offerWithId: id) { r in
-	// offer = r.resource
+    // offer = r.resource
 }
 ```
 

@@ -18,12 +18,11 @@ public func setup (_ name: String, key: String, keyType: ADTokenType = .master, 
 
 
 
-
-// MARK: - Database
+// MARK: - Databases
 
 // create
-public func createDatabase (_ databaseId: String, callback: @escaping (ADResponse<ADDatabase>) -> ()) {
-	return SessionManager.default.createDatabase(databaseId, callback: callback)
+public func create (databaseWithId databaseId: String, callback: @escaping (ADResponse<ADDatabase>) -> ()) {
+	return SessionManager.default.create(databaseWithId: databaseId, callback: callback)
 }
 
 // list
@@ -32,8 +31,8 @@ public func databases (callback: @escaping (ADListResponse<ADDatabase>) -> ()) {
 }
 
 // get
-public func database (_ databaseId: String, callback: @escaping (ADResponse<ADDatabase>) -> ()) {
-	return SessionManager.default.database(databaseId, callback: callback)
+public func get (databaseWithId databaseId: String, callback: @escaping (ADResponse<ADDatabase>) -> ()) {
+	return SessionManager.default.get(databaseWithId: databaseId, callback: callback)
 }
 
 // delete
@@ -43,65 +42,94 @@ public func delete (_ resource: ADDatabase, callback: @escaping (Bool) -> ()) {
 
 
 
-
-// MARK: - Collection
-
-//create
-public func createCollection (_ databaseId: String, collectionId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
-	return SessionManager.default.createCollection(databaseId, collectionId: collectionId, callback: callback)
-}
-
-// list
-public func collections (_ databaseId: String, callback: @escaping (ADListResponse<ADCollection>) -> ()) {
-	return SessionManager.default.collections(databaseId, callback: callback)
-}
-
-// get
-public func collection (_ databaseId: String, collectionId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
-	return SessionManager.default.collection(databaseId, collectionId: collectionId, callback: callback)
-}
-
-//delete
-public func delete (_ resource: ADCollection, databaseId: String, callback: @escaping (Bool) -> ()) {
-	return SessionManager.default.delete(resource, databaseId: databaseId, callback: callback)
-}
-
-// replace
-
-
-
-
-// MARK: - Document
+// MARK: - Collections
 
 // create
-public func createDocument<T: ADDocument> (_ databaseId: String, collectionId: String, document: T, callback: @escaping (ADResponse<T>) -> ()) {
-	return SessionManager.default.createDocument(databaseId, collectionId: collectionId, document: document, callback: callback)
+public func create (collectionWithId collectionId: String, in databaseId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
+	return SessionManager.default.create(collectionWithId: collectionId, in: databaseId, callback: callback)
 }
 
 // list
-public func documents<T: ADDocument> (_ documentType:T.Type, databaseId: String, collectionId: String, callback: @escaping (ADListResponse<T>) -> ()) {
-	return SessionManager.default.documents(documentType, databaseId: databaseId, collectionId: collectionId, callback: callback)
+public func get (collectionsIn databaseId: String, callback: @escaping (ADListResponse<ADCollection>) -> ()) {
+	return SessionManager.default.get(collectionsIn: databaseId, callback: callback)
 }
 
 // get
-public func document<T: ADDocument> (_ documentType:T.Type, databaseId: String, collectionId: String, documentId: String, callback: @escaping (ADResponse<T>) -> ()) {
-	return SessionManager.default.document(documentType, databaseId: databaseId, collectionId: collectionId, documentId: documentId, callback: callback)
+public func get (collectionWithId collectionId: String, in databaseId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
+	return SessionManager.default.get(collectionWithId: collectionId, in: databaseId, callback: callback)
 }
 
 // delete
-public func delete (_ resource: ADDocument, databaseId: String, collectionId: String, callback: @escaping (Bool) -> ()) {
-	return SessionManager.default.delete(resource, databaseId: databaseId, collectionId: collectionId, callback: callback)
+public func delete (_ resource: ADCollection, from databaseId: String, callback: @escaping (Bool) -> ()) {
+	return SessionManager.default.delete(resource, from: databaseId, callback: callback)
 }
 
 // replace
-public func replace<T: ADDocument> (_ databaseId: String, collectionId: String, document: T, callback: @escaping (ADResponse<T>) -> ()) {
-	return SessionManager.default.replace(databaseId, collectionId: collectionId, document: document, callback: callback)
+
+
+
+
+// MARK: - Documents
+
+// create
+public func create<T: ADDocument> (_ document: T, inCollection collectionId: String, in databaseId: String, callback: @escaping (ADResponse<T>) -> ()) {
+	return SessionManager.default.create(document, inCollection: collectionId, in: databaseId, callback: callback)
 }
 
-// query
-public func query (_ databaseId: String, collectionId: String, query: ADQuery, callback: @escaping (ADListResponse<ADDocument>) -> ()) {
-	return SessionManager.default.query(databaseId, collectionId: collectionId, query: query, callback: callback)
+public func create<T: ADDocument> (_ document: T, in collection: ADCollection, callback: @escaping (ADResponse<T>) -> ()) {
+	return SessionManager.default.create(document, in: collection, callback: callback)
 }
+
+
+// list
+public func get<T: ADDocument> (documentsAs documentType: T.Type, inCollection collectionId: String, in databaseId: String, callback: @escaping (ADListResponse<T>) -> ()) {
+	return SessionManager.default.get(documentsAs: documentType, inCollection: collectionId, in: databaseId, callback: callback)
+}
+
+public func get<T: ADDocument> (documentsAs documentType: T.Type, in collection: ADCollection, callback: @escaping (ADListResponse<T>) -> ()) {
+	return SessionManager.default.get(documentsAs: documentType, in: collection, callback: callback)
+}
+
+
+// get
+public func get<T: ADDocument> (documentWithId documentId: String, as documentType:T.Type, inCollection collectionId: String, in databaseId: String, callback: @escaping (ADResponse<T>) -> ()) {
+	return SessionManager.default.get(documentWithId: documentId, as: documentType, inCollection: collectionId, in: databaseId, callback: callback)
+}
+
+public func get<T: ADDocument> (documentWithId resourceId: String, as documentType:T.Type, in collection: ADCollection, callback: @escaping (ADResponse<T>) -> ()) {
+	return SessionManager.default.get(documentWithId: resourceId, as: documentType, in: collection, callback: callback)
+}
+
+
+// delete
+public func delete (_ document: ADDocument, fromCollection collectionId: String, in databaseId: String, callback: @escaping (Bool) -> ()) {
+	return SessionManager.default.delete(document, fromCollection: collectionId, in: databaseId, callback: callback)
+}
+
+public func delete (_ document: ADDocument, from collection: ADCollection, callback: @escaping (Bool) -> ()) {
+	return SessionManager.default.delete(document, from: collection, callback: callback)
+}
+
+
+// replace
+public func replace<T: ADDocument> (_ document: T, inCollection collectionId: String, in databaseId: String, callback: @escaping (ADResponse<T>) -> ()) {
+	return SessionManager.default.replace(document, inCollection: collectionId, in: databaseId, callback: callback)
+}
+
+public func replace<T: ADDocument> (_ document: T, in collection: ADCollection, callback: @escaping (ADResponse<T>) -> ()) {
+	return SessionManager.default.replace(document, in: collection, callback: callback)
+}
+
+
+// query
+public func query (documentsIn collectionId: String, in databaseId: String, with query: ADQuery, callback: @escaping (ADListResponse<ADDocument>) -> ()) {
+	return SessionManager.default.query(documentsIn: collectionId, in: databaseId, with: query, callback: callback)
+}
+
+public func query (documentsIn collection: ADCollection, with query: ADQuery, callback: @escaping (ADListResponse<ADDocument>) -> ()) {
+	return SessionManager.default.query(documentsIn: collection, with: query, callback: callback)
+}
+
 
 
 
@@ -128,11 +156,11 @@ public func delete (_ resource: ADAttachment, databaseId: String, collectionId: 
 
 // replace
 public func replace(_ databaseId: String, collectionId: String, documentId: String, attachmentId: String, contentType: String, mediaUrl: URL, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
-    SessionManager.default.replace(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId, contentType: contentType, mediaUrl: mediaUrl, callback: callback)
+    return SessionManager.default.replace(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId, contentType: contentType, mediaUrl: mediaUrl, callback: callback)
 }
 
 public func replace(_ databaseId: String, collectionId: String, documentId: String, attachmentId: String, contentType: String, mediaName: String, media:Data, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
-    SessionManager.default.replace(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId, contentType: contentType, mediaName: mediaName, media: media, callback: callback)
+    return SessionManager.default.replace(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId, contentType: contentType, mediaName: mediaName, media: media, callback: callback)
 }
 
 

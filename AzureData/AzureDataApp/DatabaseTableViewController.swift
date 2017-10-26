@@ -95,7 +95,7 @@ class DatabaseTableViewController: UITableViewController {
 		alertController.addAction(UIAlertAction(title: "Create", style: .default) { a in
 			
 			if let name = alertController.textFields?.first?.text {
-				AzureData.createDatabase(name) { r in
+				AzureData.create(databaseWithId: name) { r in
 					if let database = r.resource {
 						self.databases.append(database)
 						self.tableView.reloadData()
@@ -139,7 +139,7 @@ class DatabaseTableViewController: UITableViewController {
 	override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
 			if self.databasesSelected {
-				AzureData.database(self.databases[indexPath.row].id) { r in
+				AzureData.get(databaseWithId: self.databases[indexPath.row].id) { r in
 					debugPrint(r.result)
 					r.resource?.printLog()
 					tableView.reloadRows(at: [indexPath], with: .automatic)

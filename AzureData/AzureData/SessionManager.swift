@@ -158,7 +158,7 @@ open class SessionManager {
 	// MARK: - Databases
 
 	// create
-	public func createDatabase (_ databaseId: String, callback: @escaping (ADResponse<ADDatabase>) -> ()) {
+	public func create (databaseWithId databaseId: String, callback: @escaping (ADResponse<ADDatabase>) -> ()) {
 		
 		let resourceUri = baseUri.database()
 		
@@ -181,7 +181,7 @@ open class SessionManager {
 	}
 
 	// get
-	public func database (_ databaseId: String, callback: @escaping (ADResponse<ADDatabase>) -> ()) {
+	public func get (databaseWithId databaseId: String, callback: @escaping (ADResponse<ADDatabase>) -> ()) {
 		
 		let resourceUri = baseUri.database(databaseId)
 		
@@ -201,7 +201,7 @@ open class SessionManager {
 	// MARK: - Collections
 	
 	// create
-	public func createCollection (_ databaseId: String, collectionId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
+	public func create (collectionWithId collectionId: String, in databaseId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
 		
 		let resourceUri = baseUri.collection(databaseId)
 		
@@ -216,7 +216,7 @@ open class SessionManager {
 	}
 
 	// list
-	public func collections (_ databaseId: String, callback: @escaping (ADListResponse<ADCollection>) -> ()) {
+	public func get (collectionsIn databaseId: String, callback: @escaping (ADListResponse<ADCollection>) -> ()) {
 		
 		let resourceUri = baseUri.collection(databaseId)
 		
@@ -224,7 +224,7 @@ open class SessionManager {
 	}
 
 	// get
-	public func collection (_ databaseId: String, collectionId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
+	public func get (collectionWithId collectionId: String, in databaseId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
 		
 		let resourceUri = baseUri.collection(databaseId, collectionId: collectionId)
 		
@@ -232,7 +232,7 @@ open class SessionManager {
 	}
 
 	// delete
-	public func delete (_ resource: ADCollection, databaseId: String, callback: @escaping (Bool) -> ()) {
+	public func delete (_ resource: ADCollection, from databaseId: String, callback: @escaping (Bool) -> ()) {
 		
 		let resourceUri = baseUri.collection(databaseId, collectionId: resource.id)
 		
@@ -247,7 +247,7 @@ open class SessionManager {
 	// MARK: - Documents
 	
 	// create
-	public func createDocument<T: ADDocument> (_ databaseId: String, collectionId: String, document: T, callback: @escaping (ADResponse<T>) -> ()) {
+	public func create<T: ADDocument> (_ document: T, inCollection collectionId: String, in databaseId: String, callback: @escaping (ADResponse<T>) -> ()) {
 		
 		let resourceUri = baseUri.document(inDatabase: databaseId, inCollection: collectionId)
 		
@@ -261,9 +261,9 @@ open class SessionManager {
 		return create(resourceUri: resourceUri, resourceType: .document, httpBody: httpBody, callback: callback)
 	}
 
-    public func createDocument<T: ADDocument> (_ document: T, atSelfLink selfLink: String, callback: @escaping (ADResponse<T>) -> ()) {
+	public func create<T: ADDocument> (_ document: T, in collection: ADCollection, callback: @escaping (ADResponse<T>) -> ()) {
         
-        let resourceUri = baseUri.document(atLink: selfLink)
+        let resourceUri = baseUri.document(atLink: collection.selfLink!)
         
         let body = document.dictionary
         
@@ -276,53 +276,53 @@ open class SessionManager {
     }
 
 	// list
-	public func documents<T: ADDocument> (_ documentType:T.Type, databaseId: String, collectionId: String, callback: @escaping (ADListResponse<T>) -> ()) {
+	public func get<T: ADDocument> (documentsAs documentType:T.Type, inCollection collectionId: String, in databaseId: String, callback: @escaping (ADListResponse<T>) -> ()) {
 		
 		let resourceUri = baseUri.document(inDatabase: databaseId, inCollection: collectionId)
 		
 		return resources(resourceUri: resourceUri, resourceType: .document, callback: callback)
 	}
 
-    public func documents<T: ADDocument> (atSelfLink selfLink: String, as documentType:T.Type, callback: @escaping (ADListResponse<T>) -> ()) {
+	public func get<T: ADDocument> (documentsAs documentType:T.Type, in collection: ADCollection, callback: @escaping (ADListResponse<T>) -> ()) {
         
-        let resourceUri = baseUri.document(atLink: selfLink)
+        let resourceUri = baseUri.document(atLink: collection.selfLink!)
         
         return resources(resourceUri: resourceUri, resourceType: .document, callback: callback)
     }
 
 	// get
-    public func document<T: ADDocument> (_ documentType:T.Type, databaseId: String, collectionId: String, documentId: String, callback: @escaping (ADResponse<T>) -> ()) {
+	public func get<T: ADDocument> (documentWithId documentId: String, as documentType:T.Type, inCollection collectionId: String, in databaseId: String, callback: @escaping (ADResponse<T>) -> ()) {
         
         let resourceUri = baseUri.document(inDatabase: databaseId, inCollection: collectionId, withId: documentId)
         
         return resource(resourceUri: resourceUri, resourceType: .document, callback: callback)
     }
 
-    public func document<T: ADDocument> (withResourceId resourceId: String, atSelfLink selfLink: String, as documentType:T.Type, callback: @escaping (ADResponse<T>) -> ()) {
+	public func get<T: ADDocument> (documentWithId resourceId: String, as documentType:T.Type, in collection: ADCollection, callback: @escaping (ADResponse<T>) -> ()) {
         
-        let resourceUri = baseUri.document(atLink: selfLink, withResourceId: resourceId)
+        let resourceUri = baseUri.document(atLink: collection.selfLink!, withResourceId: resourceId)
         
         return resource(resourceUri: resourceUri, resourceType: .document, callback: callback)
     }
 
 	// delete
-	public func delete (_ resource: ADDocument, databaseId: String, collectionId: String, callback: @escaping (Bool) -> ()) {
+	public func delete (_ document: ADDocument, fromCollection collectionId: String, in databaseId: String, callback: @escaping (Bool) -> ()) {
 		
-		let resourceUri = baseUri.document(inDatabase: databaseId, inCollection: collectionId, withId: resource.id)
+		let resourceUri = baseUri.document(inDatabase: databaseId, inCollection: collectionId, withId: document.id)
 		
 		return delete(resourceUri: resourceUri, resourceType: .document, callback: callback)
 	}
 
-    public func delete (_ resource: ADDocument, atSelfLink selfLink:String, callback: @escaping (Bool) -> ()) {
+	public func delete (_ document: ADDocument, from collection: ADCollection, callback: @escaping (Bool) -> ()) {
         
-        let resourceUri = baseUri.document(atLink: selfLink, withResourceId: resource.resourceId)
+        let resourceUri = baseUri.document(atLink: collection.selfLink!, withResourceId: document.resourceId)
         
         return delete(resourceUri: resourceUri, resourceType: .document, callback: callback)
     }
 
     
 	// replace
-	public func replace<T: ADDocument> (_ databaseId: String, collectionId: String, document: T, callback: @escaping (ADResponse<T>) -> ()) {
+	public func replace<T: ADDocument> (_ document: T, inCollection collectionId: String, in databaseId: String, callback: @escaping (ADResponse<T>) -> ()) {
 		
 		let resourceUri = baseUri.document(inDatabase: databaseId, inCollection: collectionId, withId: document.id)
 		
@@ -336,11 +336,11 @@ open class SessionManager {
 		return replace(resourceUri: resourceUri, resourceType: .document, httpBody: httpBody, callback: callback)
 	}
 
-    public func replace<T: ADDocument> (_ resource: T, atSelfLink selfLink: String, callback: @escaping (ADResponse<T>) -> ()) {
+	public func replace<T: ADDocument> (_ document: T, in collection: ADCollection, callback: @escaping (ADResponse<T>) -> ()) {
         
-        let resourceUri = baseUri.document(atLink: selfLink, withResourceId: resource.resourceId)
+        let resourceUri = baseUri.document(atLink: collection.selfLink!, withResourceId: document.resourceId)
         
-        let body = resource.dictionary
+        let body = document.dictionary
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
             DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
@@ -352,7 +352,7 @@ open class SessionManager {
 
     
 	// query
-    public func query (_ databaseId: String, collectionId: String, query:ADQuery, callback: @escaping (ADListResponse<ADDocument>) -> ()) {
+    public func query (documentsIn collectionId: String, in databaseId: String, with query: ADQuery, callback: @escaping (ADListResponse<ADDocument>) -> ()) {
 
         let resourceUri = baseUri.document(inDatabase: databaseId, inCollection: collectionId)
         
@@ -370,9 +370,9 @@ open class SessionManager {
         return self.query(resourceUri: resourceUri, resourceType: .document, httpBody: httpBody, callback: callback)
     }
 
-    public func query (_ query: ADQuery, atSelfLink selfLink: String, callback: @escaping (ADListResponse<ADDocument>) -> ()) {
+	public func query (documentsIn collection: ADCollection, with query: ADQuery, callback: @escaping (ADListResponse<ADDocument>) -> ()) {
         
-        let resourceUri = baseUri.document(atLink: selfLink)
+        let resourceUri = baseUri.document(atLink: collection.selfLink!)
         
         query.printQuery()
         

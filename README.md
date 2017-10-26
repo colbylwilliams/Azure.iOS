@@ -21,7 +21,7 @@ AzureData.setup("cosmosDb name", key: "read-write key", keyType: .master)
 
 ```swift
 // Create
-AzureData.createDatabase(databaseId) { r in
+AzureData.create(databaseWithId: id) { r in
     // database = r.resource
 }
 
@@ -33,13 +33,13 @@ AzureData.databases { r in
 
 
 // Get
-AzureData.database(databaseId) { r in
+AzureData.get(databaseWithId: id) { r in
     // database = r.resource
 }
 
 
 // Delete
-AzureData.delete(databaseId) { s in
+AzureData.delete(database) { s in
     // s == successfully deleted
 }
 ```
@@ -49,18 +49,18 @@ AzureData.delete(databaseId) { s in
 
 ```swift
 // Create
-AzureData.createCollection(databaseId, collectionId: collectionId) { r in
+AzureData.create(collectionWithId: id, in: databaseId) { r in
     // collection = r.resource
 }
 
 // using an instance of `ADDatabase`:
-database.create(collectionWithId: collectionId) { r in
+database.create(collectionWithId: id) { r in
     // collection = r.resource
 }
 
 
 // List
-AzureData.collections(databaseId) { r in
+AzureData.get(collectionsIn: databaseId) { r in
     // collections = r.resource?.items
 }
 
@@ -71,18 +71,18 @@ database.getCollections () { r in
 
 
 // Get
-AzureData.collection(databaseId, collectionId: collectionId) { r in
+AzureData.get(collectionWithId: id, in: databaseId) { r in
     // collection = r.resource
 }
 
 // using an instance of `ADDatabase`
-database.get (collectionWithId: collectionId) { r in
+database.get (collectionWithId: id) { r in
     // collection = r.resource
 }
 
 
 // Delete
-AzureData.delete(collection, databaseId: databaseId) { s in
+AzureData.delete(collection, from: databaseId) { s in
     // s == successfully deleted
 }
 
@@ -106,56 +106,80 @@ let newDocument = ADDocument()
 newDocument["aNumber"] = 1_500_000
 newDocument["aString"] = "Hello!"
 			
-AzureData.createDocument(databaseId, collectionId: collectionId, document: document) { r in
+AzureData.create(document, inCollection: collectionId, in: databaseId) { r in
     // document = r.resource
 }
 
 // using an instance of `ADCollection`
+AzureData.create(document, in: collection) { r in
+    // document = r.resource
+}
+
+// directly from an instance of `ADCollection`
 collection.create (document: document) { r in
     // document = r.resource
 }
 
 
 // List
-AzureData.documents(ADDocument.self, databaseId: databaseId, collectionId: collectionId) { r in
+AzureData.get(documentsAs: documentType, inCollection: collectionId, in: databaseId) { r in
     // documents = r.resource?.items
 }
 
 // using an instance of `ADCollection`
+AzureData.get(documentsAs: documentType, in: collection) { r in
+    // documents = r.resource?.items
+}
+
+// directly from an instance of `ADCollection`
 collection.get (documentsAs: ADDocument.self) { r in
     // documents in r.resource?.list
 }
 
 
 // Get
-AzureData.document(ADDocument.self, databaseId: databaseId, collectionId: collectionId, documentId: documentId) { r in
+AzureData.get(documentWithId: documentId, as: documentType, inCollection: collectionId, in: databaseId) { r in
     // document = r.resource
 }
 
 // using an instance of `ADCollection`
+AzureData.get(documentWithId: resourceId, as: documentType, in: collection) { r in
+    // document = r.resource
+}
+
+// directly from an instance of `ADCollection`
 collection.get(documentWithResourceId: documentId: as: ADDocument.self) { r in
     // document = r.resource
 }
 
 
 // Delete
-AzureData.delete(document, databaseId: databaseId, collectionId: collectionId) { s in
-    // s == successfully deleted
+AzureData.delete(document, fromCollection: collectionId, in: databaseId) { r in
+    // document = r.resource
 }
 
-
 // using an instance of `ADCollection`
+AzureData.delete(document, from: collection) { r in
+    // document = r.resource
+}
+
+// directly from an instance of `ADCollection`
 collection.delete (document: document) { s in
     // s == successfully deleted
 }
 
 
 // Replace
-AzureData.replace(databaseId, collectionId: collectionId, document: document) { r in
+AzureData.replace(document, inCollection: collectionId, in: databaseId) { r in
     // document = r.resource
 }
 
 // using an instance of `ADCollection`
+AzureData.replace(document, in: collection) { r in
+    // document = r.resource
+}
+
+// directly from an instance of `ADCollection`
 collection.replace (document: document) { r in
     // document = r.resource
 }
@@ -169,15 +193,19 @@ let query = ADQuery.select("firstName", "lastName", ...)
                    .and("age", isGreaterThanOrEqualTo: 20)
                    .orderBy("_etag", descending: true)
 
-AzureData.query(databaseId, collectionId: collectionId, query: query) { r in
+AzureData.query(documentsIn: collectionId, in: databaseId, with: query) { r in
     // documents = r.resource?.items
 }
 
 // using an instance of `ADCollection`
+AzureData.query(documentsIn: collection, with: query) { r in
+    // documents = r.resource?.items
+}
+
+// directly from an instance of `ADCollection`
 collection.query (documentsWith: query) { r in
     // documents in r.resource?.list
 }
-
 ```
 
 

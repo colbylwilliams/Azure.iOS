@@ -29,7 +29,7 @@ class CollectionTableViewController: UITableViewController {
         super.viewDidLoad()
 
 		segmentedControl.selectedSegmentIndex = UserDefaults.standard.integer(forKey: selectedSegmentIndexKey)
-		
+
 		refreshData()
 		
 		navigationItem.rightBarButtonItems = [addButton, editButtonItem]
@@ -39,8 +39,8 @@ class CollectionTableViewController: UITableViewController {
 	func refreshData(fromUser: Bool = false) {
         if !fromUser || collectionsSelected {
             
-            //AzureData.collections(database.id) { r in
-            database.getCollections() { r in
+			AzureData.get(collectionsIn: database.id) { r in
+            //database.getCollections() { r in
                 debugPrint(r.result)
                 if let items = r.resource?.items {
                     self.collections = items
@@ -100,8 +100,8 @@ class CollectionTableViewController: UITableViewController {
 			if let name = alertController.textFields?.first?.text {
 				if self.collectionsSelected {
 					
-                    //AzureData.createcollection(self.database.id, collectionId: name) { r in
-                    self.database.create(collectionWithId: name) { r in
+                    AzureData.create(collectionWithId: name, in: self.database.id) { r in
+                    //self.database.create(collectionWithId: name) { r in
 						debugPrint(r.result)
 						if let collection = r.resource {
 							self.collections.append(collection)
@@ -112,8 +112,8 @@ class CollectionTableViewController: UITableViewController {
 					}
 				} else {
 					
-                    //AzureData.createUser(self.database.id, userId: name) { r in
-                    self.database.create(userWithId: name) { r in
+                    AzureData.createUser(self.database.id, userId: name) { r in
+                    //self.database.create(userWithId: name) { r in
 						debugPrint(r.result)
 						if let user = r.resource {
 							self.users.append(user)
@@ -161,8 +161,8 @@ class CollectionTableViewController: UITableViewController {
 		let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
 			if self.collectionsSelected {
 				
-                //AzureData.collection(self.database.id, collectionId: self.collections[indexPath.row].id) { r in
-                self.database.get(collectionWithId: self.collections[indexPath.row].id) { r in
+				AzureData.get(collectionWithId: self.collections[indexPath.row].id, in: self.database.id) { r in
+                //self.database.get(collectionWithId: self.collections[indexPath.row].id) { r in
 					if r.result.isSuccess {
 						debugPrint(r.result)
 						r.resource?.printLog()
@@ -175,8 +175,8 @@ class CollectionTableViewController: UITableViewController {
 				}
 			} else {
 				
-                //AzureData.user(self.database.id, userId: self.users[indexPath.row].id) { r in
-                self.database.get(userWithId: self.users[indexPath.row].id) { r in
+                AzureData.user(self.database.id, userId: self.users[indexPath.row].id) { r in
+                //self.database.get(userWithId: self.users[indexPath.row].id) { r in
 					if r.result.isSuccess {
 						debugPrint(r.result)
 						tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -211,8 +211,8 @@ class CollectionTableViewController: UITableViewController {
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
         if collectionsSelected {
-            //AzureData.delete(collections[indexPath.row], databaseId: database.id) { success in
-            database.delete(collection: collections[indexPath.row]) { success in
+            AzureData.delete(collections[indexPath.row], from: database.id) { success in
+            //database.delete(collection: collections[indexPath.row]) { success in
                 if success {
                     self.collections.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .automatic)
@@ -220,8 +220,8 @@ class CollectionTableViewController: UITableViewController {
                 callback?(success)
             }
         } else {
-            //AzureData.delete(users[indexPath.row], databaseId: database.id) { success in
-            database.delete(user: users[indexPath.row]) { success in
+            AzureData.delete(users[indexPath.row], databaseId: database.id) { success in
+            //database.delete(user: users[indexPath.row]) { success in
                 if success {
                     self.users.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .automatic)

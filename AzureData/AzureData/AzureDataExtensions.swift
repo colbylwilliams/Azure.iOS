@@ -15,22 +15,22 @@ public extension ADDatabase {
     
     //create
     public func create (collectionWithId id: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
-        return SessionManager.default.createCollection(self.id, collectionId: id, callback: callback)
+		return SessionManager.default.create(collectionWithId: id, in: self.id, callback: callback)
     }
     
     // list
     public func getCollections (callback: @escaping (ADListResponse<ADCollection>) -> ()) {
-        return SessionManager.default.collections(self.id, callback: callback)
+		return SessionManager.default.get(collectionsIn: self.id, callback: callback)
     }
     
     // get
-    public func get (collectionWithId id: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
-        return SessionManager.default.collection(self.id, collectionId: id, callback: callback)
+    public func get (collectionWithId collectionId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
+		return SessionManager.default.get(collectionWithId: collectionId, in: self.id, callback: callback)
     }
     
     //delete
     public func delete (collection resource: ADCollection, callback: @escaping (Bool) -> ()) {
-        return SessionManager.default.delete(resource, databaseId: self.id, callback: callback)
+        return SessionManager.default.delete(resource, from: self.id, callback: callback)
     }
     
     
@@ -64,32 +64,32 @@ public extension ADCollection {
     
     // create
     public func create<T: ADDocument> (document resource: T, callback: @escaping (ADResponse<T>) -> ()) {
-        return SessionManager.default.createDocument(resource, atSelfLink: self.selfLink!, callback: callback)
+		return SessionManager.default.create(resource, in: self, callback: callback)
     }
     
     // list
     public func get<T: ADDocument> (documentsAs documentType:T.Type, callback: @escaping (ADListResponse<T>) -> ()) {
-        return SessionManager.default.documents(atSelfLink: self.selfLink!, as: documentType, callback: callback)
+		return SessionManager.default.get(documentsAs: documentType, in: self, callback: callback)
     }
     
     // get
     public func get<T: ADDocument> (documentWithResourceId id: String, as documentType:T.Type, callback: @escaping (ADResponse<T>) -> ()) {
-        return SessionManager.default.document(withResourceId: id, atSelfLink: self.selfLink!, as: documentType, callback: callback)
+		return SessionManager.default.get(documentWithId: id, as: documentType, from: self, callback: callback)
     }
     
     // delete
     public func delete (document resource: ADDocument, callback: @escaping (Bool) -> ()) {
-        return SessionManager.default.delete(resource, atSelfLink: self.selfLink!, callback: callback)
+		return SessionManager.default.delete(resource, from: self, callback: callback)
     }
     
     // replace
     public func replace<T: ADDocument> (document resource: T, callback: @escaping (ADResponse<T>) -> ()) {
-        return SessionManager.default.replace(resource, atSelfLink: self.selfLink!, callback: callback)
+		return SessionManager.default.replace(resource, in: self, callback: callback)
     }
     
     // query
     public func query (documentsWith query:ADQuery, callback: @escaping (ADListResponse<ADDocument>) -> ()) {
-        return SessionManager.default.query(query, atSelfLink: self.selfLink!, callback: callback)
+		return SessionManager.default.query(documentsIn: self, with: query, callback: callback)
     }
     
     

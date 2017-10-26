@@ -21,7 +21,7 @@ AzureData.setup("cosmosDb name", key: "read-write key", keyType: .master)
 
 #### Create
 ```swift
-AzureData.create(databaseWithId: id) { r in
+AzureData.create (databaseWithId: id) { r in
     // database = r.resource
 }
 ```
@@ -35,14 +35,14 @@ AzureData.databases { r in
 
 #### Get
 ```swift
-AzureData.get(databaseWithId: id) { r in
+AzureData.get (databaseWithId: id) { r in
     // database = r.resource
 }
 ```
 
 #### Delete
 ```swift
-AzureData.delete(database) { s in
+AzureData.delete (database) { s in
     // s == successfully deleted
 }
 ```
@@ -53,23 +53,21 @@ AzureData.delete(database) { s in
 
 #### Create
 ```swift
-AzureData.create(collectionWithId: id, in: databaseId) { r in
+AzureData.create (collectionWithId: id, inDatabase: databaseId) { r in
     // collection = r.resource
 }
-
-// using an instance of `ADDatabase`:
-database.create(collectionWithId: id) { r in
+// or
+database.create (collectionWithId: id) { r in
     // collection = r.resource
 }
 ```
 
 #### List
 ```swift
-AzureData.get(collectionsIn: databaseId) { r in
+AzureData.get (collectionsIn: databaseId) { r in
     // collections = r.resource?.items
 }
-
-// using an instance of `ADDatabase`
+// or
 database.getCollections () { r in
     // collections = r.resource?.items
 }
@@ -77,11 +75,10 @@ database.getCollections () { r in
 
 #### Get
 ```swift
-AzureData.get(collectionWithId: id, in: databaseId) { r in
+AzureData.get (collectionWithId: id, inDatabase: databaseId) { r in
     // collection = r.resource
 }
-
-// using an instance of `ADDatabase`
+// or
 database.get (collectionWithId: id) { r in
     // collection = r.resource
 }
@@ -89,12 +86,11 @@ database.get (collectionWithId: id) { r in
 
 #### Delete
 ```swift
-AzureData.delete(collection, from: databaseId) { s in
+AzureData.delete (collection, from: databaseId) { s in
     // s == successfully deleted
 }
-
-// using an instance of `ADDatabase`
-database.delete (collection: collection) { s in
+// or
+database.delete (collection) { s in
     // s == successfully deleted
 }
 ```
@@ -115,33 +111,29 @@ let newDocument = ADDocument()
 newDocument["aNumber"] = 1_500_000
 newDocument["aString"] = "Hello!"
 			
-AzureData.create(document, inCollection: collectionId, in: databaseId) { r in
+AzureData.create (document, inCollection: collectionId, inDatabase: databaseId) { r in
     // document = r.resource
 }
-
-// using an instance of `ADCollection`
-AzureData.create(document, in: collection) { r in
+// or
+AzureData.create (document, in: collection) { r in
     // document = r.resource
 }
-
-// directly from an instance of `ADCollection`
-collection.create (document: document) { r in
+// or
+collection.create (document) { r in
     // document = r.resource
 }
 ```
 
 #### List
 ```swift
-AzureData.get(documentsAs: documentType, inCollection: collectionId, in: databaseId) { r in
+AzureData.get (documentsAs: ADDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
     // documents = r.resource?.items
 }
-
-// using an instance of `ADCollection`
-AzureData.get(documentsAs: documentType, in: collection) { r in
+// or
+AzureData.get (documentsAs: ADDocument.self, in: collection) { r in
     // documents = r.resource?.items
 }
-
-// directly from an instance of `ADCollection`
+// or
 collection.get (documentsAs: ADDocument.self) { r in
     // documents in r.resource?.list
 }
@@ -149,51 +141,45 @@ collection.get (documentsAs: ADDocument.self) { r in
 
 #### Get
 ```swift
-AzureData.get(documentWithId: documentId, as: documentType, inCollection: collectionId, in: databaseId) { r in
+AzureData.get (documentWithId: documentId, as: ADDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
     // document = r.resource
 }
-
-// using an instance of `ADCollection`
-AzureData.get(documentWithId: resourceId, as: documentType, in: collection) { r in
+// or
+AzureData.get (documentWithId: resourceId, as: ADDocument.self, in: collection) { r in
     // document = r.resource
 }
-
-// directly from an instance of `ADCollection`
-collection.get(documentWithResourceId: documentId: as: ADDocument.self) { r in
+// or
+collection.get (documentWithResourceId: documentId: as: ADDocument.self) { r in
     // document = r.resource
 }
 ```
 
 #### Delete
 ```swift
-AzureData.delete(document, fromCollection: collectionId, in: databaseId) { r in
+AzureData.delete (document, fromCollection: collectionId, inDatabase: databaseId) { r in
     // document = r.resource
 }
-
-// using an instance of `ADCollection`
-AzureData.delete(document, from: collection) { r in
+// or
+AzureData.delete (document, from: collection) { r in
     // document = r.resource
 }
-
-// directly from an instance of `ADCollection`
-collection.delete (document: document) { s in
+// or
+collection.delete (document) { s in
     // s == successfully deleted
 }
 ```
 
 #### Replace
 ```swift
-AzureData.replace(document, inCollection: collectionId, in: databaseId) { r in
+AzureData.replace (document, inCollection: collectionId, inDatabase: databaseId) { r in
     // document = r.resource
 }
-
-// using an instance of `ADCollection`
-AzureData.replace(document, in: collection) { r in
+// or
+AzureData.replace (document, in: collection) { r in
     // document = r.resource
 }
-
-// directly from an instance of `ADCollection`
-collection.replace (document: document) { r in
+// or
+collection.replace (document) { r in
     // document = r.resource
 }
 ```
@@ -207,16 +193,14 @@ let query = ADQuery.select("firstName", "lastName", ...)
                    .and("age", isGreaterThanOrEqualTo: 20)
                    .orderBy("_etag", descending: true)
 
-AzureData.query(documentsIn: collectionId, in: databaseId, with: query) { r in
+AzureData.query(documentsIn: collectionId, inDatabase: databaseId, with: query) { r in
     // documents = r.resource?.items
 }
-
-// using an instance of `ADCollection`
+// or
 AzureData.query(documentsIn: collection, with: query) { r in
     // documents = r.resource?.items
 }
-
-// directly from an instance of `ADCollection`
+// or
 collection.query (documentsWith: query) { r in
     // documents in r.resource?.list
 }
@@ -229,41 +213,40 @@ collection.query (documentsWith: query) { r in
 #### Create
 ```swift
 // link to existing media asset:
-AzureData.createAttachment(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId, contentType: contentType, mediaUrl: mediaUrl) { r in
-    // attachment = r.resource
+AzureData.create (attachmentWithId: id, contentType: "image/png", andMediaUrl: url, onDocument: documentId, inCollection: collectionId, inDatabase: databaseId) { r in
+	// attachment = r.resource
 }
 
 //or upload the media directly:
-AzureData.createAttachment(databaseId, collectionId: collectionId, documentId: documentId, contentType: contentType, mediaName: mediaName, media: media) { r in
-    // attachment = r.resource
+AzureData.create (attachmentWithId: id, contentType: "image/png", name: "file.png", with: media, onDocument: documentId, inCollection: collectionId, inDatabase: databaseId) { r in
+	// attachment = r.resource
 }
 ```
 
 #### List
 ```swift
-AzureData.attachemnts(databaseId, collectionId: collectionId, documentId: documentId) { r in
-    // attachments = r.resource?.items
+AzureData.get (attachmentsOn: documentId, inCollection: collectionId, inDatabase: databaseId) { r in
+	// attachments = r.resource
 }
 ```
 
 #### Delete
 ```swift
-AzureData.delete (attachment, databaseId: databaseId, collectionId: collectionId, documentId: documentId) { s in
-    // s == successfully deleted
+AzureData.delete (attachment, onDocument: documentId, inCollection: collectionId, inDatabase: databaseId) { s in
+	// s == successfully deleted
 }
 ```
 
 #### Replace
 ```swift
 // link to existing media asset:
-AzureData.replace(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId, contentType: contentType, mediaUrl: mediaUrl) { r in
-    // att
-    achment = r.resource
+AzureData.replace(attachmentWithId: id, contentType: "image/png", andMediaUrl: url, onDocument: documentId, inCollection: collectionId, inDatabase: databaseId) { r in
+	// attachment = r.resource
 }
 
 // or upload the media directly:
-AzureData.replace(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId, contentType: contentType, mediaName: mediaName, media: media) { r in
-    // attachment = r.resource
+AzureData.replace(attachmentWithId: id, contentType: "image/png", name: "file.png", with: media, onDocument: documentId, inCollection: collectionId, inDatabase: databaseId) { r in
+	// attachment = r.resource
 }
 ```
 
@@ -273,11 +256,14 @@ AzureData.replace(databaseId, collectionId: collectionId, documentId: documentId
 
 #### Create
 ```swift
-AzureData.createStoredProcedure (databaseId, collectionId: collectionId, storedProcedureId: storedProcedureId, body: body) { r in
-    // storedProcedure = r.resource
+AzureData.create (storedProcedureWithId: id, andBody: body, inCollection: collectionId, inDatabase: databaseId) { r in
+	// storedProcedure = r.resource
 }
 
-// using an instance of `ADCollection`
+AzureData.create (storedProcedureWithId: id, andBody: body, in: collection) { r in
+	// storedProcedure = r.resource
+}
+// or
 collection.create (storedProcedureWithId: storedProcedureId, andBody: body) { r in
     // storedProcedure = r.resource
 }
@@ -285,11 +271,14 @@ collection.create (storedProcedureWithId: storedProcedureId, andBody: body) { r 
 
 #### List
 ```swift
-AzureData.storedProcedures(databaseId, collectionId: collectionId) { r in
-    // storedProcedures = r.resource?.items
+AzureData.get (storedProceduresIn: collectionId, inDatabase: databaseId) { r in
+	// storedProcedures = r.resource?.items
 }
 
-// using an instance of `ADCollection`
+AzureData.get (storedProceduresIn: collection) { r in
+	// storedProcedures = r.resource?.items
+}
+// or
 collection.getStoredProcedures () { r in
     // storedProcedures in r.resource?.list
 }
@@ -297,11 +286,14 @@ collection.getStoredProcedures () { r in
 
 #### Delete
 ```swift
-AzureData.delete(storedProcedure, databaseId: databaseId, collectionId: collectionId) { s in
-    // s == successfully deleted
+AzureData.delete (storedProcedure, fromCollection: collectionId, inDatabase: databaseId) { s in
+	// s == successfully deleted
 }
 
-// using an instance of `ADCollection`
+AzureData.delete (storedProcedure, from: collection) { s in
+	// s == successfully deleted
+}
+// or
 collection.delete (storedProcedure) { s in
     // s == successfully deleted
 }
@@ -309,11 +301,14 @@ collection.delete (storedProcedure) { s in
 
 #### Replace
 ```swift
-AzureData.replace (databaseId, collectionId: collectionId, storedProcedureId: storedProcedureId, body: body) { r in
-    // storedProcedure = r.resource
+AzureData.replace (storedProcedureWithId: id, andBody: body, inCollection: collectionId, inDatabase: databaseId) { r in
+	// storedProcedure = r.resource
 }
 
-// using an instance of `ADCollection`
+AzureData.replace (storedProcedureWithId: id, andBody: body, in: collection) { r in
+	// storedProcedure = r.resource
+}
+// or
 collection.replace (storedProcedureWithId: storedProcedureId, andBody: body) { r in
     // storedProcedure = r.resource
 }
@@ -321,11 +316,14 @@ collection.replace (storedProcedureWithId: storedProcedureId, andBody: body) { r
 
 #### Execute
 ```swift
-AzureData.execute (databaseId, collectionId: collectionId, storedProcedureId: storedProcedureId, parameters: parameters) { data in
-    // data = response from stored procedure
+AzureData.execute (storedProcedureWithId: id, usingParameters: [], inCollection: collectionId, inDatabase: databaseId) { r in
+	// r = raw response data
 }
 
-// using an instance of `ADCollection`
+AzureData.execute (storedProcedureWithId: id, usingParameters: [], in: collection) { r in
+	// r = raw response data
+}
+// or
 collection.execute (storedProcedureWithId: storedProcedureId, usingParameters: parameters) { data in
     // data = response from stored procedure
 }
@@ -337,11 +335,14 @@ collection.execute (storedProcedureWithId: storedProcedureId, usingParameters: p
 
 #### Create
 ```swift
-AzureData.createUserDefinedFunction (databaseId, collectionId: collectionId, functionId: functionId, body: body) { r in
-    // userDefinedFunction = r.resource
+AzureData.create (userDefinedFunctionWithId: id, andBody: body, inCollection: collectionId, inDatabase: databaseId) { r in
+	// userDefinedFunction = r.resource
 }
 
-// using an instance of `ADCollection`
+AzureData.create (userDefinedFunctionWithId: id, andBody: body, in: collection) { r in
+	// userDefinedFunction = r.resource
+}
+// or
 collection.create (userDefinedFunctionWithId: userDefinedFunctionId, andBody: body) { r in
     // userDefinedFunction = r.resource
 }
@@ -349,11 +350,14 @@ collection.create (userDefinedFunctionWithId: userDefinedFunctionId, andBody: bo
 
 #### List
 ```swift
-AzureData.userDefinedFunctions(databaseId, collectionId: collectionId) { r in
-    // udfs = r.resource?.items
+AzureData.get (userDefinedFunctionsIn: collectionId, inDatabase: databaseId) { r in
+	// userDefinedFunction = r.resource?.items
 }
 
-// using an instance of `ADCollection`
+AzureData.get (userDefinedFunctionsIn: collection) { r in
+	// userDefinedFunction = r.resource?.items
+}
+// or
 collection.getUserDefinedFunctions () { r in
     // userDefinedFunctions in r.resource?.list
 }
@@ -361,11 +365,14 @@ collection.getUserDefinedFunctions () { r in
 
 #### Delete
 ```swift
-AzureData.delete(udf, databaseId: databaseId, collectionId: collectionId) { s in
-    // s == successfully deleted
+AzureData.delete (userDefinedFunction, fromCollection: collectionId, inDatabase: databaseId) { s in
+	// s == successfully deleted
 }
 
-// using an instance of `ADCollection`
+AzureData.delete (userDefinedFunction, from: collection) { s in
+	// s == successfully deleted
+}
+// or
 collection.delete (userDefinedFunction) { s in
     // s == successfully deleted
 }
@@ -373,11 +380,14 @@ collection.delete (userDefinedFunction) { s in
 
 #### Replace
 ```swift
-AzureData.replace (databaseId, collectionId: collectionId, functionId: functionId, body: body) { r in
-    // userDefinedFunction = r.resource
+AzureData.replace (userDefinedFunctionWithId: id, andBody: body, inCollection: collectionId, inDatabase: databaseId) { r in
+	// userDefinedFunction = r.resource
 }
 
-// using an instance of `ADCollection`
+AzureData.replace (userDefinedFunctionWithId: id, andBody: body, from: collection) { r in
+	// userDefinedFunction = r.resource
+}
+// or
 collection.replace (userDefinedFunctionWithId: userDefinedFunctionId, andBody: body) { r in
     // userDefinedFunction = r.resource
 }
@@ -389,11 +399,14 @@ collection.replace (userDefinedFunctionWithId: userDefinedFunctionId, andBody: b
 
 #### Create
 ```swift
-AzureData.createTrigger (databaseId, collectionId: collectionId, triggerId: triggerId, triggerBody: triggerBody, operation: operation, triggerType: triggerType) { r in
-    // trigger = r.resource
+AzureData.create (triggerWithId: id, operation: .all, type: .pre, andBody: body, inCollection: collectionId, inDatabase: databaseId) { r in
+	// trigger = r.resource
 }
 
-// using an instance of `ADCollection`
+AzureData.create (triggerWithId: id, operation: .all, type: .pre, andBody: bosy, in: collection) { r in
+	// trigger = r.resource
+}
+// or
 collection.create (triggerWithId: triggerId, andBody: body, operation: operation, type: type) { r in
     // trigger = r.resource
 }
@@ -401,11 +414,14 @@ collection.create (triggerWithId: triggerId, andBody: body, operation: operation
 
 #### List
 ```swift
-AzureData.triggers(databaseId, collectionId: collectionId) { r in
-    // triggers = r.resource?.items
+AzureData.get (triggersIn: collectionId, inDatabase: databaseId) { r in
+	// triggers = r.resource?.items
 }
 
-// using an instance of `ADCollection`
+AzureData.get (triggersIn: collection) { r in
+	// triggers = r.resource?.items
+}
+// or
 collection.getTriggers () { r in
     // triggers in r.resource?.list
 }
@@ -413,11 +429,14 @@ collection.getTriggers () { r in
 
 #### Delete
 ```swift
-AzureData.delete(trigger, databaseId: databaseId, collectionId: collectionId) { s in
-    // s == successfully deleted
+AzureData.delete (trigger, fromCollection: collectionId, inDatabase: databaseId) { s in
+	// s == successfully deleted
 }
 
-// using an instance of `ADCollection`
+AzureData.delete (trigger, from: collection) { s in
+	// s == successfully deleted
+}
+// or
 collection.delete (trigger) { s in
     // s == successfully deleted
 }
@@ -425,11 +444,14 @@ collection.delete (trigger) { s in
 
 #### Replace
 ```swift
-AzureData.replace (databaseId, collectionId: collectionId, triggerId: triggerId, triggerBody: triggerBody, operation: operation, triggerType: triggerType) { r in
-    // trigger = r.resource
+AzureData.replace (triggerWithId: id, operation: .all, type: .pre, andBody: body, inCollection: collectionId, inDatabase: databaseId) { r in
+	// trigger = r.resource
 }
 
-// using an instance of `ADCollection`
+AzureData.replace (triggerWithId: id, operation: .all, type: .pre, andBody: body, in: collection) { r in
+	// trigger = r.resource
+}
+// or
 collection.replace (triggerWithId: triggerId, andBody: body, operation: operation, type: type) { r in
     // trigger = r.resource
 }
@@ -441,11 +463,10 @@ collection.replace (triggerWithId: triggerId, andBody: body, operation: operatio
 
 #### Create
 ```swift
-AzureData.createUser(databaseId, userId: userId) { r in
-    // user = r.resource
+AzureData.create (userWithId: id, inDatabase: databaseId) { r in
+	// user = r.resource
 }
-
-// using an instance of `ADDatabase`
+// or
 database.create (userWithId: userId) { r in
     // user = r.resource
 }
@@ -453,11 +474,10 @@ database.create (userWithId: userId) { r in
 
 #### List
 ```swift
-AzureData.users(databaseId) { r in
-    // users = r.resource?.items
+AzureData.get (usersIn: databaseId) { r in
+	// users = r.resource?.items
 }
-
-// using an instance of `ADDatabase`
+// or
 database.getUsers () { r in
     // users = r.resource?.items
 }
@@ -465,11 +485,10 @@ database.getUsers () { r in
 
 #### Get
 ```swift
-AzureData.user(databaseId, userId: userId) { r in
-    // user = r.resource
+AzureData.get (userWithId: id, inDatabase: databaseId) { r in
+	// user = r.resource
 }
-
-// using an instance of `ADDatabase`
+// or
 database.get (userWithId: userId) { r in
     // user = r.resource
 }
@@ -477,11 +496,10 @@ database.get (userWithId: userId) { r in
 
 #### Delete
 ```swift
-AzureData.delete(user, databaseId: databaseId) { s in
-    // s == successfully deleted
+AzureData.delete (user, fromDatabase: databaseId) { s in
+	// s == successfully deleted
 }
-
-// using an instance of `ADDatabase`
+// or
 database.delete (user: user) { s in
     // s == successfully deleted
 }
@@ -489,11 +507,10 @@ database.delete (user: user) { s in
 
 #### Replace
 ```swift
-AzureData.replace (databaseId, userId: userId, newUserId: userId) { r in
-    // user = r.resource
+AzureData.replace (userWithId: id, with: newUserId, inDatabase: databaseId) { r in
+	// user = r.resource
 }
-
-// using an instance of `ADDatabase`
+// or
 database.replace (userWithId: userId) { r in
     // user = r.resource
 }
@@ -505,36 +522,36 @@ database.replace (userWithId: userId) { r in
 
 #### Create
 ```swift
-AzureData.createPermission (resource, databaseId: databaseId, userId: userId, permissionId: permissionId, permissionMode: permissionMode) { r in
-    // permission = r.resource
+AzureData.create (permissionWithId: id, mode: .read, in: resource, forUser: userId, inDatabase: databaseId) { r in
+	// permission = r.resource
 }
 ```
 
 #### List
 ```swift
-AzureData.permissions (databaseId, userId: databaseId) { r in
-    // permissions = r.resource?.items
+AzureData.get (permissionsFor: userId, inDatabase: databaseId) { r in
+	// permissions = r.resource
 }
 ```
 
 #### Get
 ```swift
-AzureData.permission (databaseId, userId: String, permissionId: permissionId) { r in
-    // permission = r.resource
+AzureData.get (permissionWithId: id, forUser: userId, inDatabase: databaseId) { r in
+	// permission = r.resource
 }
 ```
 
 #### Delete
 ```swift
-AzureData.delete(permission, databaseId: databaseId, collectionId: collectionId, userId: userId) { s in
-    // s == successfully deleted
+AzureData.delete (permission, forUser: userId, inDatabase: databaseId) { s in
+	// s == successfully deleted
 }
 ```
 
 #### Replace
 ```swift
-AzureData.replace (databaseId, userId: userId, permissionId: permissionId, permissionMode: permissionMode, resource: resource) { r in
-    // permission = r.resource
+AzureData.replace (permissionWithId: id, mode: .read, in: resource, forUser: userId, inDatabase: databaseId) { r in
+	// permission = r.resource
 }
 ```
 
@@ -544,15 +561,15 @@ AzureData.replace (databaseId, userId: userId, permissionId: permissionId, permi
 
 #### Lists
 ```swift
-AzureData.offers { r in
-    // offers = r.resource?.items
+AzureData.offers() { r in
+// offers = r.resource?.items
 }
 ```
 
 #### Get
 ```swift
-AzureData.offer(offerId) { r in
-    // offer = r.resource
+AzureData.get (offerWithId: id) { r in
+	// offer = r.resource
 }
 ```
 

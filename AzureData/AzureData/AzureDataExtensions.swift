@@ -29,7 +29,7 @@ public extension ADDatabase {
     }
     
     //delete
-    public func delete (collection resource: ADCollection, callback: @escaping (Bool) -> ()) {
+    public func delete (_ resource: ADCollection, callback: @escaping (Bool) -> ()) {
         return SessionManager.default.delete(resource, fromDatabase: self.id, callback: callback)
     }
     

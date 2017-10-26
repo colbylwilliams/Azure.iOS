@@ -38,14 +38,14 @@ public class ADTrigger: ADResource {
 
 
 public enum ADTriggerOperation: String {
-	case All		= "All"
-	case Insert		= "Insert"
-	case Replace	= "Replace"
-	case Delete		= "Delete"
+	case all		= "All"
+	case insert		= "Insert"
+	case replace	= "Replace"
+	case delete		= "Delete"
 }
 
 
 public enum ADTriggerType: String {
-	case Pre  = "Pre"
-	case Post = "Post"
+	case pre  = "Pre"
+	case post = "Post"
 }

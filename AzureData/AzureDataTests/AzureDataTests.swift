@@ -51,7 +51,7 @@ class AzureDataTests: XCTestCase {
         var deleteSuccess = false
 
         // Create
-        AzureData.createDatabase(databaseId) { r in
+		AzureData.create(databaseWithId: databaseId) { r in
             createResponse = r
             createExpectation.fulfill()
         }
@@ -83,7 +83,7 @@ class AzureDataTests: XCTestCase {
         var deleteSuccess = false
 
         // Create
-        AzureData.createCollection(collectionId, collectionId: collectionId) { r in
+		AzureData.create(collectionWithId: collectionId, inDatabase: collectionId) { r in
             createResponse = r
             createExpectation.fulfill()
         }
@@ -93,7 +93,7 @@ class AzureDataTests: XCTestCase {
         XCTAssertNotNil(createResponse?.resource)
 
         // Delete
-        AzureData.delete(ADCollection(collectionId), databaseId: collectionId) { s in
+        AzureData.delete(ADCollection(collectionId), fromDatabase: collectionId) { s in
             deleteSuccess = s
             deleteExpectation.fulfill()
         }
@@ -122,7 +122,8 @@ class AzureDataTests: XCTestCase {
         document["customProperty"] = "customPropertyValue"
 
         // Create
-        AzureData.createDocument(documentId, collectionId: documentId, document: document) { r in
+		
+		AzureData.create(document, inCollection: documentId, inDatabase: documentId) { r in
             createResponse = r
             createExpectation.fulfill()
         }
@@ -134,7 +135,7 @@ class AzureDataTests: XCTestCase {
         XCTAssertEqual(createResponse!.resource!["customProperty"] as! String, "customPropertyValue")
         
         // Delete
-        AzureData.delete(createResponse!.resource!, databaseId: documentId, collectionId: documentId) { s in
+		AzureData.delete(createResponse!.resource!, fromCollection: documentId, inDatabase: documentId) { s in
             deleteSuccess = s
             deleteExpectation.fulfill()
         }

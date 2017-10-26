@@ -7,6 +7,9 @@
 
 # API
 
+The following usage examples are abbreviated, complete examples can be found in the [Wiki](/wiki/DocumentDB)
+
+
 ## Setup
 
 ```swift
@@ -16,261 +19,149 @@ AzureData.setup("cosmosDb name", key: "read-write key", keyType: .master)
 
 ## Databases
 
-### Create
-
 ```swift
-AzureData.createDatabase(newDatabaseId) { response in
-    if let database = response.resource {
-        print(database)
-    } else if let error = response.error {
-        error.pringLog()
-    }
+// Create
+AzureData.createDatabase(databaseId) { r in
+    // database = r.resource
+}
+
+
+// List
+AzureData.databases { r in
+    // databases = r.resource?.items
+}
+
+
+// Get
+AzureData.database(databaseId) { r in
+    // database = r.resource
+}
+
+
+// Delete
+AzureData.delete(databaseId) { s in
+    // s == successfully deleted
 }
 ```
 
-### List
+
+## Collections
 
 ```swift
-AzureData.databases { response in
-    if let databases = response.resource?.items {
-        print(databases)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// Create
+AzureData.createCollection(databaseId, collectionId: collectionId) { r in
+    // collection = r.resource
 }
-```
 
-### Get
-
-```swift
-AzureData.database(databaseId) { response in
-    if let database = response.resource {
-        print(database)
-    } else if let error = response.error {
-        error.pringLog()
-    }
+// using an instance of `ADDatabase`:
+database.create(collectionWithId: collectionId) { r in
+    // collection = r.resource
 }
-```
 
-### Delete
 
-```swift
-AzureData.delete(databaseId) { success in
-    if success { /* successfully deleted */ }
+// List
+AzureData.collections(databaseId) { r in
+    // collections = r.resource?.items
 }
-```
 
-## DocumentCollections
-
-### Create
-
-```swift
-AzureData.createDocumentCollection(databaseId, collectionId: newCollectionId) { response in
-    if let collection = response.resource {
-        print(collection)
-    } else if let error = response.error {
-        error.pringLog()
-    }
+// using an instance of `ADDatabase`
+database.getCollections () { r in
+    // collections = r.resource?.items
 }
-```
 
-Or directly from an instance of `ADDatabase`:
-```swift
-database.create(collectionWithId: newCollectionId) { response in
-    if let collection = response.resource {
-        print(collection)
-    } else if let error = response.error {
-        error.pringLog()
-    }
+
+// Get
+AzureData.collection(databaseId, collectionId: collectionId) { r in
+    // collection = r.resource
 }
-```
 
-### List
-
-```swift
-AzureData.documentCollections(databaseId) { response in
-    if let collections = response.resource?.items {
-        print(collections)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// using an instance of `ADDatabase`
+database.get (collectionWithId: collectionId) { r in
+    // collection = r.resource
 }
-```
 
-Or directly from an instance of `ADDatabase`
-```swift
-database.getCollections () {
-    if let collections = response.resource?.items {
-        print(collections)
-    } else if let error = response.error {
-        error.printLog()
-    }
+
+// Delete
+AzureData.delete(collection, databaseId: databaseId) { s in
+    // s == successfully deleted
 }
-```
 
-### Get
-
-```swift
-AzureData.documentCollection(databaseId, collectionId: collectionId) { response in
-    if let collection = response.resource {
-        print(collection)
-    } else if let error = response.error {
-        error.pringLog()
-    }
+// using an instance of `ADDatabase`
+database.delete (collection: collection) { s in
+    // s == successfully deleted
 }
-```
 
-Or directly from an instance of `ADDatabase`
-```swift
-database.get (collectionWithId: newCollectionId) { response in
-    if let collection = response.resource {
-        print(collection)
-    } else if let error = response.error {
-        error.printLog()
-    }
-}
-```
 
-### Delete
-
-```swift
-AzureData.delete(collection, databaseId: databaseId) { success in
-    if success { /* successfully deleted */ }
-}
-```
-
-Or directly from an instance of `ADDatabase`
-```swift
-database.delete (collection: collection) { success in
-    if success { /* successfully deleted */ }
-}
-```
-
-### Replace
-
-```swift
+// Replace
 // TODO...
 ```
 
 
-
 ## Documents
 
-### Create
-
 ```swift
+// Create
 let newDocument = ADDocument()
 			
 newDocument["aNumber"] = 1_500_000
 newDocument["aString"] = "Hello!"
 			
-AzureData.createDocument(databaseId, collectionId: collectionId, document: newDocument) { response in
-    if let document = response.resource {
-        print(document)
-    } else if let error = response.error {
-        error.pringLog()
-    }
+AzureData.createDocument(databaseId, collectionId: collectionId, document: document) { r in
+    // document = r.resource
 }
-```
 
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.create (document: newDocument) { response in
-    if let document = response.resource {
-        print (document)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// using an instance of `ADCollection`
+collection.create (document: document) { r in
+    // document = r.resource
 }
-```
 
-### List
 
-```swift
-AzureData.documents(ADDocument.self, databaseId: databaseId, collectionId: collectionId) { response in
-    if let documents = response.resource?.items {
-        print(documents)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// List
+AzureData.documents(ADDocument.self, databaseId: databaseId, collectionId: collectionId) { r in
+    // documents = r.resource?.items
 }
-```
 
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.get (documentsAs: ADDocument.self) { response in
-    if let documents in response.resource?.list {
-        print(documents)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// using an instance of `ADCollection`
+collection.get (documentsAs: ADDocument.self) { r in
+    // documents in r.resource?.list
 }
-```
 
-### Get
 
-```swift
-AzureData.document(ADDocument.self, databaseId: databaseId, collectionId: collectionId, documentId: documentId) { response in
-    if let document = response.resource {
-        print(document)
-    } else if let error = response.error {
-        error.pringLog()
-    }
+// Get
+AzureData.document(ADDocument.self, databaseId: databaseId, collectionId: collectionId, documentId: documentId) { r in
+    // document = r.resource
 }
-```
 
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.get(documentWithResourceId: documentId: as: ADDocument.self) { response in
-    if let document = response.resource {
-        print (document)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// using an instance of `ADCollection`
+collection.get(documentWithResourceId: documentId: as: ADDocument.self) { r in
+    // document = r.resource
 }
-```
 
-### Delete
 
-```swift
-AzureData.delete(document, databaseId: databaseId, collectionId: collectionId) { success in
-    if success { /* successfully deleted */ }
+// Delete
+AzureData.delete(document, databaseId: databaseId, collectionId: collectionId) { s in
+    // s == successfully deleted
 }
-```
 
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.delete (document: document) { success in
-    if success { /* successfully deleted */ }
+
+// using an instance of `ADCollection`
+collection.delete (document: document) { s in
+    // s == successfully deleted
 }
-```
 
-### Replace
 
-```swift
-AzureData.replace(databaseId, collectionId: collectionId, document: newDocument) { response in
-    if let document = response.resource {
-        print(document)
-    } else if let error = response.error {
-        error.pringLog()
-    }
+// Replace
+AzureData.replace(databaseId, collectionId: collectionId, document: document) { r in
+    // document = r.resource
 }
-```
 
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.replace (document: document) { response in
-    if let document = response.resource {
-        print (document)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// using an instance of `ADCollection`
+collection.replace (document: document) { r in
+    // document = r.resource
 }
-```
 
-### Query
 
-```swift
+// Query
 let query = ADQuery.select("firstName", "lastName", ...)
                    .from("People")
                    .where("firstName", is: "Colby")
@@ -278,482 +169,333 @@ let query = ADQuery.select("firstName", "lastName", ...)
                    .and("age", isGreaterThanOrEqualTo: 20)
                    .orderBy("_etag", descending: true)
 
-AzureData.query(databaseId, collectionId: documentCollectionId, query: query) { response in
-    if let items = response.resource?.items {
-        for item in items {
-            print(item)
-        }
-    } else if let error = response.error {
-        error.printLog()
-    }
+AzureData.query(databaseId, collectionId: collectionId, query: query) { r in
+    // documents = r.resource?.items
 }
-```
 
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.query (documentsWith: query) { response in
-    if let documents in response.resource?.list {
-        print(documents)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// using an instance of `ADCollection`
+collection.query (documentsWith: query) { r in
+    // documents in r.resource?.list
 }
+
 ```
 
 
 ## Attachments
 
-### Create
-
 ```swift
-// TODO...
-```
-
-### List
-
-```swift
-AzureData.attachemnts(databaseId, collectionId: collectionId, documentId: documentId) { response in
-    if let attachments = response.resource?.items {
-        print(attachments)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// Create
+// link to existing media asset:
+AzureData.createAttachment(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId, contentType: contentType, mediaUrl: mediaUrl) { r in
+    // attachment = r.resource
 }
-```
 
-### Delete
-
-```swift
-AzureData.delete (attachment, databaseId: databaseId, collectionId: collectionId, documentId: documentId) { success in
-    if success { /* successfully deleted */ }
+//or upload the media directly:
+AzureData.createAttachment(databaseId, collectionId: collectionId, documentId: documentId, contentType: contentType, mediaName: mediaName, media: media) { r in
+    // attachment = r.resource
 }
+
+
+// List
+AzureData.attachemnts(databaseId, collectionId: collectionId, documentId: documentId) { r in
+    // attachments = r.resource?.items
+}
+
+
+// Delete
+AzureData.delete (attachment, databaseId: databaseId, collectionId: collectionId, documentId: documentId) { s in
+    // s == successfully deleted
+}
+
+
+// Replace
+// link to existing media asset:
+AzureData.replace(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId, contentType: contentType, mediaUrl: mediaUrl) { r in
+    // att
+    achment = r.resource
+}
+
+// or upload the media directly:
+AzureData.replace(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId, contentType: contentType, mediaName: mediaName, media: media) { r in
+    // attachment = r.resource
+}
+
 ```
-
-### Replace
-
-```swift
-// TODO...
-```
-
 
 
 ## Stored Procedures
 
-### Create
-
 ```swift
-// TODO...
-```
-
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.create (storedProcedureWithId: storedProcedureId, andBody: body) { response in
-    if let storedProcedure = response.resource {
-        print (storedProcedure)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// Create
+AzureData.createStoredProcedure (databaseId, collectionId: collectionId, storedProcedureId: storedProcedureId, body: body) { r in
+    // storedProcedure = r.resource
 }
-```
 
-### List
-
-```swift
-AzureData.storedProcedures(databaseId, collectionId: collectionId) { response in
-    if let storedProcedures = response.resource?.items {
-        print(storedProcedures)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// using an instance of `ADCollection`
+collection.create (storedProcedureWithId: storedProcedureId, andBody: body) { r in
+    // storedProcedure = r.resource
 }
-```
 
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.getStoredProcedures () { response in
-    if let storedProcedures in response.resource?.list {
-        print(storedProcedures)
-    } else if let error = response.error {
-        error.printLog()
-    }
+
+// List
+AzureData.storedProcedures(databaseId, collectionId: collectionId) { r in
+    // storedProcedures = r.resource?.items
 }
-```
 
-### Delete
-
-```swift
-AzureData.delete(storedProcedure, databaseId: databaseId, collectionId: collectionId) { success in
-    if success { /* successfully deleted */ }
+// using an instance of `ADCollection`
+collection.getStoredProcedures () { r in
+    // storedProcedures in r.resource?.list
 }
-```
 
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.delete (storedProcedure) { success in
-    if success { /* successfully deleted */ }
+
+// Delete
+AzureData.delete(storedProcedure, databaseId: databaseId, collectionId: collectionId) { s in
+    // s == successfully deleted
 }
-```
 
-### Replace
-
-```swift
-// TODO...
-```
-
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.replace (storedProcedureWithId: storedProcedureId, andBody: body) { response in
-    if let storedProcedure = response.resource {
-        print (storedProcedure)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// using an instance of `ADCollection`
+collection.delete (storedProcedure) { s in
+    // s == successfully deleted
 }
-```
 
-### Execute
 
-```swift
-// TODO...
-```
+// Replace
+AzureData.replace (databaseId, collectionId: collectionId, storedProcedureId: storedProcedureId, body: body) { r in
+    // storedProcedure = r.resource
+}
 
-Or directly from an instance of `ADDocumentCollection`
-```swift
+// using an instance of `ADCollection`
+collection.replace (storedProcedureWithId: storedProcedureId, andBody: body) { r in
+    // storedProcedure = r.resource
+}
+
+
+// Execute
+AzureData.execute (databaseId, collectionId: collectionId, storedProcedureId: storedProcedureId, parameters: parameters) { data in
+    // data = response from stored procedure
+}
+
+// using an instance of `ADCollection`
 collection.execute (storedProcedureWithId: storedProcedureId, usingParameters: parameters) { data in
-    
+    // data = response from stored procedure
 }
+
 ```
 
 
 ## User Defined Functions
 
-### Create
-
 ```swift
-// TODO...
-```
-
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.create (userDefinedFunctionWithId: userDefinedFunctionId, andBody: body) { response in
-    if let userDefinedFunction = response.resource {
-        print (userDefinedFunction)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// Create
+AzureData.createUserDefinedFunction (databaseId, collectionId: collectionId, functionId: functionId, body: body) { r in
+    // userDefinedFunction = r.resource
 }
-```
 
-### List
-
-```swift
-AzureData.userDefinedFunctions(databaseId, collectionId: collectionId) { response in
-    if let udfs = response.resource?.items {
-        print(udfs)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// using an instance of `ADCollection`
+collection.create (userDefinedFunctionWithId: userDefinedFunctionId, andBody: body) { r in
+    // userDefinedFunction = r.resource
 }
-```
 
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.getUserDefinedFunctions () { response in
-    if let userDefinedFunctions in response.resource?.list {
-        print(userDefinedFunctions)
-    } else if let error = response.error {
-        error.printLog()
-    }
+
+// List
+AzureData.userDefinedFunctions(databaseId, collectionId: collectionId) { r in
+    // udfs = r.resource?.items
 }
-```
 
-### Delete
-
-```swift
-AzureData.delete(udf, databaseId: databaseId, collectionId: collectionId) { success in
-    if success { /* successfully deleted */ }
+// using an instance of `ADCollection`
+collection.getUserDefinedFunctions () { r in
+    // userDefinedFunctions in r.resource?.list
 }
-```
 
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.delete (userDefinedFunction) { success in
-    if success { /* successfully deleted */ }
+
+// Delete
+AzureData.delete(udf, databaseId: databaseId, collectionId: collectionId) { s in
+    // s == successfully deleted
 }
-```
 
-### Replace
-
-```swift
-// TODO...
-```
-
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.replace (userDefinedFunctionWithId: userDefinedFunctionId, andBody: body) { response in
-    if let userDefinedFunction = response.resource {
-        print (userDefinedFunction)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// using an instance of `ADCollection`
+collection.delete (userDefinedFunction) { s in
+    // s == successfully deleted
 }
+
+
+// Replace
+AzureData.replace (databaseId, collectionId: collectionId, functionId: functionId, body: body) { r in
+    // userDefinedFunction = r.resource
+}
+
+// using an instance of `ADCollection`
+collection.replace (userDefinedFunctionWithId: userDefinedFunctionId, andBody: body) { r in
+    // userDefinedFunction = r.resource
+}
+
 ```
 
 
 ## Triggers
 
-### Create
-
 ```swift
-// TODO...
-```
+// Create
+AzureData.createTrigger (databaseId, collectionId: collectionId, triggerId: triggerId, triggerBody: triggerBody, operation: operation, triggerType: triggerType) { r in
+    // trigger = r.resource
+}
 
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.create (triggerWithId: triggerId, andBody: body, operation: operation, type: type) { response in
-    if let trigger = response.resource {
-        print (trigger)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// using an instance of `ADCollection`
+collection.create (triggerWithId: triggerId, andBody: body, operation: operation, type: type) { r in
+    // trigger = r.resource
+}
+
+
+// List
+AzureData.triggers(databaseId, collectionId: collectionId) { r in
+    // triggers = r.resource?.items
+}
+
+// using an instance of `ADCollection`
+collection.getTriggers () { r in
+    // triggers in r.resource?.list
+}
+
+
+// Delete
+AzureData.delete(trigger, databaseId: databaseId, collectionId: collectionId) { s in
+    // s == successfully deleted
+}
+
+// using an instance of `ADCollection`
+collection.delete (trigger) { s in
+    // s == successfully deleted
+}
+
+
+// Replace
+AzureData.replace (databaseId, collectionId: collectionId, triggerId: triggerId, triggerBody: triggerBody, operation: operation, triggerType: triggerType) { r in
+    // trigger = r.resource
+}
+
+// using an instance of `ADCollection`
+collection.replace (triggerWithId: triggerId, andBody: body, operation: operation, type: type) { r in
+    // trigger = r.resource
 }
 ```
-
-### List
-
-```swift
-AzureData.triggers(databaseId, collectionId: collectionId) { response in
-    if let triggers = response.resource?.items {
-        print(triggers)
-    } else if let error = response.error {
-        error.printLog()
-    }
-}
-```
-
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.getTriggers () { response in
-    if let triggers in response.resource?.list {
-        print(triggers)
-    } else if let error = response.error {
-        error.printLog()
-    }
-}
-```
-
-### Delete
-
-```swift
-AzureData.delete(trigger, databaseId: databaseId, collectionId: collectionId) { success in
-    if success { /* successfully deleted */ }
-}
-```
-
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.delete (trigger) { success in
-    if success { /* successfully deleted */ }
-}
-```
-
-### Replace
-
-```swift
-// TODO...
-```
-
-Or directly from an instance of `ADDocumentCollection`
-```swift
-collection.replace (triggerWithId: triggerId, andBody: body, operation: operation, type: type) { response in
-    if let trigger = response.resource {
-        print (trigger)
-    } else if let error = response.error {
-        error.printLog()
-    }
-}
-```
-
 
 
 ## Users	
 
-### Create
-
 ```swift
-AzureData.createUser(databaseId, userId: newUserId) { response in
-    if let user = response.resource {
-        print(user)
-    } else if let error = response.error {
-        error.pringLog()
-    }
+// Create
+AzureData.createUser(databaseId, userId: userId) { r in
+    // user = r.resource
 }
-```
 
-Or directly from an instance of `ADDatabase`
-```swift
-database.create (userWithId: newUserId) { response in
-    if let user = response.resource {
-        print(user)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// using an instance of `ADDatabase`
+database.create (userWithId: userId) { r in
+    // user = r.resource
 }
-```
 
-### List
 
-```swift
-AzureData.users(databaseId) { response in
-    if let users = response.resource?.items {
-        print(users)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// List
+AzureData.users(databaseId) { r in
+    // users = r.resource?.items
 }
-```
 
-Or directly from an instance of `ADDatabase`
-```swift
-database.getUsers () {
-    if let users = response.resource?.items {
-        print(users)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// using an instance of `ADDatabase`
+database.getUsers () { r in
+    // users = r.resource?.items
 }
-```
 
-### Get
 
-```swift
-AzureData.user(databaseId, userId: userId) { response in
-    if let user = response.resource {
-        print(user)
-    } else if let error = response.error {
-        error.pringLog()
-    }
+// Get
+AzureData.user(databaseId, userId: userId) { r in
+    // user = r.resource
 }
-```
 
-Or directly from an instance of `ADDatabase`
-```swift
-database.get (userWithId: newUserId) { response in
-    if let user = response.resource {
-        print(user)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// using an instance of `ADDatabase`
+database.get (userWithId: userId) { r in
+    // user = r.resource
 }
-```
 
-### Delete
 
-```swift
-AzureData.delete(user, databaseId: databaseId) { success in
-    if success { /* successfully deleted */ }
+// Delete
+AzureData.delete(user, databaseId: databaseId) { s in
+    // s == successfully deleted
 }
-```
 
-Or directly from an instance of `ADDatabase`
-```swift
-database.delete (user: user) { success in
-    if success { /* successfully deleted */ }
+// using an instance of `ADDatabase`
+database.delete (user: user) { s in
+    // s == successfully deleted
 }
+
+
+// Replace
+AzureData.replace (databaseId, userId: userId, newUserId: userId) { r in
+    // user = r.resource
+}
+
+// using an instance of `ADDatabase`
+database.replace (userWithId: userId) { r in
+    // user = r.resource
+}
+
 ```
-
-### Replace
-
-```swift
-// TODO...
-```
-
 
 
 ## Permissions	
 
-### Create
-
 ```swift
-// TODO...
-```
-
-### List
-
-```swift
-AzureData.permissions (databaseId, userId: databaseId) { response in
-    if let permissions = response.resource?.items {
-        print(permissions)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// Create
+AzureData.createPermission (resource, databaseId: databaseId, userId: userId, permissionId: permissionId, permissionMode: permissionMode) { r in
+    // permission = r.resource
 }
-```
 
-### Get
 
-```swift
-AzureData.permission (databaseId, userId: String, permissionId: permissionId) { response in
-    if let permission = response.resource {
-        print(permission)
-    } else if let error = response.error {
-        error.pringLog()
-    }
+// List
+AzureData.permissions (databaseId, userId: databaseId) { r in
+    // permissions = r.resource?.items
 }
-```
 
-### Delete
 
-```swift
-AzureData.delete(permission, databaseId: databaseId, collectionId: collectionId, userId: userId) { success in
-    if success { /* successfully deleted */ }
+// Get
+AzureData.permission (databaseId, userId: String, permissionId: permissionId) { r in
+    // permission = r.resource
 }
+
+// Delete
+AzureData.delete(permission, databaseId: databaseId, collectionId: collectionId, userId: userId) { s in
+    // s == successfully deleted
+}
+
+
+// Replace
+AzureData.replace (databaseId, userId: userId, permissionId: permissionId, permissionMode: permissionMode, resource: resource) { r in
+    // permission = r.resource
+}
+
 ```
 
-### Replace
-
-```swift
-// TODO...
-```
 
 ## Offers
 
-### List
-
 ```swift
-AzureData.offers { response in
-    if let offers = response.resource?.items {
-        print(offers)
-    } else if let error = response.error {
-        error.printLog()
-    }
+// List
+AzureData.offers { r in
+    // offers = r.resource?.items
 }
-```
 
-### Get
 
-```swift
-AzureData.offer(offerId) { response in
-    if let offer = response.resource {
-        print(offer)
-    } else if let error = response.error {
-        error.pringLog()
-    }
+// Get
+AzureData.offer(offerId) { r in
+    // offer = r.resource
 }
-```
 
-### Replace
 
-```swift
+// Replace
+// TODO...
+
+
+// Query
 // TODO...
 ```
-
-### Query
-
-```swift
-// TODO...
-```
-
 
 
 

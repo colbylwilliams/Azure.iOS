@@ -28,7 +28,7 @@ AzureData.create (databaseWithId: id) { r in
 
 #### List
 ```swift
-AzureData.databases { r in
+AzureData.databases () { r in
     // databases = r.resource?.items
 }
 ```
@@ -141,15 +141,15 @@ collection.get (documentsAs: ADDocument.self) { r in
 
 #### Get
 ```swift
-AzureData.get (documentWithId: documentId, as: ADDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
+AzureData.get (documentWithId: id, as: ADDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
     // document = r.resource
 }
 // or
-AzureData.get (documentWithId: resourceId, as: ADDocument.self, in: collection) { r in
+AzureData.get (documentWithId: id, as: ADDocument.self, in: collection) { r in
     // document = r.resource
 }
 // or
-collection.get (documentWithResourceId: documentId: as: ADDocument.self) { r in
+collection.get (documentWithResourceId: id: as: ADDocument.self) { r in
     // document = r.resource
 }
 ```

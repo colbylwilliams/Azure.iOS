@@ -7,33 +7,26 @@
 
 # Usage
 
+- **[Setup](#setup)**
+|                                                       |                                                       |                                                       |                                                       |                                                       |                                                       |                                                       |
+| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
+| **[Databases](#databases)**                           | [Create](#create)                                     | [List](#list)                                         | [Get](#get)                                           | [Delete](#delete)                                     |                                                       |                                                       |
+| **[Collections](#collections)**                       | [Create](#create-1)                                   | [List](#list-1)                                       | [Get](#get-1)                                         | [Delete](#delete-1)                                   | [Replace](#replace)                                   |                                                       |
+| **[Documents](#documents)**                           | [Create](#create-2)                                   | [List](#list-2)                                       | [Get](#get-2)                                         | [Delete](#delete-2)                                   | [Replace](#replace-1)                                 | [Query](#query)                                       |
+| **[Attachments](#attachments)**                       | [Create](#create-3)                                   | [List](#list-3)                                       | [Delete](#delete-3)                                   | [Replace](#replace-2)                                 |                                                       |                                                       |
+| **[Stored Procedures](#stored-procedures)**           | [Create](#create-4)                                   | [List](#list-4)                                       | [Delete](#delete-4)                                   | [Replace](#replace-3)                                 | [Execute](#execute)                                   |                                                       |
+| **[User Defined Functions](#user-defined-functions)** | [Create](#create-5)                                   | [List](#list-5)                                       | [Delete](#delete-5)                                   | [Replace](#replace-4)                                 |                                                       |                                                       |
+| **[Triggers](#triggers)**                             | [Create](#create-6)                                   | [List](#list-6)                                       | [Delete](#delete-6)                                   | [Replace](#replace-5)                                 |                                                       |                                                       |
+| **[Users](#users)**                                   | [Create](#create-7)                                   | [List](#list-7)                                       | [Get](#get-3)                                         | [Delete](#delete-7)                                   | [Replace](#replace-6)                                 |                                                       |
+| **[Permissions](#permissions)**                       | [Create](#create-8)                                   | [List](#list-8)                                       | [Get](#get-4)                                         | [Delete](#delete-8)                                   | [Replace](#replace-7)                                 |                                                       |
+| **[Offers](#offers)**                                 | [Lists](#lists-9)                                     | [Get](#get-5)                                         | [Replace](#replace-8)                                 | [Query](#query-1)                                     |                                                       |                                                       |
+
 
 ## Setup
 
 ```swift
 AzureData.setup("cosmosDb name", key: "read-write key", keyType: .master)
 ```
-
-
-## Resources
-
-| [Databases](#databases)                               | [Collections](#collections)                           | [Documents](#documents)                               | [Attachments](#attachments)                           | [Stored Procedures](#stored-procedures)               | [User Defined Functions](#user-defined-functions)     |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| [Create](#create)                                     | [Create](#create-1)                                   | [Create](#create-2)                                   | [Create](#create-3)                                   | [Create](#create-4)                                   | [Create](#create-5)                                   |
-| [List](#list)                                         | [List](#list-1)                                       | [List](#list-2)                                       | [List](#list-3)                                       | [List](#list-4)                                       | [List](#list-5)                                       |
-| [Get](#get)                                           | [Get](#get-1)                                         | [Get](#get-2)                                         | [Delete](#delete-3)                                   | [Delete](#delete-4)                                   | [Delete](#delete-5)                                   |
-| [Delete](#delete)                                     | [Delete](#delete-1)                                   | [Delete](#delete-2)                                   | [Replace](#replace-2)                                 | [Replace](#replace-3)                                 | [Replace](#replace-4)                                 |
-|                                                       | [Replace](#replace)                                   | [Replace](#replace-1)                                 |                                                       | [Execute](#execute)                                   |                                                       |
-|                                                       |                                                       | [Query](#query)                                       |                                                       |                                                       |                                                       |
-
-| [Triggers](#triggers)                                 | [Users](#users)                                       | [Permissions](#permissions)                           | [Offers](#offers)                                     |
-| ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
-| [Create](#create-6)                                   | [Create](#create-7)                                   | [Create](#create-8)                                   | [Lists](#lists-9)                                     |
-| [List](#list-6)                                       | [List](#list-7)                                       | [List](#list-8)                                       | [Get](#get-5)                                         |
-| [Delete](#delete-6)                                   | [Get](#get-3)                                         | [Get](#get-4)                                         | [Replace](#replace-8)                                 |
-| [Replace](#replace-5)                                 | [Delete](#delete-7)                                   | [Delete](#delete-8)                                   | [Query](#query-1)                                     |
-|                                                       | [Replace](#replace-6)                                 | [Replace](#replace-7)                                 |                                                       |
-
 
 
 ## Databases

@@ -5,9 +5,12 @@
 | AzureData  | [![Build status][app-data-build-status]][app-data-build-master] |
 
 
+
 # Usage
 
+
 ## Setup
+
 
 ```swift
 AzureData.setup("cosmosDb name", key: "read-write key", keyType: .master)
@@ -16,7 +19,7 @@ AzureData.setup("cosmosDb name", key: "read-write key", keyType: .master)
 
 ## Resources
 
-| Resource                                              | Create                                                | List                                                  | Get                                                   | Delete                                                | Replace                                               | Query/Execute                                         |
+|                                                       |                                                       |                                                       |                                                       |                                                       |                                                       |                                                       |
 | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
 | **[Databases](#databases)**                           | [Create](#create)                                     | [List](#list)                                         | [Get](#get)                                           | [Delete](#delete)                                     |                                                       |                                                       |
 | **[Collections](#collections)**                       | [Create](#create-1)                                   | [List](#list-1)                                       | [Get](#get-1)                                         | [Delete](#delete-1)                                   | [Replace](#replace)                                   |                                                       |

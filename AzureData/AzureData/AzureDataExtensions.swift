@@ -64,6 +64,7 @@ public extension ADDatabase {
 }
 
 
+
 public extension ADCollection {
     
     // MARK - Documents
@@ -177,12 +178,71 @@ public extension ADCollection {
 }
 
 
+
 public extension ADDocument {
     
+    // MARK: - Attachments
+    
+    // create
+    public func create (attachmentWithId attachmentId: String, contentType: String, andMediaUrl mediaUrl: URL, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+        return SessionManager.default.create(attachmentWithId: attachmentId, contentType: contentType, andMediaUrl: mediaUrl, onDocument: self, callback: callback)
+    }
+    
+    public func create (attachmentWithId attachmentId: String, contentType: String, name mediaName: String, with media: Data, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+        return SessionManager.default.create(attachmentWithId: attachmentId, contentType: contentType, name: mediaName, with: media, onDocument: self, callback: callback)
+    }
+    
+    // list
+    public func getAttachemnts (callback: @escaping (ADListResponse<ADAttachment>) -> ()) {
+        return SessionManager.default.get (attachmentsOn: self, callback: callback)
+    }
+    
+    // delete
+    public func delete (_ attachment: ADAttachment, callback: @escaping (Bool) -> ()) {
+        return SessionManager.default.delete (attachment, onDocument: self, callback: callback)
+    }
+    
+    // replace
+    public func replace (attachmentWithId attachmentId: String, contentType: String, andMediaUrl mediaUrl: URL, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+        return SessionManager.default.replace(attachmentWithId: attachmentId, contentType: contentType, andMediaUrl: mediaUrl, onDocument: self, callback: callback)
+    }
+    
+    public func replace (attachmentWithId attachmentId: String, contentType: String, name mediaName: String, with media: Data, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+        return SessionManager.default.replace(attachmentWithId: attachmentId, contentType: contentType, name: mediaName, with: media, onDocument: self, callback: callback)
+    }
 }
 
 
 
+public extension ADUser {
+    
+    // MARK: - Permissions
+    
+    // create
+    public func create (permissionWithId permissionId: String, mode permissionMode: ADPermissionMode, in resource: ADResource, callback: @escaping (ADResponse<ADPermission>) -> ()) {
+        return SessionManager.default.create (permissionWithId: permissionId, mode: permissionMode, in: resource, forUser: self, callback: callback)
+    }
+    
+    // list
+    public func getPermissions (callback: @escaping (ADListResponse<ADPermission>) -> ()) {
+        return SessionManager.default.get (permissionsFor: self, callback: callback)
+    }
+    
+    // get
+    public func get (permissionWithId permissionId: String,callback: @escaping (ADResponse<ADPermission>) -> ()) {
+        return SessionManager.default.get (permissionWithId: permissionId, forUser: self, callback: callback)
+    }
+    
+    // delete
+    public func delete (_ permission: ADPermission, callback: @escaping (Bool) -> ()) {
+        return SessionManager.default.delete (permission, forUser: self, callback: callback)
+    }
+    
+    // replace
+    public func replace (permissionWithId permissionId: String, mode permissionMode: ADPermissionMode, in resource: ADResource, callback: @escaping (ADResponse<ADPermission>) -> ()) {
+        return SessionManager.default.replace (permissionWithId: permissionId, mode: permissionMode, in: resource, forUser: self, callback: callback)
+    }
+}
 
 
 

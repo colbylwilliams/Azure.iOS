@@ -35,6 +35,12 @@ public struct ADResourceUri {
         let itemLink = getItemLink(forType: .permission, baseLink: baseLink, resourceId: resourceId)
         return getUrlLink(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
     }
+
+    func permission(atLink baseLink: String, withResourceId resourceId: String? = nil) -> (URL, String) {
+        let itemLink = getItemLink(forType: .permission, baseLink: baseLink, resourceId: resourceId)
+        return getUrlLinkForSelf(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
+    }
+
     
     func collection(_ databaseId: String, collectionId resourceId: String? = nil) -> (URL, String) {
         let baseLink = "dbs/\(databaseId)"
@@ -91,6 +97,12 @@ public struct ADResourceUri {
         let itemLink = getItemLink(forType: .attachment, baseLink: baseLink, resourceId: resourceId)
         return getUrlLink(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
     }
+    
+    func attachment(atLink baseLink: String, withResourceId resourceId: String? = nil) -> (URL, String) {
+        let itemLink = getItemLink(forType: .attachment, baseLink: baseLink, resourceId: resourceId)
+        return getUrlLinkForSelf(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
+    }
+
     
     func offer(_ resourceId: String? = nil) -> (URL, String) {
         let baseLink = ""

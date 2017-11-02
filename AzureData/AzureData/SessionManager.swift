@@ -416,6 +416,33 @@ open class SessionManager {
         return create(resourceUri: resourceUri, resourceType: .attachment, httpBody: media, additionalHeaders: headers, callback: callback)
     }
 
+    public func create(attachmentWithId attachmentId: String, contentType: String, andMediaUrl mediaUrl: URL, onDocument document: ADDocument, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+        
+        let resourceUri = baseUri?.attachment(atLink: document.selfLink!)
+        
+        let body = ADAttachment.jsonDict(attachmentId, contentType: contentType, media: mediaUrl)
+        
+        guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
+            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
+            return
+        }
+        
+        return create(resourceUri: resourceUri, resourceType: .attachment, httpBody: httpBody, callback: callback)
+    }
+    
+    public func create(attachmentWithId attachmentId: String, contentType: String, name mediaName: String, with media: Data, onDocument document: ADDocument, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+        
+        let resourceUri = baseUri?.attachment(atLink: document.selfLink!)
+        
+        let headers: [String:ADHttpRequestHeader] = [
+            contentType:.contentType,
+            mediaName:.slug
+        ]
+        
+        return create(resourceUri: resourceUri, resourceType: .attachment, httpBody: media, additionalHeaders: headers, callback: callback)
+    }
+
+    
     // list
     public func get (attachmentsOn documentId: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADListResponse<ADAttachment>) -> ()) {
         
@@ -424,10 +451,24 @@ open class SessionManager {
         return resources(resourceUri: resourceUri, resourceType: .attachment, callback: callback)
     }
 
+    public func get (attachmentsOn document: ADDocument, callback: @escaping (ADListResponse<ADAttachment>) -> ()) {
+        
+        let resourceUri = baseUri?.attachment(atLink: document.selfLink!)
+        
+        return resources(resourceUri: resourceUri, resourceType: .attachment, callback: callback)
+    }
+
     // delete
     public func delete (_ attachment: ADAttachment, onDocument documentId: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (Bool) -> ()) {
         
         let resourceUri = baseUri?.attachment(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachment.id)
+        
+        return delete(resourceUri: resourceUri, resourceType: .attachment, callback: callback)
+    }
+
+    public func delete (_ attachment: ADAttachment, onDocument document: ADDocument, callback: @escaping (Bool) -> ()) {
+        
+        let resourceUri = baseUri?.attachment(atLink: document.selfLink!, withResourceId: attachment.id)
         
         return delete(resourceUri: resourceUri, resourceType: .attachment, callback: callback)
     }
@@ -450,6 +491,32 @@ open class SessionManager {
     public func replace(attachmentWithId attachmentId: String, contentType: String, name mediaName: String, with media: Data, onDocument documentId: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
         
         let resourceUri = baseUri?.attachment(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId)
+        
+        let headers: [String:ADHttpRequestHeader] = [
+            contentType:.contentType,
+            mediaName:.slug
+        ]
+        
+        return replace(resourceUri: resourceUri, resourceType: .attachment, httpBody: media, additionalHeaders: headers, callback: callback)
+    }
+
+    public func replace(attachmentWithId attachmentId: String, contentType: String, andMediaUrl mediaUrl: URL, onDocument document: ADDocument, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+        
+        let resourceUri = baseUri?.attachment(atLink: document.selfLink!, withResourceId: attachmentId)
+        
+        let body = ADAttachment.jsonDict(attachmentId, contentType: contentType, media: mediaUrl)
+        
+        guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
+            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
+            return
+        }
+        
+        return replace(resourceUri: resourceUri, resourceType: .attachment, httpBody: httpBody, callback: callback)
+    }
+    
+    public func replace(attachmentWithId attachmentId: String, contentType: String, name mediaName: String, with media: Data, onDocument document: ADDocument, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+        
+        let resourceUri = baseUri?.attachment(atLink: document.selfLink!, withResourceId: attachmentId)
         
         let headers: [String:ADHttpRequestHeader] = [
             contentType:.contentType,
@@ -832,11 +899,32 @@ open class SessionManager {
         
         return create(resourceUri: resourceUri, resourceType: .permission, httpBody: httpBody, callback: callback)
     }
-    
+
+    public func create (permissionWithId permissionId: String, mode permissionMode: ADPermissionMode, in resource: ADResource, forUser user: ADUser, callback: @escaping (ADResponse<ADPermission>) -> ()) {
+        
+        let resourceUri = baseUri?.permission(atLink: user.selfLink!, withResourceId: permissionId)
+        
+        let body = ["id":permissionId, "permissionMode": permissionMode.rawValue, "resource":resource.selfLink!]
+        
+        guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
+            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
+            return
+        }
+        
+        return create(resourceUri: resourceUri, resourceType: .permission, httpBody: httpBody, callback: callback)
+    }
+
     // list
     public func get (permissionsFor userId: String, inDatabase databaseId: String, callback: @escaping (ADListResponse<ADPermission>) -> ()) {
         
         let resourceUri = baseUri?.permission(databaseId, userId: userId)
+        
+        return resources(resourceUri: resourceUri, resourceType: .permission, callback: callback)
+    }
+
+    public func get (permissionsFor user: ADUser, callback: @escaping (ADListResponse<ADPermission>) -> ()) {
+        
+        let resourceUri = baseUri?.permission(atLink: user.selfLink!)
         
         return resources(resourceUri: resourceUri, resourceType: .permission, callback: callback)
     }
@@ -849,6 +937,13 @@ open class SessionManager {
         return resource(resourceUri: resourceUri, resourceType: .permission, callback: callback)
     }
 
+    public func get (permissionWithId permissionId: String, forUser user: ADUser, callback: @escaping (ADResponse<ADPermission>) -> ()) {
+        
+        let resourceUri = baseUri?.permission(atLink: user.selfLink!, withResourceId: permissionId)
+        
+        return resource(resourceUri: resourceUri, resourceType: .permission, callback: callback)
+    }
+
     // delete
     public func delete (_ permission: ADPermission, forUser userId: String, inDatabase databaseId: String, callback: @escaping (Bool) -> ()) {
         
@@ -857,10 +952,31 @@ open class SessionManager {
         return delete(resourceUri: resourceUri, resourceType: .permission, callback: callback)
     }
 
+    public func delete (_ permission: ADPermission, forUser user: ADUser, callback: @escaping (Bool) -> ()) {
+        
+        let resourceUri = baseUri?.permission(atLink: user.selfLink!, withResourceId: permission.id)
+        
+        return delete(resourceUri: resourceUri, resourceType: .permission, callback: callback)
+    }
+
     // replace
     public func replace (permissionWithId permissionId: String, mode permissionMode: ADPermissionMode, in resource: ADResource, forUser userId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADPermission>) -> ()) {
         
         let resourceUri = baseUri?.permission(databaseId, userId: userId, permissionId: permissionId)
+        
+        let body: [String : Any] = ["id":permissionId, "permissionMode": permissionMode.rawValue, "resource": resource]
+        
+        guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
+            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
+            return
+        }
+        
+        return replace(resourceUri: resourceUri, resourceType: .permission, httpBody: httpBody, callback: callback)
+    }
+
+    public func replace (permissionWithId permissionId: String, mode permissionMode: ADPermissionMode, in resource: ADResource, forUser user: ADUser, callback: @escaping (ADResponse<ADPermission>) -> ()) {
+        
+        let resourceUri = baseUri?.permission(atLink: user.selfLink!, withResourceId: permissionId)
         
         let body: [String : Any] = ["id":permissionId, "permissionMode": permissionMode.rawValue, "resource": resource]
         

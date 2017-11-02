@@ -7,6 +7,64 @@
 
 # Usage
 
+- **[Setup][#setup]**
+- **[Databases][#databases]**
+    - [Create][#create]
+    - [List][#list]
+    - [Get][#get]
+    - [Delete][#delete]
+- **[Collections][#collections]**
+    - [Create][#create-1]
+    - [List][#list-1]
+    - [Get][#get-1]
+    - [Delete][#delete-1]
+    - [Replace][#replace]
+- **[Documents][#documents]**
+    - [Create][#create-2]
+    - [List][#list-2]
+    - [Get][#get-2]
+    - [Delete][#delete-2]
+    - [Replace][#replace-1]
+    - [Query][#query]
+- **[Attachments][#attachments]**
+    - [Create][#create-3]
+    - [List][#list-3]
+    - [Delete][#delete-3]
+    - [Replace][#replace-2]
+- **[Stored Procedures][#stored-procedures]**
+    - [Create][#create-4]
+    - [List][#list-4]
+    - [Delete][#delete-4]
+    - [Replace][#replace-3]
+    - [Execute][#execute]
+- **[User Defined Functions][#user-defined-functions]**
+    - [Create][#create-5]
+    - [List][#list-5]
+    - [Delete][#delete-5]
+    - [Replace][#replace-4]
+- **[Triggers][#triggers]**
+    - [Create][#create-6]
+    - [List][#list-6]
+    - [Delete][#delete-6]
+    - [Replace][#replace-5]
+- **[Users][#users]**
+    - [Create][#create-7]
+    - [List][#list-7]
+    - [Get][#get-3]
+    - [Delete][#delete-7]
+    - [Replace][#replace-6]
+- **[Permissions][#permissions]**
+    - [Create][#create-8]
+    - [List][#list-8]
+    - [Get][#get-4]
+    - [Delete][#delete-8]
+    - [Replace][#replace-7]
+- **[Offers][#offers]**
+    - [Lists][#lists-9]
+    - [Get][#get-5]
+    - [Replace][#replace-8]
+    - [Query][#query-1]
+
 
 ## Setup
 
@@ -557,7 +615,7 @@ AzureData.replace (permissionWithId: id, mode: .read, in: resource, forUser: use
 
 ## Offers
 
-#### Lists
+#### List
 ```swift
 AzureData.offers() { r in
 // offers = r.resource?.items

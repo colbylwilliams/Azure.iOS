@@ -9,9 +9,9 @@
 import Foundation
 
 extension Optional where Wrapped == String {
-	var valueOrEmpty: String {
-		return self ?? ""
-	}
+    var valueOrEmpty: String {
+        return self ?? ""
+    }
     
     var isNilOrEmpty: Bool {
         return self == nil || self!.isEmpty

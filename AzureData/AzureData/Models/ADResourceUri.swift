@@ -10,93 +10,93 @@ import Foundation
 
 // https://docs.microsoft.com/en-us/rest/api/documentdb/documentdb-resource-uri-syntax-for-rest
 public struct ADResourceUri {
-	let empty = ""
-	
-	let baseUri: String
-	
-	init(_ databaseaccount: String) {
-		baseUri = "https://\(databaseaccount).documents.azure.com"
-	}
-	
-	func database(_ resourceId: String? = nil) -> (URL, String) {
-		let baseLink = ""
+    let empty = ""
+    
+    let baseUri: String
+    
+    init(_ databaseaccount: String) {
+        baseUri = "https://\(databaseaccount).documents.azure.com"
+    }
+    
+    func database(_ resourceId: String? = nil) -> (URL, String) {
+        let baseLink = ""
         let itemLink = getItemLink(forType: .database, baseLink: baseLink, resourceId: resourceId)
         return getUrlLink(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
-	}
-	
-	func user(_ databaseId: String, userId resourceId: String? = nil) -> (URL, String) {
-		let baseLink = "dbs/\(databaseId)"
+    }
+    
+    func user(_ databaseId: String, userId resourceId: String? = nil) -> (URL, String) {
+        let baseLink = "dbs/\(databaseId)"
         let itemLink = getItemLink(forType: .user, baseLink: baseLink, resourceId: resourceId)
         return getUrlLink(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
-	}
-	
-	func permission(_ databaseId: String, userId: String, permissionId resourceId: String? = nil) -> (URL, String) {
-		let baseLink = "dbs/\(databaseId)/users/\(userId)"
+    }
+    
+    func permission(_ databaseId: String, userId: String, permissionId resourceId: String? = nil) -> (URL, String) {
+        let baseLink = "dbs/\(databaseId)/users/\(userId)"
         let itemLink = getItemLink(forType: .permission, baseLink: baseLink, resourceId: resourceId)
         return getUrlLink(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
-	}
-	
-	func collection(_ databaseId: String, collectionId resourceId: String? = nil) -> (URL, String) {
-		let baseLink = "dbs/\(databaseId)"
+    }
+    
+    func collection(_ databaseId: String, collectionId resourceId: String? = nil) -> (URL, String) {
+        let baseLink = "dbs/\(databaseId)"
         let itemLink = getItemLink(forType: .collection, baseLink: baseLink, resourceId: resourceId)
         return getUrlLink(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
-	}
-	
-	func storedProcedure(_ databaseId: String, collectionId: String, storedProcedureId resourceId: String? = nil) -> (URL, String) {
-		let baseLink = "dbs/\(databaseId)/colls/\(collectionId)"
+    }
+    
+    func storedProcedure(_ databaseId: String, collectionId: String, storedProcedureId resourceId: String? = nil) -> (URL, String) {
+        let baseLink = "dbs/\(databaseId)/colls/\(collectionId)"
         let itemLink = getItemLink(forType: .storedProcedure, baseLink: baseLink, resourceId: resourceId)
         return getUrlLink(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
-	}
+    }
 
     func storedProcedure(atLink baseLink: String, withResourceId resourceId: String? = nil) -> (URL, String) {
         let itemLink = getItemLink(forType: .storedProcedure, baseLink: baseLink, resourceId: resourceId)
         return getUrlLinkForSelf(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
     }
 
-	func trigger(_ databaseId: String, collectionId: String, triggerId resourceId: String? = nil) -> (URL, String) {
-		let baseLink = "dbs/\(databaseId)/colls/\(collectionId)"
+    func trigger(_ databaseId: String, collectionId: String, triggerId resourceId: String? = nil) -> (URL, String) {
+        let baseLink = "dbs/\(databaseId)/colls/\(collectionId)"
         let itemLink = getItemLink(forType: .trigger, baseLink: baseLink, resourceId: resourceId)
         return getUrlLink(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
-	}
+    }
 
     func trigger(atLink baseLink: String, withResourceId resourceId: String? = nil) -> (URL, String) {
         let itemLink = getItemLink(forType: .trigger, baseLink: baseLink, resourceId: resourceId)
         return getUrlLinkForSelf(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
     }
 
-	func udf(_ databaseId: String, collectionId: String, udfId resourceId: String? = nil) -> (URL, String) {
-		let baseLink = "dbs/\(databaseId)/colls/\(collectionId)"
+    func udf(_ databaseId: String, collectionId: String, udfId resourceId: String? = nil) -> (URL, String) {
+        let baseLink = "dbs/\(databaseId)/colls/\(collectionId)"
         let itemLink = getItemLink(forType: .udf, baseLink: baseLink, resourceId: resourceId)
         return getUrlLink(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
-	}
+    }
 
     func udf(atLink baseLink: String, withResourceId resourceId: String? = nil) -> (URL, String) {
         let itemLink = getItemLink(forType: .udf, baseLink: baseLink, resourceId: resourceId)
         return getUrlLinkForSelf(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
     }
 
-	func document(inDatabase databaseId: String, inCollection collectionId: String, withId resourceId: String? = nil) -> (URL, String) {
-		let baseLink = "dbs/\(databaseId)/colls/\(collectionId)"
+    func document(inDatabase databaseId: String, inCollection collectionId: String, withId resourceId: String? = nil) -> (URL, String) {
+        let baseLink = "dbs/\(databaseId)/colls/\(collectionId)"
         let itemLink = getItemLink(forType: .document, baseLink: baseLink, resourceId: resourceId)
         return getUrlLink(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
-	}
+    }
 
     func document(atLink baseLink: String, withResourceId resourceId: String? = nil) -> (URL, String) {
         let itemLink = getItemLink(forType: .document, baseLink: baseLink, resourceId: resourceId)
         return getUrlLinkForSelf(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
     }
     
-	func attachment(_ databaseId: String, collectionId: String, documentId: String, attachmentId resourceId: String? = nil) -> (URL, String) {
-		let baseLink = "dbs/\(databaseId)/colls/\(collectionId)/docs/\(documentId)"
+    func attachment(_ databaseId: String, collectionId: String, documentId: String, attachmentId resourceId: String? = nil) -> (URL, String) {
+        let baseLink = "dbs/\(databaseId)/colls/\(collectionId)/docs/\(documentId)"
         let itemLink = getItemLink(forType: .attachment, baseLink: baseLink, resourceId: resourceId)
         return getUrlLink(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
-	}
-	
-	func offer(_ resourceId: String? = nil) -> (URL, String) {
-		let baseLink = ""
+    }
+    
+    func offer(_ resourceId: String? = nil) -> (URL, String) {
+        let baseLink = ""
         let itemLink = getItemLink(forType: .offer, baseLink: baseLink, resourceId: resourceId)
-		return getUrlLink(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
-	}
+        return getUrlLink(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
+    }
 
     fileprivate func getItemLink(forType type: ADResourceType, baseLink: String, resourceId: String?) -> String {
         

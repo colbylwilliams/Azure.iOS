@@ -9,14 +9,14 @@
 import Foundation
 
 public class ADPartitionKeyRange: ADResource {
-	
-	let parentsKey = "parents"
+    
+    let parentsKey = "parents"
 
-	public private(set) var parents: String?
+    public private(set) var parents: String?
 
-	required public init?(fromJson dict: [String:Any]) {
-		super.init(fromJson: dict)
+    required public init?(fromJson dict: [String:Any]) {
+        super.init(fromJson: dict)
 
-		parents = dict[parentsKey] as? String
-	}
+        parents = dict[parentsKey] as? String
+    }
 }

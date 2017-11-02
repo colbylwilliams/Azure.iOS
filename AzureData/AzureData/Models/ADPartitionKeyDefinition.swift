@@ -9,20 +9,20 @@
 import Foundation
 
 public class ADPartitionKeyDefinition {
-	
-	let pathsKey = "paths"
-	
-	public private(set) var paths: [String] = []
-	
-	public init?(fromJson dict: [String:Any]) {
-		if let paths = dict[pathsKey] as? [String] {
-			for path in paths {
-				self.paths.append(path)
-			}
-		}
-	}
-	
-	public var dictionary: [String:Any] {
-		return [ pathsKey:paths	]
-	}
+    
+    let pathsKey = "paths"
+    
+    public private(set) var paths: [String] = []
+    
+    public init?(fromJson dict: [String:Any]) {
+        if let paths = dict[pathsKey] as? [String] {
+            for path in paths {
+                self.paths.append(path)
+            }
+        }
+    }
+    
+    public var dictionary: [String:Any] {
+        return [ pathsKey:paths ]
+    }
 }

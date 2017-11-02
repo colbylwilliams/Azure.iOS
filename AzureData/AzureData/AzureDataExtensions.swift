@@ -15,17 +15,17 @@ public extension ADDatabase {
     
     //create
     public func create (collectionWithId id: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
-		return SessionManager.default.create(collectionWithId: id, inDatabase: self.id, callback: callback)
+        return SessionManager.default.create(collectionWithId: id, inDatabase: self.id, callback: callback)
     }
     
     // list
     public func getCollections (callback: @escaping (ADListResponse<ADCollection>) -> ()) {
-		return SessionManager.default.get(collectionsIn: self.id, callback: callback)
+        return SessionManager.default.get(collectionsIn: self.id, callback: callback)
     }
     
     // get
     public func get (collectionWithId collectionId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
-		return SessionManager.default.get(collectionWithId: collectionId, inDatabase: self.id, callback: callback)
+        return SessionManager.default.get(collectionWithId: collectionId, inDatabase: self.id, callback: callback)
     }
     
     //delete
@@ -56,46 +56,46 @@ public extension ADDatabase {
     public func delete (_ user: ADUser, callback: @escaping (Bool) -> ()) {
         return SessionManager.default.delete (user, fromDatabase: self.id, callback: callback)
     }
-	
-	// replace
-	public func replace (userWithId id: String, with newUserId: String, in databaseId: String, callback: @escaping (ADResponse<ADUser>) -> ()) {
-		return SessionManager.default.replace (userWithId: id, with: newUserId, inDatabase: databaseId, callback: callback)
-	}
+    
+    // replace
+    public func replace (userWithId id: String, with newUserId: String, in databaseId: String, callback: @escaping (ADResponse<ADUser>) -> ()) {
+        return SessionManager.default.replace (userWithId: id, with: newUserId, inDatabase: databaseId, callback: callback)
+    }
 }
 
 
 public extension ADCollection {
-	
+    
     // MARK - Documents
     
     // create
     public func create<T: ADDocument> (_ document: T, callback: @escaping (ADResponse<T>) -> ()) {
-		return SessionManager.default.create(document, in: self, callback: callback)
+        return SessionManager.default.create(document, in: self, callback: callback)
     }
     
     // list
     public func get<T: ADDocument> (documentsAs documentType:T.Type, callback: @escaping (ADListResponse<T>) -> ()) {
-		return SessionManager.default.get(documentsAs: documentType, in: self, callback: callback)
+        return SessionManager.default.get(documentsAs: documentType, in: self, callback: callback)
     }
     
     // get
     public func get<T: ADDocument> (documentWithResourceId id: String, as documentType:T.Type, callback: @escaping (ADResponse<T>) -> ()) {
-		return SessionManager.default.get(documentWithId: id, as: documentType, in: self, callback: callback)
+        return SessionManager.default.get(documentWithId: id, as: documentType, in: self, callback: callback)
     }
     
     // delete
     public func delete (_ document: ADDocument, callback: @escaping (Bool) -> ()) {
-		return SessionManager.default.delete(document, from: self, callback: callback)
+        return SessionManager.default.delete(document, from: self, callback: callback)
     }
     
     // replace
     public func replace<T: ADDocument> (_ document: T, callback: @escaping (ADResponse<T>) -> ()) {
-		return SessionManager.default.replace(document, in: self, callback: callback)
+        return SessionManager.default.replace(document, in: self, callback: callback)
     }
     
     // query
-	public func query (documentsWith query: ADQuery, callback: @escaping (ADListResponse<ADDocument>) -> ()) {
-		return SessionManager.default.query(documentsIn: self, with: query, callback: callback)
+    public func query (documentsWith query: ADQuery, callback: @escaping (ADListResponse<ADDocument>) -> ()) {
+        return SessionManager.default.query(documentsIn: self, with: query, callback: callback)
     }
     
     
@@ -104,12 +104,12 @@ public extension ADCollection {
     
     // create
     public func create (storedProcedureWithId id: String, andBody body: String, callback: @escaping (ADResponse<ADStoredProcedure>) -> ()) {
-		return SessionManager.default.create (storedProcedureWithId: id, andBody: body, in: self, callback: callback)
+        return SessionManager.default.create (storedProcedureWithId: id, andBody: body, in: self, callback: callback)
     }
     
     // list
     public func getStoredProcedures (callback: @escaping (ADListResponse<ADStoredProcedure>) -> ()) {
-		return SessionManager.default.get (storedProceduresIn: self, callback: callback)
+        return SessionManager.default.get (storedProceduresIn: self, callback: callback)
     }
     
     // delete

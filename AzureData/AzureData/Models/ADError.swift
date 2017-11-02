@@ -10,39 +10,39 @@ import Foundation
 
 public class ADError: Error /*:ADResource*/ {
 
-	let codeKey 	= "code"
-	let messageKey 	= "message"
+    let codeKey     = "code"
+    let messageKey  = "message"
 
-	public private(set) var code:	 String
-	public private(set) var message: String
+    public private(set) var code:    String
+    public private(set) var message: String
 
-	required public init?(fromJson dict: [String:Any]) {
-		//super.init(fromJson: dict)
-		
-		if let code = dict[codeKey] as? String { self.code = code } else { self.code = "error" }
-		if let message = dict[messageKey] as? String { self.message = message } else { self.message = "unknown error" }
-	}
-	
-	init() {
-		code = "error"
-		message = "unknown error"
-	}
-	
-	init(_ message: String) {
-		code = "error"
-		self.message = message
-	}
-	
-	init (error: Error) {
-		code = "error"
-		message = error.localizedDescription
-	}
-	
-	public func printLog() {
-		print("")
-		print("ADError")
-		print("\t\(code)")
-		print("\t\(message)")
-		print("")
-	}
+    required public init?(fromJson dict: [String:Any]) {
+        //super.init(fromJson: dict)
+        
+        if let code = dict[codeKey] as? String { self.code = code } else { self.code = "error" }
+        if let message = dict[messageKey] as? String { self.message = message } else { self.message = "unknown error" }
+    }
+    
+    init() {
+        code = "error"
+        message = "unknown error"
+    }
+    
+    init(_ message: String) {
+        code = "error"
+        self.message = message
+    }
+    
+    init (error: Error) {
+        code = "error"
+        message = error.localizedDescription
+    }
+    
+    public func printLog() {
+        print("")
+        print("ADError")
+        print("\t\(code)")
+        print("\t\(message)")
+        print("")
+    }
 }

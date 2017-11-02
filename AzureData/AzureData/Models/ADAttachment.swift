@@ -9,19 +9,19 @@
 import Foundation
 
 public class ADAttachment: ADResource {
-	
-	static let contentTypeKey 	= "contentType"
-	static let mediaLinkKey 	= "media"
+    
+    static let contentTypeKey   = "contentType"
+    static let mediaLinkKey     = "media"
 
-	public private(set) var contentType:String?
-	public private(set) var mediaLink: 	String?
+    public private(set) var contentType:String?
+    public private(set) var mediaLink:  String?
 
-	required public init?(fromJson dict: [String:Any]) {
-		super.init(fromJson: dict)
-		
-		contentType = dict[ADAttachment.contentTypeKey] as? String
-		mediaLink = dict[ADAttachment.mediaLinkKey] as? String
-	}
+    required public init?(fromJson dict: [String:Any]) {
+        super.init(fromJson: dict)
+        
+        contentType = dict[ADAttachment.contentTypeKey] as? String
+        mediaLink = dict[ADAttachment.mediaLinkKey] as? String
+    }
     
     public static func jsonDict(_ id: String, contentType: String, media: URL) -> [String:Any] {
         return [

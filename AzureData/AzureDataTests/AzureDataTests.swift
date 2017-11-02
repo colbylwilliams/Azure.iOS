@@ -19,18 +19,18 @@ class AzureDataTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-		
-		// AzureData.setup("<Database Name>", key: "<Database Key>", keyType: .master, verboseLogging: true)
+        
+        // AzureData.setup("<Database Name>", key: "<Database Key>", keyType: .master, verboseLogging: true)
 
-		let bundle = Bundle(for: type(of: self))
-		
-		if let accountName = bundle.infoDictionary?["ADDatabaseAccountName"] as? String,
-			let accountKey  = bundle.infoDictionary?["ADDatabaseAccountKey"] as? String {
-		
-			AzureData.setup(accountName, key: accountKey, verboseLogging: true)
-		}
-		
-		XCTAssert(AzureData.isSetup(), "AzureData setup failed")
+        let bundle = Bundle(for: type(of: self))
+        
+        if let accountName = bundle.infoDictionary?["ADDatabaseAccountName"] as? String,
+            let accountKey  = bundle.infoDictionary?["ADDatabaseAccountKey"] as? String {
+        
+            AzureData.setup(accountName, key: accountKey, verboseLogging: true)
+        }
+        
+        XCTAssert(AzureData.isSetup(), "AzureData setup failed")
     }
     
     
@@ -41,9 +41,9 @@ class AzureDataTests: XCTestCase {
     
     
     func testDatabaseIsCreatedAndDeleted() {
-		
-		XCTAssert(AzureData.isSetup(), "AzureData in not Setup")
-		
+        
+        XCTAssert(AzureData.isSetup(), "AzureData in not Setup")
+        
         let createExpectation = self.expectation(description: "should create and return database")
         let deleteExpectation = self.expectation(description: "should delete database")
         
@@ -51,7 +51,7 @@ class AzureDataTests: XCTestCase {
         var deleteSuccess = false
 
         // Create
-		AzureData.create(databaseWithId: databaseId) { r in
+        AzureData.create(databaseWithId: databaseId) { r in
             createResponse = r
             createExpectation.fulfill()
         }
@@ -73,9 +73,9 @@ class AzureDataTests: XCTestCase {
     
     
     func testCollectionIsCreatedAndDeleted() {
-		
-		XCTAssert(AzureData.isSetup(), "AzureData in not Setup")
-		
+        
+        XCTAssert(AzureData.isSetup(), "AzureData in not Setup")
+        
         let createExpectation = self.expectation(description: "should create and return database")
         let deleteExpectation = self.expectation(description: "should delete database")
         
@@ -83,7 +83,7 @@ class AzureDataTests: XCTestCase {
         var deleteSuccess = false
 
         // Create
-		AzureData.create(collectionWithId: collectionId, inDatabase: collectionId) { r in
+        AzureData.create(collectionWithId: collectionId, inDatabase: collectionId) { r in
             createResponse = r
             createExpectation.fulfill()
         }
@@ -105,9 +105,9 @@ class AzureDataTests: XCTestCase {
 
     
     func testDocumentIsCreatedAndDeleted() {
-		
-		XCTAssert(AzureData.isSetup(), "AzureData in not Setup")
-		
+        
+        XCTAssert(AzureData.isSetup(), "AzureData in not Setup")
+        
         let createExpectation = self.expectation(description: "should create and return database")
         let deleteExpectation = self.expectation(description: "should delete database")
         
@@ -122,8 +122,8 @@ class AzureDataTests: XCTestCase {
         document["customProperty"] = "customPropertyValue"
 
         // Create
-		
-		AzureData.create(document, inCollection: documentId, inDatabase: documentId) { r in
+        
+        AzureData.create(document, inCollection: documentId, inDatabase: documentId) { r in
             createResponse = r
             createExpectation.fulfill()
         }
@@ -135,7 +135,7 @@ class AzureDataTests: XCTestCase {
         XCTAssertEqual(createResponse!.resource!["customProperty"] as! String, "customPropertyValue")
         
         // Delete
-		AzureData.delete(createResponse!.resource!, fromCollection: documentId, inDatabase: documentId) { s in
+        AzureData.delete(createResponse!.resource!, fromCollection: documentId, inDatabase: documentId) { s in
             deleteSuccess = s
             deleteExpectation.fulfill()
         }

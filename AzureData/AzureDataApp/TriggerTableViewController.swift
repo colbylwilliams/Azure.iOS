@@ -11,25 +11,25 @@ import AzureData
 
 class TriggerTableViewController: UITableViewController {
 
-	@IBOutlet var addButton: UIBarButtonItem!
-	
-	var database: ADDatabase!
-	var collection: ADCollection!
+    @IBOutlet var addButton: UIBarButtonItem!
+    
+    var database: ADDatabase!
+    var collection: ADCollection!
 
-	var resources: [ADTrigger] = []
+    var resources: [ADTrigger] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-		//refreshData()
-		
-		navigationItem.rightBarButtonItems = [addButton, editButtonItem]
+        //refreshData()
+        
+        navigationItem.rightBarButtonItems = [addButton, editButtonItem]
     }
 
-	
-	func refreshData() {
+    
+    func refreshData() {
         //AzureData.get(triggersIn: collection.id, inDatabase: database.id) { r in
-		collection.getTriggers() { r in
+        collection.getTriggers() { r in
             debugPrint(r.result)
             if let items = r.resource?.items {
                 //for item in items { item.printLog()    }
@@ -42,42 +42,42 @@ class TriggerTableViewController: UITableViewController {
                 self.refreshControl!.endRefreshing()
             }
         }
-	}
-	
-	
-	func showErrorAlert (_ error: ADError) {
-		let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-		alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-		present(alertController, animated: true) { }
-	}
+    }
+    
+    
+    func showErrorAlert (_ error: ADError) {
+        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
+        present(alertController, animated: true) { }
+    }
 
-	
-	@IBAction func addButtonTouchUpInside(_ sender: Any) { }
-	
-	
-	@IBAction func refreshControlValueChanged(_ sender: Any) { refreshData() }
-	
-	
-	// MARK: - Table view data source
-	
-	override func numberOfSections(in tableView: UITableView) -> Int { return 1 }
-	
-	
-	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return resources.count }
-	
-	
-	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-		let cell = tableView.dequeueReusableCell(withIdentifier: "resourceCell", for: indexPath)
-		
-		let resource = resources[indexPath.row]
-		
-		cell.textLabel?.text = resource.id
-		cell.detailTextLabel?.text = resource.resourceId
-		
-		return cell
-	}
+    
+    @IBAction func addButtonTouchUpInside(_ sender: Any) { }
+    
+    
+    @IBAction func refreshControlValueChanged(_ sender: Any) { refreshData() }
+    
+    
+    // MARK: - Table view data source
+    
+    override func numberOfSections(in tableView: UITableView) -> Int { return 1 }
+    
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { return resources.count }
+    
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "resourceCell", for: indexPath)
+        
+        let resource = resources[indexPath.row]
+        
+        cell.textLabel?.text = resource.id
+        cell.detailTextLabel?.text = resource.resourceId
+        
+        return cell
+    }
 
-	
+    
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction.init(style: .destructive, title: "Delete") { (action, view, callback) in
             self.deleteResource(at: indexPath, from: tableView, callback: callback)
@@ -95,7 +95,7 @@ class TriggerTableViewController: UITableViewController {
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
         //AzureData.delete(resources[indexPath.row], fromCollection: collection.id, inDatabase: database.id) { success in
-		collection.delete(self.resources[indexPath.row]) { success in
+        collection.delete(self.resources[indexPath.row]) { success in
             if success {
                 self.resources.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .automatic)

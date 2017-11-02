@@ -9,20 +9,20 @@
 import Foundation
 
 public class ADConflict: ADResource {
-	
-	let operationKindKey 	= "operationKind"
-	let resourceTypeKey 	= "resourceType"
-	let sourceResourceIdKey	= "sourceResourceId"
-	
-	public private(set) var operationKind: 	 String?
-	public private(set) var resourceType: 	 String?
-	public private(set) var sourceResourceId:String?
+    
+    let operationKindKey    = "operationKind"
+    let resourceTypeKey     = "resourceType"
+    let sourceResourceIdKey = "sourceResourceId"
+    
+    public private(set) var operationKind:   String?
+    public private(set) var resourceType:    String?
+    public private(set) var sourceResourceId:String?
 
-	required public init?(fromJson dict: [String:Any]) {
-		super.init(fromJson: dict)
-		
-		operationKind = dict[operationKindKey] as? String
-		resourceType = dict[resourceTypeKey] as? String
-		sourceResourceId = dict[sourceResourceIdKey] as? String
-	}
+    required public init?(fromJson dict: [String:Any]) {
+        super.init(fromJson: dict)
+        
+        operationKind = dict[operationKindKey] as? String
+        resourceType = dict[resourceTypeKey] as? String
+        sourceResourceId = dict[sourceResourceIdKey] as? String
+    }
 }

@@ -10,14 +10,14 @@ import Foundation
 
 public class ADUserDefinedFunction: ADResource {
 
-	let bodyKey = "body"
+    let bodyKey = "body"
 
-	public private(set) var body: String?
+    public private(set) var body: String?
 
-	required public init?(fromJson dict: [String:Any]) {
-		super.init(fromJson: dict)
+    required public init?(fromJson dict: [String:Any]) {
+        super.init(fromJson: dict)
 
-		body = dict[bodyKey] as? String
-	}
+        body = dict[bodyKey] as? String
+    }
 }
  

@@ -10,13 +10,13 @@ import Foundation
 
 public class ADUser: ADResource {
 
-	let permissionsLinkKey = "permissionsLink"
+    let permissionsLinkKey = "permissionsLink"
 
-	public private(set) var permissionsLink: String?
+    public private(set) var permissionsLink: String?
 
-	required public init?(fromJson dict: [String:Any]) {
-		super.init(fromJson: dict)
+    required public init?(fromJson dict: [String:Any]) {
+        super.init(fromJson: dict)
 
-		permissionsLink = dict[permissionsLinkKey] as? String
-	}
+        permissionsLink = dict[permissionsLinkKey] as? String
+    }
 }

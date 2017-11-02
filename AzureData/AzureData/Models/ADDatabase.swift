@@ -9,28 +9,28 @@
 import Foundation
 
 public class ADDatabase: ADResource {
-	
-	let collectionsLinkKey = "_colls"
-	let usersLinkKey = 		 "_users"
-	
-	public private(set) var collectionsLink: String?
-	public private(set) var usersLink: 		 String?
-	
+    
+    let collectionsLinkKey = "_colls"
+    let usersLinkKey =       "_users"
+    
+    public private(set) var collectionsLink: String?
+    public private(set) var usersLink:       String?
+    
     public override init(_ id: String) {
         super.init(id)
     }
     
-	required public init?(fromJson dict: [String:Any]) {
-		super.init(fromJson: dict)
-		
-		collectionsLink = dict[collectionsLinkKey] 	as? String
-		usersLink 		= dict[usersLinkKey] 		as? String
-	}
-	
-	override public var dictionary: [String : Any] {
-		return super.dictionary.merging([
-			collectionsLinkKey:collectionsLink.valueOrEmpty,
-			usersLinkKey:usersLink.valueOrEmpty])
-		{ (_, new) in new }
-	}
+    required public init?(fromJson dict: [String:Any]) {
+        super.init(fromJson: dict)
+        
+        collectionsLink = dict[collectionsLinkKey]  as? String
+        usersLink       = dict[usersLinkKey]        as? String
+    }
+    
+    override public var dictionary: [String : Any] {
+        return super.dictionary.merging([
+            collectionsLinkKey:collectionsLink.valueOrEmpty,
+            usersLinkKey:usersLink.valueOrEmpty])
+        { (_, new) in new }
+    }
 }

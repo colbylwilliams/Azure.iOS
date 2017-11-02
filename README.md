@@ -2,7 +2,7 @@
 
 | App        | Status          |
 | ---------- | --------------- |
-| AzureData  | ![Build status][app-data-build-status] |
+| AzureData  | [![Build status][app-data-build-status]][app-data-build-master] |
 
 
 # Usage
@@ -587,3 +587,4 @@ AzureData.get (offerWithId: id) { r in
 
 
 [app-data-build-status]:https://build.mobile.azure.com/v0.1/apps/359067a7-aa63-4c29-ac2e-bd9d29c086dc/branches/master/badge
+[app-data-build-master]:https://mobile.azure.com/orgs/Azure.Mobile/apps/AzureDataApp/build/branches/master

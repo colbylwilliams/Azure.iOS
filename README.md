@@ -33,7 +33,7 @@ AzureData.setup("cosmosDb name", key: "read-write key", keyType: .master)
 | [Delete](#delete-6)                                   | [Get](#get-3)                                         | [Get](#get-4)                                         | [Replace](#replace-8)                                 |
 | [Replace](#replace-5)                                 | [Delete](#delete-7)                                   | [Delete](#delete-8)                                   | [Query](#query-1)                                     |
 |                                                       | [Replace](#replace-6)                                 | [Replace](#replace-7)                                 |                                                       |
-|                                                       |                                                       |                                                       |                                                       |
+
 
 
 ## Databases

@@ -7,10 +7,17 @@
 
 # Usage
 
-**[Setup](#setup)**
+
+## Setup
+
+```swift
+AzureData.setup("cosmosDb name", key: "read-write key", keyType: .master)
+```
 
 
-| **[Databases](#databases)**                           | **[Collections](#collections)**                       | **[Documents](#documents)**                           | **[Attachments](#attachments)**                       | **[Stored Procedures](#stored-procedures)**           | **[User Defined Functions](#user-defined-functions)** | **[Triggers](#triggers)**                             | **[Users](#users)**                                   | **[Permissions](#permissions)**                       | **[Offers](#offers)**                                 |
+## Resources
+
+| [Databases](#databases)                               | [Collections](#collections)                           | [Documents](#documents)                               | [Attachments](#attachments)                           | [Stored Procedures](#stored-procedures)               | [User Defined Functions](#user-defined-functions)     | [Triggers](#triggers)                                 | [Users](#users)                                       | [Permissions](#permissions)                           | [Offers](#offers)                                     |
 | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- | ----------------------------------------------------- |
 | [Create](#create)                                     | [Create](#create-1)                                   | [Create](#create-2)                                   | [Create](#create-3)                                   | [Create](#create-4)                                   | [Create](#create-5)                                   | [Create](#create-6)                                   | [Create](#create-7)                                   | [Create](#create-8)                                   | [Lists](#lists-9)                                     |
 | [List](#list)                                         | [List](#list-1)                                       | [List](#list-2)                                       | [List](#list-3)                                       | [List](#list-4)                                       | [List](#list-5)                                       | [List](#list-6)                                       | [List](#list-7)                                       | [List](#list-8)                                       | [Get](#get-5)                                         |
@@ -19,17 +26,6 @@
 |                                                       | [Replace](#replace)                                   | [Replace](#replace-1)                                 |                                                       | [Execute](#execute)                                   |                                                       |                                                       | [Replace](#replace-6)                                 | [Replace](#replace-7)                                 |                                                       |
 |                                                       |                                                       | [Query](#query)                                       |                                                       |                                                       |                                                       |                                                       |                                                       |                                                       |                                                       |
 
-
-
-
-
-
-
-## Setup
-
-```swift
-AzureData.setup("cosmosDb name", key: "read-write key", keyType: .master)
-```
 
 
 ## Databases

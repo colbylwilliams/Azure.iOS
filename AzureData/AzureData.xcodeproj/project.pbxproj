@@ -29,6 +29,9 @@
 		B5619EBA1F994FB800D01EAD /* DatabaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EB91F994FB800D01EAD /* DatabaseTableViewController.swift */; };
 		B5619EBC1F994FE300D01EAD /* CollectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EBB1F994FE300D01EAD /* CollectionTableViewController.swift */; };
 		B5619EBE1F994FF100D01EAD /* DocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EBD1F994FF100D01EAD /* DocumentTableViewController.swift */; };
+		B57446AB1FB11F810048B20F /* ADDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57446AA1FB11F810048B20F /* ADDatabaseTests.swift */; };
+		B57446AD1FB11FEF0048B20F /* ADCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57446AC1FB11FEF0048B20F /* ADCollectionTests.swift */; };
+		B57446AF1FB120070048B20F /* ADDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57446AE1FB120070048B20F /* ADDocumentTests.swift */; };
 		B57C36A41F9B00E90035A106 /* UtilityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57C36A31F9B00E90035A106 /* UtilityExtensions.swift */; };
 		B587C71F1F9FACC4004A76F6 /* AzureDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B587C71E1F9FACC4004A76F6 /* AzureDataExtensions.swift */; };
 		B5958A051F9903F10023C0AF /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A041F9903F10023C0AF /* Models.swift */; };
@@ -134,6 +137,9 @@
 		B5619EB91F994FB800D01EAD /* DatabaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseTableViewController.swift; sourceTree = "<group>"; };
 		B5619EBB1F994FE300D01EAD /* CollectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewController.swift; sourceTree = "<group>"; };
 		B5619EBD1F994FF100D01EAD /* DocumentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTableViewController.swift; sourceTree = "<group>"; };
+		B57446AA1FB11F810048B20F /* ADDatabaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabaseTests.swift; sourceTree = "<group>"; };
+		B57446AC1FB11FEF0048B20F /* ADCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionTests.swift; sourceTree = "<group>"; };
+		B57446AE1FB120070048B20F /* ADDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDocumentTests.swift; sourceTree = "<group>"; };
 		B57C36A31F9B00E90035A106 /* UtilityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityExtensions.swift; sourceTree = "<group>"; };
 		B587C71E1F9FACC4004A76F6 /* AzureDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureDataExtensions.swift; sourceTree = "<group>"; };
 		B5958A041F9903F10023C0AF /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
@@ -302,6 +308,9 @@
 			children = (
 				B5F76C471F96A7AF001E8B11 /* AzureDataTests.swift */,
 				B5F76C491F96A7AF001E8B11 /* Info.plist */,
+				B57446AA1FB11F810048B20F /* ADDatabaseTests.swift */,
+				B57446AC1FB11FEF0048B20F /* ADCollectionTests.swift */,
+				B57446AE1FB120070048B20F /* ADDocumentTests.swift */,
 			);
 			path = AzureDataTests;
 			sourceTree = "<group>";
@@ -620,6 +629,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5F76C481F96A7AF001E8B11 /* AzureDataTests.swift in Sources */,
+				B57446AB1FB11F810048B20F /* ADDatabaseTests.swift in Sources */,
+				B57446AD1FB11FEF0048B20F /* ADCollectionTests.swift in Sources */,
+				B57446AF1FB120070048B20F /* ADDocumentTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

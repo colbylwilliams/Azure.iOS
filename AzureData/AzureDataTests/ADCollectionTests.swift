@@ -13,24 +13,28 @@ class ADCollectionTests: AzureDataTests {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
     }
     
     override func tearDown() {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
     }
     
-    func testCollectionIsCreatedAndDeleted() {
+    func testCollectionCrud() {
         
         let databaseId      = "CollectionTestsDatabase"
         let collectionId    = "CollectionTests"
         
-        let createExpectation = self.expectation(description: "should create and return collection")
-        let deleteExpectation = self.expectation(description: "should delete collection")
-        
+        let createExpectation   = self.expectation(description: "should create and return collection")
+        let listExpectation     = self.expectation(description: "should list and return collections")
+        let getExpectation      = self.expectation(description: "should get and return collection")
+        let deleteExpectation   = self.expectation(description: "should delete collection")
+
         var createResponse: ADResponse<ADCollection>?
+        var listResponse:   ADListResponse<ADCollection>?
+        var getResponse:    ADResponse<ADCollection>?
+        
         var deleteSuccess = false
+        
         
         // Create
         AzureData.create(collectionWithId: collectionId, inDatabase: databaseId) { r in
@@ -41,6 +45,29 @@ class ADCollectionTests: AzureDataTests {
         wait(for: [createExpectation], timeout: timeout)
         
         XCTAssertNotNil(createResponse?.resource)
+        
+        
+        // List
+        AzureData.get(collectionsIn: databaseId) { r in
+            listResponse = r
+            listExpectation.fulfill()
+        }
+        
+        wait(for: [listExpectation], timeout: timeout)
+        
+        XCTAssertNotNil(listResponse?.resource)
+        
+        
+        // Get
+        AzureData.get(collectionWithId: collectionId, inDatabase: databaseId) { r in
+            getResponse = r
+            getExpectation.fulfill()
+        }
+        
+        wait(for: [getExpectation], timeout: timeout)
+        
+        XCTAssertNotNil(getResponse?.resource)
+
         
         // Delete
         AzureData.delete(ADCollection(collectionId), fromDatabase: databaseId) { s in

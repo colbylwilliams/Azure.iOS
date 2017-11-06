@@ -184,7 +184,7 @@ public func replace (attachmentWithId attachmentId: String, contentType: String,
 }
 
 public func replace (attachmentWithId attachmentId: String, contentType: String, name mediaName: String, with media: Data, onDocument document: ADDocument, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
-    return SessionManager.default.replace (attachmentWithId: attachmentId, contentType: contentType, mediaName: name, with: media, onDocument: document, callback: callback)
+    return SessionManager.default.replace (attachmentWithId: attachmentId, contentType: contentType, name: mediaName, with: media, onDocument: document, callback: callback)
 }
 
 

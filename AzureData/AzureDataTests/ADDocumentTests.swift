@@ -30,18 +30,26 @@ class ADDocumentTests: AzureDataTests {
         
         let createExpectation   = self.expectation(description: "should create and return document")
         let listExpectation     = self.expectation(description: "should list and return documents")
+        let queryExpectation    = self.expectation(description: "should list and return documents")
         let getExpectation      = self.expectation(description: "should get and return document")
         let deleteExpectation   = self.expectation(description: "should delete document")
         
         var createResponse: ADResponse<ADDocument>?
         var listResponse:   ADListResponse<ADDocument>?
+        var queryResponse:  ADListResponse<ADDocument>?
         var getResponse:    ADResponse<ADDocument>?
         
         var deleteSuccess = false
 
+        let customStringKey = "customStringKey"
+        let customStringValue = "customStringValue"
+        let customNumberKey = "customNumberKey"
+        let customNumberValue = n
         
         let document = ADDocument(documentId)
-        document["customProperty"] = "customPropertyValue"
+        
+        document[customStringKey] = customStringValue
+        document[customNumberKey] = customNumberValue
         
         
         // Create
@@ -53,8 +61,10 @@ class ADDocumentTests: AzureDataTests {
         wait(for: [createExpectation], timeout: timeout)
         
         XCTAssertNotNil(createResponse?.resource)
-        XCTAssertNotNil(createResponse!.resource!["customProperty"] as? String)
-        XCTAssertEqual (createResponse!.resource!["customProperty"] as! String, "customPropertyValue")
+        XCTAssertNotNil(createResponse!.resource![customStringKey] as? String)
+        XCTAssertEqual (createResponse!.resource![customStringKey] as! String, customStringValue)
+        XCTAssertNotNil(createResponse!.resource![customNumberKey] as? Int)
+        XCTAssertEqual (createResponse!.resource![customNumberKey] as! Int, customNumberValue)
 
 
         // List
@@ -68,6 +78,27 @@ class ADDocumentTests: AzureDataTests {
         XCTAssertNotNil(listResponse?.resource)
 
         
+        // Query
+        let query = ADQuery.select()
+            .from(collectionId)
+            .where(customStringKey, is: customStringValue)
+            .and(customNumberKey, is: customNumberValue)
+            .orderBy("_etag", descending: true)
+        
+        AzureData.query(documentsIn: collectionId, inDatabase: databaseId, with: query) { r in
+            queryResponse = r
+            queryExpectation.fulfill()
+        }
+        
+        wait(for: [queryExpectation], timeout: timeout)
+        
+        XCTAssertNotNil(queryResponse?.resource?.items.first)
+        XCTAssertNotNil(queryResponse?.resource?.items.first![customStringKey] as? String)
+        XCTAssertEqual (queryResponse?.resource?.items.first![customStringKey] as! String, customStringValue)
+        XCTAssertNotNil(queryResponse?.resource?.items.first![customNumberKey] as? Int)
+        XCTAssertEqual (queryResponse?.resource?.items.first![customNumberKey] as! Int, customNumberValue)
+
+        
         // Get
         AzureData.get(documentWithId: documentId, as: ADDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
             getResponse = r
@@ -77,6 +108,10 @@ class ADDocumentTests: AzureDataTests {
         wait(for: [getExpectation], timeout: timeout)
         
         XCTAssertNotNil(getResponse?.resource)
+        XCTAssertNotNil(getResponse!.resource![customStringKey] as? String)
+        XCTAssertEqual (getResponse!.resource![customStringKey] as! String, customStringValue)
+        XCTAssertNotNil(getResponse!.resource![customNumberKey] as? Int)
+        XCTAssertEqual (getResponse!.resource![customNumberKey] as! Int, customNumberValue)
 
         
         // Delete

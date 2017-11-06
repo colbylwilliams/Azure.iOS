@@ -74,6 +74,8 @@
 		B5F76C891F96ACA6001E8B11 /* AzureDataAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C881F96ACA6001E8B11 /* AzureDataAppUITests.swift */; };
 		B5F76C9B1F96AF66001E8B11 /* AzureData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F76C391F96A7AF001E8B11 /* AzureData.framework */; };
 		B5F76C9C1F96AF66001E8B11 /* AzureData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B5F76C391F96A7AF001E8B11 /* AzureData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B5FC20B61FB12B5900283FDA /* ADDatabaseExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC20B51FB12B5900283FDA /* ADDatabaseExtensionsTests.swift */; };
+		B5FC20B81FB12B8E00283FDA /* ADCollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC20B71FB12B8E00283FDA /* ADCollectionExtensionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +191,8 @@
 		B5F76C841F96ACA6001E8B11 /* AzureDataAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AzureDataAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F76C881F96ACA6001E8B11 /* AzureDataAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureDataAppUITests.swift; sourceTree = "<group>"; };
 		B5F76C8A1F96ACA6001E8B11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5FC20B51FB12B5900283FDA /* ADDatabaseExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabaseExtensionsTests.swift; sourceTree = "<group>"; };
+		B5FC20B71FB12B8E00283FDA /* ADCollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionExtensionsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -311,6 +315,8 @@
 				B57446AA1FB11F810048B20F /* ADDatabaseTests.swift */,
 				B57446AC1FB11FEF0048B20F /* ADCollectionTests.swift */,
 				B57446AE1FB120070048B20F /* ADDocumentTests.swift */,
+				B5FC20B51FB12B5900283FDA /* ADDatabaseExtensionsTests.swift */,
+				B5FC20B71FB12B8E00283FDA /* ADCollectionExtensionsTests.swift */,
 			);
 			path = AzureDataTests;
 			sourceTree = "<group>";
@@ -630,8 +636,10 @@
 			files = (
 				B5F76C481F96A7AF001E8B11 /* AzureDataTests.swift in Sources */,
 				B57446AB1FB11F810048B20F /* ADDatabaseTests.swift in Sources */,
+				B5FC20B81FB12B8E00283FDA /* ADCollectionExtensionsTests.swift in Sources */,
 				B57446AD1FB11FEF0048B20F /* ADCollectionTests.swift in Sources */,
 				B57446AF1FB120070048B20F /* ADDocumentTests.swift in Sources */,
+				B5FC20B61FB12B5900283FDA /* ADDatabaseExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,9 +19,12 @@ class PermissionTableViewController: UITableViewController {
     
     var permissions: [ADPermission] = []
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         refreshData()
+        
         navigationItem.rightBarButtonItems = [addButton, editButtonItem]
     }
     
@@ -29,13 +32,13 @@ class PermissionTableViewController: UITableViewController {
     func refreshData() {
         AzureData.get(permissionsFor: user.id, inDatabase: database.id) { r in
             debugPrint(r.result)
-            if let items = r.resource?.items {
-                self.permissions = items
-                self.reloadOnMainThread()
-            } else if let error = r.error {
-                self.showErrorAlert(error)
-            }
             DispatchQueue.main.async {
+                if let items = r.resource?.items {
+                    self.permissions = items
+                    self.tableView.reloadData()
+                } else if let error = r.error {
+                    self.showErrorAlert(error)
+                }
                 if self.refreshControl?.isRefreshing ?? false {
                     self.refreshControl!.endRefreshing()
                 }
@@ -45,11 +48,9 @@ class PermissionTableViewController: UITableViewController {
     
     
     func showErrorAlert (_ error: ADError) {
-        DispatchQueue.main.async {
-            let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-            self.present(alertController, animated: true) { }
-        }
+        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
+        present(alertController, animated: true) { }
     }
 
     
@@ -76,11 +77,13 @@ class PermissionTableViewController: UITableViewController {
                 
                 AzureData.create(permissionWithId: id, mode: .read, in: self.collection, forUser: self.user.id, inDatabase: self.database.id) { r in
                     debugPrint(r.result)
-                    if let permission = r.resource {
-                        self.permissions.append(permission)
-                        self.reloadOnMainThread()
-                    } else if let error = r.error {
-                        self.showErrorAlert(error)
+                    DispatchQueue.main.async {
+                        if let permission = r.resource {
+                            self.permissions.append(permission)
+                            self.tableView.reloadData()
+                        } else if let error = r.error {
+                            self.showErrorAlert(error)
+                        }
                     }
                 }
             }
@@ -90,9 +93,6 @@ class PermissionTableViewController: UITableViewController {
     }
     
     
-    func reloadOnMainThread() { DispatchQueue.main.async { self.tableView.reloadData() } }
-    
-
     @IBAction func refreshControlValueChanged(_ sender: Any) { refreshData() }
     
     
@@ -150,11 +150,13 @@ class PermissionTableViewController: UITableViewController {
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
         AzureData.delete(permissions[indexPath.row], forUser: user.id, inDatabase: database.id) { success in
-            if success {
-                self.permissions.remove(at: indexPath.row)
-                DispatchQueue.main.async { tableView.deleteRows(at: [indexPath], with: .automatic) }
+            DispatchQueue.main.async {
+                if success {
+                    self.permissions.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                }
+                callback?(success)
             }
-            DispatchQueue.main.async { callback?(success) }
         }
     }
 }

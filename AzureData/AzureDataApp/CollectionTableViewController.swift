@@ -39,33 +39,35 @@ class CollectionTableViewController: UITableViewController {
     func refreshData(fromUser: Bool = false) {
         if !fromUser || collectionsSelected {
             
-            AzureData.get(collectionsIn: database.id) { r in
-            //database.getCollections() { r in
+            database.getCollections() { r in
                 debugPrint(r.result)
-                if let items = r.resource?.items {
-                    self.collections = items
-                    self.tableView.reloadData()
-                } else if let error = r.error {
-                    self.showErrorAlert(error)
-                }
-                if self.refreshControl?.isRefreshing ?? false {
-                    self.refreshControl!.endRefreshing()
+                DispatchQueue.main.async {
+                    if let items = r.resource?.items {
+                        self.collections = items
+                        self.tableView.reloadData()
+                    } else if let error = r.error {
+                        self.showErrorAlert(error)
+                    }
+                    if self.refreshControl?.isRefreshing ?? false {
+                        self.refreshControl!.endRefreshing()
+                    }
                 }
             }
         }
         if !fromUser || !collectionsSelected {
             
-            //AzureData.users(database.id) { r in
             database.getUsers() { r in
                 debugPrint(r.result)
-                if let items = r.resource?.items {
-                    self.users = items
-                    self.tableView.reloadData()
-                } else if let error = r.error {
-                    self.showErrorAlert(error)
-                }
-                if self.refreshControl?.isRefreshing ?? false {
-                    self.refreshControl!.endRefreshing()
+                DispatchQueue.main.async {
+                    if let items = r.resource?.items {
+                        self.users = items
+                        self.tableView.reloadData()
+                    } else if let error = r.error {
+                        self.showErrorAlert(error)
+                    }
+                    if self.refreshControl?.isRefreshing ?? false {
+                        self.refreshControl!.endRefreshing()
+                    }
                 }
             }
         }
@@ -100,26 +102,28 @@ class CollectionTableViewController: UITableViewController {
             if let name = alertController.textFields?.first?.text {
                 if self.collectionsSelected {
                     
-                    AzureData.create(collectionWithId: name, inDatabase: self.database.id) { r in
-                    //self.database.create(collectionWithId: name) { r in
+                    self.database.create(collectionWithId: name) { r in
                         debugPrint(r.result)
-                        if let collection = r.resource {
-                            self.collections.append(collection)
-                            self.reloadOnMainThread()
-                        } else if let error = r.error {
-                            self.showErrorAlert(error)
+                        DispatchQueue.main.async {
+                            if let collection = r.resource {
+                                self.collections.append(collection)
+                                self.tableView.reloadData()
+                            } else if let error = r.error {
+                                self.showErrorAlert(error)
+                            }
                         }
                     }
                 } else {
                     
-                    AzureData.create(userWithId: name, inDatabase: self.database.id) { r in
-                    //self.database.create(userWithId: name) { r in
+                    self.database.create(userWithId: name) { r in
                         debugPrint(r.result)
-                        if let user = r.resource {
-                            self.users.append(user)
-                            self.reloadOnMainThread()
-                        } else if let error = r.error {
-                            self.showErrorAlert(error)
+                        DispatchQueue.main.async {
+                            if let user = r.resource {
+                                self.users.append(user)
+                                self.tableView.reloadData()
+                            } else if let error = r.error {
+                                self.showErrorAlert(error)
+                            }
                         }
                     }
                 }
@@ -130,15 +134,10 @@ class CollectionTableViewController: UITableViewController {
     }
 
     
-    func reloadOnMainThread() { DispatchQueue.main.async { self.tableView.reloadData() } }
-    
-    
     func showErrorAlert (_ error: ADError) {
-        DispatchQueue.main.async {
-            let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-            self.present(alertController, animated: true) { }
-        }
+        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
+        present(alertController, animated: true) { }
     }
 
     
@@ -166,37 +165,36 @@ class CollectionTableViewController: UITableViewController {
         let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
             if self.collectionsSelected {
                 
-                AzureData.get(collectionWithId: self.collections[indexPath.row].id, inDatabase: self.database.id) { r in
-                //self.database.get(collectionWithId: self.collections[indexPath.row].id) { r in
-                    if r.result.isSuccess {
-                        debugPrint(r.result)
-                        r.resource?.printLog()
-                        DispatchQueue.main.async {
+                self.database.get(collectionWithId: self.collections[indexPath.row].id) { r in
+                    DispatchQueue.main.async {
+                        if r.result.isSuccess {
+                            debugPrint(r.result)
+                            r.resource?.printLog()
                             tableView.reloadRows(at: [indexPath], with: .automatic)
                             callback(false)
+                        } else if let error = r.error {
+                            self.showErrorAlert(error)
+                            callback(false)
                         }
-                    } else if let error = r.error {
-                        self.showErrorAlert(error)
-                        DispatchQueue.main.async { callback(false) }
                     }
                 }
             } else {
                 
-                AzureData.get(userWithId: self.users[indexPath.row].id, inDatabase: self.database.id) { r in
-                //self.database.get(userWithId: self.users[indexPath.row].id) { r in
-                    if r.result.isSuccess {
-                        debugPrint(r.result)
-                        DispatchQueue.main.async {
+                self.database.get(userWithId: self.users[indexPath.row].id) { r in
+                    DispatchQueue.main.async {
+                        if r.result.isSuccess {
+                            debugPrint(r.result)
                             tableView.reloadRows(at: [indexPath], with: .automatic)
                             callback(false)
+                        } else if let error = r.error {
+                            self.showErrorAlert(error)
+                            callback(false)
                         }
-                    } else if let error = r.error {
-                        self.showErrorAlert(error)
-                        DispatchQueue.main.async { callback(false) }
                     }
                 }
             }
         }
+        
         action.backgroundColor = UIColor.blue
         
         return UISwipeActionsConfiguration(actions: [ action ] );
@@ -220,22 +218,26 @@ class CollectionTableViewController: UITableViewController {
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
         if collectionsSelected {
-            AzureData.delete(collections[indexPath.row], fromDatabase: database.id) { success in
-            //database.delete(collection: collections[indexPath.row]) { success in
-                if success {
-                    self.collections.remove(at: indexPath.row)
-                    DispatchQueue.main.async { tableView.deleteRows(at: [indexPath], with: .automatic) }
+
+            database.delete(collections[indexPath.row]) { success in
+                DispatchQueue.main.async {
+                    if success {
+                        self.collections.remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: .automatic)
+                    }
+                    callback?(success)
                 }
-                DispatchQueue.main.async { callback?(success) }
             }
         } else {
-            AzureData.delete(users[indexPath.row], fromDatabase: database.id) { success in
-            //database.delete(user: users[indexPath.row]) { success in
-                if success {
-                    self.users.remove(at: indexPath.row)
-                    DispatchQueue.main.async { tableView.deleteRows(at: [indexPath], with: .automatic) }
+            
+            database.delete(users[indexPath.row]) { success in
+                DispatchQueue.main.async {
+                    if success {
+                        self.users.remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: .automatic)
+                    }
+                    callback?(success)
                 }
-                DispatchQueue.main.async { callback?(success) }
             }
         }
     }

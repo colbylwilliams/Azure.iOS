@@ -18,26 +18,25 @@ class StoredProcedureTableViewController: UITableViewController {
 
     var resources:  [ADStoredProcedure] = []
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //refreshData()
-        
         navigationItem.rightBarButtonItems = [addButton, editButtonItem]
     }
 
     
     func refreshData() {
-        //AzureData.get(storedProceduresIn: collection.id, inDatabase: database.id) { r in
+
         collection.getStoredProcedures() { r in
             debugPrint(r.result)
-            if let items = r.resource?.items {
-                self.resources = items
-                self.reloadOnMainThread()
-            } else if let error = r.error {
-                self.showErrorAlert(error)
-            }
             DispatchQueue.main.async {
+                if let items = r.resource?.items {
+                    self.resources = items
+                    self.tableView.reloadData()
+                } else if let error = r.error {
+                    self.showErrorAlert(error)
+                }
                 if self.refreshControl?.isRefreshing ?? false {
                     self.refreshControl!.endRefreshing()
                 }
@@ -45,16 +44,11 @@ class StoredProcedureTableViewController: UITableViewController {
         }
     }
 
-    
-    func reloadOnMainThread() { DispatchQueue.main.async { self.tableView.reloadData() } }
-    
-    
+        
     func showErrorAlert (_ error: ADError) {
-        DispatchQueue.main.async {
-            let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-            self.present(alertController, animated: true) { }
-        }
+        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
+        present(alertController, animated: true) { }
     }
 
     
@@ -69,14 +63,15 @@ class StoredProcedureTableViewController: UITableViewController {
         }
         """
         
-        //AzureData.create(storedProcedureWithId: "helloWorld", andBody: storedProcedure, inCollection: collection.id, inDatabase: database.id) { r in
         collection.create(storedProcedureWithId: "helloWorld", andBody: storedProcedure) { r in
             debugPrint(r.result)
-            if let storedProcedure = r.resource {
-                self.resources.append(storedProcedure)
-                self.reloadOnMainThread()
-            } else if let error = r.error {
-                self.showErrorAlert(error)
+            DispatchQueue.main.async {
+                if let storedProcedure = r.resource {
+                    self.resources.append(storedProcedure)
+                    self.tableView.reloadData()
+                } else if let error = r.error {
+                    self.showErrorAlert(error)
+                }
             }
         }
     }
@@ -121,13 +116,15 @@ class StoredProcedureTableViewController: UITableViewController {
     
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
-        AzureData.delete(resources[indexPath.row], fromCollection: collection.id, inDatabase: database.id) { success in
-        //collection.delete(self.resources[indexPath.row]) { success in
-            if success {
-                self.resources.remove(at: indexPath.row)
-                DispatchQueue.main.async { tableView.deleteRows(at: [indexPath], with: .automatic) }
+
+        collection.delete(self.resources[indexPath.row]) { success in
+            DispatchQueue.main.async {
+                if success {
+                    self.resources.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                }
+                callback?(success)
             }
-            DispatchQueue.main.async { callback?(success) }
         }
     }
 

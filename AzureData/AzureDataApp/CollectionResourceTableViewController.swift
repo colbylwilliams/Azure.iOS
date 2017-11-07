@@ -28,6 +28,7 @@ class CollectionResourceTableViewController: UITableViewController {
         default: return ""
         }
     }
+    
     func collectionResourceArray(_ section: Int) -> [ADResource] {
         switch section {
         case 0: return documents
@@ -47,74 +48,76 @@ class CollectionResourceTableViewController: UITableViewController {
     var refreshCount = 4
     
     func refreshData() {
-        //AzureData.documents(ADDocument.self, databaseId: database.id, collectionId: collection.id) { r in
         collection.get(documentsAs: ADDocument.self) { r in
             debugPrint(r.result)
-            if let items = r.resource?.items {
-                self.documents = items
-                self.reloadOnMainThread()
-            } else if let error = r.error {
-                self.showErrorAlert(error)
+            DispatchQueue.main.async {
+                if let items = r.resource?.items {
+                    self.documents = items
+                    self.self.tableView.reloadData()
+                } else if let error = r.error {
+                    self.showErrorAlert(error)
+                }
+                self.finishedRefresh()
             }
-            self.finishedRefresh()
         }
-        //AzureData.storedProcedures(database.id, collectionId: collection.id) { r in
+        
         collection.getStoredProcedures() { r in
             debugPrint(r.result)
-            if let items = r.resource?.items {
-                self.storedProcedures = items
-                self.reloadOnMainThread()
-            } else if let error = r.error {
-                self.showErrorAlert(error)
+            DispatchQueue.main.async {
+                if let items = r.resource?.items {
+                    self.storedProcedures = items
+                    self.self.tableView.reloadData()
+                } else if let error = r.error {
+                    self.showErrorAlert(error)
+                }
+                self.finishedRefresh()
             }
-            self.finishedRefresh()
         }
-        //AzureData.triggers(database.id, collectionId: collection.id) { r in
+        
         collection.getTriggers() { r in
             debugPrint(r.result)
-            if let items = r.resource?.items {
-                self.triggers = items
-                self.reloadOnMainThread()
-            } else if let error = r.error {
-                self.showErrorAlert(error)
+            DispatchQueue.main.async {
+                if let items = r.resource?.items {
+                    self.triggers = items
+                    self.self.tableView.reloadData()
+                } else if let error = r.error {
+                    self.showErrorAlert(error)
+                }
+                self.finishedRefresh()
             }
-            self.finishedRefresh()
         }
-        //AzureData.userDefinedFunctions(database.id, collectionId: collection.id) { r in
+        
         collection.getUserDefinedFunctions() { r in
             debugPrint(r.result)
-            if let items = r.resource?.items {
-                self.udfs = items
-                self.reloadOnMainThread()
-            } else if let error = r.error {
-                self.showErrorAlert(error)
+            DispatchQueue.main.async {
+                if let items = r.resource?.items {
+                    self.udfs = items
+                    self.self.tableView.reloadData()
+                } else if let error = r.error {
+                    self.showErrorAlert(error)
+                }
+                self.finishedRefresh()
             }
-            self.finishedRefresh()
         }
     }
     
-    func reloadOnMainThread() { DispatchQueue.main.async { self.tableView.reloadData() } }
     
     func finishedRefresh() {
-        DispatchQueue.main.async {
-            if self.refreshControl?.isRefreshing ?? false {
-                self.refreshCount -= 1
-                if self.refreshCount <= 0 {
-                    self.refreshControl!.endRefreshing()
-                    self.refreshCount = 4
-                }
+        if refreshControl?.isRefreshing ?? false {
+            refreshCount -= 1
+            if refreshCount <= 0 {
+                refreshControl!.endRefreshing()
+                refreshCount = 4
             }
-            print("refreshCount = \(self.refreshCount)")
         }
+        print("refreshCount = \(refreshCount)")
     }
     
 
     func showErrorAlert (_ error: ADError) {
-        DispatchQueue.main.async {
-            let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-            self.present(alertController, animated: true) { }
-        }
+        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
+        present(alertController, animated: true) { }
     }
 
     

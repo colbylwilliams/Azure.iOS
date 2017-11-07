@@ -31,13 +31,13 @@ class DocumentTableViewController: UITableViewController {
         
         collection.get(documentsAs: ADDocument.self) { response in
             debugPrint(response.result)
-            if let items = response.resource?.items {
-                self.documents = items
-                self.reloadOnMainThread()
-            } else if let error = response.error {
-                self.showErrorAlert(error)
-            }
             DispatchQueue.main.async {
+                if let items = response.resource?.items {
+                    self.documents = items
+                    self.tableView.reloadData()
+                } else if let error = response.error {
+                    self.showErrorAlert(error)
+                }
                 if self.refreshControl?.isRefreshing ?? false {
                     self.refreshControl!.endRefreshing()
                 }
@@ -45,9 +45,6 @@ class DocumentTableViewController: UITableViewController {
         }
     }
 
-    
-    func reloadOnMainThread() { DispatchQueue.main.async { self.tableView.reloadData() } }
-    
     
     @IBAction func refreshControlValueChanged(_ sender: Any) { refreshData() }
     
@@ -79,25 +76,24 @@ class DocumentTableViewController: UITableViewController {
         doc["testString"] = "Yeah baby\nRock n Roll"
         doc["testDate"]   = Date().timeIntervalSince1970
         
-        //AzureData.createDocument(database.id, collectionId: collection.id, document: doc) { r in
         collection.create(doc) { r in
             debugPrint(r.result)
-            if let document = r.resource {
-                self.documents.append(document)
-                self.reloadOnMainThread()
-            } else if let error = r.error {
-                self.showErrorAlert(error)
+            DispatchQueue.main.async {
+                if let document = r.resource {
+                    self.documents.append(document)
+                    self.tableView.reloadData()
+                } else if let error = r.error {
+                    self.showErrorAlert(error)
+                }
             }
         }
     }
     
     
     func showErrorAlert (_ error: ADError) {
-        DispatchQueue.main.async {
-            let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-            self.present(alertController, animated: true) { }
-        }
+        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
+        present(alertController, animated: true) { }
     }
 
     
@@ -123,18 +119,18 @@ class DocumentTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
-            //AzureData.get(documentWithId: self.documents[indexPath.row].id, as: ADDocument.self, inCollection: collection.id, inDatabase: database.id) { r in
+            
             self.collection.get(documentWithResourceId: self.documents[indexPath.row].resourceId, as: ADDocument.self) { r in
-                if r.result.isSuccess {
-                    debugPrint(r.result)
-                    r.resource?.printLog()
-                    DispatchQueue.main.async {
+                DispatchQueue.main.async {
+                    if r.result.isSuccess {
+                        debugPrint(r.result)
+                        r.resource?.printLog()
                         tableView.reloadRows(at: [indexPath], with: .automatic)
                         callback(false)
+                    } else if let error = r.error {
+                        self.showErrorAlert(error)
+                        callback(false)
                     }
-                } else if let error = r.error {
-                    self.showErrorAlert(error)
-                    DispatchQueue.main.async { callback(false) }
                 }
             }
         }
@@ -160,13 +156,15 @@ class DocumentTableViewController: UITableViewController {
     
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
-        //AzureData.delete(documents[indexPath.row], fromCollection: collection.id, inDatabase: database.id) { success in
+
         collection.delete(documents[indexPath.row]) { success in
-            if success {
-                self.documents.remove(at: indexPath.row)
-                DispatchQueue.main.async { tableView.deleteRows(at: [indexPath], with: .automatic) }
+            DispatchQueue.main.async {
+                if success {
+                    self.documents.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                }
+                callback?(success)
             }
-            DispatchQueue.main.async { callback?(success) }
         }
     }
     

@@ -18,26 +18,25 @@ class TriggerTableViewController: UITableViewController {
 
     var resources: [ADTrigger] = []
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //refreshData()
-        
         navigationItem.rightBarButtonItems = [addButton, editButtonItem]
     }
 
     
     func refreshData() {
-        //AzureData.get(triggersIn: collection.id, inDatabase: database.id) { r in
+
         collection.getTriggers() { r in
-            debugPrint(r.result)
-            if let items = r.resource?.items {
-                self.resources = items
-                self.reloadOnMainThread()
-            } else if let error = r.error {
-                self.showErrorAlert(error)
-            }
             DispatchQueue.main.async {
+                debugPrint(r.result)
+                if let items = r.resource?.items {
+                    self.resources = items
+                    self.tableView.reloadData()
+                } else if let error = r.error {
+                    self.showErrorAlert(error)
+                }
                 if self.refreshControl?.isRefreshing ?? false {
                     self.refreshControl!.endRefreshing()
                 }
@@ -45,14 +44,11 @@ class TriggerTableViewController: UITableViewController {
         }
     }
     
-    func reloadOnMainThread() { DispatchQueue.main.async { self.tableView.reloadData() } }
     
     func showErrorAlert (_ error: ADError) {
-        DispatchQueue.main.async {
-            let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-            self.present(alertController, animated: true) { }
-        }
+        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
+        present(alertController, animated: true) { }
     }
 
     
@@ -98,13 +94,15 @@ class TriggerTableViewController: UITableViewController {
     
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
-        //AzureData.delete(resources[indexPath.row], fromCollection: collection.id, inDatabase: database.id) { success in
+
         collection.delete(self.resources[indexPath.row]) { success in
-            if success {
-                self.resources.remove(at: indexPath.row)
-                DispatchQueue.main.async { tableView.deleteRows(at: [indexPath], with: .automatic) }
+            DispatchQueue.main.async {
+                if success {
+                    self.resources.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .automatic)
+                }
+                callback?(success)
             }
-            DispatchQueue.main.async { callback?(success) }
         }
     }
 }

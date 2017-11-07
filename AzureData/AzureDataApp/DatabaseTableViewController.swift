@@ -19,9 +19,11 @@ class DatabaseTableViewController: UITableViewController {
     var offers: [ADOffer] = []
     var databases: [ADDatabase] = []
     
+    
     var databasesSelected: Bool {
-        return segmentedControl.selectedSegmentIndex == 0
+        return self.segmentedControl.selectedSegmentIndex == 0
     }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,17 +38,18 @@ class DatabaseTableViewController: UITableViewController {
     
     func refreshData(fromUser: Bool = false) {
         if !fromUser || databasesSelected {
+            
             AzureData.databases { r in
                 debugPrint(r.result)
-                if let databases = r.resource?.items {
-                    self.databases = databases
-                    if self.databasesSelected {
-                        self.reloadOnMainThread()
-                    }
-                } else if let error = r.result.error {
-                    self.showErrorAlert(error)
-                }
                 DispatchQueue.main.async {
+                    if let databases = r.resource?.items {
+                        self.databases = databases
+                        if self.databasesSelected {
+                            self.tableView.reloadData()
+                        }
+                    } else if let error = r.result.error {
+                        self.showErrorAlert(error)
+                    }
                     if self.refreshControl?.isRefreshing ?? false {
                         self.refreshControl!.endRefreshing()
                     }
@@ -54,17 +57,18 @@ class DatabaseTableViewController: UITableViewController {
             }
         }
         if fromUser || !databasesSelected {
+            
             AzureData.offers { r in
                 debugPrint(r.result)
-                if let offers = r.resource?.items {
-                    self.offers = offers
-                    if !self.databasesSelected {
-                        self.reloadOnMainThread()
-                    }
-                } else if let error = r.result.error {
-                    self.showErrorAlert(error)
-                }
                 DispatchQueue.main.async {
+                    if let offers = r.resource?.items {
+                        self.offers = offers
+                        if !self.databasesSelected {
+                            self.tableView.reloadData()
+                        }
+                    } else if let error = r.result.error {
+                        self.showErrorAlert(error)
+                    }
                     if self.refreshControl?.isRefreshing ?? false {
                         self.refreshControl!.endRefreshing()
                     }
@@ -74,15 +78,12 @@ class DatabaseTableViewController: UITableViewController {
     }
 
     
-    func reloadOnMainThread() { DispatchQueue.main.async { self.tableView.reloadData() } }
-    
-    
     @IBAction func segmentedControlValueChanged(_ sender: Any) {
-        DispatchQueue.main.async {
+        //DispatchQueue.main.async {
             UserDefaults.standard.set(self.segmentedControl.selectedSegmentIndex, forKey: self.selectedSegmentIndexKey)
             self.addButton.isEnabled = self.databasesSelected
             self.tableView.reloadData()
-        }
+        //}
     }
     
     
@@ -105,11 +106,13 @@ class DatabaseTableViewController: UITableViewController {
             
             if let name = alertController.textFields?.first?.text {
                 AzureData.create(databaseWithId: name) { r in
-                    if let database = r.resource {
-                        self.databases.append(database)
-                        self.reloadOnMainThread()
-                    } else if let error = r.error {
-                        self.showErrorAlert(error)
+                    DispatchQueue.main.async {
+                        if let database = r.resource {
+                            self.databases.append(database)
+                            self.tableView.reloadData()
+                        } else if let error = r.error {
+                            self.showErrorAlert(error)
+                        }
                     }
                 }
             }
@@ -117,17 +120,16 @@ class DatabaseTableViewController: UITableViewController {
         present(alertController, animated: true) { }
     }
     
+    
     var presentingAlert = false
     
     func showErrorAlert (_ error: ADError) {
-        DispatchQueue.main.async {
-            if !self.presentingAlert {
-            
-                self.presentingAlert = true
-                let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-                alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel) { a in self.presentingAlert = false })
-                self.present(alertController, animated: true) { }
-            }
+        if !presentingAlert {
+        
+            presentingAlert = true
+            let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel) { a in self.presentingAlert = false })
+            present(alertController, animated: true) { }
         }
     }
 
@@ -153,8 +155,11 @@ class DatabaseTableViewController: UITableViewController {
 
 
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        let dbSelected = databasesSelected
+        
         let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
-            if self.databasesSelected {
+            if dbSelected {
                 AzureData.get(databaseWithId: self.databases[indexPath.row].id) { r in
                     debugPrint(r.result)
                     r.resource?.printLog()
@@ -180,15 +185,18 @@ class DatabaseTableViewController: UITableViewController {
     
     
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
         if !databasesSelected { return UISwipeActionsConfiguration.init(actions: [])}
         
         let action = UIContextualAction.init(style: .destructive, title: "Delete") { (action, view, callback) in
             AzureData.delete(self.databases[indexPath.row]) { success in
-                if success {
-                    self.databases.remove(at: indexPath.row)
-                    DispatchQueue.main.async { tableView.deleteRows(at: [indexPath], with: .automatic) }
+                DispatchQueue.main.async {
+                    if success {
+                        self.databases.remove(at: indexPath.row)
+                        tableView.deleteRows(at: [indexPath], with: .automatic)
+                    }
+                    callback(success)
                 }
-                DispatchQueue.main.async { callback(success) }
             }
         }
         return UISwipeActionsConfiguration(actions: [ action ] );

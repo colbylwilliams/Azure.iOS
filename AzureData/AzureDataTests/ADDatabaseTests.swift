@@ -12,33 +12,24 @@ import XCTest
 class ADDatabaseTests: AzureDataTests {
     
     override func setUp() {
+        resourceType = .database
         super.setUp()
     }
-    
-    override func tearDown() {
-        super.tearDown()
-    }
+
+    override func tearDown() { super.tearDown() }
+
     
     func testDatabaseCrud() {
         
-        let databaseId      = "DatabaseTests"
-        
-        let createExpectation   = self.expectation(description: "should create and return database")
-        let listExpectation     = self.expectation(description: "should list and return databases")
-        let getExpectation      = self.expectation(description: "should get and return database")
-        let deleteExpectation   = self.expectation(description: "should delete database")
-
         var createResponse: ADResponse<ADDatabase>?
         var listResponse:   ADListResponse<ADDatabase>?
         var getResponse:    ADResponse<ADDatabase>?
-        
-        var deleteSuccess = false
         
         
         // Create
         AzureData.create(databaseWithId: databaseId) { r in
             createResponse = r
-            createExpectation.fulfill()
+            self.createExpectation.fulfill()
         }
         
         wait(for: [createExpectation], timeout: timeout)
@@ -49,7 +40,7 @@ class ADDatabaseTests: AzureDataTests {
         // List
         AzureData.databases { r in
             listResponse = r
-            listExpectation.fulfill()
+            self.listExpectation.fulfill()
         }
         
         wait(for: [listExpectation], timeout: timeout)
@@ -60,7 +51,7 @@ class ADDatabaseTests: AzureDataTests {
         // Get
         AzureData.get(databaseWithId: databaseId) { r in
             getResponse = r
-            getExpectation.fulfill()
+            self.getExpectation.fulfill()
         }
         
         wait(for: [getExpectation], timeout: timeout)
@@ -70,8 +61,8 @@ class ADDatabaseTests: AzureDataTests {
         
         // Delete
         AzureData.delete(ADDatabase(databaseId)) { s in
-            deleteSuccess = s
-            deleteExpectation.fulfill()
+            self.deleteSuccess = s
+            self.deleteExpectation.fulfill()
         }
         
         wait(for: [deleteExpectation], timeout: timeout)

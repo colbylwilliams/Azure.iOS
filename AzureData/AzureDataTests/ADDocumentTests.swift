@@ -12,41 +12,28 @@ import XCTest
 class ADDocumentTests: AzureDataTests {
     
     override func setUp() {
+        resourceType = .document
+        ensureDatabase = true
+        ensureCollection = true
         super.setUp()
     }
-    
-    override func tearDown() {
-        super.tearDown()
-    }
+
+    override func tearDown() { super.tearDown() }
+
     
     func testDocumentCrud() {
-        
-        // random number
-        let n = random
-        
-        let databaseId      = "DocumentTestsDatabase"
-        let collectionId    = "DocumentTestsCollection"
-        let documentId      = "DocumentTests\(n)"
-        
-        let createExpectation   = self.expectation(description: "should create and return document")
-        let listExpectation     = self.expectation(description: "should list and return documents")
-        let queryExpectation    = self.expectation(description: "should list and return documents")
-        let getExpectation      = self.expectation(description: "should get and return document")
-        let deleteExpectation   = self.expectation(description: "should delete document")
         
         var createResponse: ADResponse<ADDocument>?
         var listResponse:   ADListResponse<ADDocument>?
         var queryResponse:  ADListResponse<ADDocument>?
         var getResponse:    ADResponse<ADDocument>?
         
-        var deleteSuccess = false
-
         let customStringKey = "customStringKey"
         let customStringValue = "customStringValue"
         let customNumberKey = "customNumberKey"
-        let customNumberValue = n
+        let customNumberValue = random
         
-        let newDocument = ADDocument(documentId)
+        let newDocument = ADDocument(resourceId)
         
         newDocument[customStringKey] = customStringValue
         newDocument[customNumberKey] = customNumberValue
@@ -56,7 +43,7 @@ class ADDocumentTests: AzureDataTests {
         // Create
         AzureData.create(newDocument, inCollection: collectionId, inDatabase: databaseId) { r in
             createResponse = r
-            createExpectation.fulfill()
+            self.createExpectation.fulfill()
         }
         
         wait(for: [createExpectation], timeout: timeout)
@@ -76,7 +63,7 @@ class ADDocumentTests: AzureDataTests {
         // List
         AzureData.get(documentsAs: ADDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
             listResponse = r
-            listExpectation.fulfill()
+            self.listExpectation.fulfill()
         }
         
         wait(for: [listExpectation], timeout: timeout)
@@ -94,7 +81,7 @@ class ADDocumentTests: AzureDataTests {
         
         AzureData.query(documentsIn: collectionId, inDatabase: databaseId, with: query) { r in
             queryResponse = r
-            queryExpectation.fulfill()
+            self.queryExpectation.fulfill()
         }
         
         wait(for: [queryExpectation], timeout: timeout)
@@ -114,9 +101,9 @@ class ADDocumentTests: AzureDataTests {
         // Get
         if createResponse?.result.isSuccess ?? false {
             
-            AzureData.get(documentWithId: documentId, as: ADDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
+            AzureData.get(documentWithId: resourceId, as: ADDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
                 getResponse = r
-                getExpectation.fulfill()
+                self.getExpectation.fulfill()
             }
             
             wait(for: [getExpectation], timeout: timeout)
@@ -138,8 +125,8 @@ class ADDocumentTests: AzureDataTests {
         if createResponse?.result.isSuccess ?? false {
          
             AzureData.delete(createResponse!.resource!, fromCollection: collectionId, inDatabase: databaseId) { s in
-                deleteSuccess = s
-                deleteExpectation.fulfill()
+                self.deleteSuccess = s
+                self.deleteExpectation.fulfill()
             }
             
             wait(for: [deleteExpectation], timeout: timeout)

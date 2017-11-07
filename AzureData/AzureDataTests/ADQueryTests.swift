@@ -11,11 +11,7 @@ import XCTest
 
 class ADQueryTests: AzureDataTests {
     
-    override func setUp() {
-        super.setUp()
-    }
+    override func setUp() { super.setUp() }
     
-    override func tearDown() {
-        super.tearDown()
-    }
+    override func tearDown() { super.tearDown() }
 }

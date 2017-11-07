@@ -12,10 +12,11 @@ import XCTest
 class ADPermissionTests: AzureDataTests {
     
     override func setUp() {
+        resourceType = .permission
+        ensureDatabase = true
+        ensureCollection = true
         super.setUp()
     }
     
-    override func tearDown() {
-        super.tearDown()
-    }
+    override func tearDown() { super.tearDown() }
 }

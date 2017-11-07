@@ -12,38 +12,27 @@ import XCTest
 class ADUserTests: AzureDataTests {
     
     override func setUp() {
+        resourceType = .user
+        ensureDatabase = true
         super.setUp()
     }
     
-    override func tearDown() {
-        super.tearDown()
-    }
-    
+    override func tearDown() { super.tearDown() }
+
     
     func testUserCrud() {
         
-        let databaseId      = "UserTestsDatabase"
-        let userId          = "UserTestsUser"
-        let replacedUserId  = "UserTestsUserReplaced"
-        
-        let createExpectation   = self.expectation(description: "should create and return user")
-        let listExpectation     = self.expectation(description: "should list and return users")
-        let getExpectation      = self.expectation(description: "should get and return user")
-        let deleteExpectation   = self.expectation(description: "should delete user")
-        let replaceExpectation  = self.expectation(description: "should replace user")
         
         var createResponse:     ADResponse<ADUser>?
         var listResponse:       ADListResponse<ADUser>?
         var getResponse:        ADResponse<ADUser>?
         var replaceResponse:    ADResponse<ADUser>?
         
-        var deleteSuccess = false
-        
         
         // Create
-        AzureData.create(userWithId: userId, inDatabase: databaseId) { r in
+        AzureData.create(userWithId: resourceId, inDatabase: databaseId) { r in
             createResponse = r
-            createExpectation.fulfill()
+            self.createExpectation.fulfill()
         }
         
         wait(for: [createExpectation], timeout: timeout)
@@ -54,7 +43,7 @@ class ADUserTests: AzureDataTests {
         // List
         AzureData.get(usersIn: databaseId) { r in
             listResponse = r
-            listExpectation.fulfill()
+            self.listExpectation.fulfill()
         }
         
         wait(for: [listExpectation], timeout: timeout)
@@ -65,9 +54,9 @@ class ADUserTests: AzureDataTests {
         // Get
         if createResponse?.result.isSuccess ?? false {
             
-            AzureData.get(userWithId: userId, inDatabase: databaseId) { r in
+            AzureData.get(userWithId: resourceId, inDatabase: databaseId) { r in
                 getResponse = r
-                getExpectation.fulfill()
+                self.getExpectation.fulfill()
             }
             
             wait(for: [getExpectation], timeout: timeout)
@@ -79,9 +68,9 @@ class ADUserTests: AzureDataTests {
         // Replace
         if let user = createResponse?.resource  {
          
-            AzureData.replace(userWithId: user.id, with: replacedUserId, inDatabase: databaseId) { r in
+            AzureData.replace(userWithId: user.id, with: replacedId, inDatabase: databaseId) { r in
                 replaceResponse = r
-                replaceExpectation.fulfill()
+                self.replaceExpectation.fulfill()
             }
             
             wait(for: [replaceExpectation], timeout: timeout)
@@ -94,8 +83,8 @@ class ADUserTests: AzureDataTests {
         if let user = replaceResponse?.resource ?? createResponse?.resource {
             
             AzureData.delete(user, fromDatabase: databaseId) { s in
-                deleteSuccess = s
-                deleteExpectation.fulfill()
+                self.deleteSuccess = s
+                self.deleteExpectation.fulfill()
             }
             
             wait(for: [deleteExpectation], timeout: timeout)

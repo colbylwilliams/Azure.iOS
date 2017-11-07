@@ -12,10 +12,11 @@ import XCTest
 class ADUserDefinedFunctionTests: AzureDataTests {
     
     override func setUp() {
+        resourceType = .udf
+        ensureDatabase = true
+        ensureCollection = true
         super.setUp()
     }
-    
-    override func tearDown() {
-        super.tearDown()
-    }
+
+    override func tearDown() { super.tearDown() }
 }

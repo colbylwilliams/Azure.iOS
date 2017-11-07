@@ -12,54 +12,30 @@ import XCTest
 class ADDatabaseExtensionsTests: AzureDataTests {
     
     override func setUp() {
+        resourceType = .collection
+        resourceName = "DatabaseExtensions"
+        ensureDatabase = true
         super.setUp()
     }
+
     
-    override func tearDown() {
-        super.tearDown()
-    }
+    override func tearDown() { super.tearDown() }
+
     
     func testDatabaseCrud() {
-        
-        let databaseId      = "DatabaseExtensionsCollectionTestsDatabase"
-        let collectionId    = "DatabaseExtensionsCollectionTestsCollection"
-        
-        let createDatabaseExpectation     = self.expectation(description: "should create and return database")
-        let deleteDatabaseExpectation     = self.expectation(description: "should delete database")
-
-        let createExpectation   = self.expectation(description: "should create and return collection")
-        let listExpectation     = self.expectation(description: "should list and return collections")
-        let getExpectation      = self.expectation(description: "should get and return collection")
-        let deleteExpectation   = self.expectation(description: "should delete collection")
-        
-        var createDatabaseResponse: ADResponse<ADDatabase>?
         
         var createResponse: ADResponse<ADCollection>?
         var listResponse:   ADListResponse<ADCollection>?
         var getResponse:    ADResponse<ADCollection>?
         
-        var deleteDatabaseSuccess = false
-        var deleteSuccess = false
         
-        
-        // Create Database
-        AzureData.create(databaseWithId: databaseId) { r in
-            createDatabaseResponse = r
-            createDatabaseExpectation.fulfill()
-        }
-        
-        wait(for: [createDatabaseExpectation], timeout: timeout)
-        
-        XCTAssertNotNil(createDatabaseResponse?.resource)
-        
-        
-        if let database = createDatabaseResponse?.resource {
+        if let database = self.database {
             
-
+            
             // Create
             database.create(collectionWithId: collectionId) { r in
                 createResponse = r
-                createExpectation.fulfill()
+                self.createExpectation.fulfill()
             }
             
             wait(for: [createExpectation], timeout: timeout)
@@ -71,7 +47,7 @@ class ADDatabaseExtensionsTests: AzureDataTests {
             // List
             database.getCollections { r in
                 listResponse = r
-                listExpectation.fulfill()
+                self.listExpectation.fulfill()
             }
             
             wait(for: [listExpectation], timeout: timeout)
@@ -85,7 +61,7 @@ class ADDatabaseExtensionsTests: AzureDataTests {
                 
                 database.get(collectionWithId: collection.id) { r in
                     getResponse = r
-                    getExpectation.fulfill()
+                    self.getExpectation.fulfill()
                 }
                 
                 wait(for: [getExpectation], timeout: timeout)
@@ -100,73 +76,32 @@ class ADDatabaseExtensionsTests: AzureDataTests {
             if let collection = createResponse?.resource {
                 
                 database.delete(collection) { s in
-                    deleteSuccess = s
-                    deleteExpectation.fulfill()
+                    self.deleteSuccess = s
+                    self.deleteExpectation.fulfill()
                 }
                 
                 wait(for: [deleteExpectation], timeout: timeout)
             }
             
             XCTAssert(deleteSuccess)
-
-            
-            
-            // Delete Database
-            AzureData.delete(database) { s in
-                deleteDatabaseSuccess = s
-                deleteDatabaseExpectation.fulfill()
-            }
-            
-            wait(for: [deleteDatabaseExpectation], timeout: timeout)
-            
-            XCTAssert(deleteDatabaseSuccess)
         }
     }
     
     
     func testUserCrud() {
         
-        let databaseId      = "DatabaseExtensionsUserTestsDatabase"
-        let userId          = "DatabaseExtensionsUserTestsUser"
-        let replacedUserId  = "DatabaseExtensionsUserTestsUserReplaced"
-        
-        let createDatabaseExpectation     = self.expectation(description: "should create and return database")
-        let deleteDatabaseExpectation     = self.expectation(description: "should delete database")
-        
-        let createExpectation   = self.expectation(description: "should create and return user")
-        let listExpectation     = self.expectation(description: "should list and return users")
-        let getExpectation      = self.expectation(description: "should get and return user")
-        let deleteExpectation   = self.expectation(description: "should delete user")
-        let replaceExpectation  = self.expectation(description: "should replace user")
-        
-        var createDatabaseResponse: ADResponse<ADDatabase>?
-        
         var createResponse:     ADResponse<ADUser>?
         var listResponse:       ADListResponse<ADUser>?
         var getResponse:        ADResponse<ADUser>?
         var replaceResponse:    ADResponse<ADUser>?
         
-        var deleteSuccess = false
-        var deleteDatabaseSuccess = false
         
-        
-        // Create Database
-        AzureData.create(databaseWithId: databaseId) { r in
-            createDatabaseResponse = r
-            createDatabaseExpectation.fulfill()
-        }
-        
-        wait(for: [createDatabaseExpectation], timeout: timeout)
-        
-        XCTAssertNotNil(createDatabaseResponse?.resource)
-        
-        
-        if let database = createDatabaseResponse?.resource {
+        if let database = self.database {
 
             // Create
-            database.create(userWithId: userId) { r in
+            database.create(userWithId: resourceId) { r in
                 createResponse = r
-                createExpectation.fulfill()
+                self.createExpectation.fulfill()
             }
             
             wait(for: [createExpectation], timeout: timeout)
@@ -177,7 +112,7 @@ class ADDatabaseExtensionsTests: AzureDataTests {
             // List
             database.getUsers() { r in
                 listResponse = r
-                listExpectation.fulfill()
+                self.listExpectation.fulfill()
             }
             
             wait(for: [listExpectation], timeout: timeout)
@@ -188,9 +123,9 @@ class ADDatabaseExtensionsTests: AzureDataTests {
             // Get
             if createResponse?.result.isSuccess ?? false {
                 
-                database.get(userWithId: userId) { r in
+                database.get(userWithId: resourceId) { r in
                     getResponse = r
-                    getExpectation.fulfill()
+                    self.getExpectation.fulfill()
                 }
                 
                 wait(for: [getExpectation], timeout: timeout)
@@ -202,9 +137,9 @@ class ADDatabaseExtensionsTests: AzureDataTests {
             // Replace
             if let user = createResponse?.resource  {
                 
-                database.replace(userWithId: user.id, with: replacedUserId) { r in
+                database.replace(userWithId: user.id, with: replacedId) { r in
                     replaceResponse = r
-                    replaceExpectation.fulfill()
+                    self.replaceExpectation.fulfill()
                 }
                 
                 wait(for: [replaceExpectation], timeout: timeout)
@@ -217,27 +152,14 @@ class ADDatabaseExtensionsTests: AzureDataTests {
             if let user = replaceResponse?.resource ?? createResponse?.resource {
                 
                 database.delete(user) { s in
-                    deleteSuccess = s
-                    deleteExpectation.fulfill()
+                    self.deleteSuccess = s
+                    self.deleteExpectation.fulfill()
                 }
                 
                 wait(for: [deleteExpectation], timeout: timeout)
             }
             
             XCTAssert(deleteSuccess)
-            
-            
-            // Delete Database
-            AzureData.delete(database) { s in
-                deleteDatabaseSuccess = s
-                deleteDatabaseExpectation.fulfill()
-            }
-            
-            wait(for: [deleteDatabaseExpectation], timeout: timeout)
-            
-            XCTAssert(deleteDatabaseSuccess)
         }
     }
 }
-
-

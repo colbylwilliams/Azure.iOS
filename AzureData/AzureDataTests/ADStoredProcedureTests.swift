@@ -12,10 +12,12 @@ import XCTest
 class ADStoredProcedureTests: AzureDataTests {
     
     override func setUp() {
+        resourceType = .storedProcedure
+        ensureDatabase = true
+        ensureCollection = true
         super.setUp()
     }
+
     
-    override func tearDown() {
-        super.tearDown()
-    }
+    override func tearDown() { super.tearDown() }
 }

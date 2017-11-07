@@ -12,10 +12,11 @@ import XCTest
 class ADTriggerTests: AzureDataTests {
     
     override func setUp() {
+        resourceType = .trigger
+        ensureDatabase = true
+        ensureCollection = true
         super.setUp()
     }
     
-    override func tearDown() {
-        super.tearDown()
-    }
+    override func tearDown() { super.tearDown() }
 }

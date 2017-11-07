@@ -103,13 +103,19 @@ public struct ADResourceUri {
         return getUrlLinkForSelf(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
     }
 
-    
-    func offer(_ resourceId: String? = nil) -> (URL, String) {
+    func offer() -> (URL, String) {
         let baseLink = ""
-        let itemLink = getItemLink(forType: .offer, baseLink: baseLink, resourceId: resourceId)
-        return getUrlLink(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
+        let itemLink = getItemLink(forType: .offer, baseLink: baseLink, resourceId: nil)
+        return getUrlLink(baseLink: baseLink, itemLink: itemLink, resourceId: nil)
     }
 
+    func offer(_ resourceId: String) -> (URL, String) {
+        let baseLink = ""
+        let itemLink = getItemLink(forType: .offer, baseLink: baseLink, resourceId: resourceId)
+        return getUrlLinkForSelf(baseLink: baseLink, itemLink: itemLink, resourceId: resourceId)
+    }
+
+    
     fileprivate func getItemLink(forType type: ADResourceType, baseLink: String, resourceId: String?) -> String {
         
         let fragment = resourceId.isNilOrEmpty ? empty : "/\(resourceId!)"

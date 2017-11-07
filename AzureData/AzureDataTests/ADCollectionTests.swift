@@ -12,34 +12,24 @@ import XCTest
 class ADCollectionTests: AzureDataTests {
     
     override func setUp() {
+        resourceType = .collection
+        ensureDatabase = true
         super.setUp()
     }
+
+    override func tearDown() { super.tearDown() }
     
-    override func tearDown() {
-        super.tearDown()
-    }
     
     func testCollectionCrud() {
         
-        let databaseId      = "CollectionTestsDatabase"
-        let collectionId    = "CollectionTests"
-        
-        let createExpectation   = self.expectation(description: "should create and return collection")
-        let listExpectation     = self.expectation(description: "should list and return collections")
-        let getExpectation      = self.expectation(description: "should get and return collection")
-        let deleteExpectation   = self.expectation(description: "should delete collection")
-
         var createResponse: ADResponse<ADCollection>?
         var listResponse:   ADListResponse<ADCollection>?
         var getResponse:    ADResponse<ADCollection>?
         
-        var deleteSuccess = false
-        
-        
         // Create
-        AzureData.create(collectionWithId: collectionId, inDatabase: databaseId) { r in
+        AzureData.create(collectionWithId: resourceId, inDatabase: databaseId) { r in
             createResponse = r
-            createExpectation.fulfill()
+            self.createExpectation.fulfill()
         }
         
         wait(for: [createExpectation], timeout: timeout)
@@ -50,7 +40,7 @@ class ADCollectionTests: AzureDataTests {
         // List
         AzureData.get(collectionsIn: databaseId) { r in
             listResponse = r
-            listExpectation.fulfill()
+            self.listExpectation.fulfill()
         }
         
         wait(for: [listExpectation], timeout: timeout)
@@ -61,9 +51,9 @@ class ADCollectionTests: AzureDataTests {
         // Get
         if createResponse?.result.isSuccess ?? false {
             
-            AzureData.get(collectionWithId: collectionId, inDatabase: databaseId) { r in
+            AzureData.get(collectionWithId: resourceId, inDatabase: databaseId) { r in
                 getResponse = r
-                getExpectation.fulfill()
+                self.getExpectation.fulfill()
             }
             
             wait(for: [getExpectation], timeout: timeout)
@@ -75,9 +65,9 @@ class ADCollectionTests: AzureDataTests {
         // Delete
         if createResponse?.result.isSuccess ?? false {
         
-            AzureData.delete(ADCollection(collectionId), fromDatabase: databaseId) { s in
-                deleteSuccess = s
-                deleteExpectation.fulfill()
+            AzureData.delete(ADCollection(resourceId), fromDatabase: databaseId) { s in
+                self.deleteSuccess = s
+                self.deleteExpectation.fulfill()
             }
             
             wait(for: [deleteExpectation], timeout: timeout)

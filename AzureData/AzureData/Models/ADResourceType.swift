@@ -50,12 +50,27 @@ public enum ADResourceType : String {
         }
     }
 
+    var name: String {
+        switch self {
+        case .database:         return "Database"
+        case .user:             return "User"
+        case .permission:       return "Permission"
+        case .collection:       return "DocumentCollection"
+        case .storedProcedure:  return "StoredProcedure"
+        case .trigger:          return "Trigger"
+        case .udf:              return "UserDefinedFunction"
+        case .document:         return "Document"
+        case .attachment:       return "Attachment"
+        case .offer:            return "Offer"
+        }
+    }
+
     init?(fromResource resource: ADResource) {
         switch resource {
         case is ADDatabase:             self = .database
         case is ADUser:                 self = .user
         case is ADPermission:           self = .permission
-        case is ADCollection:   self = .collection
+        case is ADCollection:           self = .collection
         case is ADStoredProcedure:      self = .storedProcedure
         case is ADTrigger:              self = .trigger
         case is ADUserDefinedFunction:  self = .udf

@@ -59,7 +59,4 @@ open class ADDocument: ADResource {
             data[key] = newValue
         }
     }
-    
-    
-    func printData() { for item in data { print(item) } }
 }

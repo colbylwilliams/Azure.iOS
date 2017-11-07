@@ -9,12 +9,13 @@
 import XCTest
 
 class ADAttachmentTests: AzureDataTests {
-    
+
     override func setUp() {
+        resourceType = .attachment
+        ensureDatabase = true
+        ensureCollection = true
         super.setUp()
     }
-    
-    override func tearDown() {
-        super.tearDown()
-    }    
+
+    override func tearDown() { super.tearDown() }
 }

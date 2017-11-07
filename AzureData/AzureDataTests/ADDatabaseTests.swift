@@ -21,10 +21,12 @@ class ADDatabaseTests: AzureDataTests {
     
     func testDatabaseCrud() {
         
-        var createResponse: ADResponse<ADDatabase>?
-        var listResponse:   ADListResponse<ADDatabase>?
-        var getResponse:    ADResponse<ADDatabase>?
-        
+        var createResponse:     ADResponse<ADDatabase>?
+        var listResponse:       ADListResponse<ADDatabase>?
+        var getResponse:        ADResponse<ADDatabase>?
+        //var replaceResponse:    ADResponse<ADDatabase>?
+        //var queryResponse:      ADListResponse<ADDatabase>?
+
         
         // Create
         AzureData.create(databaseWithId: databaseId) { r in

@@ -19,4 +19,14 @@ class ADPermissionTests: AzureDataTests {
     }
     
     override func tearDown() { super.tearDown() }
+    
+    //func testPermissionCrud() {
+        
+        //var createResponse:     ADResponse<ADPermission>?
+        //var listResponse:       ADListResponse<ADPermission>?
+        //var getResponse:        ADResponse<ADPermission>?
+        //var replaceResponse:    ADResponse<ADPermission>?
+        //var queryResponse:      ADListResponse<ADPermission>?
+
+    //}
 }

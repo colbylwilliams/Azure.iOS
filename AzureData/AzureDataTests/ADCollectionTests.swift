@@ -22,9 +22,12 @@ class ADCollectionTests: AzureDataTests {
     
     func testCollectionCrud() {
         
-        var createResponse: ADResponse<ADCollection>?
-        var listResponse:   ADListResponse<ADCollection>?
-        var getResponse:    ADResponse<ADCollection>?
+        var createResponse:     ADResponse<ADCollection>?
+        var listResponse:       ADListResponse<ADCollection>?
+        var getResponse:        ADResponse<ADCollection>?
+        //var replaceResponse:    ADResponse<ADCollection>?
+        //var queryResponse:      ADListResponse<ADCollection>?
+
         
         // Create
         AzureData.create(collectionWithId: resourceId, inDatabase: databaseId) { r in

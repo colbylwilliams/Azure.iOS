@@ -6,12 +6,13 @@
 //  Copyright © 2017 Colby Williams. All rights reserved.
 //
 
-import XCTest
-@testable import AzureData
+//import XCTest
+//@testable import AzureData
+//
+//class ADQueryTests: AzureDataTests {
+//    
+//    override func setUp() { super.setUp() }
+//    
+//    override func tearDown() { super.tearDown() }
+//}
 
-class ADQueryTests: AzureDataTests {
-    
-    override func setUp() { super.setUp() }
-    
-    override func tearDown() { super.tearDown() }
-}

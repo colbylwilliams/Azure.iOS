@@ -1,5 +1,5 @@
 //
-//  ADCollectionExtensionsTests.swift
+//  ADCollectionDocumentExtensionsTests.swift
 //  AzureDataTests
 //
 //  Created by Colby Williams on 11/6/17.
@@ -9,11 +9,11 @@
 import XCTest
 @testable import AzureData
 
-class ADCollectionExtensionsTests: AzureDataTests {
+class ADCollectionDocumentExtensionsTests: AzureDataTests {
     
     override func setUp() {
         resourceType = .document
-        resourceName = "CollectionExtensions"
+        resourceName = "CollectionDocumentExtensions"
         ensureDatabase = true
         ensureCollection = true
         super.setUp()
@@ -23,16 +23,13 @@ class ADCollectionExtensionsTests: AzureDataTests {
 
     
     func testCollectionCrud() {
-
-        var createResponse: ADResponse<ADDocument>?
-        var listResponse:   ADListResponse<ADDocument>?
-        var queryResponse:  ADListResponse<ADDocument>?
-        var getResponse:    ADResponse<ADDocument>?
         
-        let customStringKey = "customStringKey"
-        let customStringValue = "customStringValue"
-        let customNumberKey = "customNumberKey"
-        let customNumberValue = random
+        var createResponse:     ADResponse<ADDocument>?
+        var listResponse:       ADListResponse<ADDocument>?
+        var getResponse:        ADResponse<ADDocument>?
+        //var replaceResponse:    ADResponse<ADDocument>?
+        var queryResponse:      ADListResponse<ADDocument>?
+
         
         if let collection = self.collection {
         

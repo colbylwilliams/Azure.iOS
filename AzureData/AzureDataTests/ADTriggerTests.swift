@@ -19,4 +19,15 @@ class ADTriggerTests: AzureDataTests {
     }
     
     override func tearDown() { super.tearDown() }
+    
+    //func testTriggerCrud() {
+    
+    //var createResponse:     ADResponse<ADTrigger>?
+    //var listResponse:       ADListResponse<ADTrigger>?
+    //var getResponse:        ADResponse<ADTrigger>?
+    //var replaceResponse:    ADResponse<ADTrigger>?
+    //var queryResponse:      ADListResponse<ADTrigger>?
+    
+    //}
+    
 }

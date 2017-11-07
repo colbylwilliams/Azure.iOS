@@ -1,91 +1,25 @@
 //
-//  ADDatabaseExtensionsTests.swift
+//  ADDatabaseUserExtensionsTests.swift
 //  AzureDataTests
 //
-//  Created by Colby Williams on 11/6/17.
+//  Created by Colby Williams on 11/7/17.
 //  Copyright © 2017 Colby Williams. All rights reserved.
 //
 
 import XCTest
 @testable import AzureData
 
-class ADDatabaseExtensionsTests: AzureDataTests {
+class ADDatabaseUserExtensionsTests: AzureDataTests {
     
     override func setUp() {
-        resourceType = .collection
-        resourceName = "DatabaseExtensions"
+        resourceType = .document
+        resourceName = "CollectionUserExtensions"
         ensureDatabase = true
+        ensureCollection = true
         super.setUp()
     }
 
-    
     override func tearDown() { super.tearDown() }
-
-    
-    func testDatabaseCrud() {
-        
-        var createResponse: ADResponse<ADCollection>?
-        var listResponse:   ADListResponse<ADCollection>?
-        var getResponse:    ADResponse<ADCollection>?
-        
-        
-        if let database = self.database {
-            
-            
-            // Create
-            database.create(collectionWithId: collectionId) { r in
-                createResponse = r
-                self.createExpectation.fulfill()
-            }
-            
-            wait(for: [createExpectation], timeout: timeout)
-            
-            XCTAssertNotNil(createResponse?.resource)
-            
-            
-            
-            // List
-            database.getCollections { r in
-                listResponse = r
-                self.listExpectation.fulfill()
-            }
-            
-            wait(for: [listExpectation], timeout: timeout)
-            
-            XCTAssertNotNil(listResponse?.resource)
-            
-            
-            
-            // Get
-            if let collection = createResponse?.resource {
-                
-                database.get(collectionWithId: collection.id) { r in
-                    getResponse = r
-                    self.getExpectation.fulfill()
-                }
-                
-                wait(for: [getExpectation], timeout: timeout)
-            }
-
-            XCTAssertNotNil(getResponse?.resource)
-                
-            
-            
-            
-            // Delete
-            if let collection = createResponse?.resource {
-                
-                database.delete(collection) { s in
-                    self.deleteSuccess = s
-                    self.deleteExpectation.fulfill()
-                }
-                
-                wait(for: [deleteExpectation], timeout: timeout)
-            }
-            
-            XCTAssert(deleteSuccess)
-        }
-    }
     
     
     func testUserCrud() {
@@ -94,10 +28,11 @@ class ADDatabaseExtensionsTests: AzureDataTests {
         var listResponse:       ADListResponse<ADUser>?
         var getResponse:        ADResponse<ADUser>?
         var replaceResponse:    ADResponse<ADUser>?
-        
+        //var queryResponse:      ADListResponse<ADUser>?
+
         
         if let database = self.database {
-
+            
             // Create
             database.create(userWithId: resourceId) { r in
                 createResponse = r
@@ -161,5 +96,5 @@ class ADDatabaseExtensionsTests: AzureDataTests {
             
             XCTAssert(deleteSuccess)
         }
-    }
+    }    
 }

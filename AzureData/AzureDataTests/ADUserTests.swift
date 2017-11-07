@@ -22,13 +22,13 @@ class ADUserTests: AzureDataTests {
     
     func testUserCrud() {
         
-        
         var createResponse:     ADResponse<ADUser>?
         var listResponse:       ADListResponse<ADUser>?
         var getResponse:        ADResponse<ADUser>?
         var replaceResponse:    ADResponse<ADUser>?
-        
-        
+        //var queryResponse:      ADListResponse<ADUser>?
+
+
         // Create
         AzureData.create(userWithId: resourceId, inDatabase: databaseId) { r in
             createResponse = r

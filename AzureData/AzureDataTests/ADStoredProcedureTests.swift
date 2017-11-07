@@ -17,7 +17,17 @@ class ADStoredProcedureTests: AzureDataTests {
         ensureCollection = true
         super.setUp()
     }
-
     
     override func tearDown() { super.tearDown() }
+    
+    //func testStoredProcedureCrud() {
+    
+    //var createResponse:     ADResponse<ADStoredProcedure>?
+    //var listResponse:       ADListResponse<ADStoredProcedure>?
+    //var getResponse:        ADResponse<ADStoredProcedure>?
+    //var replaceResponse:    ADResponse<ADStoredProcedure>?
+    //var queryResponse:      ADListResponse<ADStoredProcedure>?
+    
+    //}
+    
 }

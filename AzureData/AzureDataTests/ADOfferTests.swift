@@ -21,9 +21,12 @@ class ADOfferTests: AzureDataTests {
     
     func testOfferCrud() {
         
-        var listResponse:   ADListResponse<ADOffer>?
-        var getResponse:    ADResponse<ADOffer>?
-        
+        //var createResponse:     ADResponse<ADOffer>?
+        var listResponse:       ADListResponse<ADOffer>?
+        var getResponse:        ADResponse<ADOffer>?
+        //var replaceResponse:    ADResponse<ADOffer>?
+        //var queryResponse:      ADListResponse<ADOffer>?
+
         
         // List
         AzureData.offers { r in

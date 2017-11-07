@@ -12,14 +12,14 @@ import XCTest
 class AzureDataTests: XCTestCase {
     
     let timeout: TimeInterval = 30.0
-    
-    let random: Int = 12
-    
+
+    var ensureDatabase:    Bool = false
+    var ensureCollection:  Bool = false
+
     fileprivate(set) var database: ADDatabase?
     fileprivate(set) var collection: ADCollection?
     
     var resourceName: String?
-    
     var resourceType: ADResourceType!
     
     var rname: String { return resourceName ?? resourceType.name }
@@ -30,17 +30,22 @@ class AzureDataTests: XCTestCase {
     var replacedId:     String { return "\(rname)Replaced" }
 
     
+    let random: Int = 12
+    
+    let customStringKey = "customStringKey"
+    let customStringValue = "customStringValue"
+    let customNumberKey = "customNumberKey"
+    let customNumberValue = 86
+    
+    
     lazy var createExpectation  = self.expectation(description: "should create and return \(rname)")
     lazy var listExpectation    = self.expectation(description: "should return a list of \(rname)")
     lazy var getExpectation     = self.expectation(description: "should get and return \(rname)")
     lazy var deleteExpectation  = self.expectation(description: "should delete \(rname)")
     lazy var queryExpectation   = self.expectation(description: "should query \(rname)")
-    lazy var replaceExpectation = self.expectation(description: "should replace \(rname)")
+    lazy var replaceExpectation = self.expectation(description: "should replace \(rname)")    
 
     var deleteSuccess = false
-    
-    var ensureDatabase:    Bool = false
-    var ensureCollection:  Bool = false
     
     
     override func setUp() {

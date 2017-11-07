@@ -21,6 +21,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		B5199DF11FB17D6400B69C99 /* ADDatabaseUserExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5199DF01FB17D6400B69C99 /* ADDatabaseUserExtensionsTests.swift */; };
 		B528A53D1F9EBF1C000586BE /* ADQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B528A53C1F9EBF1C000586BE /* ADQuery.swift */; };
 		B53BF7761F9A2F9400B7A187 /* ADIndexingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53BF7751F9A2F9400B7A187 /* ADIndexingPolicy.swift */; };
 		B53BF7781F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53BF7771F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift */; };
@@ -82,8 +83,8 @@
 		B5F76C891F96ACA6001E8B11 /* AzureDataAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C881F96ACA6001E8B11 /* AzureDataAppUITests.swift */; };
 		B5F76C9B1F96AF66001E8B11 /* AzureData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F76C391F96A7AF001E8B11 /* AzureData.framework */; };
 		B5F76C9C1F96AF66001E8B11 /* AzureData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B5F76C391F96A7AF001E8B11 /* AzureData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B5FC20B61FB12B5900283FDA /* ADDatabaseExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC20B51FB12B5900283FDA /* ADDatabaseExtensionsTests.swift */; };
-		B5FC20B81FB12B8E00283FDA /* ADCollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC20B71FB12B8E00283FDA /* ADCollectionExtensionsTests.swift */; };
+		B5FC20B61FB12B5900283FDA /* ADDatabaseCollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC20B51FB12B5900283FDA /* ADDatabaseCollectionExtensionsTests.swift */; };
+		B5FC20B81FB12B8E00283FDA /* ADCollectionDocumentExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC20B71FB12B8E00283FDA /* ADCollectionDocumentExtensionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -139,6 +140,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B5199DF01FB17D6400B69C99 /* ADDatabaseUserExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabaseUserExtensionsTests.swift; sourceTree = "<group>"; };
 		B528A53C1F9EBF1C000586BE /* ADQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADQuery.swift; sourceTree = "<group>"; };
 		B53BF7751F9A2F9400B7A187 /* ADIndexingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADIndexingPolicy.swift; sourceTree = "<group>"; };
 		B53BF7771F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPartitionKeyDefinition.swift; sourceTree = "<group>"; };
@@ -207,8 +209,8 @@
 		B5F76C841F96ACA6001E8B11 /* AzureDataAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AzureDataAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F76C881F96ACA6001E8B11 /* AzureDataAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureDataAppUITests.swift; sourceTree = "<group>"; };
 		B5F76C8A1F96ACA6001E8B11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5FC20B51FB12B5900283FDA /* ADDatabaseExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabaseExtensionsTests.swift; sourceTree = "<group>"; };
-		B5FC20B71FB12B8E00283FDA /* ADCollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionExtensionsTests.swift; sourceTree = "<group>"; };
+		B5FC20B51FB12B5900283FDA /* ADDatabaseCollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabaseCollectionExtensionsTests.swift; sourceTree = "<group>"; };
+		B5FC20B71FB12B8E00283FDA /* ADCollectionDocumentExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionDocumentExtensionsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,10 +329,11 @@
 			isa = PBXGroup;
 			children = (
 				B5C89B531FB147D100EA0739 /* ADAttachmentTests.swift */,
-				B5FC20B71FB12B8E00283FDA /* ADCollectionExtensionsTests.swift */,
+				B5FC20B71FB12B8E00283FDA /* ADCollectionDocumentExtensionsTests.swift */,
 				B57446AC1FB11FEF0048B20F /* ADCollectionTests.swift */,
-				B5FC20B51FB12B5900283FDA /* ADDatabaseExtensionsTests.swift */,
+				B5FC20B51FB12B5900283FDA /* ADDatabaseCollectionExtensionsTests.swift */,
 				B57446AA1FB11F810048B20F /* ADDatabaseTests.swift */,
+				B5199DF01FB17D6400B69C99 /* ADDatabaseUserExtensionsTests.swift */,
 				B57446AE1FB120070048B20F /* ADDocumentTests.swift */,
 				B5C89B551FB1480700EA0739 /* ADOfferTests.swift */,
 				B5C89B571FB1481B00EA0739 /* ADPermissionTests.swift */,
@@ -664,12 +667,13 @@
 				B57446AB1FB11F810048B20F /* ADDatabaseTests.swift in Sources */,
 				B5C89B5E1FB1485800EA0739 /* ADTriggerTests.swift in Sources */,
 				B5C89B601FB1486800EA0739 /* ADUserTests.swift in Sources */,
-				B5FC20B81FB12B8E00283FDA /* ADCollectionExtensionsTests.swift in Sources */,
+				B5FC20B81FB12B8E00283FDA /* ADCollectionDocumentExtensionsTests.swift in Sources */,
 				B5C89B541FB147D100EA0739 /* ADAttachmentTests.swift in Sources */,
 				B57446AD1FB11FEF0048B20F /* ADCollectionTests.swift in Sources */,
 				B57446AF1FB120070048B20F /* ADDocumentTests.swift in Sources */,
-				B5FC20B61FB12B5900283FDA /* ADDatabaseExtensionsTests.swift in Sources */,
+				B5FC20B61FB12B5900283FDA /* ADDatabaseCollectionExtensionsTests.swift in Sources */,
 				B5C89B561FB1480700EA0739 /* ADOfferTests.swift in Sources */,
+				B5199DF11FB17D6400B69C99 /* ADDatabaseUserExtensionsTests.swift in Sources */,
 				B5C89B5C1FB1484500EA0739 /* ADStoredProcedureTests.swift in Sources */,
 				B5C89B5A1FB1482C00EA0739 /* ADQueryTests.swift in Sources */,
 			);

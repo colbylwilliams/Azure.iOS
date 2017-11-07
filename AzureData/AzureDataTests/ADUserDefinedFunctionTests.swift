@@ -19,4 +19,15 @@ class ADUserDefinedFunctionTests: AzureDataTests {
     }
 
     override func tearDown() { super.tearDown() }
+    
+    //func testUserDefinedFunctionCrud() {
+
+        //var createResponse:     ADResponse<ADUserDefinedFunction>?
+        //var listResponse:       ADListResponse<ADUserDefinedFunction>?
+        //var getResponse:        ADResponse<ADUserDefinedFunction>?
+        //var replaceResponse:    ADResponse<ADUserDefinedFunction>?
+        //var queryResponse:      ADListResponse<ADUserDefinedFunction>?
+
+    //}
+        
 }

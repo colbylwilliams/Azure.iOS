@@ -23,15 +23,12 @@ class ADDocumentTests: AzureDataTests {
     
     func testDocumentCrud() {
         
-        var createResponse: ADResponse<ADDocument>?
-        var listResponse:   ADListResponse<ADDocument>?
-        var queryResponse:  ADListResponse<ADDocument>?
-        var getResponse:    ADResponse<ADDocument>?
-        
-        let customStringKey = "customStringKey"
-        let customStringValue = "customStringValue"
-        let customNumberKey = "customNumberKey"
-        let customNumberValue = random
+        var createResponse:     ADResponse<ADDocument>?
+        var listResponse:       ADListResponse<ADDocument>?
+        var getResponse:        ADResponse<ADDocument>?
+        //var replaceResponse:    ADResponse<ADDocument>?
+        var queryResponse:      ADListResponse<ADDocument>?
+
         
         let newDocument = ADDocument(resourceId)
         

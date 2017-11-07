@@ -32,18 +32,22 @@ class DocumentTableViewController: UITableViewController {
         collection.get(documentsAs: ADDocument.self) { response in
             debugPrint(response.result)
             if let items = response.resource?.items {
-                //for item in items { item.printLog() }
                 self.documents = items
-                self.tableView.reloadData()
+                self.reloadOnMainThread()
             } else if let error = response.error {
                 self.showErrorAlert(error)
             }
-            if self.refreshControl?.isRefreshing ?? false {
-                self.refreshControl!.endRefreshing()
+            DispatchQueue.main.async {
+                if self.refreshControl?.isRefreshing ?? false {
+                    self.refreshControl!.endRefreshing()
+                }
             }
         }
     }
 
+    
+    func reloadOnMainThread() { DispatchQueue.main.async { self.tableView.reloadData() } }
+    
     
     @IBAction func refreshControlValueChanged(_ sender: Any) { refreshData() }
     
@@ -80,7 +84,7 @@ class DocumentTableViewController: UITableViewController {
             debugPrint(r.result)
             if let document = r.resource {
                 self.documents.append(document)
-                self.tableView.reloadData()
+                self.reloadOnMainThread()
             } else if let error = r.error {
                 self.showErrorAlert(error)
             }
@@ -89,9 +93,11 @@ class DocumentTableViewController: UITableViewController {
     
     
     func showErrorAlert (_ error: ADError) {
-        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-        present(alertController, animated: true) { }
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
+            self.present(alertController, animated: true) { }
+        }
     }
 
     
@@ -122,11 +128,13 @@ class DocumentTableViewController: UITableViewController {
                 if r.result.isSuccess {
                     debugPrint(r.result)
                     r.resource?.printLog()
-                    tableView.reloadRows(at: [indexPath], with: .automatic)
-                    callback(false)
+                    DispatchQueue.main.async {
+                        tableView.reloadRows(at: [indexPath], with: .automatic)
+                        callback(false)
+                    }
                 } else if let error = r.error {
                     self.showErrorAlert(error)
-                    callback(false)
+                    DispatchQueue.main.async { callback(false) }
                 }
             }
         }
@@ -156,9 +164,9 @@ class DocumentTableViewController: UITableViewController {
         collection.delete(documents[indexPath.row]) { success in
             if success {
                 self.documents.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+                DispatchQueue.main.async { tableView.deleteRows(at: [indexPath], with: .automatic) }
             }
-            callback?(success)
+            DispatchQueue.main.async { callback?(success) }
         }
     }
     

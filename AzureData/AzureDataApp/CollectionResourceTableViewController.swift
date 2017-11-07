@@ -51,9 +51,8 @@ class CollectionResourceTableViewController: UITableViewController {
         collection.get(documentsAs: ADDocument.self) { r in
             debugPrint(r.result)
             if let items = r.resource?.items {
-                //for item in items { item.printLog()    }
                 self.documents = items
-                self.tableView.reloadData()
+                self.reloadOnMainThread()
             } else if let error = r.error {
                 self.showErrorAlert(error)
             }
@@ -63,9 +62,8 @@ class CollectionResourceTableViewController: UITableViewController {
         collection.getStoredProcedures() { r in
             debugPrint(r.result)
             if let items = r.resource?.items {
-                //for item in items { item.printLog()    }
                 self.storedProcedures = items
-                self.tableView.reloadData()
+                self.reloadOnMainThread()
             } else if let error = r.error {
                 self.showErrorAlert(error)
             }
@@ -75,9 +73,8 @@ class CollectionResourceTableViewController: UITableViewController {
         collection.getTriggers() { r in
             debugPrint(r.result)
             if let items = r.resource?.items {
-                //for item in items { item.printLog()    }
                 self.triggers = items
-                self.tableView.reloadData()
+                self.reloadOnMainThread()
             } else if let error = r.error {
                 self.showErrorAlert(error)
             }
@@ -87,9 +84,8 @@ class CollectionResourceTableViewController: UITableViewController {
         collection.getUserDefinedFunctions() { r in
             debugPrint(r.result)
             if let items = r.resource?.items {
-                //for item in items { item.printLog()    }
                 self.udfs = items
-                self.tableView.reloadData()
+                self.reloadOnMainThread()
             } else if let error = r.error {
                 self.showErrorAlert(error)
             }
@@ -97,23 +93,28 @@ class CollectionResourceTableViewController: UITableViewController {
         }
     }
     
+    func reloadOnMainThread() { DispatchQueue.main.async { self.tableView.reloadData() } }
     
     func finishedRefresh() {
-        if self.refreshControl?.isRefreshing ?? false {
-            refreshCount -= 1
-            if refreshCount <= 0 {
-                self.refreshControl!.endRefreshing()
-                refreshCount = 4
+        DispatchQueue.main.async {
+            if self.refreshControl?.isRefreshing ?? false {
+                self.refreshCount -= 1
+                if self.refreshCount <= 0 {
+                    self.refreshControl!.endRefreshing()
+                    self.refreshCount = 4
+                }
             }
+            print("refreshCount = \(self.refreshCount)")
         }
-        print("refreshCount = \(refreshCount)")
     }
     
 
     func showErrorAlert (_ error: ADError) {
-        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-        present(alertController, animated: true) { }
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
+            self.present(alertController, animated: true) { }
+        }
     }
 
     

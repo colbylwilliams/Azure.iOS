@@ -31,21 +31,25 @@ class PermissionTableViewController: UITableViewController {
             debugPrint(r.result)
             if let items = r.resource?.items {
                 self.permissions = items
-                self.tableView.reloadData()
+                self.reloadOnMainThread()
             } else if let error = r.error {
                 self.showErrorAlert(error)
             }
-            if self.refreshControl?.isRefreshing ?? false {
-                self.refreshControl!.endRefreshing()
+            DispatchQueue.main.async {
+                if self.refreshControl?.isRefreshing ?? false {
+                    self.refreshControl!.endRefreshing()
+                }
             }
         }
     }
     
     
     func showErrorAlert (_ error: ADError) {
-        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-        present(alertController, animated: true) { }
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
+            self.present(alertController, animated: true) { }
+        }
     }
 
     
@@ -74,7 +78,7 @@ class PermissionTableViewController: UITableViewController {
                     debugPrint(r.result)
                     if let permission = r.resource {
                         self.permissions.append(permission)
-                        self.tableView.reloadData()
+                        self.reloadOnMainThread()
                     } else if let error = r.error {
                         self.showErrorAlert(error)
                     }
@@ -84,6 +88,9 @@ class PermissionTableViewController: UITableViewController {
         
         present(alertController, animated: true) { }
     }
+    
+    
+    func reloadOnMainThread() { DispatchQueue.main.async { self.tableView.reloadData() } }
     
 
     @IBAction func refreshControlValueChanged(_ sender: Any) { refreshData() }
@@ -114,8 +121,10 @@ class PermissionTableViewController: UITableViewController {
         let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
             AzureData.get(permissionWithId: self.permissions[indexPath.row].id, forUser: self.user.id, inDatabase: self.database.id) { r in
                 debugPrint(r.result)
-                tableView.reloadRows(at: [indexPath], with: .automatic)
-                callback(false)
+                DispatchQueue.main.async {
+                    tableView.reloadRows(at: [indexPath], with: .automatic)
+                    callback(false)
+                }
             }
         }
         action.backgroundColor = UIColor.blue
@@ -143,9 +152,9 @@ class PermissionTableViewController: UITableViewController {
         AzureData.delete(permissions[indexPath.row], forUser: user.id, inDatabase: database.id) { success in
             if success {
                 self.permissions.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+                DispatchQueue.main.async { tableView.deleteRows(at: [indexPath], with: .automatic) }
             }
-            callback?(success)
+            DispatchQueue.main.async { callback?(success) }
         }
     }
 }

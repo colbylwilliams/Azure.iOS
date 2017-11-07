@@ -144,7 +144,7 @@ open class SessionManager {
 //      if let resourceUri = resourceUri {
 //          return delete(resourceUri: resourceUri, resourceType: resourceType, callback: callback)
 //      } else {
-//          DispatchQueue.main.async { callback(false) }
+//          callback(false)
 //      }
 //  }
 
@@ -160,8 +160,7 @@ open class SessionManager {
         let body = ["id":databaseId]
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return create(resourceUri: resourceUri, resourceType: .database, httpBody: httpBody, callback: callback)
@@ -204,8 +203,7 @@ open class SessionManager {
         let body = ["id":collectionId]
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return create(resourceUri: resourceUri, resourceType: .collection, httpBody: httpBody, callback: callback)
@@ -250,8 +248,7 @@ open class SessionManager {
         let body = document.dictionary
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return create(resourceUri: resourceUri, resourceType: .document, httpBody: httpBody, callback: callback)
@@ -264,8 +261,7 @@ open class SessionManager {
         let body = document.dictionary
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return create(resourceUri: resourceUri, resourceType: .document, httpBody: httpBody, callback: callback)
@@ -325,8 +321,7 @@ open class SessionManager {
         let body = document.dictionary
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return replace(resourceUri: resourceUri, resourceType: .document, httpBody: httpBody, callback: callback)
@@ -339,8 +334,7 @@ open class SessionManager {
         let body = document.dictionary
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return replace(resourceUri: resourceUri, resourceType: .document, httpBody: httpBody, callback: callback)
@@ -357,8 +351,7 @@ open class SessionManager {
         let body = query.dictionary
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADListResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADListResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         print(String(data: httpBody, encoding: .utf8)!); print()
@@ -375,8 +368,7 @@ open class SessionManager {
         let body = query.dictionary
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADListResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADListResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         print(String(data: httpBody, encoding: .utf8)!); print()
@@ -397,8 +389,7 @@ open class SessionManager {
         let body = ADAttachment.jsonDict(attachmentId, contentType: contentType, media: mediaUrl)
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
 
         return create(resourceUri: resourceUri, resourceType: .attachment, httpBody: httpBody, callback: callback)
@@ -420,8 +411,7 @@ open class SessionManager {
         let body = ADAttachment.jsonDict(attachmentId, contentType: contentType, media: mediaUrl)
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return create(resourceUri: resourceUri, resourceType: .attachment, httpBody: httpBody, callback: callback)
@@ -475,8 +465,7 @@ open class SessionManager {
         let body = ADAttachment.jsonDict(attachmentId, contentType: contentType, media: mediaUrl)
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return replace(resourceUri: resourceUri, resourceType: .attachment, httpBody: httpBody, callback: callback)
@@ -498,8 +487,7 @@ open class SessionManager {
         let body = ADAttachment.jsonDict(attachmentId, contentType: contentType, media: mediaUrl)
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return replace(resourceUri: resourceUri, resourceType: .attachment, httpBody: httpBody, callback: callback)
@@ -527,8 +515,7 @@ open class SessionManager {
         let body = ["id":storedProcedureId, "body":procedure]
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
 
         return create(resourceUri: resourceUri, resourceType: .storedProcedure, httpBody: httpBody, callback: callback)
@@ -541,8 +528,7 @@ open class SessionManager {
         let body = ["id":storedProcedureId, "body":procedure]
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return create(resourceUri: resourceUri, resourceType: .storedProcedure, httpBody: httpBody, callback: callback)
@@ -586,8 +572,7 @@ open class SessionManager {
         let body = ["id":storedProcedureId, "body":procedure]
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return replace(resourceUri: resourceUri, resourceType: .storedProcedure, httpBody: httpBody, callback: callback)
@@ -600,8 +585,7 @@ open class SessionManager {
         let body = ["id":storedProcedureId, "body":procedure]
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return replace(resourceUri: resourceUri, resourceType: .storedProcedure, httpBody: httpBody, callback: callback)
@@ -615,9 +599,8 @@ open class SessionManager {
         let body = parameters ?? []
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            //DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            DispatchQueue.main.async { callback(nil) }
-            return
+            //callback(ADResponse(ADError("Error: Could not serialize document to JSON")))
+            callback(nil); return
         }
         
         return execute(resourceUri: resourceUri, resourceType: .storedProcedure, httpBody: httpBody, callback: callback)
@@ -630,9 +613,8 @@ open class SessionManager {
         let body = parameters ?? []
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            //DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            DispatchQueue.main.async { callback(nil) }
-            return
+            //callback(ADResponse(ADError("Error: Could not serialize document to JSON")))
+            callback(nil); return
         }
         
         return execute(resourceUri: resourceUri, resourceType: .storedProcedure, httpBody: httpBody, callback: callback)
@@ -651,8 +633,7 @@ open class SessionManager {
         let body = ["id":functionId, "body":function]
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return create(resourceUri: resourceUri, resourceType: .udf, httpBody: httpBody, callback: callback)
@@ -665,8 +646,7 @@ open class SessionManager {
         let body = ["id":functionId, "body":function]
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return create(resourceUri: resourceUri, resourceType: .udf, httpBody: httpBody, callback: callback)
@@ -710,8 +690,7 @@ open class SessionManager {
         let body = ["id":functionId, "body":function]
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return replace(resourceUri: resourceUri, resourceType: .udf, httpBody: httpBody, callback: callback)
@@ -724,8 +703,7 @@ open class SessionManager {
         let body = ["id":functionId, "body":function]
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return replace(resourceUri: resourceUri, resourceType: .udf, httpBody: httpBody, callback: callback)
@@ -750,8 +728,7 @@ open class SessionManager {
         let body = ADTrigger.jsonDict(triggerId, body: triggerBody, operation: operation, type: triggerType)
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return create(resourceUri: resourceUri, resourceType: .trigger, httpBody: httpBody, callback: callback)
@@ -801,8 +778,7 @@ open class SessionManager {
         let body = ADTrigger.jsonDict(triggerId, body: triggerBody, operation: operation, type: triggerType)
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return replace(resourceUri: resourceUri, resourceType: .trigger, httpBody: httpBody, callback: callback)
@@ -821,8 +797,7 @@ open class SessionManager {
         let body = ["id":userId]
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return create(resourceUri: resourceUri, resourceType: .user, httpBody: httpBody, callback: callback)
@@ -860,8 +835,7 @@ open class SessionManager {
         let body = ["id":newUserId]
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return replace(resourceUri: resourceUri, resourceType: .user, httpBody: httpBody, callback: callback)
@@ -881,8 +855,7 @@ open class SessionManager {
         let body = ["id":permissionId, "permissionMode": permissionMode.rawValue, "resource":resource.selfLink!]
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return create(resourceUri: resourceUri, resourceType: .permission, httpBody: httpBody, callback: callback)
@@ -895,8 +868,7 @@ open class SessionManager {
         let body = ["id":permissionId, "permissionMode": permissionMode.rawValue, "resource":resource.selfLink!]
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return create(resourceUri: resourceUri, resourceType: .permission, httpBody: httpBody, callback: callback)
@@ -955,8 +927,7 @@ open class SessionManager {
         let body: [String : Any] = ["id":permissionId, "permissionMode": permissionMode.rawValue, "resource": resource]
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return replace(resourceUri: resourceUri, resourceType: .permission, httpBody: httpBody, callback: callback)
@@ -969,8 +940,7 @@ open class SessionManager {
         let body: [String : Any] = ["id":permissionId, "permissionMode": permissionMode.rawValue, "resource": resource]
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
-            DispatchQueue.main.async { callback(ADResponse(ADError("Error: Could not serialize document to JSON"))) }
-            return
+            callback(ADResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
         
         return replace(resourceUri: resourceUri, resourceType: .permission, httpBody: httpBody, callback: callback)
@@ -1092,15 +1062,15 @@ open class SessionManager {
     
     fileprivate func sendRequest<T> (_ request: URLRequest, callback: @escaping (ADResponse<T>) -> ()) {
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        //UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         session.dataTask(with: request) { (data, response, error) in
             
-            DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
+            //DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
             
             if let error = error {
                 if self.verboseLogging { print(error.localizedDescription); print() }
-                DispatchQueue.main.async { callback(ADResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(error:error)))) }
+                callback(ADResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(error:error))))
             }
             if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
                 if self.verboseLogging { print(json); print() }
@@ -1114,12 +1084,12 @@ open class SessionManager {
                 }
                 
                 if let result = result {
-                    DispatchQueue.main.async { callback(ADResponse(request: request, response: response as? HTTPURLResponse, data: data, result: result)) }
+                    callback(ADResponse(request: request, response: response as? HTTPURLResponse, data: data, result: result))
                 } else {
-                    DispatchQueue.main.async { callback(ADResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError()))) }
+                    callback(ADResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError())))
                 }
             } else {
-                DispatchQueue.main.async { callback(ADResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError()))) }
+                callback(ADResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError())))
             }
         }.resume()
     }
@@ -1127,15 +1097,15 @@ open class SessionManager {
     
     fileprivate func sendRequest<T> (_ request: URLRequest, resourceType: ADResourceType, callback: @escaping (ADListResponse<T>) -> ()) {
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        //UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         session.dataTask(with: request) { (data, response, error) in
             
-            DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
+            //DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
             
             if let error = error {
                 if self.verboseLogging { print(error.localizedDescription); print() }
-                DispatchQueue.main.async { callback(ADListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(error:error)))) }
+                callback(ADListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(error:error))))
             }
             if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
                 if self.verboseLogging { print(json); print() }
@@ -1149,12 +1119,12 @@ open class SessionManager {
                 }
 
                 if let result = result {
-                    DispatchQueue.main.async { callback(ADListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: result)) }
+                    callback(ADListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: result))
                 } else {
-                    DispatchQueue.main.async { callback(ADListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError()))) }
+                    callback(ADListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError())))
                 }
             } else {
-                DispatchQueue.main.async { callback(ADListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError()))) }
+                callback(ADListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError())))
             }
         }.resume()
     }
@@ -1162,17 +1132,17 @@ open class SessionManager {
 
     fileprivate func sendRequest (_ request:URLRequest, callback: @escaping (Data?) -> ()) {
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        //UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         session.dataTask(with: request) { (data, response, error) in
             
-            DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
+            //DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
             
             if let error = error {
                 if self.verboseLogging { print(error.localizedDescription); print() }
-                DispatchQueue.main.async { callback(nil) }
+                callback(nil)
             } else {
-                DispatchQueue.main.async { callback(data) }
+                callback(data)
             }
         }.resume()
     }
@@ -1180,17 +1150,17 @@ open class SessionManager {
     
     fileprivate func sendRequest (_ request:URLRequest, callback: @escaping (Bool) -> ()) {
         
-        UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        //UIApplication.shared.isNetworkActivityIndicatorVisible = true
         
         session.dataTask(with: request) { (data, response, error) in
             
-            DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
+            //DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
             
             if let error = error {
                 if self.verboseLogging { print(error.localizedDescription); print() }
-                DispatchQueue.main.async { callback(false) }
+                callback(false)
             } else {
-                DispatchQueue.main.async { callback(true) }
+                callback(true)
             }
         }.resume()
     }

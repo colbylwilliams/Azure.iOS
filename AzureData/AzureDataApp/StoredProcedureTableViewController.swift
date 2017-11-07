@@ -32,23 +32,29 @@ class StoredProcedureTableViewController: UITableViewController {
         collection.getStoredProcedures() { r in
             debugPrint(r.result)
             if let items = r.resource?.items {
-                //for item in items { item.printLog()    }
                 self.resources = items
-                self.tableView.reloadData()
+                self.reloadOnMainThread()
             } else if let error = r.error {
                 self.showErrorAlert(error)
             }
-            if self.refreshControl?.isRefreshing ?? false {
-                self.refreshControl!.endRefreshing()
+            DispatchQueue.main.async {
+                if self.refreshControl?.isRefreshing ?? false {
+                    self.refreshControl!.endRefreshing()
+                }
             }
         }
     }
 
     
+    func reloadOnMainThread() { DispatchQueue.main.async { self.tableView.reloadData() } }
+    
+    
     func showErrorAlert (_ error: ADError) {
-        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-        present(alertController, animated: true) { }
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
+            alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
+            self.present(alertController, animated: true) { }
+        }
     }
 
     
@@ -68,7 +74,7 @@ class StoredProcedureTableViewController: UITableViewController {
             debugPrint(r.result)
             if let storedProcedure = r.resource {
                 self.resources.append(storedProcedure)
-                self.tableView.reloadData()
+                self.reloadOnMainThread()
             } else if let error = r.error {
                 self.showErrorAlert(error)
             }
@@ -119,9 +125,9 @@ class StoredProcedureTableViewController: UITableViewController {
         //collection.delete(self.resources[indexPath.row]) { success in
             if success {
                 self.resources.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+                DispatchQueue.main.async { tableView.deleteRows(at: [indexPath], with: .automatic) }
             }
-            callback?(success)
+            DispatchQueue.main.async { callback?(success) }
         }
     }
 

@@ -58,8 +58,8 @@ public extension ADDatabase {
     }
     
     // replace
-    public func replace (userWithId id: String, with newUserId: String, in databaseId: String, callback: @escaping (ADResponse<ADUser>) -> ()) {
-        return SessionManager.default.replace (userWithId: id, with: newUserId, inDatabase: databaseId, callback: callback)
+    public func replace (userWithId id: String, with newUserId: String, callback: @escaping (ADResponse<ADUser>) -> ()) {
+        return SessionManager.default.replace (userWithId: id, with: newUserId, inDatabase: self.id, callback: callback)
     }
 }
 

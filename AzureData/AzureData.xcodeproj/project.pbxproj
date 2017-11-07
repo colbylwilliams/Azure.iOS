@@ -83,6 +83,11 @@
 		B5F76C891F96ACA6001E8B11 /* AzureDataAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C881F96ACA6001E8B11 /* AzureDataAppUITests.swift */; };
 		B5F76C9B1F96AF66001E8B11 /* AzureData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F76C391F96A7AF001E8B11 /* AzureData.framework */; };
 		B5F76C9C1F96AF66001E8B11 /* AzureData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B5F76C391F96A7AF001E8B11 /* AzureData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		B5FA67891FB237840008FA9E /* ADCollectionStoredProcedureExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA67881FB237840008FA9E /* ADCollectionStoredProcedureExtensionsTests.swift */; };
+		B5FA678B1FB2379B0008FA9E /* ADCollectionTriggerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA678A1FB2379B0008FA9E /* ADCollectionTriggerExtensionsTests.swift */; };
+		B5FA678D1FB237B70008FA9E /* ADCollectionUserDefinedFunctionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA678C1FB237B70008FA9E /* ADCollectionUserDefinedFunctionExtensionsTests.swift */; };
+		B5FA678F1FB237EE0008FA9E /* ADUserPermissionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA678E1FB237EE0008FA9E /* ADUserPermissionExtensionsTests.swift */; };
+		B5FA67911FB238370008FA9E /* ADDocumentAttachmentExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA67901FB238370008FA9E /* ADDocumentAttachmentExtensionsTests.swift */; };
 		B5FC20B61FB12B5900283FDA /* ADDatabaseCollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC20B51FB12B5900283FDA /* ADDatabaseCollectionExtensionsTests.swift */; };
 		B5FC20B81FB12B8E00283FDA /* ADCollectionDocumentExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC20B71FB12B8E00283FDA /* ADCollectionDocumentExtensionsTests.swift */; };
 /* End PBXBuildFile section */
@@ -209,6 +214,11 @@
 		B5F76C841F96ACA6001E8B11 /* AzureDataAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AzureDataAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5F76C881F96ACA6001E8B11 /* AzureDataAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureDataAppUITests.swift; sourceTree = "<group>"; };
 		B5F76C8A1F96ACA6001E8B11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5FA67881FB237840008FA9E /* ADCollectionStoredProcedureExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionStoredProcedureExtensionsTests.swift; sourceTree = "<group>"; };
+		B5FA678A1FB2379B0008FA9E /* ADCollectionTriggerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionTriggerExtensionsTests.swift; sourceTree = "<group>"; };
+		B5FA678C1FB237B70008FA9E /* ADCollectionUserDefinedFunctionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionUserDefinedFunctionExtensionsTests.swift; sourceTree = "<group>"; };
+		B5FA678E1FB237EE0008FA9E /* ADUserPermissionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADUserPermissionExtensionsTests.swift; sourceTree = "<group>"; };
+		B5FA67901FB238370008FA9E /* ADDocumentAttachmentExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDocumentAttachmentExtensionsTests.swift; sourceTree = "<group>"; };
 		B5FC20B51FB12B5900283FDA /* ADDatabaseCollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabaseCollectionExtensionsTests.swift; sourceTree = "<group>"; };
 		B5FC20B71FB12B8E00283FDA /* ADCollectionDocumentExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionDocumentExtensionsTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -330,10 +340,14 @@
 			children = (
 				B5C89B531FB147D100EA0739 /* ADAttachmentTests.swift */,
 				B5FC20B71FB12B8E00283FDA /* ADCollectionDocumentExtensionsTests.swift */,
+				B5FA67881FB237840008FA9E /* ADCollectionStoredProcedureExtensionsTests.swift */,
 				B57446AC1FB11FEF0048B20F /* ADCollectionTests.swift */,
+				B5FA678A1FB2379B0008FA9E /* ADCollectionTriggerExtensionsTests.swift */,
+				B5FA678C1FB237B70008FA9E /* ADCollectionUserDefinedFunctionExtensionsTests.swift */,
 				B5FC20B51FB12B5900283FDA /* ADDatabaseCollectionExtensionsTests.swift */,
 				B57446AA1FB11F810048B20F /* ADDatabaseTests.swift */,
 				B5199DF01FB17D6400B69C99 /* ADDatabaseUserExtensionsTests.swift */,
+				B5FA67901FB238370008FA9E /* ADDocumentAttachmentExtensionsTests.swift */,
 				B57446AE1FB120070048B20F /* ADDocumentTests.swift */,
 				B5C89B551FB1480700EA0739 /* ADOfferTests.swift */,
 				B5C89B571FB1481B00EA0739 /* ADPermissionTests.swift */,
@@ -341,6 +355,7 @@
 				B5C89B5B1FB1484500EA0739 /* ADStoredProcedureTests.swift */,
 				B5C89B5D1FB1485800EA0739 /* ADTriggerTests.swift */,
 				B5C89B611FB1487800EA0739 /* ADUserDefinedFunctionTests.swift */,
+				B5FA678E1FB237EE0008FA9E /* ADUserPermissionExtensionsTests.swift */,
 				B5C89B5F1FB1486800EA0739 /* ADUserTests.swift */,
 				B5F76C471F96A7AF001E8B11 /* AzureDataTests.swift */,
 				B5F76C491F96A7AF001E8B11 /* Info.plist */,
@@ -666,16 +681,21 @@
 				B5C89B621FB1487800EA0739 /* ADUserDefinedFunctionTests.swift in Sources */,
 				B57446AB1FB11F810048B20F /* ADDatabaseTests.swift in Sources */,
 				B5C89B5E1FB1485800EA0739 /* ADTriggerTests.swift in Sources */,
+				B5FA678D1FB237B70008FA9E /* ADCollectionUserDefinedFunctionExtensionsTests.swift in Sources */,
 				B5C89B601FB1486800EA0739 /* ADUserTests.swift in Sources */,
 				B5FC20B81FB12B8E00283FDA /* ADCollectionDocumentExtensionsTests.swift in Sources */,
 				B5C89B541FB147D100EA0739 /* ADAttachmentTests.swift in Sources */,
 				B57446AD1FB11FEF0048B20F /* ADCollectionTests.swift in Sources */,
+				B5FA67891FB237840008FA9E /* ADCollectionStoredProcedureExtensionsTests.swift in Sources */,
+				B5FA678B1FB2379B0008FA9E /* ADCollectionTriggerExtensionsTests.swift in Sources */,
 				B57446AF1FB120070048B20F /* ADDocumentTests.swift in Sources */,
 				B5FC20B61FB12B5900283FDA /* ADDatabaseCollectionExtensionsTests.swift in Sources */,
 				B5C89B561FB1480700EA0739 /* ADOfferTests.swift in Sources */,
 				B5199DF11FB17D6400B69C99 /* ADDatabaseUserExtensionsTests.swift in Sources */,
+				B5FA67911FB238370008FA9E /* ADDocumentAttachmentExtensionsTests.swift in Sources */,
 				B5C89B5C1FB1484500EA0739 /* ADStoredProcedureTests.swift in Sources */,
 				B5C89B5A1FB1482C00EA0739 /* ADQueryTests.swift in Sources */,
+				B5FA678F1FB237EE0008FA9E /* ADUserPermissionExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

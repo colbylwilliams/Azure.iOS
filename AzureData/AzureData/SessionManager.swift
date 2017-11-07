@@ -100,7 +100,7 @@ open class SessionManager {
                     return "AzureData/\(build)" // AzureData/2.0.0
                 }()
                 
-                print("\(executable)/\(appVersion) (\(bundle); build:\(appBuild); \(osNameVersion)) \(azureDataVersion)")
+                print("\(executable)/\(appVersion) (\(bundle); build:\(appBuild); \(osNameVersion)) \(azureDataVersion)"); print()
                 return "\(executable)/\(appVersion) (\(bundle); build:\(appBuild); \(osNameVersion)) \(azureDataVersion)"
             }
             
@@ -352,7 +352,7 @@ open class SessionManager {
 
         let resourceUri = baseUri?.document(inDatabase: databaseId, inCollection: collectionId)
         
-        query.printQuery()
+        query.printQuery(); print()
         
         let body = query.dictionary
         
@@ -361,7 +361,7 @@ open class SessionManager {
             return
         }
         
-        print(String(data: httpBody, encoding: .utf8)!)
+        print(String(data: httpBody, encoding: .utf8)!); print()
 
         return self.query(resourceUri: resourceUri, resourceType: .document, httpBody: httpBody, callback: callback)
     }
@@ -370,7 +370,7 @@ open class SessionManager {
         
         let resourceUri = baseUri?.document(atLink: collection.selfLink!)
         
-        query.printQuery()
+        query.printQuery(); print()
         
         let body = query.dictionary
         
@@ -379,7 +379,7 @@ open class SessionManager {
             return
         }
         
-        print(String(data: httpBody, encoding: .utf8)!)
+        print(String(data: httpBody, encoding: .utf8)!); print()
         
         return self.query(resourceUri: resourceUri, resourceType: .document, httpBody: httpBody, callback: callback)
     }
@@ -408,10 +408,7 @@ open class SessionManager {
         
         let resourceUri = baseUri?.attachment(databaseId, collectionId: collectionId, documentId: documentId)
         
-        let headers: [String:ADHttpRequestHeader] = [
-            contentType:.contentType,
-            mediaName:.slug
-        ]
+        let headers: [String:ADHttpRequestHeader] = [ contentType:.contentType, mediaName: .slug ]
         
         return create(resourceUri: resourceUri, resourceType: .attachment, httpBody: media, additionalHeaders: headers, callback: callback)
     }
@@ -434,10 +431,7 @@ open class SessionManager {
         
         let resourceUri = baseUri?.attachment(atLink: document.selfLink!)
         
-        let headers: [String:ADHttpRequestHeader] = [
-            contentType:.contentType,
-            mediaName:.slug
-        ]
+        let headers: [String:ADHttpRequestHeader] = [ contentType:.contentType, mediaName: .slug ]
         
         return create(resourceUri: resourceUri, resourceType: .attachment, httpBody: media, additionalHeaders: headers, callback: callback)
     }
@@ -492,10 +486,7 @@ open class SessionManager {
         
         let resourceUri = baseUri?.attachment(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId)
         
-        let headers: [String:ADHttpRequestHeader] = [
-            contentType:.contentType,
-            mediaName:.slug
-        ]
+        let headers: [String:ADHttpRequestHeader] = [ contentType:.contentType, mediaName: .slug ]
         
         return replace(resourceUri: resourceUri, resourceType: .attachment, httpBody: media, additionalHeaders: headers, callback: callback)
     }
@@ -518,10 +509,7 @@ open class SessionManager {
         
         let resourceUri = baseUri?.attachment(atLink: document.selfLink!, withResourceId: attachmentId)
         
-        let headers: [String:ADHttpRequestHeader] = [
-            contentType:.contentType,
-            mediaName:.slug
-        ]
+        let headers: [String:ADHttpRequestHeader] = [ contentType:.contentType, mediaName: .slug ]
         
         return replace(resourceUri: resourceUri, resourceType: .attachment, httpBody: media, additionalHeaders: headers, callback: callback)
     }
@@ -1111,11 +1099,11 @@ open class SessionManager {
             DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
             
             if let error = error {
-                if self.verboseLogging { print(error.localizedDescription) }
+                if self.verboseLogging { print(error.localizedDescription); print() }
                 DispatchQueue.main.async { callback(ADResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(error:error)))) }
             }
             if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
-                if self.verboseLogging { print(json) }
+                if self.verboseLogging { print(json); print() }
                 
                 var result: ADResult<T>?
                 
@@ -1146,11 +1134,11 @@ open class SessionManager {
             DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
             
             if let error = error {
-                if self.verboseLogging { print(error.localizedDescription) }
+                if self.verboseLogging { print(error.localizedDescription); print() }
                 DispatchQueue.main.async { callback(ADListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(error:error)))) }
             }
             if let data = data, let jsonData = try? JSONSerialization.jsonObject(with: data) as? [String:Any], let json = jsonData  {
-                if self.verboseLogging { print(json) }
+                if self.verboseLogging { print(json); print() }
                 
                 var result: ADListResult<T>?
                 
@@ -1181,7 +1169,7 @@ open class SessionManager {
             DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
             
             if let error = error {
-                if self.verboseLogging { print(error.localizedDescription) }
+                if self.verboseLogging { print(error.localizedDescription); print() }
                 DispatchQueue.main.async { callback(nil) }
             } else {
                 DispatchQueue.main.async { callback(data) }
@@ -1199,7 +1187,7 @@ open class SessionManager {
             DispatchQueue.main.async { UIApplication.shared.isNetworkActivityIndicatorVisible = false }
             
             if let error = error {
-                if self.verboseLogging { print(error.localizedDescription) }
+                if self.verboseLogging { print(error.localizedDescription); print() }
                 DispatchQueue.main.async { callback(false) }
             } else {
                 DispatchQueue.main.async { callback(true) }

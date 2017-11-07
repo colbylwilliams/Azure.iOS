@@ -52,7 +52,7 @@ public class ADTokenProvider {
         
         let payload = "\(verb.lowercased())\n\(resourceType.lowercased())\n\(resourceLink)\n\(dateString.lowercased())\n\n"
         
-        print(payload)
+//        print(payload)
         
         let signiture = payload.hmac(algorithm: .SHA256, key: key)
         

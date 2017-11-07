@@ -13,11 +13,13 @@ class AzureDataTests: XCTestCase {
     
     let timeout: TimeInterval = 30.0
 
-    var ensureDatabase:    Bool = false
-    var ensureCollection:  Bool = false
+    var ensureDatabase:     Bool = false
+    var ensureCollection:   Bool = false
+    var ensureDocument:     Bool = false
 
     fileprivate(set) var database: ADDatabase?
     fileprivate(set) var collection: ADCollection?
+    fileprivate(set) var document: ADDocument?
     
     var resourceName: String?
     var resourceType: ADResourceType!
@@ -26,6 +28,7 @@ class AzureDataTests: XCTestCase {
     
     var databaseId:     String { return "\(rname)TestsDatabase" }
     var collectionId:   String { return "\(rname)TestsCollection" }
+    var documentId:     String { return "\(rname)TestsDocument" }
     var resourceId:     String { return "\(rname)Tests\(rname)" }
     var replacedId:     String { return "\(rname)Replaced" }
 
@@ -126,6 +129,39 @@ class AzureDataTests: XCTestCase {
                 }
                 
                 XCTAssertNotNil(collection)
+                
+                if ensureDocument, let collection = collection {
+                    
+                    let initGetDocumentExpectation = self.expectation(description: "Should get document")
+                    var initGetDocumentResponse: ADResponse<ADDocument>?
+                    
+                    AzureData.get(documentWithId: documentId, as: ADDocument.self, inCollection: collection.id, inDatabase: database.id) { r in
+                        initGetDocumentResponse = r
+                        initGetDocumentExpectation.fulfill()
+                    }
+                    
+                    wait(for: [initGetDocumentExpectation], timeout: timeout)
+                    
+                    document = initGetDocumentResponse?.resource
+                    
+                    if document == nil {
+                        
+                        let initCreateDocumentExpectation = self.expectation(description: "Should initialize document")
+                        var initCreateDocumentResponse: ADResponse<ADDocument>?
+                        
+                        collection.create(ADDocument(documentId)) { r in
+                            initCreateDocumentResponse = r
+                            initCreateDocumentExpectation.fulfill()
+                        }
+                        
+                        wait(for: [initCreateDocumentExpectation], timeout: timeout)
+                        
+                        document = initCreateDocumentResponse?.resource
+                    }
+                    
+                    XCTAssertNotNil(document)
+
+                }
             }
         }
         

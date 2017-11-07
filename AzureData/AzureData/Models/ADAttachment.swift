@@ -22,8 +22,16 @@ public class ADAttachment: ADResource {
         contentType = dict[ADAttachment.contentTypeKey] as? String
         mediaLink = dict[ADAttachment.mediaLinkKey] as? String
     }
-    
+
     public static func jsonDict(_ id: String, contentType: String, media: URL) -> [String:Any] {
+        return [
+            idKey:id,
+            contentTypeKey:contentType,
+            mediaLinkKey:media.absoluteString
+        ]
+    }
+    
+    public static func jsonDict(_ id: String, contentType: String, media: String) -> [String:Any] {
         return [
             idKey:id,
             contentTypeKey:contentType,

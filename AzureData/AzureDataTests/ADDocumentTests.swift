@@ -22,7 +22,7 @@ class ADDocumentTests: AzureDataTests {
     func testDocumentCrud() {
         
         // random number
-        let n = Int(arc4random_uniform(100))
+        let n = random
         
         let databaseId      = "DocumentTestsDatabase"
         let collectionId    = "DocumentTestsCollection"
@@ -46,14 +46,15 @@ class ADDocumentTests: AzureDataTests {
         let customNumberKey = "customNumberKey"
         let customNumberValue = n
         
-        let document = ADDocument(documentId)
+        let newDocument = ADDocument(documentId)
         
-        document[customStringKey] = customStringValue
-        document[customNumberKey] = customNumberValue
+        newDocument[customStringKey] = customStringValue
+        newDocument[customNumberKey] = customNumberValue
+        
         
         
         // Create
-        AzureData.create(document, inCollection: collectionId, inDatabase: databaseId) { r in
+        AzureData.create(newDocument, inCollection: collectionId, inDatabase: databaseId) { r in
             createResponse = r
             createExpectation.fulfill()
         }
@@ -61,12 +62,17 @@ class ADDocumentTests: AzureDataTests {
         wait(for: [createExpectation], timeout: timeout)
         
         XCTAssertNotNil(createResponse?.resource)
-        XCTAssertNotNil(createResponse!.resource![customStringKey] as? String)
-        XCTAssertEqual (createResponse!.resource![customStringKey] as! String, customStringValue)
-        XCTAssertNotNil(createResponse!.resource![customNumberKey] as? Int)
-        XCTAssertEqual (createResponse!.resource![customNumberKey] as! Int, customNumberValue)
+        
+        if let document = createResponse?.resource {
+            
+            XCTAssertNotNil(document[customStringKey] as? String)
+            XCTAssertEqual (document[customStringKey] as! String, customStringValue)
+            XCTAssertNotNil(document[customNumberKey] as? Int)
+            XCTAssertEqual (document[customNumberKey] as! Int, customNumberValue)
+        }
 
-
+        
+        
         // List
         AzureData.get(documentsAs: ADDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
             listResponse = r
@@ -77,6 +83,7 @@ class ADDocumentTests: AzureDataTests {
         
         XCTAssertNotNil(listResponse?.resource)
 
+        
         
         // Query
         let query = ADQuery.select()
@@ -93,34 +100,50 @@ class ADDocumentTests: AzureDataTests {
         wait(for: [queryExpectation], timeout: timeout)
         
         XCTAssertNotNil(queryResponse?.resource?.items.first)
-        XCTAssertNotNil(queryResponse?.resource?.items.first![customStringKey] as? String)
-        XCTAssertEqual (queryResponse?.resource?.items.first![customStringKey] as! String, customStringValue)
-        XCTAssertNotNil(queryResponse?.resource?.items.first![customNumberKey] as? Int)
-        XCTAssertEqual (queryResponse?.resource?.items.first![customNumberKey] as! Int, customNumberValue)
-
+        
+        if let document = queryResponse?.resource?.items.first {
+            
+            XCTAssertNotNil(document[customStringKey] as? String)
+            XCTAssertEqual (document[customStringKey] as! String, customStringValue)
+            XCTAssertNotNil(document[customNumberKey] as? Int)
+            XCTAssertEqual (document[customNumberKey] as! Int, customNumberValue)
+        }
+        
+        
         
         // Get
-        AzureData.get(documentWithId: documentId, as: ADDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
-            getResponse = r
-            getExpectation.fulfill()
+        if createResponse?.result.isSuccess ?? false {
+            
+            AzureData.get(documentWithId: documentId, as: ADDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
+                getResponse = r
+                getExpectation.fulfill()
+            }
+            
+            wait(for: [getExpectation], timeout: timeout)
         }
-        
-        wait(for: [getExpectation], timeout: timeout)
         
         XCTAssertNotNil(getResponse?.resource)
-        XCTAssertNotNil(getResponse!.resource![customStringKey] as? String)
-        XCTAssertEqual (getResponse!.resource![customStringKey] as! String, customStringValue)
-        XCTAssertNotNil(getResponse!.resource![customNumberKey] as? Int)
-        XCTAssertEqual (getResponse!.resource![customNumberKey] as! Int, customNumberValue)
+        
+        if let document = getResponse?.resource {
+            
+            XCTAssertNotNil(document[customStringKey] as? String)
+            XCTAssertEqual (document[customStringKey] as! String, customStringValue)
+            XCTAssertNotNil(document[customNumberKey] as? Int)
+            XCTAssertEqual (document[customNumberKey] as! Int, customNumberValue)
+        }
 
         
-        // Delete
-        AzureData.delete(createResponse!.resource!, fromCollection: collectionId, inDatabase: databaseId) { s in
-            deleteSuccess = s
-            deleteExpectation.fulfill()
-        }
         
-        wait(for: [deleteExpectation], timeout: timeout)
+        // Delete
+        if createResponse?.result.isSuccess ?? false {
+         
+            AzureData.delete(createResponse!.resource!, fromCollection: collectionId, inDatabase: databaseId) { s in
+                deleteSuccess = s
+                deleteExpectation.fulfill()
+            }
+            
+            wait(for: [deleteExpectation], timeout: timeout)
+        }
         
         XCTAssert(deleteSuccess)
     }

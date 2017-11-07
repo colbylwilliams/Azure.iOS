@@ -59,23 +59,29 @@ class ADCollectionTests: AzureDataTests {
         
         
         // Get
-        AzureData.get(collectionWithId: collectionId, inDatabase: databaseId) { r in
-            getResponse = r
-            getExpectation.fulfill()
+        if createResponse?.result.isSuccess ?? false {
+            
+            AzureData.get(collectionWithId: collectionId, inDatabase: databaseId) { r in
+                getResponse = r
+                getExpectation.fulfill()
+            }
+            
+            wait(for: [getExpectation], timeout: timeout)
         }
-        
-        wait(for: [getExpectation], timeout: timeout)
         
         XCTAssertNotNil(getResponse?.resource)
 
         
         // Delete
-        AzureData.delete(ADCollection(collectionId), fromDatabase: databaseId) { s in
-            deleteSuccess = s
-            deleteExpectation.fulfill()
-        }
+        if createResponse?.result.isSuccess ?? false {
         
-        wait(for: [deleteExpectation], timeout: timeout)
+            AzureData.delete(ADCollection(collectionId), fromDatabase: databaseId) { s in
+                deleteSuccess = s
+                deleteExpectation.fulfill()
+            }
+            
+            wait(for: [deleteExpectation], timeout: timeout)
+        }
         
         XCTAssert(deleteSuccess)
     }

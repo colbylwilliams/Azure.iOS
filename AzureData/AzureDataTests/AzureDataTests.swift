@@ -13,6 +13,10 @@ class AzureDataTests: XCTestCase {
     
     let timeout: TimeInterval = 30.0
     
+    var random: Int {
+        return Int(arc4random_uniform(100))
+    }
+    
     override func setUp() {
         super.setUp()
         

@@ -63,7 +63,7 @@ class AzureDataTests: XCTestCase {
             if let accountName = bundle.infoDictionary?["ADDatabaseAccountName"] as? String,
                 let accountKey = bundle.infoDictionary?["ADDatabaseAccountKey"]  as? String {
             
-                AzureData.setup(accountName, key: accountKey, verboseLogging: true)
+                AzureData.setup(accountName, key: accountKey)
             }
         }
         

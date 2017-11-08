@@ -29,6 +29,8 @@ import XCTest
 
 class NetworkReachabilityManagerTestCase: XCTestCase {
 
+    let timeout: TimeInterval = 30.0
+    
     // MARK: - Tests - Initialization
 
     func testThatManagerCanBeInitializedFromHost() {

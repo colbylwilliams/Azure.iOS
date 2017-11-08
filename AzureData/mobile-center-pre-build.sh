@@ -9,21 +9,16 @@ accountKey="$AZURE_COSMOS_DB_ACCOUNT_KEY"
 
 # echo Source Directory: "$MOBILECENTER_SOURCE_DIRECTORY"
 
-# frmkInfoPlist="$MOBILECENTER_SOURCE_DIRECTORY/AzureData/AzureData/Info.plist"
-# appsInfoPlist="$MOBILECENTER_SOURCE_DIRECTORY/AzureData/AzureDataApp/Info.plist"
-testInfoPlist="$MOBILECENTER_SOURCE_DIRECTORY/AzureData/AzureDataTests/Info.plist"
+# frmkInfoPlist="$MOBILECENTER_SOURCE_DIRECTORY/AzureData/Source/Info.plist"
+testInfoPlist="$MOBILECENTER_SOURCE_DIRECTORY/AzureData/Tests/Info.plist"
 
 
 # echo Framework Info.plist Path: "$frmkInfoPlist"
-# echo App Info.plist Path: "$appsInfoPlist"
 # echo Test Info.plist Path: "$testInfoPlist"
 
 
 # plutil -replace ADDatabaseAccountName -string "$accountName" "$frmkInfoPlist"
 # plutil -replace ADDatabaseAccountKey -string "$accountKey" "$frmkInfoPlist"
-
-# plutil -replace ADDatabaseAccountName -string "$accountName" "$appsInfoPlist"
-# plutil -replace ADDatabaseAccountKey -string "$accountKey" "$appsInfoPlist"
 
 plutil -replace ADDatabaseAccountName -string "$accountName" "$testInfoPlist"
 plutil -replace ADDatabaseAccountKey -string "$accountKey" "$testInfoPlist"

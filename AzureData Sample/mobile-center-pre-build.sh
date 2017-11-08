@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 if [ ! -z "$MOBILECENTER_SOURCE_DIRECTORY" ]; then
-	cd $MOBILECENTER_SOURCE_DIRECTORY/AzureData\ Sample && /usr/local/bin/carthage bootstrap
+	cd $MOBILECENTER_SOURCE_DIRECTORY/AzureData\ Sample && carthage bootstrap
 fi

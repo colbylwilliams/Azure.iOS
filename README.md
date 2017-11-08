@@ -1,8 +1,16 @@
-# Azure.iOS
+# Azure.iOS [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/colbylwilliams/Azure.iOS/master/LICENSE.md) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
-| App        | Status          |
-| ---------- | --------------- |
-| AzureData  | [![Build status][app-data-build-status]][app-data-build-master] |
+
+| Target               | OS      | Status                                                                                                |
+| -------------------- | ------- | ----------------------------------------------------------------------------------------------------- |
+| AzureData.framework  | iOS     | [![Build status][azuredata-ios-build-master-badge]][azuredata-ios-build-master]                       |
+| AzureData.framework  | macOS   | [![Build status][azuredata-macos-build-master-badge]][azuredata-macos-build-master]                   |
+| AzureData.framework  | tvOS    | [![Build status][azuredata-tvos-build-master-badge]][azuredata-tvos-build-master]                     |
+| AzureData.framework  | watchOS | [![Build status][azuredata-watchos-build-master-badge]][azuredata-watchos-build-master]               |
+| AzureData Sample App | iOS     | [![Build status][azuredata-ios-sample-build-master-badge]][azuredata-ios-sample-build-master]         |
+| AzureData Sample App | macOS   | [![Build status][azuredata-macos-sample-build-master-badge]][azuredata-macos-sample-build-master]     |
+| AzureData Sample App | tvOS    | Coming soon..                                                                                         |
+| AzureData Sample App | watchOS | Coming soon..                                                                                         |
 
 
 # Setup
@@ -598,7 +606,22 @@ AzureData.get (offerWithId: id) { r in
 
 
 
+[azuredata-ios-build-master]:https://mobile.azure.com/orgs/Azure.Mobile/apps/AzureData-iOS/build/branches/master
+[azuredata-ios-build-master-badge]:https://build.mobile.azure.com/v0.1/apps/8deac5ea-505c-4d94-821a-cb1f8165198e/branches/master/badge
+[azuredata-ios-sample-build-master]:https://mobile.azure.com/orgs/Azure.Mobile/apps/AzureData-iOS-Sample/build/branches/master
+[azuredata-ios-sample-build-master-badge]:https://build.mobile.azure.com/v0.1/apps/5ba90a44-853c-4bb1-9a18-eab19fb79e34/branches/master/badge
 
+[azuredata-macos-build-master]:https://mobile.azure.com/orgs/Azure.Mobile/apps/AzureData-iOS/build/branches/master
+[azuredata-macos-build-master-badge]:https://build.mobile.azure.com/v0.1/apps/8deac5ea-505c-4d94-821a-cb1f8165198e/branches/master/badge
+[azuredata-macos-sample-build-master]:https://mobile.azure.com/orgs/Azure.Mobile/apps/AzureData-iOS-Sample/build/branches/master
+[azuredata-macos-sample-build-master-badge]:https://build.mobile.azure.com/v0.1/apps/5ba90a44-853c-4bb1-9a18-eab19fb79e34/branches/master/badge
 
-[app-data-build-status]:https://build.mobile.azure.com/v0.1/apps/359067a7-aa63-4c29-ac2e-bd9d29c086dc/branches/master/badge
-[app-data-build-master]:https://mobile.azure.com/orgs/Azure.Mobile/apps/AzureDataApp/build/branches/master
+[azuredata-tvos-build-master]:https://mobile.azure.com/orgs/Azure.Mobile/apps/AzureData-iOS/build/branches/master
+[azuredata-tvos-build-master-badge]:https://build.mobile.azure.com/v0.1/apps/8deac5ea-505c-4d94-821a-cb1f8165198e/branches/master/badge
+[azuredata-tvos-sample-build-master]:https://mobile.azure.com/orgs/Azure.Mobile/apps/AzureData-iOS-Sample/build/branches/master
+[azuredata-tvos-sample-build-master-badge]:https://build.mobile.azure.com/v0.1/apps/5ba90a44-853c-4bb1-9a18-eab19fb79e34/branches/master/badge
+
+[azuredata-watchos-build-master]:https://mobile.azure.com/orgs/Azure.Mobile/apps/AzureData-iOS/build/branches/master
+[azuredata-watchos-build-master-badge]:https://build.mobile.azure.com/v0.1/apps/8deac5ea-505c-4d94-821a-cb1f8165198e/branches/master/badge
+[azuredata-watchos-sample-build-master]:https://mobile.azure.com/orgs/Azure.Mobile/apps/AzureData-iOS-Sample/build/branches/master
+[azuredata-watchos-sample-build-master-badge]:https://build.mobile.azure.com/v0.1/apps/5ba90a44-853c-4bb1-9a18-eab19fb79e34/branches/master/badge

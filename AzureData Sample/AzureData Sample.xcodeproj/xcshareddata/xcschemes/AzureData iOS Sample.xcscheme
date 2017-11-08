@@ -29,16 +29,6 @@
       language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B55AEF951FB3480400F7BEED"
-               BuildableName = "AzureData iOS Sample UITests.xctest"
-               BlueprintName = "AzureData iOS Sample UITests"
-               ReferencedContainer = "container:AzureData Sample.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

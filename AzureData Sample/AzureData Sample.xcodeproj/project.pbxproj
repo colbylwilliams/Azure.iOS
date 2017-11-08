@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B53401511FB386890063BCC7 /* AzureData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B53401501FB386890063BCC7 /* AzureData.framework */; };
 		B55AEF861FB3480300F7BEED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AEF851FB3480300F7BEED /* AppDelegate.swift */; };
 		B55AEF8B1FB3480400F7BEED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B55AEF891FB3480400F7BEED /* Main.storyboard */; };
 		B55AEF8D1FB3480400F7BEED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B55AEF8C1FB3480400F7BEED /* Assets.xcassets */; };
@@ -21,8 +22,6 @@
 		B55AEFD31FB3495100F7BEED /* CollectionResourceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AEFCA1FB3495000F7BEED /* CollectionResourceTableViewController.swift */; };
 		B55AEFD41FB3495100F7BEED /* CollectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AEFCB1FB3495100F7BEED /* CollectionTableViewController.swift */; };
 		B55AEFD51FB3495100F7BEED /* DatabaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AEFCC1FB3495100F7BEED /* DatabaseTableViewController.swift */; };
-		B55AEFDC1FB34A0200F7BEED /* AzureData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B55AEFD81FB349ED00F7BEED /* AzureData.framework */; };
-		B55AEFDD1FB34A0200F7BEED /* AzureData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B55AEFD81FB349ED00F7BEED /* AzureData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,21 +34,8 @@
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		B55AEFDE1FB34A0200F7BEED /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				B55AEFDD1FB34A0200F7BEED /* AzureData.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
+		B53401501FB386890063BCC7 /* AzureData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AzureData.framework; path = Carthage/Build/iOS/AzureData.framework; sourceTree = "<group>"; };
 		B55AEF831FB3480300F7BEED /* AzureData iOS Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AzureData iOS Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B55AEF851FB3480300F7BEED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B55AEF8A1FB3480400F7BEED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -68,7 +54,6 @@
 		B55AEFCA1FB3495000F7BEED /* CollectionResourceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionResourceTableViewController.swift; sourceTree = "<group>"; };
 		B55AEFCB1FB3495100F7BEED /* CollectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewController.swift; sourceTree = "<group>"; };
 		B55AEFCC1FB3495100F7BEED /* DatabaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseTableViewController.swift; sourceTree = "<group>"; };
-		B55AEFD81FB349ED00F7BEED /* AzureData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = AzureData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,7 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B55AEFDC1FB34A0200F7BEED /* AzureData.framework in Frameworks */,
+				B53401511FB386890063BCC7 /* AzureData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,7 +127,7 @@
 		B55AEFD61FB349ED00F7BEED /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B55AEFD81FB349ED00F7BEED /* AzureData.framework */,
+				B53401501FB386890063BCC7 /* AzureData.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -157,7 +142,8 @@
 				B55AEF7F1FB3480300F7BEED /* Sources */,
 				B55AEF801FB3480300F7BEED /* Frameworks */,
 				B55AEF811FB3480300F7BEED /* Resources */,
-				B55AEFDE1FB34A0200F7BEED /* Embed Frameworks */,
+				B534014F1FB383420063BCC7 /* ShellScript */,
+				B53401521FB3877C0063BCC7 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -245,6 +231,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		B534014F1FB383420063BCC7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/AzureData.framework",
+			);
+			outputPaths = (
+				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AzureData.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+			showEnvVarsInLog = 0;
+		};
+		B53401521FB3877C0063BCC7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage outdated --xcode-warnings";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B55AEF7F1FB3480300F7BEED /* Sources */ = {
@@ -416,6 +435,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N7C38P267Q;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "AzureData iOS Sample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				ONLY_ACTIVE_ARCH = NO;
@@ -434,6 +457,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N7C38P267Q;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "AzureData iOS Sample/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.azure.data.app;

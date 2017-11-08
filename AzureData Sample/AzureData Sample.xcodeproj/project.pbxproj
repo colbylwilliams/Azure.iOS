@@ -139,11 +139,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B55AEFA11FB3480400F7BEED /* Build configuration list for PBXNativeTarget "AzureData iOS Sample" */;
 			buildPhases = (
+				B53401531FB3A08B0063BCC7 /* Carthage Bootstrap */,
+				B534014F1FB383420063BCC7 /* Carthage Copy Frameworks */,
 				B55AEF7F1FB3480300F7BEED /* Sources */,
 				B55AEF801FB3480300F7BEED /* Frameworks */,
 				B55AEF811FB3480300F7BEED /* Resources */,
-				B534014F1FB383420063BCC7 /* ShellScript */,
-				B53401521FB3877C0063BCC7 /* ShellScript */,
+				B53401521FB3877C0063BCC7 /* Carthage Outdated Warning */,
 			);
 			buildRules = (
 			);
@@ -233,7 +234,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		B534014F1FB383420063BCC7 /* ShellScript */ = {
+		B534014F1FB383420063BCC7 /* Carthage Copy Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -241,6 +242,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/AzureData.framework",
 			);
+			name = "Carthage Copy Frameworks";
 			outputPaths = (
 				"$(BUILT_PRODUCTS_DIR)/$(FRAMEWORKS_FOLDER_PATH)/AzureData.framework",
 			);
@@ -249,19 +251,34 @@
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 			showEnvVarsInLog = 0;
 		};
-		B53401521FB3877C0063BCC7 /* ShellScript */ = {
+		B53401521FB3877C0063BCC7 /* Carthage Outdated Warning */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Carthage Outdated Warning";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage outdated --xcode-warnings";
 			showEnvVarsInLog = 0;
+		};
+		B53401531FB3A08B0063BCC7 /* Carthage Bootstrap */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Carthage Bootstrap";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/scripts/carthage-bootstrap.sh\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 

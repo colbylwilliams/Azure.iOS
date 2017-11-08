@@ -1,6 +1,6 @@
 //
 //  DocumentDetailTableViewController.swift
-//  AzureDataApp
+//  AzureData iOS Sample
 //
 //  Created by Colby Williams on 10/20/17.
 //  Copyright © 2017 Colby Williams. All rights reserved.

@@ -1,6 +1,6 @@
 //
-//  TriggerTableViewController.swift
-//  AzureDataApp
+//  UserDefinedFunctionTableViewController.swift
+//  AzureData iOS Sample
 //
 //  Created by Colby Williams on 10/24/17.
 //  Copyright © 2017 Colby Williams. All rights reserved.
@@ -9,28 +9,27 @@
 import UIKit
 import AzureData
 
-class TriggerTableViewController: UITableViewController {
+class UserDefinedFunctionTableViewController: UITableViewController {
 
     @IBOutlet var addButton: UIBarButtonItem!
     
     var database: ADDatabase!
     var collection: ADCollection!
 
-    var resources: [ADTrigger] = []
+    var resources: [ADUserDefinedFunction] = []
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         navigationItem.rightBarButtonItems = [addButton, editButtonItem]
     }
-
+    
     
     func refreshData() {
-
-        collection.getTriggers() { r in
+        AzureData.get(userDefinedFunctionsIn: collection.id, inDatabase: database.id) { r in
+            debugPrint(r.result)
             DispatchQueue.main.async {
-                debugPrint(r.result)
                 if let items = r.resource?.items {
                     self.resources = items
                     self.tableView.reloadData()
@@ -43,8 +42,8 @@ class TriggerTableViewController: UITableViewController {
             }
         }
     }
-    
-    
+
+
     func showErrorAlert (_ error: ADError) {
         let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
@@ -57,7 +56,7 @@ class TriggerTableViewController: UITableViewController {
     
     @IBAction func refreshControlValueChanged(_ sender: Any) { refreshData() }
     
-    
+
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int { return 1 }
@@ -96,11 +95,13 @@ class TriggerTableViewController: UITableViewController {
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
 
         collection.delete(self.resources[indexPath.row]) { success in
+        
             DispatchQueue.main.async {
                 if success {
                     self.resources.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 }
+            
                 callback?(success)
             }
         }

@@ -12,7 +12,7 @@ public class ADTrigger: ADResource {
 
     static let bodyKey              = "body"
     static let triggerOperationKey  = "triggerOperation"
-    static let triggerTypeKey           = "triggerType"
+    static let triggerTypeKey       = "triggerType"
 
     public private(set) var body:               String?
     public private(set) var triggerOperation:   ADTriggerOperation?

@@ -21,78 +21,234 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		B5199DF11FB17D6400B69C99 /* ADDatabaseUserExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5199DF01FB17D6400B69C99 /* ADDatabaseUserExtensionsTests.swift */; };
-		B528A53D1F9EBF1C000586BE /* ADQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B528A53C1F9EBF1C000586BE /* ADQuery.swift */; };
-		B53BF7761F9A2F9400B7A187 /* ADIndexingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53BF7751F9A2F9400B7A187 /* ADIndexingPolicy.swift */; };
-		B53BF7781F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53BF7771F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift */; };
-		B53BF77A1F9A7AE700B7A187 /* DocumentDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B53BF7791F9A7AE700B7A187 /* DocumentDetailTableViewController.swift */; };
-		B5619EB81F99357800D01EAD /* ADResourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EB71F99357800D01EAD /* ADResourceList.swift */; };
-		B5619EBA1F994FB800D01EAD /* DatabaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EB91F994FB800D01EAD /* DatabaseTableViewController.swift */; };
-		B5619EBC1F994FE300D01EAD /* CollectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EBB1F994FE300D01EAD /* CollectionTableViewController.swift */; };
-		B5619EBE1F994FF100D01EAD /* DocumentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5619EBD1F994FF100D01EAD /* DocumentTableViewController.swift */; };
-		B57446AB1FB11F810048B20F /* ADDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57446AA1FB11F810048B20F /* ADDatabaseTests.swift */; };
-		B57446AD1FB11FEF0048B20F /* ADCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57446AC1FB11FEF0048B20F /* ADCollectionTests.swift */; };
-		B57446AF1FB120070048B20F /* ADDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57446AE1FB120070048B20F /* ADDocumentTests.swift */; };
-		B57C36A41F9B00E90035A106 /* UtilityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B57C36A31F9B00E90035A106 /* UtilityExtensions.swift */; };
-		B587C71F1F9FACC4004A76F6 /* AzureDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B587C71E1F9FACC4004A76F6 /* AzureDataExtensions.swift */; };
-		B5958A051F9903F10023C0AF /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A041F9903F10023C0AF /* Models.swift */; };
-		B5958A081F992C560023C0AF /* ADDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A071F992C560023C0AF /* ADDatabase.swift */; };
-		B5958A0A1F992C9A0023C0AF /* ADResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A091F992C9A0023C0AF /* ADResource.swift */; };
-		B5958A0C1F992CAB0023C0AF /* ADDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A0B1F992CAB0023C0AF /* ADDocument.swift */; };
-		B5958A0E1F992CB90023C0AF /* ADCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A0D1F992CB90023C0AF /* ADCollection.swift */; };
-		B5958A101F992CC50023C0AF /* ADAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A0F1F992CC50023C0AF /* ADAttachment.swift */; };
-		B5958A121F992CD10023C0AF /* ADConflict.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A111F992CD10023C0AF /* ADConflict.swift */; };
-		B5958A141F992CDD0023C0AF /* ADDatabaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A131F992CDD0023C0AF /* ADDatabaseAccount.swift */; };
-		B5958A161F992CE90023C0AF /* ADError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A151F992CE90023C0AF /* ADError.swift */; };
-		B5958A181F992CF60023C0AF /* ADOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A171F992CF60023C0AF /* ADOffer.swift */; };
-		B5958A1A1F992D020023C0AF /* ADPartitionKeyRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A191F992D020023C0AF /* ADPartitionKeyRange.swift */; };
-		B5958A1C1F992D0E0023C0AF /* ADPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A1B1F992D0E0023C0AF /* ADPermission.swift */; };
-		B5958A1E1F992D190023C0AF /* ADStoredProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A1D1F992D190023C0AF /* ADStoredProcedure.swift */; };
-		B5958A201F992D240023C0AF /* ADTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A1F1F992D240023C0AF /* ADTrigger.swift */; };
-		B5958A221F992D2E0023C0AF /* ADUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A211F992D2E0023C0AF /* ADUser.swift */; };
-		B5958A241F992D3A0023C0AF /* ADUserDefinedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A231F992D3A0023C0AF /* ADUserDefinedFunction.swift */; };
-		B5958A261F992D520023C0AF /* ADResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A251F992D520023C0AF /* ADResourceType.swift */; };
-		B5958A281F992D5E0023C0AF /* ADResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5958A271F992D5E0023C0AF /* ADResourceUri.swift */; };
-		B5AEF8FB1F9F7565006E4905 /* StoredProcedureTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEF8FA1F9F7565006E4905 /* StoredProcedureTableViewController.swift */; };
-		B5AEF8FD1F9F7572006E4905 /* TriggerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEF8FC1F9F7572006E4905 /* TriggerTableViewController.swift */; };
-		B5AEF8FF1F9F7589006E4905 /* UserDefinedFunctionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEF8FE1F9F7589006E4905 /* UserDefinedFunctionTableViewController.swift */; };
-		B5AEF9011F9F783A006E4905 /* CollectionResourceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5AEF9001F9F783A006E4905 /* CollectionResourceTableViewController.swift */; };
-		B5BEF1B01F9E41120018CEC9 /* PermissionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5BEF1AF1F9E41120018CEC9 /* PermissionTableViewController.swift */; };
-		B5C89B541FB147D100EA0739 /* ADAttachmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C89B531FB147D100EA0739 /* ADAttachmentTests.swift */; };
-		B5C89B561FB1480700EA0739 /* ADOfferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C89B551FB1480700EA0739 /* ADOfferTests.swift */; };
-		B5C89B581FB1481B00EA0739 /* ADPermissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C89B571FB1481B00EA0739 /* ADPermissionTests.swift */; };
-		B5C89B5A1FB1482C00EA0739 /* ADQueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C89B591FB1482C00EA0739 /* ADQueryTests.swift */; };
-		B5C89B5C1FB1484500EA0739 /* ADStoredProcedureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C89B5B1FB1484500EA0739 /* ADStoredProcedureTests.swift */; };
-		B5C89B5E1FB1485800EA0739 /* ADTriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C89B5D1FB1485800EA0739 /* ADTriggerTests.swift */; };
-		B5C89B601FB1486800EA0739 /* ADUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C89B5F1FB1486800EA0739 /* ADUserTests.swift */; };
-		B5C89B621FB1487800EA0739 /* ADUserDefinedFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5C89B611FB1487800EA0739 /* ADUserDefinedFunctionTests.swift */; };
-		B5DA1DFB1F977EAF00C300D3 /* ADResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA1DFA1F977EAF00C300D3 /* ADResponse.swift */; };
-		B5DA1DFD1F978C0A00C300D3 /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA1DFC1F978C0A00C300D3 /* SessionManager.swift */; };
-		B5DA1DFF1F97D64500C300D3 /* ADHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA1DFE1F97D64500C300D3 /* ADHttp.swift */; };
+		B5223FC01FB33A9F00D0343F /* AzureData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5223FB71FB33A9F00D0343F /* AzureData.framework */; };
+		B5223FDC1FB33B0F00D0343F /* AzureData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5223FD31FB33B0F00D0343F /* AzureData.framework */; };
+		B52240501FB33DA900D0343F /* AzureData.h in Headers */ = {isa = PBXBuildFile; fileRef = B52240331FB33CD000D0343F /* AzureData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B52240511FB33DAB00D0343F /* AzureData.h in Headers */ = {isa = PBXBuildFile; fileRef = B52240331FB33CD000D0343F /* AzureData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B52240521FB33DAD00D0343F /* AzureData.h in Headers */ = {isa = PBXBuildFile; fileRef = B52240331FB33CD000D0343F /* AzureData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B52240531FB33DF100D0343F /* ADUserDefinedFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403A1FB33D1200D0343F /* ADUserDefinedFunctionTests.swift */; };
+		B52240541FB33DF100D0343F /* ADStoredProcedureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403B1FB33D1200D0343F /* ADStoredProcedureTests.swift */; };
+		B52240551FB33DF100D0343F /* ADUserPermissionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403C1FB33D1200D0343F /* ADUserPermissionExtensionsTests.swift */; };
+		B52240561FB33DF100D0343F /* ADQueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403D1FB33D1200D0343F /* ADQueryTests.swift */; };
+		B52240571FB33DF100D0343F /* ADDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403E1FB33D1200D0343F /* ADDocumentTests.swift */; };
+		B52240581FB33DF100D0343F /* ADCollectionUserDefinedFunctionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403F1FB33D1200D0343F /* ADCollectionUserDefinedFunctionExtensionsTests.swift */; };
+		B52240591FB33DF100D0343F /* ADDatabaseCollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240401FB33D1200D0343F /* ADDatabaseCollectionExtensionsTests.swift */; };
+		B522405A1FB33DF100D0343F /* ADTriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240411FB33D1200D0343F /* ADTriggerTests.swift */; };
+		B522405B1FB33DF100D0343F /* ADAttachmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240421FB33D1200D0343F /* ADAttachmentTests.swift */; };
+		B522405C1FB33DF100D0343F /* ADPermissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240431FB33D1200D0343F /* ADPermissionTests.swift */; };
+		B522405D1FB33DF100D0343F /* ADDatabaseUserExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240441FB33D1200D0343F /* ADDatabaseUserExtensionsTests.swift */; };
+		B522405E1FB33DF100D0343F /* ADCollectionTriggerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240451FB33D1200D0343F /* ADCollectionTriggerExtensionsTests.swift */; };
+		B522405F1FB33DF100D0343F /* ADUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240461FB33D1200D0343F /* ADUserTests.swift */; };
+		B52240601FB33DF100D0343F /* ADCollectionStoredProcedureExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240471FB33D1200D0343F /* ADCollectionStoredProcedureExtensionsTests.swift */; };
+		B52240611FB33DF100D0343F /* ADDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240481FB33D1200D0343F /* ADDatabaseTests.swift */; };
+		B52240621FB33DF100D0343F /* ADCollectionDocumentExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240491FB33D1200D0343F /* ADCollectionDocumentExtensionsTests.swift */; };
+		B52240631FB33DF100D0343F /* AzureDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522404A1FB33D1200D0343F /* AzureDataTests.swift */; };
+		B52240641FB33DF100D0343F /* ADCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522404B1FB33D1200D0343F /* ADCollectionTests.swift */; };
+		B52240651FB33DF100D0343F /* ADOfferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522404C1FB33D1200D0343F /* ADOfferTests.swift */; };
+		B52240661FB33DF100D0343F /* ADDocumentAttachmentExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522404D1FB33D1200D0343F /* ADDocumentAttachmentExtensionsTests.swift */; };
+		B52240671FB33DF800D0343F /* ADUserDefinedFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403A1FB33D1200D0343F /* ADUserDefinedFunctionTests.swift */; };
+		B52240681FB33DF800D0343F /* ADStoredProcedureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403B1FB33D1200D0343F /* ADStoredProcedureTests.swift */; };
+		B52240691FB33DF800D0343F /* ADUserPermissionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403C1FB33D1200D0343F /* ADUserPermissionExtensionsTests.swift */; };
+		B522406A1FB33DF800D0343F /* ADQueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403D1FB33D1200D0343F /* ADQueryTests.swift */; };
+		B522406B1FB33DF800D0343F /* ADDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403E1FB33D1200D0343F /* ADDocumentTests.swift */; };
+		B522406C1FB33DF800D0343F /* ADCollectionUserDefinedFunctionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403F1FB33D1200D0343F /* ADCollectionUserDefinedFunctionExtensionsTests.swift */; };
+		B522406D1FB33DF800D0343F /* ADDatabaseCollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240401FB33D1200D0343F /* ADDatabaseCollectionExtensionsTests.swift */; };
+		B522406E1FB33DF800D0343F /* ADTriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240411FB33D1200D0343F /* ADTriggerTests.swift */; };
+		B522406F1FB33DF800D0343F /* ADAttachmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240421FB33D1200D0343F /* ADAttachmentTests.swift */; };
+		B52240701FB33DF800D0343F /* ADPermissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240431FB33D1200D0343F /* ADPermissionTests.swift */; };
+		B52240711FB33DF800D0343F /* ADDatabaseUserExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240441FB33D1200D0343F /* ADDatabaseUserExtensionsTests.swift */; };
+		B52240721FB33DF800D0343F /* ADCollectionTriggerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240451FB33D1200D0343F /* ADCollectionTriggerExtensionsTests.swift */; };
+		B52240731FB33DF800D0343F /* ADUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240461FB33D1200D0343F /* ADUserTests.swift */; };
+		B52240741FB33DF800D0343F /* ADCollectionStoredProcedureExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240471FB33D1200D0343F /* ADCollectionStoredProcedureExtensionsTests.swift */; };
+		B52240751FB33DF800D0343F /* ADDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240481FB33D1200D0343F /* ADDatabaseTests.swift */; };
+		B52240761FB33DF800D0343F /* ADCollectionDocumentExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240491FB33D1200D0343F /* ADCollectionDocumentExtensionsTests.swift */; };
+		B52240771FB33DF800D0343F /* AzureDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522404A1FB33D1200D0343F /* AzureDataTests.swift */; };
+		B52240781FB33DF800D0343F /* ADCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522404B1FB33D1200D0343F /* ADCollectionTests.swift */; };
+		B52240791FB33DF800D0343F /* ADOfferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522404C1FB33D1200D0343F /* ADOfferTests.swift */; };
+		B522407A1FB33DF800D0343F /* ADDocumentAttachmentExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522404D1FB33D1200D0343F /* ADDocumentAttachmentExtensionsTests.swift */; };
+		B522407B1FB33DFA00D0343F /* ADUserDefinedFunctionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403A1FB33D1200D0343F /* ADUserDefinedFunctionTests.swift */; };
+		B522407C1FB33DFA00D0343F /* ADStoredProcedureTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403B1FB33D1200D0343F /* ADStoredProcedureTests.swift */; };
+		B522407D1FB33DFA00D0343F /* ADUserPermissionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403C1FB33D1200D0343F /* ADUserPermissionExtensionsTests.swift */; };
+		B522407E1FB33DFA00D0343F /* ADQueryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403D1FB33D1200D0343F /* ADQueryTests.swift */; };
+		B522407F1FB33DFA00D0343F /* ADDocumentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403E1FB33D1200D0343F /* ADDocumentTests.swift */; };
+		B52240801FB33DFA00D0343F /* ADCollectionUserDefinedFunctionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522403F1FB33D1200D0343F /* ADCollectionUserDefinedFunctionExtensionsTests.swift */; };
+		B52240811FB33DFA00D0343F /* ADDatabaseCollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240401FB33D1200D0343F /* ADDatabaseCollectionExtensionsTests.swift */; };
+		B52240821FB33DFA00D0343F /* ADTriggerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240411FB33D1200D0343F /* ADTriggerTests.swift */; };
+		B52240831FB33DFA00D0343F /* ADAttachmentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240421FB33D1200D0343F /* ADAttachmentTests.swift */; };
+		B52240841FB33DFA00D0343F /* ADPermissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240431FB33D1200D0343F /* ADPermissionTests.swift */; };
+		B52240851FB33DFA00D0343F /* ADDatabaseUserExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240441FB33D1200D0343F /* ADDatabaseUserExtensionsTests.swift */; };
+		B52240861FB33DFA00D0343F /* ADCollectionTriggerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240451FB33D1200D0343F /* ADCollectionTriggerExtensionsTests.swift */; };
+		B52240871FB33DFA00D0343F /* ADUserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240461FB33D1200D0343F /* ADUserTests.swift */; };
+		B52240881FB33DFA00D0343F /* ADCollectionStoredProcedureExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240471FB33D1200D0343F /* ADCollectionStoredProcedureExtensionsTests.swift */; };
+		B52240891FB33DFA00D0343F /* ADDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240481FB33D1200D0343F /* ADDatabaseTests.swift */; };
+		B522408A1FB33DFA00D0343F /* ADCollectionDocumentExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240491FB33D1200D0343F /* ADCollectionDocumentExtensionsTests.swift */; };
+		B522408B1FB33DFA00D0343F /* AzureDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522404A1FB33D1200D0343F /* AzureDataTests.swift */; };
+		B522408C1FB33DFA00D0343F /* ADCollectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522404B1FB33D1200D0343F /* ADCollectionTests.swift */; };
+		B522408D1FB33DFA00D0343F /* ADOfferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522404C1FB33D1200D0343F /* ADOfferTests.swift */; };
+		B522408E1FB33DFA00D0343F /* ADDocumentAttachmentExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522404D1FB33D1200D0343F /* ADDocumentAttachmentExtensionsTests.swift */; };
+		B52240911FB3407900D0343F /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240191FB33CD000D0343F /* NetworkReachabilityManager.swift */; };
+		B52240921FB3407900D0343F /* ADTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401A1FB33CD000D0343F /* ADTokenProvider.swift */; };
+		B52240931FB3407900D0343F /* AzureDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */; };
+		B52240941FB3407C00D0343F /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240191FB33CD000D0343F /* NetworkReachabilityManager.swift */; };
+		B52240951FB3407C00D0343F /* ADTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401A1FB33CD000D0343F /* ADTokenProvider.swift */; };
+		B52240961FB3407C00D0343F /* AzureDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */; };
+		B52240971FB3407D00D0343F /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240191FB33CD000D0343F /* NetworkReachabilityManager.swift */; };
+		B52240981FB3407D00D0343F /* ADTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401A1FB33CD000D0343F /* ADTokenProvider.swift */; };
+		B52240991FB3407D00D0343F /* AzureDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */; };
+		B522409A1FB3407E00D0343F /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240191FB33CD000D0343F /* NetworkReachabilityManager.swift */; };
+		B522409B1FB3407E00D0343F /* ADTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401A1FB33CD000D0343F /* ADTokenProvider.swift */; };
+		B522409C1FB3407E00D0343F /* AzureDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */; };
+		B522409D1FB3408E00D0343F /* ADResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401D1FB33CD000D0343F /* ADResourceType.swift */; };
+		B522409E1FB3408E00D0343F /* ADConflict.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401E1FB33CD000D0343F /* ADConflict.swift */; };
+		B522409F1FB3408E00D0343F /* ADQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401F1FB33CD000D0343F /* ADQuery.swift */; };
+		B52240A01FB3408E00D0343F /* ADOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240201FB33CD000D0343F /* ADOffer.swift */; };
+		B52240A11FB3408E00D0343F /* ADUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240211FB33CD000D0343F /* ADUser.swift */; };
+		B52240A21FB3408E00D0343F /* ADError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240221FB33CD000D0343F /* ADError.swift */; };
+		B52240A31FB3408E00D0343F /* ADTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240231FB33CD000D0343F /* ADTrigger.swift */; };
+		B52240A41FB3408E00D0343F /* ADDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240241FB33CD000D0343F /* ADDatabase.swift */; };
+		B52240A51FB3408E00D0343F /* ADStoredProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240251FB33CD000D0343F /* ADStoredProcedure.swift */; };
+		B52240A61FB3408E00D0343F /* ADDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240261FB33CD000D0343F /* ADDocument.swift */; };
+		B52240A71FB3408E00D0343F /* ADPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240271FB33CD000D0343F /* ADPermission.swift */; };
+		B52240A81FB3408E00D0343F /* ADResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240281FB33CD000D0343F /* ADResourceUri.swift */; };
+		B52240A91FB3408E00D0343F /* ADPartitionKeyDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240291FB33CD000D0343F /* ADPartitionKeyDefinition.swift */; };
+		B52240AA1FB3408E00D0343F /* ADAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402A1FB33CD000D0343F /* ADAttachment.swift */; };
+		B52240AB1FB3408E00D0343F /* ADCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402B1FB33CD000D0343F /* ADCollection.swift */; };
+		B52240AC1FB3408E00D0343F /* ADUserDefinedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402C1FB33CD000D0343F /* ADUserDefinedFunction.swift */; };
+		B52240AD1FB3408E00D0343F /* ADResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402D1FB33CD000D0343F /* ADResource.swift */; };
+		B52240AE1FB3408E00D0343F /* ADPartitionKeyRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402E1FB33CD000D0343F /* ADPartitionKeyRange.swift */; };
+		B52240AF1FB3408E00D0343F /* ADResourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402F1FB33CD000D0343F /* ADResourceList.swift */; };
+		B52240B01FB3408E00D0343F /* ADDatabaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240301FB33CD000D0343F /* ADDatabaseAccount.swift */; };
+		B52240B11FB3408E00D0343F /* ADIndexingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240311FB33CD000D0343F /* ADIndexingPolicy.swift */; };
+		B52240B21FB3409000D0343F /* ADResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401D1FB33CD000D0343F /* ADResourceType.swift */; };
+		B52240B31FB3409000D0343F /* ADConflict.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401E1FB33CD000D0343F /* ADConflict.swift */; };
+		B52240B41FB3409000D0343F /* ADQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401F1FB33CD000D0343F /* ADQuery.swift */; };
+		B52240B51FB3409000D0343F /* ADOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240201FB33CD000D0343F /* ADOffer.swift */; };
+		B52240B61FB3409000D0343F /* ADUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240211FB33CD000D0343F /* ADUser.swift */; };
+		B52240B71FB3409000D0343F /* ADError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240221FB33CD000D0343F /* ADError.swift */; };
+		B52240B81FB3409000D0343F /* ADTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240231FB33CD000D0343F /* ADTrigger.swift */; };
+		B52240B91FB3409000D0343F /* ADDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240241FB33CD000D0343F /* ADDatabase.swift */; };
+		B52240BA1FB3409000D0343F /* ADStoredProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240251FB33CD000D0343F /* ADStoredProcedure.swift */; };
+		B52240BB1FB3409000D0343F /* ADDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240261FB33CD000D0343F /* ADDocument.swift */; };
+		B52240BC1FB3409000D0343F /* ADPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240271FB33CD000D0343F /* ADPermission.swift */; };
+		B52240BD1FB3409000D0343F /* ADResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240281FB33CD000D0343F /* ADResourceUri.swift */; };
+		B52240BE1FB3409000D0343F /* ADPartitionKeyDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240291FB33CD000D0343F /* ADPartitionKeyDefinition.swift */; };
+		B52240BF1FB3409000D0343F /* ADAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402A1FB33CD000D0343F /* ADAttachment.swift */; };
+		B52240C01FB3409000D0343F /* ADCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402B1FB33CD000D0343F /* ADCollection.swift */; };
+		B52240C11FB3409000D0343F /* ADUserDefinedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402C1FB33CD000D0343F /* ADUserDefinedFunction.swift */; };
+		B52240C21FB3409000D0343F /* ADResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402D1FB33CD000D0343F /* ADResource.swift */; };
+		B52240C31FB3409000D0343F /* ADPartitionKeyRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402E1FB33CD000D0343F /* ADPartitionKeyRange.swift */; };
+		B52240C41FB3409000D0343F /* ADResourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402F1FB33CD000D0343F /* ADResourceList.swift */; };
+		B52240C51FB3409000D0343F /* ADDatabaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240301FB33CD000D0343F /* ADDatabaseAccount.swift */; };
+		B52240C61FB3409000D0343F /* ADIndexingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240311FB33CD000D0343F /* ADIndexingPolicy.swift */; };
+		B52240C71FB3409100D0343F /* ADResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401D1FB33CD000D0343F /* ADResourceType.swift */; };
+		B52240C81FB3409100D0343F /* ADConflict.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401E1FB33CD000D0343F /* ADConflict.swift */; };
+		B52240C91FB3409100D0343F /* ADQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401F1FB33CD000D0343F /* ADQuery.swift */; };
+		B52240CA1FB3409100D0343F /* ADOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240201FB33CD000D0343F /* ADOffer.swift */; };
+		B52240CB1FB3409100D0343F /* ADUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240211FB33CD000D0343F /* ADUser.swift */; };
+		B52240CC1FB3409100D0343F /* ADError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240221FB33CD000D0343F /* ADError.swift */; };
+		B52240CD1FB3409100D0343F /* ADTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240231FB33CD000D0343F /* ADTrigger.swift */; };
+		B52240CE1FB3409100D0343F /* ADDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240241FB33CD000D0343F /* ADDatabase.swift */; };
+		B52240CF1FB3409100D0343F /* ADStoredProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240251FB33CD000D0343F /* ADStoredProcedure.swift */; };
+		B52240D01FB3409100D0343F /* ADDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240261FB33CD000D0343F /* ADDocument.swift */; };
+		B52240D11FB3409100D0343F /* ADPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240271FB33CD000D0343F /* ADPermission.swift */; };
+		B52240D21FB3409100D0343F /* ADResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240281FB33CD000D0343F /* ADResourceUri.swift */; };
+		B52240D31FB3409100D0343F /* ADPartitionKeyDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240291FB33CD000D0343F /* ADPartitionKeyDefinition.swift */; };
+		B52240D41FB3409100D0343F /* ADAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402A1FB33CD000D0343F /* ADAttachment.swift */; };
+		B52240D51FB3409100D0343F /* ADCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402B1FB33CD000D0343F /* ADCollection.swift */; };
+		B52240D61FB3409100D0343F /* ADUserDefinedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402C1FB33CD000D0343F /* ADUserDefinedFunction.swift */; };
+		B52240D71FB3409100D0343F /* ADResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402D1FB33CD000D0343F /* ADResource.swift */; };
+		B52240D81FB3409100D0343F /* ADPartitionKeyRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402E1FB33CD000D0343F /* ADPartitionKeyRange.swift */; };
+		B52240D91FB3409100D0343F /* ADResourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402F1FB33CD000D0343F /* ADResourceList.swift */; };
+		B52240DA1FB3409100D0343F /* ADDatabaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240301FB33CD000D0343F /* ADDatabaseAccount.swift */; };
+		B52240DB1FB3409100D0343F /* ADIndexingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240311FB33CD000D0343F /* ADIndexingPolicy.swift */; };
+		B52240DC1FB3409200D0343F /* ADResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401D1FB33CD000D0343F /* ADResourceType.swift */; };
+		B52240DD1FB3409200D0343F /* ADConflict.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401E1FB33CD000D0343F /* ADConflict.swift */; };
+		B52240DE1FB3409200D0343F /* ADQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401F1FB33CD000D0343F /* ADQuery.swift */; };
+		B52240DF1FB3409200D0343F /* ADOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240201FB33CD000D0343F /* ADOffer.swift */; };
+		B52240E01FB3409200D0343F /* ADUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240211FB33CD000D0343F /* ADUser.swift */; };
+		B52240E11FB3409200D0343F /* ADError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240221FB33CD000D0343F /* ADError.swift */; };
+		B52240E21FB3409200D0343F /* ADTrigger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240231FB33CD000D0343F /* ADTrigger.swift */; };
+		B52240E31FB3409200D0343F /* ADDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240241FB33CD000D0343F /* ADDatabase.swift */; };
+		B52240E41FB3409200D0343F /* ADStoredProcedure.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240251FB33CD000D0343F /* ADStoredProcedure.swift */; };
+		B52240E51FB3409200D0343F /* ADDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240261FB33CD000D0343F /* ADDocument.swift */; };
+		B52240E61FB3409200D0343F /* ADPermission.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240271FB33CD000D0343F /* ADPermission.swift */; };
+		B52240E71FB3409200D0343F /* ADResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240281FB33CD000D0343F /* ADResourceUri.swift */; };
+		B52240E81FB3409200D0343F /* ADPartitionKeyDefinition.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240291FB33CD000D0343F /* ADPartitionKeyDefinition.swift */; };
+		B52240E91FB3409200D0343F /* ADAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402A1FB33CD000D0343F /* ADAttachment.swift */; };
+		B52240EA1FB3409200D0343F /* ADCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402B1FB33CD000D0343F /* ADCollection.swift */; };
+		B52240EB1FB3409200D0343F /* ADUserDefinedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402C1FB33CD000D0343F /* ADUserDefinedFunction.swift */; };
+		B52240EC1FB3409200D0343F /* ADResource.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402D1FB33CD000D0343F /* ADResource.swift */; };
+		B52240ED1FB3409200D0343F /* ADPartitionKeyRange.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402E1FB33CD000D0343F /* ADPartitionKeyRange.swift */; };
+		B52240EE1FB3409200D0343F /* ADResourceList.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522402F1FB33CD000D0343F /* ADResourceList.swift */; };
+		B52240EF1FB3409200D0343F /* ADDatabaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240301FB33CD000D0343F /* ADDatabaseAccount.swift */; };
+		B52240F01FB3409200D0343F /* ADIndexingPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240311FB33CD000D0343F /* ADIndexingPolicy.swift */; };
+		B52240F61FB3409D00D0343F /* ADResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240321FB33CD000D0343F /* ADResponse.swift */; };
+		B52240F71FB3409D00D0343F /* AzureData.h in Headers */ = {isa = PBXBuildFile; fileRef = B52240331FB33CD000D0343F /* AzureData.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B52240F81FB3409D00D0343F /* AzureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240341FB33CD000D0343F /* AzureData.swift */; };
+		B52240F91FB3409D00D0343F /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240351FB33CD000D0343F /* SessionManager.swift */; };
+		B52240FA1FB3409D00D0343F /* ADHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240361FB33CD000D0343F /* ADHttp.swift */; };
+		B52240FB1FB3409D00D0343F /* UtilityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240381FB33CD000D0343F /* UtilityExtensions.swift */; };
+		B52240FC1FB3409E00D0343F /* ADResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240321FB33CD000D0343F /* ADResponse.swift */; };
+		B52240FD1FB3409E00D0343F /* AzureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240341FB33CD000D0343F /* AzureData.swift */; };
+		B52240FE1FB3409E00D0343F /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240351FB33CD000D0343F /* SessionManager.swift */; };
+		B52240FF1FB3409E00D0343F /* ADHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240361FB33CD000D0343F /* ADHttp.swift */; };
+		B52241001FB3409E00D0343F /* UtilityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240381FB33CD000D0343F /* UtilityExtensions.swift */; };
+		B52241011FB3409F00D0343F /* ADResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240321FB33CD000D0343F /* ADResponse.swift */; };
+		B52241021FB3409F00D0343F /* AzureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240341FB33CD000D0343F /* AzureData.swift */; };
+		B52241031FB3409F00D0343F /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240351FB33CD000D0343F /* SessionManager.swift */; };
+		B52241041FB3409F00D0343F /* ADHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240361FB33CD000D0343F /* ADHttp.swift */; };
+		B52241051FB3409F00D0343F /* UtilityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240381FB33CD000D0343F /* UtilityExtensions.swift */; };
+		B52241061FB3409F00D0343F /* ADResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240321FB33CD000D0343F /* ADResponse.swift */; };
+		B52241071FB3409F00D0343F /* AzureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240341FB33CD000D0343F /* AzureData.swift */; };
+		B52241081FB3409F00D0343F /* SessionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240351FB33CD000D0343F /* SessionManager.swift */; };
+		B52241091FB3409F00D0343F /* ADHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240361FB33CD000D0343F /* ADHttp.swift */; };
+		B522410A1FB3409F00D0343F /* UtilityExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240381FB33CD000D0343F /* UtilityExtensions.swift */; };
+		B522410B1FB340AF00D0343F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B522404E1FB33D1200D0343F /* Info.plist */; };
+		B522410C1FB340B600D0343F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B522404E1FB33D1200D0343F /* Info.plist */; };
+		B522410D1FB340B600D0343F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B522404E1FB33D1200D0343F /* Info.plist */; };
+		B522410E1FB340B700D0343F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B522404E1FB33D1200D0343F /* Info.plist */; };
+		B52241161FB342A300D0343F /* NetworkReachabilityManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52241151FB342A300D0343F /* NetworkReachabilityManagerTests.swift */; };
+		B52241171FB342A300D0343F /* NetworkReachabilityManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52241151FB342A300D0343F /* NetworkReachabilityManagerTests.swift */; };
+		B52241181FB342A300D0343F /* NetworkReachabilityManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52241151FB342A300D0343F /* NetworkReachabilityManagerTests.swift */; };
 		B5F76C431F96A7AF001E8B11 /* AzureData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F76C391F96A7AF001E8B11 /* AzureData.framework */; };
-		B5F76C481F96A7AF001E8B11 /* AzureDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C471F96A7AF001E8B11 /* AzureDataTests.swift */; };
-		B5F76C4A1F96A7AF001E8B11 /* AzureData.h in Headers */ = {isa = PBXBuildFile; fileRef = B5F76C3C1F96A7AF001E8B11 /* AzureData.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B5F76C541F96A7F3001E8B11 /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C531F96A7F3001E8B11 /* NetworkReachabilityManager.swift */; };
-		B5F76C561F96A80B001E8B11 /* AzureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C551F96A80B001E8B11 /* AzureData.swift */; };
-		B5F76C5F1F96A91C001E8B11 /* ADTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C5E1F96A91C001E8B11 /* ADTokenProvider.swift */; };
-		B5F76C691F96ACA5001E8B11 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C681F96ACA5001E8B11 /* AppDelegate.swift */; };
-		B5F76C6E1F96ACA5001E8B11 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F76C6C1F96ACA5001E8B11 /* Main.storyboard */; };
-		B5F76C701F96ACA5001E8B11 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5F76C6F1F96ACA5001E8B11 /* Assets.xcassets */; };
-		B5F76C731F96ACA5001E8B11 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5F76C711F96ACA5001E8B11 /* LaunchScreen.storyboard */; };
-		B5F76C7E1F96ACA6001E8B11 /* AzureDataAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C7D1F96ACA6001E8B11 /* AzureDataAppTests.swift */; };
-		B5F76C891F96ACA6001E8B11 /* AzureDataAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5F76C881F96ACA6001E8B11 /* AzureDataAppUITests.swift */; };
-		B5F76C9B1F96AF66001E8B11 /* AzureData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5F76C391F96A7AF001E8B11 /* AzureData.framework */; };
-		B5F76C9C1F96AF66001E8B11 /* AzureData.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B5F76C391F96A7AF001E8B11 /* AzureData.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		B5FA67891FB237840008FA9E /* ADCollectionStoredProcedureExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA67881FB237840008FA9E /* ADCollectionStoredProcedureExtensionsTests.swift */; };
-		B5FA678B1FB2379B0008FA9E /* ADCollectionTriggerExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA678A1FB2379B0008FA9E /* ADCollectionTriggerExtensionsTests.swift */; };
-		B5FA678D1FB237B70008FA9E /* ADCollectionUserDefinedFunctionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA678C1FB237B70008FA9E /* ADCollectionUserDefinedFunctionExtensionsTests.swift */; };
-		B5FA678F1FB237EE0008FA9E /* ADUserPermissionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA678E1FB237EE0008FA9E /* ADUserPermissionExtensionsTests.swift */; };
-		B5FA67911FB238370008FA9E /* ADDocumentAttachmentExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FA67901FB238370008FA9E /* ADDocumentAttachmentExtensionsTests.swift */; };
-		B5FC20B61FB12B5900283FDA /* ADDatabaseCollectionExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC20B51FB12B5900283FDA /* ADDatabaseCollectionExtensionsTests.swift */; };
-		B5FC20B81FB12B8E00283FDA /* ADCollectionDocumentExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5FC20B71FB12B8E00283FDA /* ADCollectionDocumentExtensionsTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B5223FC11FB33A9F00D0343F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5F76C301F96A7AF001E8B11 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5223FB61FB33A9F00D0343F;
+			remoteInfo = "AzureData macOS";
+		};
+		B5223FDD1FB33B0F00D0343F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5F76C301F96A7AF001E8B11 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5223FD21FB33B0F00D0343F;
+			remoteInfo = "AzureData tvOS";
+		};
+		B522410F1FB3411100D0343F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5F76C301F96A7AF001E8B11 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5F76C571F96A848001E8B11;
+			remoteInfo = CommonCryptoModuleMap;
+		};
+		B52241111FB3411900D0343F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5F76C301F96A7AF001E8B11 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5F76C571F96A848001E8B11;
+			remoteInfo = CommonCryptoModuleMap;
+		};
+		B52241131FB3412100D0343F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B5F76C301F96A7AF001E8B11 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B5F76C571F96A848001E8B11;
+			remoteInfo = CommonCryptoModuleMap;
+		};
 		B5F76C441F96A7AF001E8B11 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B5F76C301F96A7AF001E8B11 /* Project object */;
@@ -107,123 +263,109 @@
 			remoteGlobalIDString = B5F76C571F96A848001E8B11;
 			remoteInfo = CommonCryptoModuleMap;
 		};
-		B5F76C7A1F96ACA5001E8B11 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5F76C301F96A7AF001E8B11 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B5F76C651F96ACA5001E8B11;
-			remoteInfo = AzureDataApp;
-		};
-		B5F76C851F96ACA6001E8B11 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5F76C301F96A7AF001E8B11 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B5F76C651F96ACA5001E8B11;
-			remoteInfo = AzureDataApp;
-		};
-		B5F76C9D1F96AF66001E8B11 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5F76C301F96A7AF001E8B11 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B5F76C381F96A7AF001E8B11;
-			remoteInfo = AzureData;
-		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		B5F76C9F1F96AF66001E8B11 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				B5F76C9C1F96AF66001E8B11 /* AzureData.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		B5199DF01FB17D6400B69C99 /* ADDatabaseUserExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabaseUserExtensionsTests.swift; sourceTree = "<group>"; };
-		B528A53C1F9EBF1C000586BE /* ADQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADQuery.swift; sourceTree = "<group>"; };
-		B53BF7751F9A2F9400B7A187 /* ADIndexingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADIndexingPolicy.swift; sourceTree = "<group>"; };
-		B53BF7771F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPartitionKeyDefinition.swift; sourceTree = "<group>"; };
-		B53BF7791F9A7AE700B7A187 /* DocumentDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentDetailTableViewController.swift; sourceTree = "<group>"; };
-		B5619EB71F99357800D01EAD /* ADResourceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResourceList.swift; sourceTree = "<group>"; };
-		B5619EB91F994FB800D01EAD /* DatabaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseTableViewController.swift; sourceTree = "<group>"; };
-		B5619EBB1F994FE300D01EAD /* CollectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewController.swift; sourceTree = "<group>"; };
-		B5619EBD1F994FF100D01EAD /* DocumentTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentTableViewController.swift; sourceTree = "<group>"; };
-		B57446AA1FB11F810048B20F /* ADDatabaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabaseTests.swift; sourceTree = "<group>"; };
-		B57446AC1FB11FEF0048B20F /* ADCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionTests.swift; sourceTree = "<group>"; };
-		B57446AE1FB120070048B20F /* ADDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDocumentTests.swift; sourceTree = "<group>"; };
-		B57C36A31F9B00E90035A106 /* UtilityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityExtensions.swift; sourceTree = "<group>"; };
-		B587C71E1F9FACC4004A76F6 /* AzureDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureDataExtensions.swift; sourceTree = "<group>"; };
-		B5958A041F9903F10023C0AF /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
-		B5958A071F992C560023C0AF /* ADDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabase.swift; sourceTree = "<group>"; };
-		B5958A091F992C9A0023C0AF /* ADResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResource.swift; sourceTree = "<group>"; };
-		B5958A0B1F992CAB0023C0AF /* ADDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDocument.swift; sourceTree = "<group>"; };
-		B5958A0D1F992CB90023C0AF /* ADCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollection.swift; sourceTree = "<group>"; };
-		B5958A0F1F992CC50023C0AF /* ADAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADAttachment.swift; sourceTree = "<group>"; };
-		B5958A111F992CD10023C0AF /* ADConflict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADConflict.swift; sourceTree = "<group>"; };
-		B5958A131F992CDD0023C0AF /* ADDatabaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabaseAccount.swift; sourceTree = "<group>"; };
-		B5958A151F992CE90023C0AF /* ADError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADError.swift; sourceTree = "<group>"; };
-		B5958A171F992CF60023C0AF /* ADOffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADOffer.swift; sourceTree = "<group>"; };
-		B5958A191F992D020023C0AF /* ADPartitionKeyRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPartitionKeyRange.swift; sourceTree = "<group>"; };
-		B5958A1B1F992D0E0023C0AF /* ADPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPermission.swift; sourceTree = "<group>"; };
-		B5958A1D1F992D190023C0AF /* ADStoredProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADStoredProcedure.swift; sourceTree = "<group>"; };
-		B5958A1F1F992D240023C0AF /* ADTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADTrigger.swift; sourceTree = "<group>"; };
-		B5958A211F992D2E0023C0AF /* ADUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADUser.swift; sourceTree = "<group>"; };
-		B5958A231F992D3A0023C0AF /* ADUserDefinedFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADUserDefinedFunction.swift; sourceTree = "<group>"; };
-		B5958A251F992D520023C0AF /* ADResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResourceType.swift; sourceTree = "<group>"; };
-		B5958A271F992D5E0023C0AF /* ADResourceUri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResourceUri.swift; sourceTree = "<group>"; };
-		B5AEF8FA1F9F7565006E4905 /* StoredProcedureTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoredProcedureTableViewController.swift; sourceTree = "<group>"; };
-		B5AEF8FC1F9F7572006E4905 /* TriggerTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TriggerTableViewController.swift; sourceTree = "<group>"; };
-		B5AEF8FE1F9F7589006E4905 /* UserDefinedFunctionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefinedFunctionTableViewController.swift; sourceTree = "<group>"; };
-		B5AEF9001F9F783A006E4905 /* CollectionResourceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionResourceTableViewController.swift; sourceTree = "<group>"; };
-		B5BEF1AF1F9E41120018CEC9 /* PermissionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionTableViewController.swift; sourceTree = "<group>"; };
-		B5C89B531FB147D100EA0739 /* ADAttachmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADAttachmentTests.swift; sourceTree = "<group>"; };
-		B5C89B551FB1480700EA0739 /* ADOfferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADOfferTests.swift; sourceTree = "<group>"; };
-		B5C89B571FB1481B00EA0739 /* ADPermissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPermissionTests.swift; sourceTree = "<group>"; };
-		B5C89B591FB1482C00EA0739 /* ADQueryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADQueryTests.swift; sourceTree = "<group>"; };
-		B5C89B5B1FB1484500EA0739 /* ADStoredProcedureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADStoredProcedureTests.swift; sourceTree = "<group>"; };
-		B5C89B5D1FB1485800EA0739 /* ADTriggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADTriggerTests.swift; sourceTree = "<group>"; };
-		B5C89B5F1FB1486800EA0739 /* ADUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADUserTests.swift; sourceTree = "<group>"; };
-		B5C89B611FB1487800EA0739 /* ADUserDefinedFunctionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADUserDefinedFunctionTests.swift; sourceTree = "<group>"; };
-		B5DA1DFA1F977EAF00C300D3 /* ADResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResponse.swift; sourceTree = "<group>"; };
-		B5DA1DFC1F978C0A00C300D3 /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
-		B5DA1DFE1F97D64500C300D3 /* ADHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHttp.swift; sourceTree = "<group>"; };
+		B5223FB71FB33A9F00D0343F /* AzureData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AzureData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5223FBF1FB33A9F00D0343F /* AzureData macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AzureData macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5223FD31FB33B0F00D0343F /* AzureData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AzureData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5223FDB1FB33B0F00D0343F /* AzureData tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AzureData tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B5223FEF1FB33B2600D0343F /* AzureData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AzureData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		B52240191FB33CD000D0343F /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
+		B522401A1FB33CD000D0343F /* ADTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADTokenProvider.swift; sourceTree = "<group>"; };
+		B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureDataExtensions.swift; sourceTree = "<group>"; };
+		B522401D1FB33CD000D0343F /* ADResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResourceType.swift; sourceTree = "<group>"; };
+		B522401E1FB33CD000D0343F /* ADConflict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADConflict.swift; sourceTree = "<group>"; };
+		B522401F1FB33CD000D0343F /* ADQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADQuery.swift; sourceTree = "<group>"; };
+		B52240201FB33CD000D0343F /* ADOffer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADOffer.swift; sourceTree = "<group>"; };
+		B52240211FB33CD000D0343F /* ADUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADUser.swift; sourceTree = "<group>"; };
+		B52240221FB33CD000D0343F /* ADError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADError.swift; sourceTree = "<group>"; };
+		B52240231FB33CD000D0343F /* ADTrigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADTrigger.swift; sourceTree = "<group>"; };
+		B52240241FB33CD000D0343F /* ADDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabase.swift; sourceTree = "<group>"; };
+		B52240251FB33CD000D0343F /* ADStoredProcedure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADStoredProcedure.swift; sourceTree = "<group>"; };
+		B52240261FB33CD000D0343F /* ADDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDocument.swift; sourceTree = "<group>"; };
+		B52240271FB33CD000D0343F /* ADPermission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPermission.swift; sourceTree = "<group>"; };
+		B52240281FB33CD000D0343F /* ADResourceUri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResourceUri.swift; sourceTree = "<group>"; };
+		B52240291FB33CD000D0343F /* ADPartitionKeyDefinition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPartitionKeyDefinition.swift; sourceTree = "<group>"; };
+		B522402A1FB33CD000D0343F /* ADAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADAttachment.swift; sourceTree = "<group>"; };
+		B522402B1FB33CD000D0343F /* ADCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollection.swift; sourceTree = "<group>"; };
+		B522402C1FB33CD000D0343F /* ADUserDefinedFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADUserDefinedFunction.swift; sourceTree = "<group>"; };
+		B522402D1FB33CD000D0343F /* ADResource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResource.swift; sourceTree = "<group>"; };
+		B522402E1FB33CD000D0343F /* ADPartitionKeyRange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPartitionKeyRange.swift; sourceTree = "<group>"; };
+		B522402F1FB33CD000D0343F /* ADResourceList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResourceList.swift; sourceTree = "<group>"; };
+		B52240301FB33CD000D0343F /* ADDatabaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabaseAccount.swift; sourceTree = "<group>"; };
+		B52240311FB33CD000D0343F /* ADIndexingPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADIndexingPolicy.swift; sourceTree = "<group>"; };
+		B52240321FB33CD000D0343F /* ADResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResponse.swift; sourceTree = "<group>"; };
+		B52240331FB33CD000D0343F /* AzureData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AzureData.h; sourceTree = "<group>"; };
+		B52240341FB33CD000D0343F /* AzureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureData.swift; sourceTree = "<group>"; };
+		B52240351FB33CD000D0343F /* SessionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManager.swift; sourceTree = "<group>"; };
+		B52240361FB33CD000D0343F /* ADHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHttp.swift; sourceTree = "<group>"; };
+		B52240371FB33CD000D0343F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B52240381FB33CD000D0343F /* UtilityExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilityExtensions.swift; sourceTree = "<group>"; };
+		B522403A1FB33D1200D0343F /* ADUserDefinedFunctionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADUserDefinedFunctionTests.swift; sourceTree = "<group>"; };
+		B522403B1FB33D1200D0343F /* ADStoredProcedureTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADStoredProcedureTests.swift; sourceTree = "<group>"; };
+		B522403C1FB33D1200D0343F /* ADUserPermissionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADUserPermissionExtensionsTests.swift; sourceTree = "<group>"; };
+		B522403D1FB33D1200D0343F /* ADQueryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADQueryTests.swift; sourceTree = "<group>"; };
+		B522403E1FB33D1200D0343F /* ADDocumentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDocumentTests.swift; sourceTree = "<group>"; };
+		B522403F1FB33D1200D0343F /* ADCollectionUserDefinedFunctionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionUserDefinedFunctionExtensionsTests.swift; sourceTree = "<group>"; };
+		B52240401FB33D1200D0343F /* ADDatabaseCollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabaseCollectionExtensionsTests.swift; sourceTree = "<group>"; };
+		B52240411FB33D1200D0343F /* ADTriggerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADTriggerTests.swift; sourceTree = "<group>"; };
+		B52240421FB33D1200D0343F /* ADAttachmentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADAttachmentTests.swift; sourceTree = "<group>"; };
+		B52240431FB33D1200D0343F /* ADPermissionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADPermissionTests.swift; sourceTree = "<group>"; };
+		B52240441FB33D1200D0343F /* ADDatabaseUserExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabaseUserExtensionsTests.swift; sourceTree = "<group>"; };
+		B52240451FB33D1200D0343F /* ADCollectionTriggerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionTriggerExtensionsTests.swift; sourceTree = "<group>"; };
+		B52240461FB33D1200D0343F /* ADUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADUserTests.swift; sourceTree = "<group>"; };
+		B52240471FB33D1200D0343F /* ADCollectionStoredProcedureExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionStoredProcedureExtensionsTests.swift; sourceTree = "<group>"; };
+		B52240481FB33D1200D0343F /* ADDatabaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabaseTests.swift; sourceTree = "<group>"; };
+		B52240491FB33D1200D0343F /* ADCollectionDocumentExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionDocumentExtensionsTests.swift; sourceTree = "<group>"; };
+		B522404A1FB33D1200D0343F /* AzureDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureDataTests.swift; sourceTree = "<group>"; };
+		B522404B1FB33D1200D0343F /* ADCollectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionTests.swift; sourceTree = "<group>"; };
+		B522404C1FB33D1200D0343F /* ADOfferTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADOfferTests.swift; sourceTree = "<group>"; };
+		B522404D1FB33D1200D0343F /* ADDocumentAttachmentExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDocumentAttachmentExtensionsTests.swift; sourceTree = "<group>"; };
+		B522404E1FB33D1200D0343F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B52241151FB342A300D0343F /* NetworkReachabilityManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManagerTests.swift; sourceTree = "<group>"; };
 		B5F76C391F96A7AF001E8B11 /* AzureData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AzureData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5F76C3C1F96A7AF001E8B11 /* AzureData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AzureData.h; sourceTree = "<group>"; };
-		B5F76C3D1F96A7AF001E8B11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5F76C421F96A7AF001E8B11 /* AzureDataTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AzureDataTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5F76C471F96A7AF001E8B11 /* AzureDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureDataTests.swift; sourceTree = "<group>"; };
-		B5F76C491F96A7AF001E8B11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5F76C531F96A7F3001E8B11 /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
-		B5F76C551F96A80B001E8B11 /* AzureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureData.swift; sourceTree = "<group>"; };
-		B5F76C5E1F96A91C001E8B11 /* ADTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADTokenProvider.swift; sourceTree = "<group>"; };
-		B5F76C661F96ACA5001E8B11 /* AzureDataApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AzureDataApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5F76C681F96ACA5001E8B11 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		B5F76C6D1F96ACA5001E8B11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		B5F76C6F1F96ACA5001E8B11 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B5F76C721F96ACA5001E8B11 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		B5F76C741F96ACA5001E8B11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5F76C791F96ACA5001E8B11 /* AzureDataAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AzureDataAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5F76C7D1F96ACA6001E8B11 /* AzureDataAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureDataAppTests.swift; sourceTree = "<group>"; };
-		B5F76C7F1F96ACA6001E8B11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5F76C841F96ACA6001E8B11 /* AzureDataAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AzureDataAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		B5F76C881F96ACA6001E8B11 /* AzureDataAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureDataAppUITests.swift; sourceTree = "<group>"; };
-		B5F76C8A1F96ACA6001E8B11 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B5FA67881FB237840008FA9E /* ADCollectionStoredProcedureExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionStoredProcedureExtensionsTests.swift; sourceTree = "<group>"; };
-		B5FA678A1FB2379B0008FA9E /* ADCollectionTriggerExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionTriggerExtensionsTests.swift; sourceTree = "<group>"; };
-		B5FA678C1FB237B70008FA9E /* ADCollectionUserDefinedFunctionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionUserDefinedFunctionExtensionsTests.swift; sourceTree = "<group>"; };
-		B5FA678E1FB237EE0008FA9E /* ADUserPermissionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADUserPermissionExtensionsTests.swift; sourceTree = "<group>"; };
-		B5FA67901FB238370008FA9E /* ADDocumentAttachmentExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDocumentAttachmentExtensionsTests.swift; sourceTree = "<group>"; };
-		B5FC20B51FB12B5900283FDA /* ADDatabaseCollectionExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADDatabaseCollectionExtensionsTests.swift; sourceTree = "<group>"; };
-		B5FC20B71FB12B8E00283FDA /* ADCollectionDocumentExtensionsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADCollectionDocumentExtensionsTests.swift; sourceTree = "<group>"; };
+		B5F76C421F96A7AF001E8B11 /* AzureData iOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AzureData iOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B5223FB31FB33A9F00D0343F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5223FBC1FB33A9F00D0343F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5223FC01FB33A9F00D0343F /* AzureData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5223FCF1FB33B0F00D0343F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5223FD81FB33B0F00D0343F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B5223FDC1FB33B0F00D0343F /* AzureData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5223FEB1FB33B2600D0343F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5F76C351F96A7AF001E8B11 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -239,67 +381,145 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		B5F76C631F96ACA5001E8B11 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B5F76C9B1F96AF66001E8B11 /* AzureData.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5F76C761F96ACA5001E8B11 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5F76C811F96ACA6001E8B11 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B5958A061F992BFB0023C0AF /* Models */ = {
+		B52240181FB33CD000D0343F /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				B5958A0F1F992CC50023C0AF /* ADAttachment.swift */,
-				B5958A111F992CD10023C0AF /* ADConflict.swift */,
-				B5958A071F992C560023C0AF /* ADDatabase.swift */,
-				B5958A131F992CDD0023C0AF /* ADDatabaseAccount.swift */,
-				B5958A0B1F992CAB0023C0AF /* ADDocument.swift */,
-				B5958A0D1F992CB90023C0AF /* ADCollection.swift */,
-				B5958A151F992CE90023C0AF /* ADError.swift */,
-				B53BF7751F9A2F9400B7A187 /* ADIndexingPolicy.swift */,
-				B5958A171F992CF60023C0AF /* ADOffer.swift */,
-				B53BF7771F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift */,
-				B5958A191F992D020023C0AF /* ADPartitionKeyRange.swift */,
-				B5958A1B1F992D0E0023C0AF /* ADPermission.swift */,
-				B5958A091F992C9A0023C0AF /* ADResource.swift */,
-				B5619EB71F99357800D01EAD /* ADResourceList.swift */,
-				B5958A251F992D520023C0AF /* ADResourceType.swift */,
-				B5958A271F992D5E0023C0AF /* ADResourceUri.swift */,
-				B5958A1D1F992D190023C0AF /* ADStoredProcedure.swift */,
-				B5958A1F1F992D240023C0AF /* ADTrigger.swift */,
-				B5958A211F992D2E0023C0AF /* ADUser.swift */,
-				B5958A231F992D3A0023C0AF /* ADUserDefinedFunction.swift */,
-				B528A53C1F9EBF1C000586BE /* ADQuery.swift */,
+				B52240341FB33CD000D0343F /* AzureData.swift */,
+				B55AEFE71FB34D3600F7BEED /* ADResources */,
+				B55AEFE61FB34CF600F7BEED /* Domain */,
+				B55AEFE51FB34C5400F7BEED /* Extensions */,
+				B55AEFDF1FB34B7400F7BEED /* Supporting Files */,
 			);
-			path = Models;
+			path = Source;
+			sourceTree = "<group>";
+		};
+		B52240391FB33D1200D0343F /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				B522404A1FB33D1200D0343F /* AzureDataTests.swift */,
+				B55AEFE81FB34D6500F7BEED /* Domain */,
+				B55AEFE41FB34BCB00F7BEED /* Extensions */,
+				B55AEFE21FB34BB400F7BEED /* ADResources */,
+				B55AEFE01FB34B8C00F7BEED /* Supporting Files */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		B55AEFDF1FB34B7400F7BEED /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B52240331FB33CD000D0343F /* AzureData.h */,
+				B52240371FB33CD000D0343F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B55AEFE01FB34B8C00F7BEED /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B522404E1FB33D1200D0343F /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B55AEFE21FB34BB400F7BEED /* ADResources */ = {
+			isa = PBXGroup;
+			children = (
+				B522403A1FB33D1200D0343F /* ADUserDefinedFunctionTests.swift */,
+				B522403B1FB33D1200D0343F /* ADStoredProcedureTests.swift */,
+				B522403E1FB33D1200D0343F /* ADDocumentTests.swift */,
+				B52240411FB33D1200D0343F /* ADTriggerTests.swift */,
+				B52240421FB33D1200D0343F /* ADAttachmentTests.swift */,
+				B52240431FB33D1200D0343F /* ADPermissionTests.swift */,
+				B52240461FB33D1200D0343F /* ADUserTests.swift */,
+				B52240481FB33D1200D0343F /* ADDatabaseTests.swift */,
+				B522404B1FB33D1200D0343F /* ADCollectionTests.swift */,
+				B522404C1FB33D1200D0343F /* ADOfferTests.swift */,
+			);
+			name = ADResources;
+			sourceTree = "<group>";
+		};
+		B55AEFE41FB34BCB00F7BEED /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B522403C1FB33D1200D0343F /* ADUserPermissionExtensionsTests.swift */,
+				B522403F1FB33D1200D0343F /* ADCollectionUserDefinedFunctionExtensionsTests.swift */,
+				B52240401FB33D1200D0343F /* ADDatabaseCollectionExtensionsTests.swift */,
+				B52240441FB33D1200D0343F /* ADDatabaseUserExtensionsTests.swift */,
+				B52240451FB33D1200D0343F /* ADCollectionTriggerExtensionsTests.swift */,
+				B52240471FB33D1200D0343F /* ADCollectionStoredProcedureExtensionsTests.swift */,
+				B52240491FB33D1200D0343F /* ADCollectionDocumentExtensionsTests.swift */,
+				B522404D1FB33D1200D0343F /* ADDocumentAttachmentExtensionsTests.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		B55AEFE51FB34C5400F7BEED /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */,
+				B52240381FB33CD000D0343F /* UtilityExtensions.swift */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
+		B55AEFE61FB34CF600F7BEED /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				B52240361FB33CD000D0343F /* ADHttp.swift */,
+				B522401D1FB33CD000D0343F /* ADResourceType.swift */,
+				B52240281FB33CD000D0343F /* ADResourceUri.swift */,
+				B52240321FB33CD000D0343F /* ADResponse.swift */,
+				B522401A1FB33CD000D0343F /* ADTokenProvider.swift */,
+				B52240191FB33CD000D0343F /* NetworkReachabilityManager.swift */,
+				B52240351FB33CD000D0343F /* SessionManager.swift */,
+			);
+			name = Domain;
+			sourceTree = "<group>";
+		};
+		B55AEFE71FB34D3600F7BEED /* ADResources */ = {
+			isa = PBXGroup;
+			children = (
+				B522401E1FB33CD000D0343F /* ADConflict.swift */,
+				B522401F1FB33CD000D0343F /* ADQuery.swift */,
+				B52240201FB33CD000D0343F /* ADOffer.swift */,
+				B52240211FB33CD000D0343F /* ADUser.swift */,
+				B52240221FB33CD000D0343F /* ADError.swift */,
+				B52240231FB33CD000D0343F /* ADTrigger.swift */,
+				B52240241FB33CD000D0343F /* ADDatabase.swift */,
+				B52240251FB33CD000D0343F /* ADStoredProcedure.swift */,
+				B52240261FB33CD000D0343F /* ADDocument.swift */,
+				B52240271FB33CD000D0343F /* ADPermission.swift */,
+				B52240291FB33CD000D0343F /* ADPartitionKeyDefinition.swift */,
+				B522402A1FB33CD000D0343F /* ADAttachment.swift */,
+				B522402B1FB33CD000D0343F /* ADCollection.swift */,
+				B522402C1FB33CD000D0343F /* ADUserDefinedFunction.swift */,
+				B522402D1FB33CD000D0343F /* ADResource.swift */,
+				B522402E1FB33CD000D0343F /* ADPartitionKeyRange.swift */,
+				B522402F1FB33CD000D0343F /* ADResourceList.swift */,
+				B52240301FB33CD000D0343F /* ADDatabaseAccount.swift */,
+				B52240311FB33CD000D0343F /* ADIndexingPolicy.swift */,
+			);
+			name = ADResources;
+			sourceTree = "<group>";
+		};
+		B55AEFE81FB34D6500F7BEED /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				B522403D1FB33D1200D0343F /* ADQueryTests.swift */,
+				B52241151FB342A300D0343F /* NetworkReachabilityManagerTests.swift */,
+			);
+			name = Domain;
 			sourceTree = "<group>";
 		};
 		B5F76C2F1F96A7AF001E8B11 = {
 			isa = PBXGroup;
 			children = (
-				B5F76C3B1F96A7AF001E8B11 /* AzureData */,
-				B5F76C461F96A7AF001E8B11 /* AzureDataTests */,
-				B5F76C671F96ACA5001E8B11 /* AzureDataApp */,
-				B5F76C7C1F96ACA6001E8B11 /* AzureDataAppTests */,
-				B5F76C871F96ACA6001E8B11 /* AzureDataAppUITests */,
+				B52240391FB33D1200D0343F /* Tests */,
+				B52240181FB33CD000D0343F /* Source */,
 				B5F76C3A1F96A7AF001E8B11 /* Products */,
 				B5F76C941F96ACCC001E8B11 /* Frameworks */,
 			);
@@ -309,98 +529,14 @@
 			isa = PBXGroup;
 			children = (
 				B5F76C391F96A7AF001E8B11 /* AzureData.framework */,
-				B5F76C421F96A7AF001E8B11 /* AzureDataTests.xctest */,
-				B5F76C661F96ACA5001E8B11 /* AzureDataApp.app */,
-				B5F76C791F96ACA5001E8B11 /* AzureDataAppTests.xctest */,
-				B5F76C841F96ACA6001E8B11 /* AzureDataAppUITests.xctest */,
+				B5F76C421F96A7AF001E8B11 /* AzureData iOS Tests.xctest */,
+				B5223FB71FB33A9F00D0343F /* AzureData.framework */,
+				B5223FBF1FB33A9F00D0343F /* AzureData macOS Tests.xctest */,
+				B5223FD31FB33B0F00D0343F /* AzureData.framework */,
+				B5223FDB1FB33B0F00D0343F /* AzureData tvOS Tests.xctest */,
+				B5223FEF1FB33B2600D0343F /* AzureData.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		B5F76C3B1F96A7AF001E8B11 /* AzureData */ = {
-			isa = PBXGroup;
-			children = (
-				B5DA1DFE1F97D64500C300D3 /* ADHttp.swift */,
-				B5DA1DFA1F977EAF00C300D3 /* ADResponse.swift */,
-				B5F76C5E1F96A91C001E8B11 /* ADTokenProvider.swift */,
-				B5F76C3C1F96A7AF001E8B11 /* AzureData.h */,
-				B5F76C551F96A80B001E8B11 /* AzureData.swift */,
-				B587C71E1F9FACC4004A76F6 /* AzureDataExtensions.swift */,
-				B5F76C3D1F96A7AF001E8B11 /* Info.plist */,
-				B5958A061F992BFB0023C0AF /* Models */,
-				B5F76C531F96A7F3001E8B11 /* NetworkReachabilityManager.swift */,
-				B5DA1DFC1F978C0A00C300D3 /* SessionManager.swift */,
-				B57C36A31F9B00E90035A106 /* UtilityExtensions.swift */,
-			);
-			path = AzureData;
-			sourceTree = "<group>";
-		};
-		B5F76C461F96A7AF001E8B11 /* AzureDataTests */ = {
-			isa = PBXGroup;
-			children = (
-				B5C89B531FB147D100EA0739 /* ADAttachmentTests.swift */,
-				B5FC20B71FB12B8E00283FDA /* ADCollectionDocumentExtensionsTests.swift */,
-				B5FA67881FB237840008FA9E /* ADCollectionStoredProcedureExtensionsTests.swift */,
-				B57446AC1FB11FEF0048B20F /* ADCollectionTests.swift */,
-				B5FA678A1FB2379B0008FA9E /* ADCollectionTriggerExtensionsTests.swift */,
-				B5FA678C1FB237B70008FA9E /* ADCollectionUserDefinedFunctionExtensionsTests.swift */,
-				B5FC20B51FB12B5900283FDA /* ADDatabaseCollectionExtensionsTests.swift */,
-				B57446AA1FB11F810048B20F /* ADDatabaseTests.swift */,
-				B5199DF01FB17D6400B69C99 /* ADDatabaseUserExtensionsTests.swift */,
-				B5FA67901FB238370008FA9E /* ADDocumentAttachmentExtensionsTests.swift */,
-				B57446AE1FB120070048B20F /* ADDocumentTests.swift */,
-				B5C89B551FB1480700EA0739 /* ADOfferTests.swift */,
-				B5C89B571FB1481B00EA0739 /* ADPermissionTests.swift */,
-				B5C89B591FB1482C00EA0739 /* ADQueryTests.swift */,
-				B5C89B5B1FB1484500EA0739 /* ADStoredProcedureTests.swift */,
-				B5C89B5D1FB1485800EA0739 /* ADTriggerTests.swift */,
-				B5C89B611FB1487800EA0739 /* ADUserDefinedFunctionTests.swift */,
-				B5FA678E1FB237EE0008FA9E /* ADUserPermissionExtensionsTests.swift */,
-				B5C89B5F1FB1486800EA0739 /* ADUserTests.swift */,
-				B5F76C471F96A7AF001E8B11 /* AzureDataTests.swift */,
-				B5F76C491F96A7AF001E8B11 /* Info.plist */,
-			);
-			path = AzureDataTests;
-			sourceTree = "<group>";
-		};
-		B5F76C671F96ACA5001E8B11 /* AzureDataApp */ = {
-			isa = PBXGroup;
-			children = (
-				B5F76C741F96ACA5001E8B11 /* Info.plist */,
-				B5F76C681F96ACA5001E8B11 /* AppDelegate.swift */,
-				B5AEF9001F9F783A006E4905 /* CollectionResourceTableViewController.swift */,
-				B5619EBB1F994FE300D01EAD /* CollectionTableViewController.swift */,
-				B5619EB91F994FB800D01EAD /* DatabaseTableViewController.swift */,
-				B53BF7791F9A7AE700B7A187 /* DocumentDetailTableViewController.swift */,
-				B5619EBD1F994FF100D01EAD /* DocumentTableViewController.swift */,
-				B5958A041F9903F10023C0AF /* Models.swift */,
-				B5BEF1AF1F9E41120018CEC9 /* PermissionTableViewController.swift */,
-				B5AEF8FA1F9F7565006E4905 /* StoredProcedureTableViewController.swift */,
-				B5AEF8FC1F9F7572006E4905 /* TriggerTableViewController.swift */,
-				B5AEF8FE1F9F7589006E4905 /* UserDefinedFunctionTableViewController.swift */,
-				B5F76C6F1F96ACA5001E8B11 /* Assets.xcassets */,
-				B5F76C711F96ACA5001E8B11 /* LaunchScreen.storyboard */,
-				B5F76C6C1F96ACA5001E8B11 /* Main.storyboard */,
-			);
-			path = AzureDataApp;
-			sourceTree = "<group>";
-		};
-		B5F76C7C1F96ACA6001E8B11 /* AzureDataAppTests */ = {
-			isa = PBXGroup;
-			children = (
-				B5F76C7D1F96ACA6001E8B11 /* AzureDataAppTests.swift */,
-				B5F76C7F1F96ACA6001E8B11 /* Info.plist */,
-			);
-			path = AzureDataAppTests;
-			sourceTree = "<group>";
-		};
-		B5F76C871F96ACA6001E8B11 /* AzureDataAppUITests */ = {
-			isa = PBXGroup;
-			children = (
-				B5F76C881F96ACA6001E8B11 /* AzureDataAppUITests.swift */,
-				B5F76C8A1F96ACA6001E8B11 /* Info.plist */,
-			);
-			path = AzureDataAppUITests;
 			sourceTree = "<group>";
 		};
 		B5F76C941F96ACCC001E8B11 /* Frameworks */ = {
@@ -413,20 +549,137 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		B5223FB41FB33A9F00D0343F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B52240511FB33DAB00D0343F /* AzureData.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5223FD01FB33B0F00D0343F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B52240501FB33DA900D0343F /* AzureData.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5223FEC1FB33B2600D0343F /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B52240F71FB3409D00D0343F /* AzureData.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5F76C361F96A7AF001E8B11 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5F76C4A1F96A7AF001E8B11 /* AzureData.h in Headers */,
+				B52240521FB33DAD00D0343F /* AzureData.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		B5F76C381F96A7AF001E8B11 /* AzureData */ = {
+		B5223FB61FB33A9F00D0343F /* AzureData macOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B5F76C4D1F96A7AF001E8B11 /* Build configuration list for PBXNativeTarget "AzureData" */;
+			buildConfigurationList = B5223FCC1FB33A9F00D0343F /* Build configuration list for PBXNativeTarget "AzureData macOS" */;
+			buildPhases = (
+				B5223FB21FB33A9F00D0343F /* Sources */,
+				B5223FB31FB33A9F00D0343F /* Frameworks */,
+				B5223FB41FB33A9F00D0343F /* Headers */,
+				B5223FB51FB33A9F00D0343F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B52241101FB3411100D0343F /* PBXTargetDependency */,
+			);
+			name = "AzureData macOS";
+			productName = "AzureData macOS";
+			productReference = B5223FB71FB33A9F00D0343F /* AzureData.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B5223FBE1FB33A9F00D0343F /* AzureData macOS Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5223FCD1FB33A9F00D0343F /* Build configuration list for PBXNativeTarget "AzureData macOS Tests" */;
+			buildPhases = (
+				B5223FBB1FB33A9F00D0343F /* Sources */,
+				B5223FBC1FB33A9F00D0343F /* Frameworks */,
+				B5223FBD1FB33A9F00D0343F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B5223FC21FB33A9F00D0343F /* PBXTargetDependency */,
+			);
+			name = "AzureData macOS Tests";
+			productName = "AzureData macOSTests";
+			productReference = B5223FBF1FB33A9F00D0343F /* AzureData macOS Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B5223FD21FB33B0F00D0343F /* AzureData tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5223FE41FB33B0F00D0343F /* Build configuration list for PBXNativeTarget "AzureData tvOS" */;
+			buildPhases = (
+				B5223FCE1FB33B0F00D0343F /* Sources */,
+				B5223FCF1FB33B0F00D0343F /* Frameworks */,
+				B5223FD01FB33B0F00D0343F /* Headers */,
+				B5223FD11FB33B0F00D0343F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B52241121FB3411900D0343F /* PBXTargetDependency */,
+			);
+			name = "AzureData tvOS";
+			productName = "AzureData tvOS";
+			productReference = B5223FD31FB33B0F00D0343F /* AzureData.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B5223FDA1FB33B0F00D0343F /* AzureData tvOS Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5223FE71FB33B0F00D0343F /* Build configuration list for PBXNativeTarget "AzureData tvOS Tests" */;
+			buildPhases = (
+				B5223FD71FB33B0F00D0343F /* Sources */,
+				B5223FD81FB33B0F00D0343F /* Frameworks */,
+				B5223FD91FB33B0F00D0343F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B5223FDE1FB33B0F00D0343F /* PBXTargetDependency */,
+			);
+			name = "AzureData tvOS Tests";
+			productName = "AzureData tvOSTests";
+			productReference = B5223FDB1FB33B0F00D0343F /* AzureData tvOS Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B5223FEE1FB33B2600D0343F /* AzureData watchOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5223FF41FB33B2600D0343F /* Build configuration list for PBXNativeTarget "AzureData watchOS" */;
+			buildPhases = (
+				B5223FEA1FB33B2600D0343F /* Sources */,
+				B5223FEB1FB33B2600D0343F /* Frameworks */,
+				B5223FEC1FB33B2600D0343F /* Headers */,
+				B5223FED1FB33B2600D0343F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B52241141FB3412100D0343F /* PBXTargetDependency */,
+			);
+			name = "AzureData watchOS";
+			productName = "AzureData watchOS";
+			productReference = B5223FEF1FB33B2600D0343F /* AzureData.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		B5F76C381F96A7AF001E8B11 /* AzureData iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B5F76C4D1F96A7AF001E8B11 /* Build configuration list for PBXNativeTarget "AzureData iOS" */;
 			buildPhases = (
 				B5F76C341F96A7AF001E8B11 /* Sources */,
 				B5F76C351F96A7AF001E8B11 /* Frameworks */,
@@ -438,14 +691,14 @@
 			dependencies = (
 				B5F76C5D1F96A8E5001E8B11 /* PBXTargetDependency */,
 			);
-			name = AzureData;
+			name = "AzureData iOS";
 			productName = AzureData;
 			productReference = B5F76C391F96A7AF001E8B11 /* AzureData.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		B5F76C411F96A7AF001E8B11 /* AzureDataTests */ = {
+		B5F76C411F96A7AF001E8B11 /* AzureData iOS Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B5F76C501F96A7AF001E8B11 /* Build configuration list for PBXNativeTarget "AzureDataTests" */;
+			buildConfigurationList = B5F76C501F96A7AF001E8B11 /* Build configuration list for PBXNativeTarget "AzureData iOS Tests" */;
 			buildPhases = (
 				B5F76C3E1F96A7AF001E8B11 /* Sources */,
 				B5F76C3F1F96A7AF001E8B11 /* Frameworks */,
@@ -456,65 +709,10 @@
 			dependencies = (
 				B5F76C451F96A7AF001E8B11 /* PBXTargetDependency */,
 			);
-			name = AzureDataTests;
+			name = "AzureData iOS Tests";
 			productName = AzureDataTests;
-			productReference = B5F76C421F96A7AF001E8B11 /* AzureDataTests.xctest */;
+			productReference = B5F76C421F96A7AF001E8B11 /* AzureData iOS Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		B5F76C651F96ACA5001E8B11 /* AzureDataApp */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B5F76C8B1F96ACA6001E8B11 /* Build configuration list for PBXNativeTarget "AzureDataApp" */;
-			buildPhases = (
-				B5F76C621F96ACA5001E8B11 /* Sources */,
-				B5F76C631F96ACA5001E8B11 /* Frameworks */,
-				B5F76C641F96ACA5001E8B11 /* Resources */,
-				B5F76C9F1F96AF66001E8B11 /* Embed Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B5F76C9E1F96AF66001E8B11 /* PBXTargetDependency */,
-			);
-			name = AzureDataApp;
-			productName = AzureDataApp;
-			productReference = B5F76C661F96ACA5001E8B11 /* AzureDataApp.app */;
-			productType = "com.apple.product-type.application";
-		};
-		B5F76C781F96ACA5001E8B11 /* AzureDataAppTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B5F76C8E1F96ACA6001E8B11 /* Build configuration list for PBXNativeTarget "AzureDataAppTests" */;
-			buildPhases = (
-				B5F76C751F96ACA5001E8B11 /* Sources */,
-				B5F76C761F96ACA5001E8B11 /* Frameworks */,
-				B5F76C771F96ACA5001E8B11 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B5F76C7B1F96ACA5001E8B11 /* PBXTargetDependency */,
-			);
-			name = AzureDataAppTests;
-			productName = AzureDataAppTests;
-			productReference = B5F76C791F96ACA5001E8B11 /* AzureDataAppTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		B5F76C831F96ACA6001E8B11 /* AzureDataAppUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B5F76C911F96ACA6001E8B11 /* Build configuration list for PBXNativeTarget "AzureDataAppUITests" */;
-			buildPhases = (
-				B5F76C801F96ACA6001E8B11 /* Sources */,
-				B5F76C811F96ACA6001E8B11 /* Frameworks */,
-				B5F76C821F96ACA6001E8B11 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				B5F76C861F96ACA6001E8B11 /* PBXTargetDependency */,
-			);
-			name = AzureDataAppUITests;
-			productName = AzureDataAppUITests;
-			productReference = B5F76C841F96ACA6001E8B11 /* AzureDataAppUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -526,6 +724,26 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Colby Williams";
 				TargetAttributes = {
+					B5223FB61FB33A9F00D0343F = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Manual;
+					};
+					B5223FBE1FB33A9F00D0343F = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					B5223FD21FB33B0F00D0343F = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					B5223FDA1FB33B0F00D0343F = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+					B5223FEE1FB33B2600D0343F = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
 					B5F76C381F96A7AF001E8B11 = {
 						CreatedOnToolsVersion = 9.0;
 						LastSwiftMigration = 0900;
@@ -538,20 +756,6 @@
 					B5F76C571F96A848001E8B11 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
-					};
-					B5F76C651F96ACA5001E8B11 = {
-						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
-					};
-					B5F76C781F96ACA5001E8B11 = {
-						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
-						TestTargetID = B5F76C651F96ACA5001E8B11;
-					};
-					B5F76C831F96ACA6001E8B11 = {
-						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
-						TestTargetID = B5F76C651F96ACA5001E8B11;
 					};
 				};
 			};
@@ -568,49 +772,66 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B5F76C381F96A7AF001E8B11 /* AzureData */,
-				B5F76C411F96A7AF001E8B11 /* AzureDataTests */,
+				B5F76C381F96A7AF001E8B11 /* AzureData iOS */,
+				B5F76C411F96A7AF001E8B11 /* AzureData iOS Tests */,
 				B5F76C571F96A848001E8B11 /* CommonCryptoModuleMap */,
-				B5F76C651F96ACA5001E8B11 /* AzureDataApp */,
-				B5F76C781F96ACA5001E8B11 /* AzureDataAppTests */,
-				B5F76C831F96ACA6001E8B11 /* AzureDataAppUITests */,
+				B5223FB61FB33A9F00D0343F /* AzureData macOS */,
+				B5223FBE1FB33A9F00D0343F /* AzureData macOS Tests */,
+				B5223FD21FB33B0F00D0343F /* AzureData tvOS */,
+				B5223FDA1FB33B0F00D0343F /* AzureData tvOS Tests */,
+				B5223FEE1FB33B2600D0343F /* AzureData watchOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		B5223FB51FB33A9F00D0343F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B522410C1FB340B600D0343F /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5223FBD1FB33A9F00D0343F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5223FD11FB33B0F00D0343F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B522410D1FB340B600D0343F /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5223FD91FB33B0F00D0343F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5223FED1FB33B2600D0343F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B522410E1FB340B700D0343F /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5F76C371F96A7AF001E8B11 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B522410B1FB340AF00D0343F /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		B5F76C401F96A7AF001E8B11 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5F76C641F96ACA5001E8B11 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B5F76C731F96ACA5001E8B11 /* LaunchScreen.storyboard in Resources */,
-				B5F76C701F96ACA5001E8B11 /* Assets.xcassets in Resources */,
-				B5F76C6E1F96ACA5001E8B11 /* Main.storyboard in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5F76C771F96ACA5001E8B11 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5F76C821F96ACA6001E8B11 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -636,39 +857,203 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B5223FB21FB33A9F00D0343F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B52241041FB3409F00D0343F /* ADHttp.swift in Sources */,
+				B52240941FB3407C00D0343F /* NetworkReachabilityManager.swift in Sources */,
+				B52240B71FB3409000D0343F /* ADError.swift in Sources */,
+				B52240B31FB3409000D0343F /* ADConflict.swift in Sources */,
+				B52240951FB3407C00D0343F /* ADTokenProvider.swift in Sources */,
+				B52240B61FB3409000D0343F /* ADUser.swift in Sources */,
+				B52241021FB3409F00D0343F /* AzureData.swift in Sources */,
+				B52240BB1FB3409000D0343F /* ADDocument.swift in Sources */,
+				B52240B21FB3409000D0343F /* ADResourceType.swift in Sources */,
+				B52241011FB3409F00D0343F /* ADResponse.swift in Sources */,
+				B52240C31FB3409000D0343F /* ADPartitionKeyRange.swift in Sources */,
+				B52240C41FB3409000D0343F /* ADResourceList.swift in Sources */,
+				B52241031FB3409F00D0343F /* SessionManager.swift in Sources */,
+				B52240B51FB3409000D0343F /* ADOffer.swift in Sources */,
+				B52240C21FB3409000D0343F /* ADResource.swift in Sources */,
+				B52240C51FB3409000D0343F /* ADDatabaseAccount.swift in Sources */,
+				B52240C61FB3409000D0343F /* ADIndexingPolicy.swift in Sources */,
+				B52240C01FB3409000D0343F /* ADCollection.swift in Sources */,
+				B52241051FB3409F00D0343F /* UtilityExtensions.swift in Sources */,
+				B52240B81FB3409000D0343F /* ADTrigger.swift in Sources */,
+				B52240961FB3407C00D0343F /* AzureDataExtensions.swift in Sources */,
+				B52240BE1FB3409000D0343F /* ADPartitionKeyDefinition.swift in Sources */,
+				B52240BA1FB3409000D0343F /* ADStoredProcedure.swift in Sources */,
+				B52240B41FB3409000D0343F /* ADQuery.swift in Sources */,
+				B52240C11FB3409000D0343F /* ADUserDefinedFunction.swift in Sources */,
+				B52240BD1FB3409000D0343F /* ADResourceUri.swift in Sources */,
+				B52240BF1FB3409000D0343F /* ADAttachment.swift in Sources */,
+				B52240B91FB3409000D0343F /* ADDatabase.swift in Sources */,
+				B52240BC1FB3409000D0343F /* ADPermission.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5223FBB1FB33A9F00D0343F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B52241171FB342A300D0343F /* NetworkReachabilityManagerTests.swift in Sources */,
+				B52240691FB33DF800D0343F /* ADUserPermissionExtensionsTests.swift in Sources */,
+				B52240751FB33DF800D0343F /* ADDatabaseTests.swift in Sources */,
+				B52240671FB33DF800D0343F /* ADUserDefinedFunctionTests.swift in Sources */,
+				B522406B1FB33DF800D0343F /* ADDocumentTests.swift in Sources */,
+				B52240741FB33DF800D0343F /* ADCollectionStoredProcedureExtensionsTests.swift in Sources */,
+				B52240721FB33DF800D0343F /* ADCollectionTriggerExtensionsTests.swift in Sources */,
+				B52240731FB33DF800D0343F /* ADUserTests.swift in Sources */,
+				B52240761FB33DF800D0343F /* ADCollectionDocumentExtensionsTests.swift in Sources */,
+				B522406F1FB33DF800D0343F /* ADAttachmentTests.swift in Sources */,
+				B522406E1FB33DF800D0343F /* ADTriggerTests.swift in Sources */,
+				B52240701FB33DF800D0343F /* ADPermissionTests.swift in Sources */,
+				B52240681FB33DF800D0343F /* ADStoredProcedureTests.swift in Sources */,
+				B52240771FB33DF800D0343F /* AzureDataTests.swift in Sources */,
+				B522406A1FB33DF800D0343F /* ADQueryTests.swift in Sources */,
+				B52240781FB33DF800D0343F /* ADCollectionTests.swift in Sources */,
+				B52240791FB33DF800D0343F /* ADOfferTests.swift in Sources */,
+				B522407A1FB33DF800D0343F /* ADDocumentAttachmentExtensionsTests.swift in Sources */,
+				B522406C1FB33DF800D0343F /* ADCollectionUserDefinedFunctionExtensionsTests.swift in Sources */,
+				B522406D1FB33DF800D0343F /* ADDatabaseCollectionExtensionsTests.swift in Sources */,
+				B52240711FB33DF800D0343F /* ADDatabaseUserExtensionsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5223FCE1FB33B0F00D0343F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B52240FF1FB3409E00D0343F /* ADHttp.swift in Sources */,
+				B52240971FB3407D00D0343F /* NetworkReachabilityManager.swift in Sources */,
+				B52240CC1FB3409100D0343F /* ADError.swift in Sources */,
+				B52240C81FB3409100D0343F /* ADConflict.swift in Sources */,
+				B52240981FB3407D00D0343F /* ADTokenProvider.swift in Sources */,
+				B52240CB1FB3409100D0343F /* ADUser.swift in Sources */,
+				B52240FD1FB3409E00D0343F /* AzureData.swift in Sources */,
+				B52240D01FB3409100D0343F /* ADDocument.swift in Sources */,
+				B52240C71FB3409100D0343F /* ADResourceType.swift in Sources */,
+				B52240FC1FB3409E00D0343F /* ADResponse.swift in Sources */,
+				B52240D81FB3409100D0343F /* ADPartitionKeyRange.swift in Sources */,
+				B52240D91FB3409100D0343F /* ADResourceList.swift in Sources */,
+				B52240FE1FB3409E00D0343F /* SessionManager.swift in Sources */,
+				B52240CA1FB3409100D0343F /* ADOffer.swift in Sources */,
+				B52240D71FB3409100D0343F /* ADResource.swift in Sources */,
+				B52240DA1FB3409100D0343F /* ADDatabaseAccount.swift in Sources */,
+				B52240DB1FB3409100D0343F /* ADIndexingPolicy.swift in Sources */,
+				B52240D51FB3409100D0343F /* ADCollection.swift in Sources */,
+				B52241001FB3409E00D0343F /* UtilityExtensions.swift in Sources */,
+				B52240CD1FB3409100D0343F /* ADTrigger.swift in Sources */,
+				B52240991FB3407D00D0343F /* AzureDataExtensions.swift in Sources */,
+				B52240D31FB3409100D0343F /* ADPartitionKeyDefinition.swift in Sources */,
+				B52240CF1FB3409100D0343F /* ADStoredProcedure.swift in Sources */,
+				B52240C91FB3409100D0343F /* ADQuery.swift in Sources */,
+				B52240D61FB3409100D0343F /* ADUserDefinedFunction.swift in Sources */,
+				B52240D21FB3409100D0343F /* ADResourceUri.swift in Sources */,
+				B52240D41FB3409100D0343F /* ADAttachment.swift in Sources */,
+				B52240CE1FB3409100D0343F /* ADDatabase.swift in Sources */,
+				B52240D11FB3409100D0343F /* ADPermission.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5223FD71FB33B0F00D0343F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B52241181FB342A300D0343F /* NetworkReachabilityManagerTests.swift in Sources */,
+				B522407D1FB33DFA00D0343F /* ADUserPermissionExtensionsTests.swift in Sources */,
+				B52240891FB33DFA00D0343F /* ADDatabaseTests.swift in Sources */,
+				B522407B1FB33DFA00D0343F /* ADUserDefinedFunctionTests.swift in Sources */,
+				B522407F1FB33DFA00D0343F /* ADDocumentTests.swift in Sources */,
+				B52240881FB33DFA00D0343F /* ADCollectionStoredProcedureExtensionsTests.swift in Sources */,
+				B52240861FB33DFA00D0343F /* ADCollectionTriggerExtensionsTests.swift in Sources */,
+				B52240871FB33DFA00D0343F /* ADUserTests.swift in Sources */,
+				B522408A1FB33DFA00D0343F /* ADCollectionDocumentExtensionsTests.swift in Sources */,
+				B52240831FB33DFA00D0343F /* ADAttachmentTests.swift in Sources */,
+				B52240821FB33DFA00D0343F /* ADTriggerTests.swift in Sources */,
+				B52240841FB33DFA00D0343F /* ADPermissionTests.swift in Sources */,
+				B522407C1FB33DFA00D0343F /* ADStoredProcedureTests.swift in Sources */,
+				B522408B1FB33DFA00D0343F /* AzureDataTests.swift in Sources */,
+				B522407E1FB33DFA00D0343F /* ADQueryTests.swift in Sources */,
+				B522408C1FB33DFA00D0343F /* ADCollectionTests.swift in Sources */,
+				B522408D1FB33DFA00D0343F /* ADOfferTests.swift in Sources */,
+				B522408E1FB33DFA00D0343F /* ADDocumentAttachmentExtensionsTests.swift in Sources */,
+				B52240801FB33DFA00D0343F /* ADCollectionUserDefinedFunctionExtensionsTests.swift in Sources */,
+				B52240811FB33DFA00D0343F /* ADDatabaseCollectionExtensionsTests.swift in Sources */,
+				B52240851FB33DFA00D0343F /* ADDatabaseUserExtensionsTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B5223FEA1FB33B2600D0343F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B52240FA1FB3409D00D0343F /* ADHttp.swift in Sources */,
+				B522409A1FB3407E00D0343F /* NetworkReachabilityManager.swift in Sources */,
+				B52240E11FB3409200D0343F /* ADError.swift in Sources */,
+				B52240DD1FB3409200D0343F /* ADConflict.swift in Sources */,
+				B522409B1FB3407E00D0343F /* ADTokenProvider.swift in Sources */,
+				B52240E01FB3409200D0343F /* ADUser.swift in Sources */,
+				B52240F81FB3409D00D0343F /* AzureData.swift in Sources */,
+				B52240E51FB3409200D0343F /* ADDocument.swift in Sources */,
+				B52240DC1FB3409200D0343F /* ADResourceType.swift in Sources */,
+				B52240F61FB3409D00D0343F /* ADResponse.swift in Sources */,
+				B52240ED1FB3409200D0343F /* ADPartitionKeyRange.swift in Sources */,
+				B52240EE1FB3409200D0343F /* ADResourceList.swift in Sources */,
+				B52240F91FB3409D00D0343F /* SessionManager.swift in Sources */,
+				B52240DF1FB3409200D0343F /* ADOffer.swift in Sources */,
+				B52240EC1FB3409200D0343F /* ADResource.swift in Sources */,
+				B52240EF1FB3409200D0343F /* ADDatabaseAccount.swift in Sources */,
+				B52240F01FB3409200D0343F /* ADIndexingPolicy.swift in Sources */,
+				B52240EA1FB3409200D0343F /* ADCollection.swift in Sources */,
+				B52240FB1FB3409D00D0343F /* UtilityExtensions.swift in Sources */,
+				B52240E21FB3409200D0343F /* ADTrigger.swift in Sources */,
+				B522409C1FB3407E00D0343F /* AzureDataExtensions.swift in Sources */,
+				B52240E81FB3409200D0343F /* ADPartitionKeyDefinition.swift in Sources */,
+				B52240E41FB3409200D0343F /* ADStoredProcedure.swift in Sources */,
+				B52240DE1FB3409200D0343F /* ADQuery.swift in Sources */,
+				B52240EB1FB3409200D0343F /* ADUserDefinedFunction.swift in Sources */,
+				B52240E71FB3409200D0343F /* ADResourceUri.swift in Sources */,
+				B52240E91FB3409200D0343F /* ADAttachment.swift in Sources */,
+				B52240E31FB3409200D0343F /* ADDatabase.swift in Sources */,
+				B52240E61FB3409200D0343F /* ADPermission.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B5F76C341F96A7AF001E8B11 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B53BF7781F9A3E2700B7A187 /* ADPartitionKeyDefinition.swift in Sources */,
-				B5DA1DFF1F97D64500C300D3 /* ADHttp.swift in Sources */,
-				B57C36A41F9B00E90035A106 /* UtilityExtensions.swift in Sources */,
-				B5958A121F992CD10023C0AF /* ADConflict.swift in Sources */,
-				B5958A281F992D5E0023C0AF /* ADResourceUri.swift in Sources */,
-				B5958A221F992D2E0023C0AF /* ADUser.swift in Sources */,
-				B5958A1A1F992D020023C0AF /* ADPartitionKeyRange.swift in Sources */,
-				B5958A0A1F992C9A0023C0AF /* ADResource.swift in Sources */,
-				B5958A1C1F992D0E0023C0AF /* ADPermission.swift in Sources */,
-				B5958A1E1F992D190023C0AF /* ADStoredProcedure.swift in Sources */,
-				B5619EB81F99357800D01EAD /* ADResourceList.swift in Sources */,
-				B5958A261F992D520023C0AF /* ADResourceType.swift in Sources */,
-				B587C71F1F9FACC4004A76F6 /* AzureDataExtensions.swift in Sources */,
-				B5958A201F992D240023C0AF /* ADTrigger.swift in Sources */,
-				B5958A0C1F992CAB0023C0AF /* ADDocument.swift in Sources */,
-				B53BF7761F9A2F9400B7A187 /* ADIndexingPolicy.swift in Sources */,
-				B5958A0E1F992CB90023C0AF /* ADCollection.swift in Sources */,
-				B5F76C541F96A7F3001E8B11 /* NetworkReachabilityManager.swift in Sources */,
-				B5958A161F992CE90023C0AF /* ADError.swift in Sources */,
-				B5DA1DFD1F978C0A00C300D3 /* SessionManager.swift in Sources */,
-				B5958A101F992CC50023C0AF /* ADAttachment.swift in Sources */,
-				B5958A241F992D3A0023C0AF /* ADUserDefinedFunction.swift in Sources */,
-				B5DA1DFB1F977EAF00C300D3 /* ADResponse.swift in Sources */,
-				B5958A081F992C560023C0AF /* ADDatabase.swift in Sources */,
-				B5958A141F992CDD0023C0AF /* ADDatabaseAccount.swift in Sources */,
-				B5F76C5F1F96A91C001E8B11 /* ADTokenProvider.swift in Sources */,
-				B5F76C561F96A80B001E8B11 /* AzureData.swift in Sources */,
-				B5958A181F992CF60023C0AF /* ADOffer.swift in Sources */,
-				B528A53D1F9EBF1C000586BE /* ADQuery.swift in Sources */,
+				B52241091FB3409F00D0343F /* ADHttp.swift in Sources */,
+				B52240911FB3407900D0343F /* NetworkReachabilityManager.swift in Sources */,
+				B52240A21FB3408E00D0343F /* ADError.swift in Sources */,
+				B522409E1FB3408E00D0343F /* ADConflict.swift in Sources */,
+				B52240921FB3407900D0343F /* ADTokenProvider.swift in Sources */,
+				B52240A11FB3408E00D0343F /* ADUser.swift in Sources */,
+				B52241071FB3409F00D0343F /* AzureData.swift in Sources */,
+				B52240A61FB3408E00D0343F /* ADDocument.swift in Sources */,
+				B522409D1FB3408E00D0343F /* ADResourceType.swift in Sources */,
+				B52241061FB3409F00D0343F /* ADResponse.swift in Sources */,
+				B52240AE1FB3408E00D0343F /* ADPartitionKeyRange.swift in Sources */,
+				B52240AF1FB3408E00D0343F /* ADResourceList.swift in Sources */,
+				B52241081FB3409F00D0343F /* SessionManager.swift in Sources */,
+				B52240A01FB3408E00D0343F /* ADOffer.swift in Sources */,
+				B52240AD1FB3408E00D0343F /* ADResource.swift in Sources */,
+				B52240B01FB3408E00D0343F /* ADDatabaseAccount.swift in Sources */,
+				B52240B11FB3408E00D0343F /* ADIndexingPolicy.swift in Sources */,
+				B52240AB1FB3408E00D0343F /* ADCollection.swift in Sources */,
+				B522410A1FB3409F00D0343F /* UtilityExtensions.swift in Sources */,
+				B52240A31FB3408E00D0343F /* ADTrigger.swift in Sources */,
+				B52240931FB3407900D0343F /* AzureDataExtensions.swift in Sources */,
+				B52240A91FB3408E00D0343F /* ADPartitionKeyDefinition.swift in Sources */,
+				B52240A51FB3408E00D0343F /* ADStoredProcedure.swift in Sources */,
+				B522409F1FB3408E00D0343F /* ADQuery.swift in Sources */,
+				B52240AC1FB3408E00D0343F /* ADUserDefinedFunction.swift in Sources */,
+				B52240A81FB3408E00D0343F /* ADResourceUri.swift in Sources */,
+				B52240AA1FB3408E00D0343F /* ADAttachment.swift in Sources */,
+				B52240A41FB3408E00D0343F /* ADDatabase.swift in Sources */,
+				B52240A71FB3408E00D0343F /* ADPermission.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -676,69 +1061,61 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B5C89B581FB1481B00EA0739 /* ADPermissionTests.swift in Sources */,
-				B5F76C481F96A7AF001E8B11 /* AzureDataTests.swift in Sources */,
-				B5C89B621FB1487800EA0739 /* ADUserDefinedFunctionTests.swift in Sources */,
-				B57446AB1FB11F810048B20F /* ADDatabaseTests.swift in Sources */,
-				B5C89B5E1FB1485800EA0739 /* ADTriggerTests.swift in Sources */,
-				B5FA678D1FB237B70008FA9E /* ADCollectionUserDefinedFunctionExtensionsTests.swift in Sources */,
-				B5C89B601FB1486800EA0739 /* ADUserTests.swift in Sources */,
-				B5FC20B81FB12B8E00283FDA /* ADCollectionDocumentExtensionsTests.swift in Sources */,
-				B5C89B541FB147D100EA0739 /* ADAttachmentTests.swift in Sources */,
-				B57446AD1FB11FEF0048B20F /* ADCollectionTests.swift in Sources */,
-				B5FA67891FB237840008FA9E /* ADCollectionStoredProcedureExtensionsTests.swift in Sources */,
-				B5FA678B1FB2379B0008FA9E /* ADCollectionTriggerExtensionsTests.swift in Sources */,
-				B57446AF1FB120070048B20F /* ADDocumentTests.swift in Sources */,
-				B5FC20B61FB12B5900283FDA /* ADDatabaseCollectionExtensionsTests.swift in Sources */,
-				B5C89B561FB1480700EA0739 /* ADOfferTests.swift in Sources */,
-				B5199DF11FB17D6400B69C99 /* ADDatabaseUserExtensionsTests.swift in Sources */,
-				B5FA67911FB238370008FA9E /* ADDocumentAttachmentExtensionsTests.swift in Sources */,
-				B5C89B5C1FB1484500EA0739 /* ADStoredProcedureTests.swift in Sources */,
-				B5C89B5A1FB1482C00EA0739 /* ADQueryTests.swift in Sources */,
-				B5FA678F1FB237EE0008FA9E /* ADUserPermissionExtensionsTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5F76C621F96ACA5001E8B11 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B5619EBE1F994FF100D01EAD /* DocumentTableViewController.swift in Sources */,
-				B5AEF8FD1F9F7572006E4905 /* TriggerTableViewController.swift in Sources */,
-				B5AEF8FF1F9F7589006E4905 /* UserDefinedFunctionTableViewController.swift in Sources */,
-				B53BF77A1F9A7AE700B7A187 /* DocumentDetailTableViewController.swift in Sources */,
-				B5619EBA1F994FB800D01EAD /* DatabaseTableViewController.swift in Sources */,
-				B5619EBC1F994FE300D01EAD /* CollectionTableViewController.swift in Sources */,
-				B5AEF9011F9F783A006E4905 /* CollectionResourceTableViewController.swift in Sources */,
-				B5AEF8FB1F9F7565006E4905 /* StoredProcedureTableViewController.swift in Sources */,
-				B5958A051F9903F10023C0AF /* Models.swift in Sources */,
-				B5F76C691F96ACA5001E8B11 /* AppDelegate.swift in Sources */,
-				B5BEF1B01F9E41120018CEC9 /* PermissionTableViewController.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5F76C751F96ACA5001E8B11 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B5F76C7E1F96ACA6001E8B11 /* AzureDataAppTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		B5F76C801F96ACA6001E8B11 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B5F76C891F96ACA6001E8B11 /* AzureDataAppUITests.swift in Sources */,
+				B52241161FB342A300D0343F /* NetworkReachabilityManagerTests.swift in Sources */,
+				B52240551FB33DF100D0343F /* ADUserPermissionExtensionsTests.swift in Sources */,
+				B52240611FB33DF100D0343F /* ADDatabaseTests.swift in Sources */,
+				B52240531FB33DF100D0343F /* ADUserDefinedFunctionTests.swift in Sources */,
+				B52240571FB33DF100D0343F /* ADDocumentTests.swift in Sources */,
+				B52240601FB33DF100D0343F /* ADCollectionStoredProcedureExtensionsTests.swift in Sources */,
+				B522405E1FB33DF100D0343F /* ADCollectionTriggerExtensionsTests.swift in Sources */,
+				B522405F1FB33DF100D0343F /* ADUserTests.swift in Sources */,
+				B52240621FB33DF100D0343F /* ADCollectionDocumentExtensionsTests.swift in Sources */,
+				B522405B1FB33DF100D0343F /* ADAttachmentTests.swift in Sources */,
+				B522405A1FB33DF100D0343F /* ADTriggerTests.swift in Sources */,
+				B522405C1FB33DF100D0343F /* ADPermissionTests.swift in Sources */,
+				B52240541FB33DF100D0343F /* ADStoredProcedureTests.swift in Sources */,
+				B52240631FB33DF100D0343F /* AzureDataTests.swift in Sources */,
+				B52240561FB33DF100D0343F /* ADQueryTests.swift in Sources */,
+				B52240641FB33DF100D0343F /* ADCollectionTests.swift in Sources */,
+				B52240651FB33DF100D0343F /* ADOfferTests.swift in Sources */,
+				B52240661FB33DF100D0343F /* ADDocumentAttachmentExtensionsTests.swift in Sources */,
+				B52240581FB33DF100D0343F /* ADCollectionUserDefinedFunctionExtensionsTests.swift in Sources */,
+				B52240591FB33DF100D0343F /* ADDatabaseCollectionExtensionsTests.swift in Sources */,
+				B522405D1FB33DF100D0343F /* ADDatabaseUserExtensionsTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		B5223FC21FB33A9F00D0343F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5223FB61FB33A9F00D0343F /* AzureData macOS */;
+			targetProxy = B5223FC11FB33A9F00D0343F /* PBXContainerItemProxy */;
+		};
+		B5223FDE1FB33B0F00D0343F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5223FD21FB33B0F00D0343F /* AzureData tvOS */;
+			targetProxy = B5223FDD1FB33B0F00D0343F /* PBXContainerItemProxy */;
+		};
+		B52241101FB3411100D0343F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5F76C571F96A848001E8B11 /* CommonCryptoModuleMap */;
+			targetProxy = B522410F1FB3411100D0343F /* PBXContainerItemProxy */;
+		};
+		B52241121FB3411900D0343F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5F76C571F96A848001E8B11 /* CommonCryptoModuleMap */;
+			targetProxy = B52241111FB3411900D0343F /* PBXContainerItemProxy */;
+		};
+		B52241141FB3412100D0343F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B5F76C571F96A848001E8B11 /* CommonCryptoModuleMap */;
+			targetProxy = B52241131FB3412100D0343F /* PBXContainerItemProxy */;
+		};
 		B5F76C451F96A7AF001E8B11 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = B5F76C381F96A7AF001E8B11 /* AzureData */;
+			target = B5F76C381F96A7AF001E8B11 /* AzureData iOS */;
 			targetProxy = B5F76C441F96A7AF001E8B11 /* PBXContainerItemProxy */;
 		};
 		B5F76C5D1F96A8E5001E8B11 /* PBXTargetDependency */ = {
@@ -746,43 +1123,225 @@
 			target = B5F76C571F96A848001E8B11 /* CommonCryptoModuleMap */;
 			targetProxy = B5F76C5C1F96A8E5001E8B11 /* PBXContainerItemProxy */;
 		};
-		B5F76C7B1F96ACA5001E8B11 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B5F76C651F96ACA5001E8B11 /* AzureDataApp */;
-			targetProxy = B5F76C7A1F96ACA5001E8B11 /* PBXContainerItemProxy */;
-		};
-		B5F76C861F96ACA6001E8B11 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B5F76C651F96ACA5001E8B11 /* AzureDataApp */;
-			targetProxy = B5F76C851F96ACA6001E8B11 /* PBXContainerItemProxy */;
-		};
-		B5F76C9E1F96AF66001E8B11 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B5F76C381F96A7AF001E8B11 /* AzureData */;
-			targetProxy = B5F76C9D1F96AF66001E8B11 /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		B5F76C6C1F96ACA5001E8B11 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B5F76C6D1F96ACA5001E8B11 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		B5F76C711F96ACA5001E8B11 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B5F76C721F96ACA5001E8B11 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
+		B5223FC81FB33A9F00D0343F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				HEADER_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azure.data;
+				PRODUCT_NAME = AzureData;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		B5223FC91FB33A9F00D0343F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				HEADER_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = com.azure.data;
+				PRODUCT_NAME = AzureData;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		B5223FCA1FB33A9F00D0343F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "AzureData macOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.azure.AzureData-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		B5223FCB1FB33A9F00D0343F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = "AzureData macOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.azure.AzureData-macOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+		B5223FE51FB33B0F00D0343F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.azure.data;
+				PRODUCT_NAME = AzureData;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Debug;
+		};
+		B5223FE61FB33B0F00D0343F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.azure.data;
+				PRODUCT_NAME = AzureData;
+				SDKROOT = appletvos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Release;
+		};
+		B5223FE81FB33B0F00D0343F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "AzureData tvOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.azure.AzureData-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Debug;
+		};
+		B5223FE91FB33B0F00D0343F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				INFOPLIST_FILE = "AzureData tvOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.azure.AzureData-tvOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 11.0;
+			};
+			name = Release;
+		};
+		B5223FF51FB33B2600D0343F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.azure.data;
+				PRODUCT_NAME = AzureData;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Debug;
+		};
+		B5223FF61FB33B2600D0343F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_STYLE = Automatic;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				HEADER_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap";
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.azure.data;
+				PRODUCT_NAME = AzureData;
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
+			};
+			name = Release;
+		};
 		B5F76C4B1F96A7AF001E8B11 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -899,21 +1458,22 @@
 		B5F76C4E1F96A7AF001E8B11 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = N7C38P267Q;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				HEADER_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap";
-				INFOPLIST_FILE = AzureData/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.azure.data;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = AzureData;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -925,21 +1485,22 @@
 		B5F76C4F1F96A7AF001E8B11 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				APPLICATION_EXTENSION_API_ONLY = YES;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = N7C38P267Q;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				HEADER_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap";
-				INFOPLIST_FILE = AzureData/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.azure.data;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PRODUCT_NAME = AzureData;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.0;
@@ -983,6 +1544,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N7C38P267Q;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx watchsimulator watchos appletvsimulator appletvos";
 			};
 			name = Debug;
 		};
@@ -992,116 +1554,58 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N7C38P267Q;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		B5F76C8C1F96ACA6001E8B11 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N7C38P267Q;
-				INFOPLIST_FILE = AzureDataApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.azure.data.app;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		B5F76C8D1F96ACA6001E8B11 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N7C38P267Q;
-				INFOPLIST_FILE = AzureDataApp/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.azure.data.app;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		B5F76C8F1F96ACA6001E8B11 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N7C38P267Q;
-				INFOPLIST_FILE = AzureDataAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.azure.AzureDataAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AzureDataApp.app/AzureDataApp";
-			};
-			name = Debug;
-		};
-		B5F76C901F96ACA6001E8B11 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N7C38P267Q;
-				INFOPLIST_FILE = AzureDataAppTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.azure.AzureDataAppTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AzureDataApp.app/AzureDataApp";
-			};
-			name = Release;
-		};
-		B5F76C921F96ACA6001E8B11 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N7C38P267Q;
-				INFOPLIST_FILE = AzureDataAppUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.azure.AzureDataAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = AzureDataApp;
-			};
-			name = Debug;
-		};
-		B5F76C931F96ACA6001E8B11 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N7C38P267Q;
-				INFOPLIST_FILE = AzureDataAppUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.azure.AzureDataAppUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = AzureDataApp;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx watchsimulator watchos appletvsimulator appletvos";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B5223FCC1FB33A9F00D0343F /* Build configuration list for PBXNativeTarget "AzureData macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5223FC81FB33A9F00D0343F /* Debug */,
+				B5223FC91FB33A9F00D0343F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5223FCD1FB33A9F00D0343F /* Build configuration list for PBXNativeTarget "AzureData macOS Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5223FCA1FB33A9F00D0343F /* Debug */,
+				B5223FCB1FB33A9F00D0343F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5223FE41FB33B0F00D0343F /* Build configuration list for PBXNativeTarget "AzureData tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5223FE51FB33B0F00D0343F /* Debug */,
+				B5223FE61FB33B0F00D0343F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5223FE71FB33B0F00D0343F /* Build configuration list for PBXNativeTarget "AzureData tvOS Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5223FE81FB33B0F00D0343F /* Debug */,
+				B5223FE91FB33B0F00D0343F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B5223FF41FB33B2600D0343F /* Build configuration list for PBXNativeTarget "AzureData watchOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B5223FF51FB33B2600D0343F /* Debug */,
+				B5223FF61FB33B2600D0343F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B5F76C331F96A7AF001E8B11 /* Build configuration list for PBXProject "AzureData" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1111,7 +1615,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B5F76C4D1F96A7AF001E8B11 /* Build configuration list for PBXNativeTarget "AzureData" */ = {
+		B5F76C4D1F96A7AF001E8B11 /* Build configuration list for PBXNativeTarget "AzureData iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B5F76C4E1F96A7AF001E8B11 /* Debug */,
@@ -1120,7 +1624,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B5F76C501F96A7AF001E8B11 /* Build configuration list for PBXNativeTarget "AzureDataTests" */ = {
+		B5F76C501F96A7AF001E8B11 /* Build configuration list for PBXNativeTarget "AzureData iOS Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B5F76C511F96A7AF001E8B11 /* Debug */,
@@ -1134,33 +1638,6 @@
 			buildConfigurations = (
 				B5F76C591F96A848001E8B11 /* Debug */,
 				B5F76C5A1F96A848001E8B11 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B5F76C8B1F96ACA6001E8B11 /* Build configuration list for PBXNativeTarget "AzureDataApp" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B5F76C8C1F96ACA6001E8B11 /* Debug */,
-				B5F76C8D1F96ACA6001E8B11 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B5F76C8E1F96ACA6001E8B11 /* Build configuration list for PBXNativeTarget "AzureDataAppTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B5F76C8F1F96ACA6001E8B11 /* Debug */,
-				B5F76C901F96ACA6001E8B11 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B5F76C911F96ACA6001E8B11 /* Build configuration list for PBXNativeTarget "AzureDataAppUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B5F76C921F96ACA6001E8B11 /* Debug */,
-				B5F76C931F96ACA6001E8B11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

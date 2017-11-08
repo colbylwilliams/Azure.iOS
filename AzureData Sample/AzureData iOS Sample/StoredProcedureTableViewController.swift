@@ -1,6 +1,6 @@
 //
 //  StoredProcedureTableViewController.swift
-//  AzureDataApp
+//  AzureData iOS Sample
 //
 //  Created by Colby Williams on 10/24/17.
 //  Copyright © 2017 Colby Williams. All rights reserved.

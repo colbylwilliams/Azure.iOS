@@ -8,9 +8,9 @@
 | AzureData.framework  | tvOS    | [![Build status][azuredata-tvos-build-master-badge]][azuredata-tvos-build-master]                     |
 | AzureData.framework  | watchOS | [![Build status][azuredata-watchos-build-master-badge]][azuredata-watchos-build-master]               |
 | AzureData Sample App | iOS     | [![Build status][azuredata-ios-sample-build-master-badge]][azuredata-ios-sample-build-master]         |
-| AzureData Sample App | macOS   | [![Build status][azuredata-macos-sample-build-master-badge]][azuredata-macos-sample-build-master]     |
-| AzureData Sample App | tvOS    | Coming soon..                                                                                         |
-| AzureData Sample App | watchOS | Coming soon..                                                                                         |
+| AzureData Sample App | macOS   | ...                                                                                                   |
+| AzureData Sample App | tvOS    | ...                                                                                                   |
+| AzureData Sample App | watchOS | ...                                                                                                   |
 
 
 # Setup

@@ -44,6 +44,11 @@ open class SessionManager {
         verboseLogging = verbose
     }
 
+    public func reset () {
+        baseUri = nil
+        tokenProvider = nil
+    }
+    
     
     /// Creates default values for the "Accept-Encoding", "Accept-Language", "User-Agent", and "x-ms-version" headers.
     static let defaultHTTPHeaders: HTTPHeaders = {
@@ -346,15 +351,13 @@ open class SessionManager {
 
         let resourceUri = baseUri?.document(inDatabase: databaseId, inCollection: collectionId)
         
-        query.printQuery(); print()
+        if self.verboseLogging { query.printQuery(); print() }
         
         let body = query.dictionary
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
             callback(ADListResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
-        
-        print(String(data: httpBody, encoding: .utf8)!); print()
 
         return self.query(resourceUri: resourceUri, resourceType: .document, httpBody: httpBody, callback: callback)
     }
@@ -363,15 +366,13 @@ open class SessionManager {
         
         let resourceUri = baseUri?.document(atLink: collection.selfLink!)
         
-        query.printQuery(); print()
+        if self.verboseLogging { query.printQuery(); print() }
         
         let body = query.dictionary
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
             callback(ADListResponse(ADError("Error: Could not serialize document to JSON"))); return
         }
-        
-        print(String(data: httpBody, encoding: .utf8)!); print()
         
         return self.query(resourceUri: resourceUri, resourceType: .document, httpBody: httpBody, callback: callback)
     }

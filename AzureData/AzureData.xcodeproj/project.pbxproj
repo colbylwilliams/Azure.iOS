@@ -388,6 +388,7 @@
 			isa = PBXGroup;
 			children = (
 				B52240341FB33CD000D0343F /* AzureData.swift */,
+				B52240351FB33CD000D0343F /* SessionManager.swift */,
 				B55AEFE71FB34D3600F7BEED /* ADResources */,
 				B55AEFE61FB34CF600F7BEED /* Domain */,
 				B55AEFE51FB34C5400F7BEED /* Extensions */,
@@ -475,7 +476,6 @@
 				B52240321FB33CD000D0343F /* ADResponse.swift */,
 				B522401A1FB33CD000D0343F /* ADTokenProvider.swift */,
 				B52240191FB33CD000D0343F /* NetworkReachabilityManager.swift */,
-				B52240351FB33CD000D0343F /* SessionManager.swift */,
 			);
 			name = Domain;
 			sourceTree = "<group>";
@@ -853,6 +853,7 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# This if-statement means we'll only run the main script if the CommonCryptoModuleMap directory doesn't exist\n# Because otherwise the rest of the script causes a full recompile for anything where CommonCrypto is a dependency\n# Do a \"Clean Build Folder\" to remove this directory and trigger the rest of the script to run\nif [ -d \"${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap\" ]; then\necho \"${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap directory already exists, so skipping the rest of the script.\"\nexit 0\nfi\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap\"\ncat <<EOF > \"${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap/module.modulemap\"\nmodule CommonCrypto [system] {\n    header \"${SDKROOT}/usr/include/CommonCrypto/CommonCrypto.h\"\n    export *\n}\nEOF\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1571,7 +1572,7 @@
 				B5223FC91FB33A9F00D0343F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		B5223FCD1FB33A9F00D0343F /* Build configuration list for PBXNativeTarget "AzureData macOS Tests" */ = {
 			isa = XCConfigurationList;
@@ -1580,7 +1581,7 @@
 				B5223FCB1FB33A9F00D0343F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		B5223FE41FB33B0F00D0343F /* Build configuration list for PBXNativeTarget "AzureData tvOS" */ = {
 			isa = XCConfigurationList;
@@ -1589,7 +1590,7 @@
 				B5223FE61FB33B0F00D0343F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		B5223FE71FB33B0F00D0343F /* Build configuration list for PBXNativeTarget "AzureData tvOS Tests" */ = {
 			isa = XCConfigurationList;
@@ -1598,7 +1599,7 @@
 				B5223FE91FB33B0F00D0343F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		B5223FF41FB33B2600D0343F /* Build configuration list for PBXNativeTarget "AzureData watchOS" */ = {
 			isa = XCConfigurationList;
@@ -1607,7 +1608,7 @@
 				B5223FF61FB33B2600D0343F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		B5F76C331F96A7AF001E8B11 /* Build configuration list for PBXProject "AzureData" */ = {
 			isa = XCConfigurationList;
@@ -1616,7 +1617,7 @@
 				B5F76C4C1F96A7AF001E8B11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		B5F76C4D1F96A7AF001E8B11 /* Build configuration list for PBXNativeTarget "AzureData iOS" */ = {
 			isa = XCConfigurationList;
@@ -1625,7 +1626,7 @@
 				B5F76C4F1F96A7AF001E8B11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		B5F76C501F96A7AF001E8B11 /* Build configuration list for PBXNativeTarget "AzureData iOS Tests" */ = {
 			isa = XCConfigurationList;
@@ -1634,7 +1635,7 @@
 				B5F76C521F96A7AF001E8B11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		B5F76C581F96A848001E8B11 /* Build configuration list for PBXAggregateTarget "CommonCryptoModuleMap" */ = {
 			isa = XCConfigurationList;
@@ -1643,7 +1644,7 @@
 				B5F76C5A1F96A848001E8B11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};

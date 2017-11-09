@@ -31,13 +31,12 @@ class DatabaseTableViewController: UITableViewController {
         segmentedControl.selectedSegmentIndex = UserDefaults.standard.integer(forKey: selectedSegmentIndexKey)
         
         addButton.isEnabled = databasesSelected
-        
-        refreshData()
     }
     
     
     func refreshData(fromUser: Bool = false) {
-        if !fromUser || databasesSelected {
+        
+        if databasesSelected || !fromUser  {
             
             AzureData.databases { r in
                 debugPrint(r.result)
@@ -56,7 +55,7 @@ class DatabaseTableViewController: UITableViewController {
                 }
             }
         }
-        if fromUser || !databasesSelected {
+        if !databasesSelected || !fromUser {
             
             AzureData.offers { r in
                 debugPrint(r.result)
@@ -79,11 +78,9 @@ class DatabaseTableViewController: UITableViewController {
 
     
     @IBAction func segmentedControlValueChanged(_ sender: Any) {
-        //DispatchQueue.main.async {
-            UserDefaults.standard.set(self.segmentedControl.selectedSegmentIndex, forKey: self.selectedSegmentIndexKey)
-            self.addButton.isEnabled = self.databasesSelected
-            self.tableView.reloadData()
-        //}
+        UserDefaults.standard.set(segmentedControl.selectedSegmentIndex, forKey: selectedSegmentIndexKey)
+        addButton.isEnabled = databasesSelected
+        tableView.reloadData()
     }
     
     
@@ -91,6 +88,28 @@ class DatabaseTableViewController: UITableViewController {
     
     
     @IBAction func addButtonTouchUpInside(_ sender: Any) { showNewResourceAlert() }
+    
+    
+    @IBAction func logoutButtonTouchUpInside(_ sender: Any) {
+        
+        presentingAlert = true
+        
+        let alertController = UIAlertController(title: "Clear Database Account", message: "This will remove the stored database account name and key.", preferredStyle: .alert)
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel) { a in self.presentingAlert = false })
+        
+        alertController.addAction(UIAlertAction(title: "Clear", style: .destructive) { a in
+
+            self.offers = []
+            self.databases = []
+
+            self.tableView.reloadData()
+            
+            (UIApplication.shared.delegate as? AppDelegate)?.storeDatabaseAccount(name: nil, key: nil)
+        })
+        
+        present(alertController, animated: true) { }
+    }
     
     
     func showNewResourceAlert() {
@@ -117,6 +136,7 @@ class DatabaseTableViewController: UITableViewController {
                 }
             }
         })
+        
         present(alertController, animated: true) { }
     }
     
@@ -128,7 +148,7 @@ class DatabaseTableViewController: UITableViewController {
         
             presentingAlert = true
             let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel) { a in self.presentingAlert = false })
+            alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel) { a in self.presentingAlert = false })
             present(alertController, animated: true) { }
         }
     }

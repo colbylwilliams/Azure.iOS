@@ -297,3 +297,5 @@ project.lock.json
 *.xcbkptlist
 *.xcuserstate
 *.xcworkspacedata
+
+AzureData Sample/scripts/test-all.sh

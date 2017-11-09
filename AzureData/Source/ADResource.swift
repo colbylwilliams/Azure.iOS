@@ -51,5 +51,6 @@ open class ADResource {
         for i in dictionary {
             print(i)
         }
+        print("")
     }
 }

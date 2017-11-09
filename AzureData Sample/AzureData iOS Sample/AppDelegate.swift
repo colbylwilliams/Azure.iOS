@@ -12,31 +12,54 @@ import AzureData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
+    let databaseAccountNameKey     = "ADDatabaseAccountName"
+    let databaseAccountKeyKey      = "ADDatabaseAccountKey"
+
+    
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
-        // AzureData.setup("<Database Name>", key: "<Database Key>", keyType: .master, verboseLogging: true)
-        
-        if let accountName = Bundle.main.infoDictionary?["ADDatabaseAccountName"] as? String,
-            let accountKey = Bundle.main.infoDictionary?["ADDatabaseAccountKey"]  as? String {
-            AzureData.setup(accountName, key: accountKey, verboseLogging: true)
-        }
-        
         return true
     }
     
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        showApiKeyAlert(application)
+        
+        let accountName = UserDefaults.standard.string(forKey: databaseAccountNameKey)  ?? Bundle.main.infoDictionary?[databaseAccountNameKey]  as? String
+        let accountKey  = UserDefaults.standard.string(forKey: databaseAccountKeyKey)   ?? Bundle.main.infoDictionary?[databaseAccountKeyKey]   as? String
+            
+        storeDatabaseAccount(name: accountName, key: accountKey, andCallSetup: true)
+    }
+    
+
+    func storeDatabaseAccount(name: String?, key: String?, andCallSetup callSetup: Bool = false) {
+        
+        print("storeDatabaseAccount name: \(name ?? "nil") key: \(key ?? "nil")")
+        
+        UserDefaults.standard.set(name, forKey: databaseAccountNameKey)
+        UserDefaults.standard.set(key, forKey: databaseAccountKeyKey)
+
+        if let n = name, let k = key {
+            if callSetup { AzureData.setup(n, key: k) }
+        } else {
+            AzureData.reset()
+        }
+        
+        showApiKeyAlert(UIApplication.shared)
     }
     
     
     func showApiKeyAlert(_ application: UIApplication) {
         
-        if !AzureData.isSetup() {
+        if AzureData.isSetup() {
             
-            let alertController = UIAlertController(title: "Configure App", message: "Enter a Azure Cosmos DB account name and read-write key. Or add the key in code in `didFinishLaunchingWithOptions`", preferredStyle: .alert)
+            if let navController = window?.rootViewController as? UINavigationController, let databaseController = navController.topViewController as? DatabaseTableViewController {
+                databaseController.refreshData()
+            }
+            
+        } else {
+            
+            let alertController = UIAlertController(title: "Configure App", message: "Enter a Azure Cosmos DB account name and read-write key. Or add the key in code in `applicationDidBecomeActive`", preferredStyle: .alert)
             
             alertController.addTextField() { textField in
                 textField.placeholder = "Database Name"
@@ -58,14 +81,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             alertController.addAction(UIAlertAction(title: "Done", style: .default) { a in
                 
-                if let name = alertController.textFields?.first?.text, let key = alertController.textFields?.last?.text {
-                    print("name: \(name)")
-                    print("key: \(key)")
-                    
-                    AzureData.setup(name, key: key, keyType: .master)
-                } else {
-                    self.showApiKeyAlert(application)
-                }
+                self.storeDatabaseAccount(name: alertController.textFields?.first?.text, key: alertController.textFields?.last?.text, andCallSetup: true)
             })
             
             window?.rootViewController?.present(alertController, animated: true) { }

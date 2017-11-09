@@ -16,6 +16,9 @@ public func setup (_ name: String, key: String, keyType: ADTokenType = .master, 
     return SessionManager.default.setup (name, key: key, keyType: keyType, verboseLogging: verboseLogging)
 }
 
+public func reset () {
+    return SessionManager.default.reset()
+}
 
 
 // MARK: - Databases

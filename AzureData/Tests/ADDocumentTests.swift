@@ -21,6 +21,19 @@ class ADDocumentTests: AzureDataTests {
     override func tearDown() { super.tearDown() }
 
     
+    func testHandleDate() {
+        
+        let now = Date()
+        
+        let doc = ADDocument()
+        
+        doc["dateTest"] = now
+        
+        let date = Date(timeIntervalSince1970: doc["dateTest"] as! TimeInterval)
+        
+        XCTAssertEqual (date.timeIntervalSince1970, now.timeIntervalSince1970)
+    }
+    
     func testDocumentCrud() {
         
         var createResponse:     ADResponse<ADDocument>?
@@ -34,7 +47,6 @@ class ADDocumentTests: AzureDataTests {
         
         newDocument[customStringKey] = customStringValue
         newDocument[customNumberKey] = customNumberValue
-        
         
         
         // Create

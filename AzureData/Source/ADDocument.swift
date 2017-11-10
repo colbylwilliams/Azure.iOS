@@ -36,6 +36,7 @@ open class ADDocument: ADResource {
         data = dict.filter{ x in !baseKeys.contains(x.key) }
     }
     
+    
     open override var dictionary: [String : Any] {
         return super.dictionary.merging([
             ADDocument.attachmentsLinkKey:attachmentsLink.valueOrEmpty])
@@ -52,11 +53,17 @@ open class ADDocument: ADResource {
             if newValue == nil { data[key] = newValue; return }
             
             assert(!baseKeys.contains(key), "Error: Subscript cannot be used to set the following system generated properties: \(baseKeys.joined(separator: ", "))\n")
-            assert(newValue is NSString || newValue is NSNumber || newValue is NSNull, "Error: Value for `\(key)` is not a primitive type.  Only primitive types can be stored with subscript.\n")
 
-            //guard !baseKeys.contains(key) else { return }
+            if let date = newValue as? Date {
             
-            data[key] = newValue
+                data[key] = date.timeIntervalSince1970
+            
+            } else {
+                
+                assert(newValue is NSString || newValue is NSNumber || newValue is NSNull, "Error: Value for `\(key)` is not a primitive type.  Only primitive types can be stored with subscript.\n")
+                
+                data[key] = newValue
+            }
         }
     }
 }

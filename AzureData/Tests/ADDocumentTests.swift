@@ -34,6 +34,19 @@ class ADDocumentTests: AzureDataTests {
         XCTAssertEqual (date.timeIntervalSince1970, now.timeIntervalSince1970)
     }
     
+    
+    func testThatCreateValidatesId() {
+        
+        AzureData.create(ADDocument(idWith256Chars), inCollection: collectionId, inDatabase: databaseId) { r in
+            XCTAssertNotNil(r.error)
+        }
+        
+        AzureData.create(ADDocument(idWithWhitespace), inCollection: collectionId, inDatabase: databaseId) { r in
+            XCTAssertNotNil(r.error)
+        }
+    }
+
+    
     func testDocumentCrud() {
         
         var createResponse:     ADResponse<ADDocument>?

@@ -40,6 +40,9 @@ class AzureDataTests: XCTestCase {
     let customNumberKey = "customNumberKey"
     let customNumberValue = 86
     
+    let idWith256Chars = "0123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345"
+    let idWithWhitespace = "id value with spaces"
+
     
     lazy var createExpectation  = self.expectation(description: "should create and return \(rname)")
     lazy var listExpectation    = self.expectation(description: "should return a list of \(rname)")

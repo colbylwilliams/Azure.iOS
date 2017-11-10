@@ -29,6 +29,7 @@ open class SessionManager {
     }
     
     let setupError = ADError("AzureData is not setup.  Must call AzureData.setup() before attempting CRUD operations on resources.")
+    let invalidIdError = ADError("Cosmos DB Resource IDs must not exceed 255 characters and cannot contain whitespace")
     
     public var setup: Bool { return baseUri != nil }
     
@@ -160,6 +161,8 @@ open class SessionManager {
     // create
     public func create (databaseWithId databaseId: String, callback: @escaping (ADResponse<ADDatabase>) -> ()) {
         
+        guard databaseId.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
+        
         let resourceUri = baseUri?.database()
         
         let body = ["id":databaseId]
@@ -202,6 +205,8 @@ open class SessionManager {
     
     // create
     public func create (collectionWithId collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADCollection>) -> ()) {
+        
+        guard collectionId.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
         
         let resourceUri = baseUri?.collection(databaseId)
         
@@ -248,6 +253,8 @@ open class SessionManager {
     // create
     public func create<T: ADDocument> (_ document: T, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<T>) -> ()) {
         
+        guard document.id.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
+        
         let resourceUri = baseUri?.document(inDatabase: databaseId, inCollection: collectionId)
         
         let body = document.dictionary
@@ -260,6 +267,8 @@ open class SessionManager {
     }
 
     public func create<T: ADDocument> (_ document: T, in collection: ADCollection, callback: @escaping (ADResponse<T>) -> ()) {
+        
+        guard document.id.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
         
         let resourceUri = baseUri?.document(atLink: collection.selfLink!)
         
@@ -385,6 +394,8 @@ open class SessionManager {
     // create
     public func create(attachmentWithId attachmentId: String, contentType: String, andMediaUrl mediaUrl: URL, onDocument documentId: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
         
+        guard attachmentId.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
+        
         let resourceUri = baseUri?.attachment(databaseId, collectionId: collectionId, documentId: documentId)
         
         let body = ADAttachment.jsonDict(attachmentId, contentType: contentType, media: mediaUrl)
@@ -398,6 +409,8 @@ open class SessionManager {
 
     public func create(attachmentWithId attachmentId: String, contentType: String, name mediaName: String, with media: Data, onDocument documentId: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
         
+        guard attachmentId.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
+        
         let resourceUri = baseUri?.attachment(databaseId, collectionId: collectionId, documentId: documentId)
         
         let headers: [String:ADHttpRequestHeader] = [ contentType:.contentType, mediaName: .slug ]
@@ -406,6 +419,8 @@ open class SessionManager {
     }
 
     public func create(attachmentWithId attachmentId: String, contentType: String, andMediaUrl mediaUrl: URL, onDocument document: ADDocument, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+        
+        guard attachmentId.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
         
         let resourceUri = baseUri?.attachment(atLink: document.selfLink!)
         
@@ -419,6 +434,8 @@ open class SessionManager {
     }
     
     public func create(attachmentWithId attachmentId: String, contentType: String, name mediaName: String, with media: Data, onDocument document: ADDocument, callback: @escaping (ADResponse<ADAttachment>) -> ()) {
+        
+        guard attachmentId.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
         
         let resourceUri = baseUri?.attachment(atLink: document.selfLink!)
         
@@ -511,6 +528,8 @@ open class SessionManager {
     // create
     public func create (storedProcedureWithId storedProcedureId: String, andBody procedure: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADStoredProcedure>) -> ()) {
         
+        guard storedProcedureId.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
+        
         let resourceUri = baseUri?.storedProcedure(databaseId, collectionId: collectionId)
         
         let body = ["id":storedProcedureId, "body":procedure]
@@ -523,6 +542,8 @@ open class SessionManager {
     }
 
     public func create (storedProcedureWithId storedProcedureId: String, andBody procedure: String, in collection: ADCollection, callback: @escaping (ADResponse<ADStoredProcedure>) -> ()) {
+        
+        guard storedProcedureId.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
         
         let resourceUri = baseUri?.storedProcedure(atLink: collection.selfLink!)
         
@@ -629,6 +650,8 @@ open class SessionManager {
     // create
     public func create (userDefinedFunctionWithId functionId: String, andBody function: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADUserDefinedFunction>) -> ()) {
         
+        guard functionId.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
+        
         let resourceUri = baseUri?.udf(databaseId, collectionId: collectionId)
         
         let body = ["id":functionId, "body":function]
@@ -641,6 +664,8 @@ open class SessionManager {
     }
 
     public func create (userDefinedFunctionWithId functionId: String, andBody function: String, in collection: ADCollection, callback: @escaping (ADResponse<ADUserDefinedFunction>) -> ()) {
+        
+        guard functionId.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
         
         let resourceUri = baseUri?.udf(atLink: collection.selfLink!, withResourceId: functionId)
         
@@ -726,6 +751,8 @@ open class SessionManager {
     
     fileprivate func createTrigger (resourceUri: (URL, String)?, triggerId: String, body triggerBody: String, operation: ADTriggerOperation, type triggerType: ADTriggerType, callback: @escaping (ADResponse<ADTrigger>) -> ()) {
         
+        guard triggerId.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
+        
         let body = ADTrigger.jsonDict(triggerId, body: triggerBody, operation: operation, type: triggerType)
         
         guard JSONSerialization.isValidJSONObject(body), let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else {
@@ -793,6 +820,8 @@ open class SessionManager {
     // create
     public func create (userWithId userId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADUser>) -> ()) {
         
+        guard userId.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
+        
         let resourceUri = baseUri?.user(databaseId)
         
         let body = ["id":userId]
@@ -831,6 +860,8 @@ open class SessionManager {
     // replace
     public func replace (userWithId userId: String, with newUserId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADUser>) -> ()) {
         
+        guard newUserId.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
+        
         let resourceUri = baseUri?.user(databaseId, userId: userId)
         
         let body = ["id":newUserId]
@@ -851,6 +882,8 @@ open class SessionManager {
     // create
     public func create (permissionWithId permissionId: String, mode permissionMode: ADPermissionMode, in resource: ADResource, forUser userId: String, inDatabase databaseId: String, callback: @escaping (ADResponse<ADPermission>) -> ()) {
         
+        guard permissionId.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
+        
         let resourceUri = baseUri?.permission(databaseId, userId: userId)
 
         let body = ["id":permissionId, "permissionMode": permissionMode.rawValue, "resource":resource.selfLink!]
@@ -863,6 +896,8 @@ open class SessionManager {
     }
 
     public func create (permissionWithId permissionId: String, mode permissionMode: ADPermissionMode, in resource: ADResource, forUser user: ADUser, callback: @escaping (ADResponse<ADPermission>) -> ()) {
+        
+        guard permissionId.isValidResourceId else { callback(ADResponse(invalidIdError)); return }
         
         let resourceUri = baseUri?.permission(atLink: user.selfLink!, withResourceId: permissionId)
         
@@ -1198,4 +1233,6 @@ open class SessionManager {
         
         return request
     }
+    
+    
 }

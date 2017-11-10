@@ -20,6 +20,18 @@ class ADUserDefinedFunctionTests: AzureDataTests {
 
     override func tearDown() { super.tearDown() }
     
+    
+    func testThatCreateValidatesId() {
+    
+        AzureData.create (userDefinedFunctionWithId: idWith256Chars, andBody: "", inCollection: collectionId, inDatabase: databaseId) { r in
+            XCTAssertNotNil(r.error)
+        }
+
+        AzureData.create (userDefinedFunctionWithId: idWithWhitespace, andBody: "", inCollection: collectionId, inDatabase: databaseId) { r in
+            XCTAssertNotNil(r.error)
+        }
+    }
+    
     //func testUserDefinedFunctionCrud() {
 
         //var createResponse:     ADResponse<ADUserDefinedFunction>?

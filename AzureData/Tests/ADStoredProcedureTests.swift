@@ -20,6 +20,19 @@ class ADStoredProcedureTests: AzureDataTests {
     
     override func tearDown() { super.tearDown() }
     
+    
+    func testThatCreateValidatesId() {
+        
+        AzureData.create (storedProcedureWithId: idWith256Chars, andBody: "", inCollection: collectionId, inDatabase: databaseId) { r in
+            XCTAssertNotNil(r.error)
+        }
+        
+        AzureData.create (storedProcedureWithId: idWithWhitespace, andBody: "", inCollection: collectionId, inDatabase: databaseId) { r in
+            XCTAssertNotNil(r.error)
+        }
+    }
+
+    
     //func testStoredProcedureCrud() {
     
     //var createResponse:     ADResponse<ADStoredProcedure>?

@@ -1,5 +1,5 @@
 //
-//  ADTokenProvider.swift
+//  TokenProvider.swift
 //  AzureData
 //
 //  Created by Colby Williams on 10/17/17.
@@ -10,16 +10,16 @@ import Foundation
 import CommonCrypto
 
 
-public enum ADTokenType: String {
+public enum TokenType: String {
     case master = "master"
     case resource = "resource"
 }
 
-public enum ADTokenError : Error {
+public enum TokenError : Error {
     case base64KeyError
 }
 
-public class ADTokenProvider {
+public class TokenProvider {
     
     let key: String
     let keyType: String
@@ -35,14 +35,14 @@ public class ADTokenProvider {
         return formatter
     }()
     
-    public init(key k: String, keyType type: ADTokenType = .master, tokenVersion version: String = "1.0") {
+    public init(key k: String, keyType type: TokenType = .master, tokenVersion version: String = "1.0") {
         key = k
         keyType = type.rawValue
         tokenVersion = version
     }
     
     // https://docs.microsoft.com/en-us/rest/api/documentdb/access-control-on-documentdb-resources#constructkeytoken
-    public func getToken(verb v: ADHttpMethod, resourceType type: ADResourceType, resourceLink link: String) -> (String, String) {
+    public func getToken(verb v: HttpMethod, resourceType type: ResourceType, resourceLink link: String) -> (String, String) {
         
         let verb = v.rawValue
         let resourceType = type.rawValue
@@ -64,7 +64,7 @@ public class ADTokenProvider {
     }
     
     
-    public func getToken<T:CodableResource>(_ type: T.Type = T.self, verb v: ADHttpMethod, resourceLink link: String) -> (String, String) {
+    public func getToken<T:CodableResource>(_ type: T.Type = T.self, verb v: HttpMethod, resourceLink link: String) -> (String, String) {
         
         let verb = v.rawValue
         let resourceType = type.type

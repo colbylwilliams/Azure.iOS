@@ -1,5 +1,5 @@
 //
-//  ADResourceUri.swift
+//  ResourceUri.swift
 //  AzureData
 //
 //  Created by Colby Williams on 10/19/17.
@@ -9,7 +9,7 @@
 import Foundation
 
 // https://docs.microsoft.com/en-us/rest/api/documentdb/documentdb-resource-uri-syntax-for-rest
-public struct ADResourceUri {
+public struct ResourceUri {
     let empty = ""
     
     let baseUri: String
@@ -116,7 +116,7 @@ public struct ADResourceUri {
     }
 
     
-    fileprivate func getItemLink(forType type: ADResourceType, baseLink: String, resourceId: String?) -> String {
+    fileprivate func getItemLink(forType type: ResourceType, baseLink: String, resourceId: String?) -> String {
         
         let fragment = resourceId.isNilOrEmpty ? empty : "/\(resourceId!)"
         

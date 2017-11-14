@@ -11,7 +11,7 @@ import Foundation
 public typealias HTTPHeaders = [String: String]
 
 // https://docs.microsoft.com/en-us/rest/api/documentdb/http-status-codes-for-documentdb
-public enum ADStatusCode : Int {
+public enum StatusCode : Int {
     case ok                     = 200
     case created                = 201
     case noContent              = 204
@@ -29,7 +29,7 @@ public enum ADStatusCode : Int {
     case serviceUnavailable     = 503
 }
 
-public enum ADHttpMethod : String {
+public enum HttpMethod : String {
     case get     = "GET"
     case head    = "HEAD"
     case post    = "POST"
@@ -38,7 +38,7 @@ public enum ADHttpMethod : String {
 }
 
 // https://docs.microsoft.com/en-us/rest/api/documentdb/common-documentdb-rest-request-headers
-public enum ADHttpRequestHeader {
+public enum HttpRequestHeader {
     case authorization
     case contentType
     case ifMatch
@@ -97,7 +97,7 @@ public enum ADHttpRequestHeader {
     }
 }
 
-extension Dictionary where Key == ADHttpRequestHeader, Value == String  {
+extension Dictionary where Key == HttpRequestHeader, Value == String  {
     var strings: [String:String] {
         return Dictionary<String, String>.init(uniqueKeysWithValues: self.map{ (k, v) in
             (k.key, v)
@@ -107,19 +107,19 @@ extension Dictionary where Key == ADHttpRequestHeader, Value == String  {
 
 
 // https://docs.microsoft.com/en-us/rest/api/documentdb/common-documentdb-rest-response-headers
-public enum ADResponseHeader {
+public enum ResponseHeader {
     
 }
 
 
 extension URLRequest {
-    mutating func addValue(_ value: String, forHTTPHeaderField: ADHttpRequestHeader) {
+    mutating func addValue(_ value: String, forHTTPHeaderField: HttpRequestHeader) {
         self.addValue(value, forHTTPHeaderField: forHTTPHeaderField.key)
     }
     
-    var method: ADHttpMethod? {
+    var method: HttpMethod? {
         get {
-            if let m = self.httpMethod, let adM = ADHttpMethod(rawValue: m) {
+            if let m = self.httpMethod, let adM = HttpMethod(rawValue: m) {
                 return adM
             }
             return nil
@@ -129,17 +129,3 @@ extension URLRequest {
         }
     }
 }
-
-
-//enum AMResourceUri {
-//    case database(String, String)                           //= "https://{databaseaccount}.documents.azure.com/dbs/{db}"
-//    case user(String, String, String)                       //= "https://{databaseaccount}.documents.azure.com/dbs/{db}/users/{user}"
-//    case permission(String, String, String, String)         //= "https://{databaseaccount}.documents.azure.com/dbs/{db}/users/{user}/permissions/{perm}"
-//    case collection(String, String, String)                 //= "https://{databaseaccount}.documents.azure.com/dbs/{db}/colls/{coll}"
-//    case storedProcedure(String, String, String, String)    //= "https://{databaseaccount}.documents.azure.com/dbs/{db}/colls/{coll}/sprocs/{sproc}"
-//    case trigger(String, String, String, String)            //= "https://{databaseaccount}.documents.azure.com/dbs/{db}/colls/{coll}/triggers/{trigger}"
-//    case udf(String, String, String, String)                //= "https://{databaseaccount}.documents.azure.com/dbs/{db}/colls/{coll}/udfs/{udf}"
-//    case document(String, String, String, String)           //= "https://{databaseaccount}.documents.azure.com/dbs/{db}/colls/{coll}/docs/{doc}"
-//    case attachment(String, String, String, String, String) //= "https://{databaseaccount}.documents.azure.com/dbs/{db}/colls/{coll}/docs/{doc}/attachments/{attch}"
-//    case offer(String, String)                              //= "https://{databaseaccount}.documents.azure.com/offers/{offer}"
-//}

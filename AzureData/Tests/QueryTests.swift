@@ -1,5 +1,5 @@
 //
-//  ADQueryTests.swift
+//  QueryTests.swift
 //  AzureDataTests
 //
 //  Created by Colby Williams on 11/6/17.
@@ -9,7 +9,7 @@
 //import XCTest
 //@testable import AzureData
 //
-//class ADQueryTests: AzureDataTests {
+//class QueryTests: AzureDataTests {
 //    
 //    override func setUp() { super.setUp() }
 //    

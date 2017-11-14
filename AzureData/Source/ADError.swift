@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class ADError: Error /*:ADResource*/ {
+public class ADError: Error {
 
     let codeKey     = "code"
     let messageKey  = "message"

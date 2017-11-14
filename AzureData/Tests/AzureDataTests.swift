@@ -22,7 +22,7 @@ class AzureDataTests: XCTestCase {
     fileprivate(set) var document:  Document?
     
     var resourceName: String?
-    var resourceType: ADResourceType!
+    var resourceType: ResourceType!
     
     var rname: String { return resourceName ?? resourceType.name }
     

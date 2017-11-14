@@ -13,7 +13,7 @@ public func isSetup() -> Bool { return DocumentClient.default.setup }
 
 
 // setup
-public func setup (_ name: String, key: String, keyType: ADTokenType = .master, verboseLogging: Bool = false) {
+public func setup (_ name: String, key: String, keyType: TokenType = .master, verboseLogging: Bool = false) {
     return DocumentClient.default.setup (name, key: key, keyType: keyType, verboseLogging: verboseLogging)
 }
 

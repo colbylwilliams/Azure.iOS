@@ -1,5 +1,5 @@
 //
-//  ADResourceType.swift
+//  ResourceType.swift
 //  AzureData
 //
 //  Created by Colby Williams on 10/19/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum ADResourceType : String {
+public enum ResourceType : String {
     case database               = "dbs"
     case user                   = "users"
     case permission             = "permissions"

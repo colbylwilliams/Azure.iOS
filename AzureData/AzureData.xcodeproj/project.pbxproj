@@ -91,29 +91,29 @@
 		B522408D1FB33DFA00D0343F /* OfferTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522404C1FB33D1200D0343F /* OfferTests.swift */; };
 		B522408E1FB33DFA00D0343F /* DocumentAttachmentExtensionsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522404D1FB33D1200D0343F /* DocumentAttachmentExtensionsTests.swift */; };
 		B52240911FB3407900D0343F /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240191FB33CD000D0343F /* NetworkReachabilityManager.swift */; };
-		B52240921FB3407900D0343F /* ADTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401A1FB33CD000D0343F /* ADTokenProvider.swift */; };
+		B52240921FB3407900D0343F /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401A1FB33CD000D0343F /* TokenProvider.swift */; };
 		B52240931FB3407900D0343F /* AzureDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */; };
 		B52240941FB3407C00D0343F /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240191FB33CD000D0343F /* NetworkReachabilityManager.swift */; };
-		B52240951FB3407C00D0343F /* ADTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401A1FB33CD000D0343F /* ADTokenProvider.swift */; };
+		B52240951FB3407C00D0343F /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401A1FB33CD000D0343F /* TokenProvider.swift */; };
 		B52240961FB3407C00D0343F /* AzureDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */; };
 		B52240971FB3407D00D0343F /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240191FB33CD000D0343F /* NetworkReachabilityManager.swift */; };
-		B52240981FB3407D00D0343F /* ADTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401A1FB33CD000D0343F /* ADTokenProvider.swift */; };
+		B52240981FB3407D00D0343F /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401A1FB33CD000D0343F /* TokenProvider.swift */; };
 		B52240991FB3407D00D0343F /* AzureDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */; };
 		B522409A1FB3407E00D0343F /* NetworkReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240191FB33CD000D0343F /* NetworkReachabilityManager.swift */; };
-		B522409B1FB3407E00D0343F /* ADTokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401A1FB33CD000D0343F /* ADTokenProvider.swift */; };
+		B522409B1FB3407E00D0343F /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401A1FB33CD000D0343F /* TokenProvider.swift */; };
 		B522409C1FB3407E00D0343F /* AzureDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */; };
-		B522409D1FB3408E00D0343F /* ADResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401D1FB33CD000D0343F /* ADResourceType.swift */; };
+		B522409D1FB3408E00D0343F /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401D1FB33CD000D0343F /* ResourceType.swift */; };
 		B52240A21FB3408E00D0343F /* ADError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240221FB33CD000D0343F /* ADError.swift */; };
-		B52240A81FB3408E00D0343F /* ADResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240281FB33CD000D0343F /* ADResourceUri.swift */; };
-		B52240B21FB3409000D0343F /* ADResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401D1FB33CD000D0343F /* ADResourceType.swift */; };
+		B52240A81FB3408E00D0343F /* ResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240281FB33CD000D0343F /* ResourceUri.swift */; };
+		B52240B21FB3409000D0343F /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401D1FB33CD000D0343F /* ResourceType.swift */; };
 		B52240B71FB3409000D0343F /* ADError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240221FB33CD000D0343F /* ADError.swift */; };
-		B52240BD1FB3409000D0343F /* ADResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240281FB33CD000D0343F /* ADResourceUri.swift */; };
-		B52240C71FB3409100D0343F /* ADResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401D1FB33CD000D0343F /* ADResourceType.swift */; };
+		B52240BD1FB3409000D0343F /* ResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240281FB33CD000D0343F /* ResourceUri.swift */; };
+		B52240C71FB3409100D0343F /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401D1FB33CD000D0343F /* ResourceType.swift */; };
 		B52240CC1FB3409100D0343F /* ADError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240221FB33CD000D0343F /* ADError.swift */; };
-		B52240D21FB3409100D0343F /* ADResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240281FB33CD000D0343F /* ADResourceUri.swift */; };
-		B52240DC1FB3409200D0343F /* ADResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401D1FB33CD000D0343F /* ADResourceType.swift */; };
+		B52240D21FB3409100D0343F /* ResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240281FB33CD000D0343F /* ResourceUri.swift */; };
+		B52240DC1FB3409200D0343F /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401D1FB33CD000D0343F /* ResourceType.swift */; };
 		B52240E11FB3409200D0343F /* ADError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240221FB33CD000D0343F /* ADError.swift */; };
-		B52240E71FB3409200D0343F /* ADResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240281FB33CD000D0343F /* ADResourceUri.swift */; };
+		B52240E71FB3409200D0343F /* ResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240281FB33CD000D0343F /* ResourceUri.swift */; };
 		B52240F71FB3409D00D0343F /* AzureData.h in Headers */ = {isa = PBXBuildFile; fileRef = B52240331FB33CD000D0343F /* AzureData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B52240F81FB3409D00D0343F /* AzureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240341FB33CD000D0343F /* AzureData.swift */; };
 		B52240FA1FB3409D00D0343F /* ADHttp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240361FB33CD000D0343F /* ADHttp.swift */; };
@@ -265,11 +265,11 @@
 		B5223FDB1FB33B0F00D0343F /* AzureData tvOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AzureData tvOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5223FEF1FB33B2600D0343F /* AzureData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AzureData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B52240191FB33CD000D0343F /* NetworkReachabilityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkReachabilityManager.swift; sourceTree = "<group>"; };
-		B522401A1FB33CD000D0343F /* ADTokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADTokenProvider.swift; sourceTree = "<group>"; };
+		B522401A1FB33CD000D0343F /* TokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenProvider.swift; sourceTree = "<group>"; };
 		B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureDataExtensions.swift; sourceTree = "<group>"; };
-		B522401D1FB33CD000D0343F /* ADResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResourceType.swift; sourceTree = "<group>"; };
+		B522401D1FB33CD000D0343F /* ResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceType.swift; sourceTree = "<group>"; };
 		B52240221FB33CD000D0343F /* ADError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADError.swift; sourceTree = "<group>"; };
-		B52240281FB33CD000D0343F /* ADResourceUri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADResourceUri.swift; sourceTree = "<group>"; };
+		B52240281FB33CD000D0343F /* ResourceUri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceUri.swift; sourceTree = "<group>"; };
 		B52240331FB33CD000D0343F /* AzureData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AzureData.h; sourceTree = "<group>"; };
 		B52240341FB33CD000D0343F /* AzureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureData.swift; sourceTree = "<group>"; };
 		B52240361FB33CD000D0343F /* ADHttp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADHttp.swift; sourceTree = "<group>"; };
@@ -377,15 +377,15 @@
 		B52240181FB33CD000D0343F /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				B58361991FB779B6001CEC66 /* Response.swift */,
-				B583619E1FB78763001CEC66 /* DocumentClient.swift */,
-				B58361B71FBA1339001CEC66 /* Resources */,
 				B52240341FB33CD000D0343F /* AzureData.swift */,
+				B5B6AC281FBA84C400B93106 /* CodableDictionary.swift */,
+				B583619E1FB78763001CEC66 /* DocumentClient.swift */,
+				B5B6AC231FBA4B3900B93106 /* Query.swift */,
+				B58361991FB779B6001CEC66 /* Response.swift */,
 				B55AEFE61FB34CF600F7BEED /* Domain */,
 				B55AEFE51FB34C5400F7BEED /* Extensions */,
+				B58361B71FBA1339001CEC66 /* Resources */,
 				B55AEFDF1FB34B7400F7BEED /* Supporting Files */,
-				B5B6AC231FBA4B3900B93106 /* Query.swift */,
-				B5B6AC281FBA84C400B93106 /* CodableDictionary.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -465,9 +465,9 @@
 			children = (
 				B52240221FB33CD000D0343F /* ADError.swift */,
 				B52240361FB33CD000D0343F /* ADHttp.swift */,
-				B522401D1FB33CD000D0343F /* ADResourceType.swift */,
-				B52240281FB33CD000D0343F /* ADResourceUri.swift */,
-				B522401A1FB33CD000D0343F /* ADTokenProvider.swift */,
+				B522401D1FB33CD000D0343F /* ResourceType.swift */,
+				B52240281FB33CD000D0343F /* ResourceUri.swift */,
+				B522401A1FB33CD000D0343F /* TokenProvider.swift */,
 				B52240191FB33CD000D0343F /* NetworkReachabilityManager.swift */,
 			);
 			name = Domain;
@@ -489,16 +489,16 @@
 				B58361B81FBA1384001CEC66 /* CodableResource.swift */,
 				B58361EF1FBA19A7001CEC66 /* Account.swift */,
 				B58361CC1FBA1439001CEC66 /* Attachment.swift */,
-				B58361C21FBA13B0001CEC66 /* DocumentCollection.swift */,
+				B507D4F01FBB722000B2D18D /* Conflict.swift */,
 				B58361C71FBA13D8001CEC66 /* Database.swift */,
 				B58361BD1FBA13A0001CEC66 /* Document.swift */,
+				B58361C21FBA13B0001CEC66 /* DocumentCollection.swift */,
 				B58361D11FBA15A8001CEC66 /* Offer.swift */,
 				B58361D61FBA16F9001CEC66 /* Permission.swift */,
 				B58361DB1FBA17B5001CEC66 /* StoredProcedure.swift */,
 				B58361E01FBA17C8001CEC66 /* Trigger.swift */,
 				B58361E51FBA17D8001CEC66 /* User.swift */,
 				B58361EA1FBA17E8001CEC66 /* UserDefinedFunction.swift */,
-				B507D4F01FBB722000B2D18D /* Conflict.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -856,14 +856,14 @@
 				B52240941FB3407C00D0343F /* NetworkReachabilityManager.swift in Sources */,
 				B52240B71FB3409000D0343F /* ADError.swift in Sources */,
 				B58361CE1FBA1439001CEC66 /* Attachment.swift in Sources */,
-				B52240951FB3407C00D0343F /* ADTokenProvider.swift in Sources */,
+				B52240951FB3407C00D0343F /* TokenProvider.swift in Sources */,
 				B58361B31FB78F7A001CEC66 /* Resources.swift in Sources */,
 				B58361D81FBA16F9001CEC66 /* Permission.swift in Sources */,
 				B58361C41FBA13B0001CEC66 /* DocumentCollection.swift in Sources */,
 				B5B6AC251FBA4B3900B93106 /* Query.swift in Sources */,
 				B58361B41FB78F7A001CEC66 /* Response.swift in Sources */,
 				B52241021FB3409F00D0343F /* AzureData.swift in Sources */,
-				B52240B21FB3409000D0343F /* ADResourceType.swift in Sources */,
+				B52240B21FB3409000D0343F /* ResourceType.swift in Sources */,
 				B58361F11FBA19A7001CEC66 /* Account.swift in Sources */,
 				B58361E71FBA17D8001CEC66 /* User.swift in Sources */,
 				B52241051FB3409F00D0343F /* UtilityExtensions.swift in Sources */,
@@ -876,7 +876,7 @@
 				B52240961FB3407C00D0343F /* AzureDataExtensions.swift in Sources */,
 				B58361BA1FBA1385001CEC66 /* CodableResource.swift in Sources */,
 				B58361A71FB78F73001CEC66 /* DocumentClient.swift in Sources */,
-				B52240BD1FB3409000D0343F /* ADResourceUri.swift in Sources */,
+				B52240BD1FB3409000D0343F /* ResourceUri.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -918,14 +918,14 @@
 				B52240971FB3407D00D0343F /* NetworkReachabilityManager.swift in Sources */,
 				B52240CC1FB3409100D0343F /* ADError.swift in Sources */,
 				B58361CF1FBA1439001CEC66 /* Attachment.swift in Sources */,
-				B52240981FB3407D00D0343F /* ADTokenProvider.swift in Sources */,
+				B52240981FB3407D00D0343F /* TokenProvider.swift in Sources */,
 				B58361AE1FB78F7A001CEC66 /* Resources.swift in Sources */,
 				B58361D91FBA16F9001CEC66 /* Permission.swift in Sources */,
 				B58361C51FBA13B0001CEC66 /* DocumentCollection.swift in Sources */,
 				B5B6AC261FBA4B3900B93106 /* Query.swift in Sources */,
 				B58361AF1FB78F7A001CEC66 /* Response.swift in Sources */,
 				B52240FD1FB3409E00D0343F /* AzureData.swift in Sources */,
-				B52240C71FB3409100D0343F /* ADResourceType.swift in Sources */,
+				B52240C71FB3409100D0343F /* ResourceType.swift in Sources */,
 				B58361F21FBA19A7001CEC66 /* Account.swift in Sources */,
 				B58361E81FBA17D8001CEC66 /* User.swift in Sources */,
 				B52241001FB3409E00D0343F /* UtilityExtensions.swift in Sources */,
@@ -938,7 +938,7 @@
 				B52240991FB3407D00D0343F /* AzureDataExtensions.swift in Sources */,
 				B58361BB1FBA1385001CEC66 /* CodableResource.swift in Sources */,
 				B58361A61FB78F73001CEC66 /* DocumentClient.swift in Sources */,
-				B52240D21FB3409100D0343F /* ADResourceUri.swift in Sources */,
+				B52240D21FB3409100D0343F /* ResourceUri.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -980,14 +980,14 @@
 				B522409A1FB3407E00D0343F /* NetworkReachabilityManager.swift in Sources */,
 				B52240E11FB3409200D0343F /* ADError.swift in Sources */,
 				B58361D01FBA1439001CEC66 /* Attachment.swift in Sources */,
-				B522409B1FB3407E00D0343F /* ADTokenProvider.swift in Sources */,
+				B522409B1FB3407E00D0343F /* TokenProvider.swift in Sources */,
 				B58361A91FB78F78001CEC66 /* Resources.swift in Sources */,
 				B58361DA1FBA16F9001CEC66 /* Permission.swift in Sources */,
 				B58361C61FBA13B0001CEC66 /* DocumentCollection.swift in Sources */,
 				B5B6AC271FBA4B3900B93106 /* Query.swift in Sources */,
 				B58361AA1FB78F78001CEC66 /* Response.swift in Sources */,
 				B52240F81FB3409D00D0343F /* AzureData.swift in Sources */,
-				B52240DC1FB3409200D0343F /* ADResourceType.swift in Sources */,
+				B52240DC1FB3409200D0343F /* ResourceType.swift in Sources */,
 				B58361F31FBA19A7001CEC66 /* Account.swift in Sources */,
 				B58361E91FBA17D8001CEC66 /* User.swift in Sources */,
 				B52240FB1FB3409D00D0343F /* UtilityExtensions.swift in Sources */,
@@ -1000,7 +1000,7 @@
 				B522409C1FB3407E00D0343F /* AzureDataExtensions.swift in Sources */,
 				B58361BC1FBA1385001CEC66 /* CodableResource.swift in Sources */,
 				B58361A51FB78F71001CEC66 /* DocumentClient.swift in Sources */,
-				B52240E71FB3409200D0343F /* ADResourceUri.swift in Sources */,
+				B52240E71FB3409200D0343F /* ResourceUri.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1014,7 +1014,7 @@
 				B52240911FB3407900D0343F /* NetworkReachabilityManager.swift in Sources */,
 				B52240A21FB3408E00D0343F /* ADError.swift in Sources */,
 				B58361CD1FBA1439001CEC66 /* Attachment.swift in Sources */,
-				B52240921FB3407900D0343F /* ADTokenProvider.swift in Sources */,
+				B52240921FB3407900D0343F /* TokenProvider.swift in Sources */,
 				B58361D71FBA16F9001CEC66 /* Permission.swift in Sources */,
 				B58361C31FBA13B0001CEC66 /* DocumentCollection.swift in Sources */,
 				B583619A1FB779B6001CEC66 /* Response.swift in Sources */,
@@ -1022,7 +1022,7 @@
 				B583619D1FB77A70001CEC66 /* Resources.swift in Sources */,
 				B52241071FB3409F00D0343F /* AzureData.swift in Sources */,
 				B58361F01FBA19A7001CEC66 /* Account.swift in Sources */,
-				B522409D1FB3408E00D0343F /* ADResourceType.swift in Sources */,
+				B522409D1FB3408E00D0343F /* ResourceType.swift in Sources */,
 				B58361E61FBA17D8001CEC66 /* User.swift in Sources */,
 				B58361EB1FBA17E8001CEC66 /* UserDefinedFunction.swift in Sources */,
 				B58361BE1FBA13A0001CEC66 /* Document.swift in Sources */,
@@ -1034,7 +1034,7 @@
 				B583619F1FB78763001CEC66 /* DocumentClient.swift in Sources */,
 				B58361B91FBA1385001CEC66 /* CodableResource.swift in Sources */,
 				B52240931FB3407900D0343F /* AzureDataExtensions.swift in Sources */,
-				B52240A81FB3408E00D0343F /* ADResourceUri.swift in Sources */,
+				B52240A81FB3408E00D0343F /* ResourceUri.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

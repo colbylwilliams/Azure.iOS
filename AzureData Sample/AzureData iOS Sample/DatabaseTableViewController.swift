@@ -16,8 +16,8 @@ class DatabaseTableViewController: UITableViewController {
     @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
-    var offers: [ADOffer] = []
-    var databases: [ADDatabase] = []
+    var offers: [Offer] = []
+    var databases: [Database] = []
     
     
     var databasesSelected: Bool {
@@ -165,7 +165,7 @@ class DatabaseTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resourceCell", for: indexPath)
         
-        let resource: ADResource = databasesSelected ? databases[indexPath.row] : offers[indexPath.row]
+        let resource: CodableResource = databasesSelected ? databases[indexPath.row] : offers[indexPath.row]
         
         cell.textLabel?.text = resource.id
         cell.detailTextLabel?.text = resource.resourceId
@@ -182,7 +182,6 @@ class DatabaseTableViewController: UITableViewController {
             if dbSelected {
                 AzureData.get(databaseWithId: self.databases[indexPath.row].id) { r in
                     debugPrint(r.result)
-                    r.resource?.printLog()
                     DispatchQueue.main.async {
                         tableView.reloadRows(at: [indexPath], with: .automatic)
                         callback(false)
@@ -209,13 +208,13 @@ class DatabaseTableViewController: UITableViewController {
         if !databasesSelected { return UISwipeActionsConfiguration.init(actions: [])}
         
         let action = UIContextualAction.init(style: .destructive, title: "Delete") { (action, view, callback) in
-            AzureData.delete(self.databases[indexPath.row]) { success in
+            AzureData.delete(self.databases[indexPath.row]) { r in
                 DispatchQueue.main.async {
-                    if success {
+                    if r.result.isSuccess {
                         self.databases.remove(at: indexPath.row)
                         tableView.deleteRows(at: [indexPath], with: .automatic)
                     }
-                    callback(success)
+                    callback(r.result.isSuccess)
                 }
             }
         }
@@ -225,8 +224,8 @@ class DatabaseTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete && databasesSelected {
-            AzureData.delete(self.databases[indexPath.row]) { success in
-                if success {
+            AzureData.delete(self.databases[indexPath.row]) { r in
+                if r.result.isSuccess {
                     self.databases.remove(at: indexPath.row)
                     DispatchQueue.main.async { tableView.deleteRows(at: [indexPath], with: .automatic) }
                 }

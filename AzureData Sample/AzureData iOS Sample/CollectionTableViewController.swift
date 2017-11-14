@@ -16,10 +16,10 @@ class CollectionTableViewController: UITableViewController {
     @IBOutlet var addButton: UIBarButtonItem!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
-    var database: ADDatabase!
+    var database: Database!
     
-    var users: [ADUser] = []
-    var collections: [ADCollection] = []
+    var users: [User] = []
+    var collections: [DocumentCollection] = []
     
     var collectionsSelected: Bool {
         return segmentedControl.selectedSegmentIndex == 0
@@ -152,7 +152,7 @@ class CollectionTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "resourceCell", for: indexPath)
 
-        let resource: ADResource = collectionsSelected ? collections[indexPath.row] : users[indexPath.row]
+        let resource: CodableResource = collectionsSelected ? collections[indexPath.row] : users[indexPath.row]
         
         cell.textLabel?.text = resource.id
         cell.detailTextLabel?.text = resource.resourceId
@@ -169,7 +169,6 @@ class CollectionTableViewController: UITableViewController {
                     DispatchQueue.main.async {
                         if r.result.isSuccess {
                             debugPrint(r.result)
-                            r.resource?.printLog()
                             tableView.reloadRows(at: [indexPath], with: .automatic)
                             callback(false)
                         } else if let error = r.error {
@@ -219,24 +218,24 @@ class CollectionTableViewController: UITableViewController {
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
         if collectionsSelected {
 
-            database.delete(collections[indexPath.row]) { success in
+            database.delete(collections[indexPath.row]) { r in
                 DispatchQueue.main.async {
-                    if success {
+                    if r.result.isSuccess {
                         self.collections.remove(at: indexPath.row)
                         tableView.deleteRows(at: [indexPath], with: .automatic)
                     }
-                    callback?(success)
+                    callback?(r.result.isSuccess)
                 }
             }
         } else {
             
-            database.delete(users[indexPath.row]) { success in
+            database.delete(users[indexPath.row]) { r in
                 DispatchQueue.main.async {
-                    if success {
+                    if r.result.isSuccess {
                         self.users.remove(at: indexPath.row)
                         tableView.deleteRows(at: [indexPath], with: .automatic)
                     }
-                    callback?(success)
+                    callback?(r.result.isSuccess)
                 }
             }
         }

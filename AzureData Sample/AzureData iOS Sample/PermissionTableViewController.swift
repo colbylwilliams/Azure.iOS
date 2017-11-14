@@ -13,11 +13,11 @@ class PermissionTableViewController: UITableViewController {
 
     @IBOutlet weak var addButton: UIBarButtonItem!
     
-    var user: ADUser!
-    var collection: ADCollection!
-    var database: ADDatabase!
+    var user: User!
+    var collection: DocumentCollection!
+    var database: Database!
     
-    var permissions: [ADPermission] = []
+    var permissions: [Permission] = []
     
     
     override func viewDidLoad() {
@@ -149,13 +149,13 @@ class PermissionTableViewController: UITableViewController {
 
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
-        AzureData.delete(permissions[indexPath.row], forUser: user.id, inDatabase: database.id) { success in
+        AzureData.delete(permissions[indexPath.row], forUser: user.id, inDatabase: database.id) { r in
             DispatchQueue.main.async {
-                if success {
+                if r.result.isSuccess {
                     self.permissions.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 }
-                callback?(success)
+                callback?(r.result.isSuccess)
             }
         }
     }

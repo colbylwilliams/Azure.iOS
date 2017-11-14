@@ -60,16 +60,20 @@ public class DocumentClient {
         
         let encoder = JSONEncoder()
         
-        encoder.dateEncodingStrategy = self.dateEncoder == nil ? .iso8601 : .custom(self.dateEncoder!)
+        if self.dateEncoder == nil { self.dateEncoder = DocumentClient.roundTripIso8601Encoder }
+        
+        encoder.dateEncodingStrategy = .custom(self.dateEncoder!)
         
         return encoder
     }()
     
     public lazy var jsonDecoder: JSONDecoder = {
         
+        if self.dateDecoder == nil { self.dateDecoder = DocumentClient.roundTripIso8601Decoder }
+        
         let decoder = JSONDecoder()
         
-        decoder.dateDecodingStrategy = self.dateDecoder == nil ? .iso8601 : .custom(self.dateDecoder!)
+        decoder.dateDecodingStrategy = .custom(self.dateDecoder!)
         
         return decoder
     }()

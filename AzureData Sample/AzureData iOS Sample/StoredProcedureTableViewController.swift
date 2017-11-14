@@ -13,10 +13,10 @@ class StoredProcedureTableViewController: UITableViewController {
 
     @IBOutlet var addButton: UIBarButtonItem!
     
-    var database: ADDatabase!
-    var collection: ADCollection!
+    var database: Database!
+    var collection: DocumentCollection!
 
-    var resources:  [ADStoredProcedure] = []
+    var resources:  [StoredProcedure] = []
 
     
     override func viewDidLoad() {
@@ -117,13 +117,13 @@ class StoredProcedureTableViewController: UITableViewController {
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
 
-        collection.delete(self.resources[indexPath.row]) { success in
+        collection.delete(self.resources[indexPath.row]) { r in
             DispatchQueue.main.async {
-                if success {
+                if r.result.isSuccess {
                     self.resources.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 }
-                callback?(success)
+                callback?(r.result.isSuccess)
             }
         }
     }
@@ -132,8 +132,8 @@ class StoredProcedureTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let procedure = resources[indexPath.row]
         
-        AzureData.execute(storedProcedureWithId: procedure.id, usingParameters: nil, inCollection: collection.id, inDatabase: database.id) { data in
-            if let data = data {
+        AzureData.execute(storedProcedureWithId: procedure.id, usingParameters: nil, inCollection: collection.id, inDatabase: database.id) { r in
+            if let data = r.data {
                 if let string = String(data: data, encoding: .utf8) {
                     print(string)
                 } else {

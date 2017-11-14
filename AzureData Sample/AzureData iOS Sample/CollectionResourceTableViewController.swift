@@ -11,13 +11,13 @@ import AzureData
 
 class CollectionResourceTableViewController: UITableViewController {
     
-    var database: ADDatabase!
-    var collection: ADCollection!
+    var database: Database!
+    var collection: DocumentCollection!
     
-    var documents:          [ADDocument] = []
-    var storedProcedures:   [ADStoredProcedure] = []
-    var triggers:           [ADTrigger] = []
-    var udfs:               [ADUserDefinedFunction] = []
+    var documents:          [Document] = []
+    var storedProcedures:   [StoredProcedure] = []
+    var triggers:           [Trigger] = []
+    var udfs:               [UserDefinedFunction] = []
     
     func collectionResourceName(_ section: Int) -> String {
         switch section {
@@ -29,7 +29,7 @@ class CollectionResourceTableViewController: UITableViewController {
         }
     }
     
-    func collectionResourceArray(_ section: Int) -> [ADResource] {
+    func collectionResourceArray(_ section: Int) -> [CodableResource] {
         switch section {
         case 0: return documents
         case 1: return storedProcedures
@@ -48,7 +48,7 @@ class CollectionResourceTableViewController: UITableViewController {
     var refreshCount = 4
     
     func refreshData() {
-        collection.get(documentsAs: ADDocument.self) { r in
+        collection.get(documentsAs: Document.self) { r in
             debugPrint(r.result)
             DispatchQueue.main.async {
                 if let items = r.resource?.items {

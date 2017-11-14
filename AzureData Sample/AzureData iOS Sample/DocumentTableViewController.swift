@@ -13,10 +13,10 @@ class DocumentTableViewController: UITableViewController {
 
     @IBOutlet var addButton: UIBarButtonItem!
     
-    var database: ADDatabase!
-    var collection: ADCollection!
+    var database: Database!
+    var collection: DocumentCollection!
     
-    var documents: [ADDocument] = []
+    var documents: [Document] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +29,7 @@ class DocumentTableViewController: UITableViewController {
     
     func refreshData() {
         
-        collection.get(documentsAs: ADDocument.self) { response in
+        collection.get(documentsAs: Document.self) { response in
             debugPrint(response.result)
             DispatchQueue.main.async {
                 if let items = response.resource?.items {
@@ -51,7 +51,7 @@ class DocumentTableViewController: UITableViewController {
     
     @IBAction func addButtonTouchUpInside(_ sender: Any) {
         
-//        let query =  ADQuery.select()
+//        let query =  Query.select()
 //                            .from(collection.id)
 //                            .where("firstName", is: "Colby")
 //                            .and("lastName", is: "Williams")
@@ -70,7 +70,7 @@ class DocumentTableViewController: UITableViewController {
 //        
 //        return
         
-        let doc = ADDocument()
+        let doc = Document()
         
         doc["testNumber"] = 1_000_000
         doc["testString"] = "Yeah baby\nRock n Roll"
@@ -120,11 +120,10 @@ class DocumentTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
             
-            self.collection.get(documentWithResourceId: self.documents[indexPath.row].resourceId, as: ADDocument.self) { r in
+            self.collection.get(documentWithResourceId: self.documents[indexPath.row].resourceId, as: Document.self) { r in
                 DispatchQueue.main.async {
                     if r.result.isSuccess {
                         debugPrint(r.result)
-                        r.resource?.printLog()
                         tableView.reloadRows(at: [indexPath], with: .automatic)
                         callback(false)
                     } else if let error = r.error {
@@ -157,13 +156,13 @@ class DocumentTableViewController: UITableViewController {
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
 
-        collection.delete(documents[indexPath.row]) { success in
+        collection.delete(documents[indexPath.row]) { r in
             DispatchQueue.main.async {
-                if success {
+                if r.result.isSuccess {
                     self.documents.remove(at: indexPath.row)
                     tableView.deleteRows(at: [indexPath], with: .automatic)
                 }
-                callback?(success)
+                callback?(r.result.isSuccess)
             }
         }
     }
@@ -178,7 +177,7 @@ class DocumentTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let cell = sender as? UITableViewCell, let index = tableView.indexPath(for: cell), let destinationViewController = segue.destination as? DocumentDetailTableViewController {
-            destinationViewController.documentDictionary = documents[index.row].dictionary
+            //destinationViewController.documentDictionary = documents[index.row]
         }
     }
 }

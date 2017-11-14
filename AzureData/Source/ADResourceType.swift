@@ -64,35 +64,4 @@ public enum ADResourceType : String {
         case .offer:            return "Offer"
         }
     }
-
-    var type: ADResource.Type {
-        switch self {
-        case .database:         return ADDatabase.self
-        case .user:             return ADUser.self
-        case .permission:       return ADPermission.self
-        case .collection:       return ADCollection.self
-        case .storedProcedure:  return ADStoredProcedure.self
-        case .trigger:          return ADTrigger.self
-        case .udf:              return ADUserDefinedFunction.self
-        case .document:         return ADDocument.self
-        case .attachment:       return ADAttachment.self
-        case .offer:            return ADOffer.self
-        }
-    }
-
-    init?(fromResource resource: ADResource) {
-        switch resource {
-        case is ADDatabase:             self = .database
-        case is ADUser:                 self = .user
-        case is ADPermission:           self = .permission
-        case is ADCollection:           self = .collection
-        case is ADStoredProcedure:      self = .storedProcedure
-        case is ADTrigger:              self = .trigger
-        case is ADUserDefinedFunction:  self = .udf
-        case is ADDocument:             self = .document
-        case is ADAttachment:           self = .attachment
-        case is ADOffer:                self = .offer
-        default: return nil
-        }
-    }
 }

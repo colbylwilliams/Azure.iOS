@@ -62,6 +62,28 @@ public class ADTokenProvider {
         
         return (authStringEncoded, dateString)
     }
+    
+    
+    public func getToken<T:CodableResource>(_ type: T.Type = T.self, verb v: ADHttpMethod, resourceLink link: String) -> (String, String) {
+        
+        let verb = v.rawValue
+        let resourceType = type.type
+        let resourceLink = link
+        
+        let dateString = dateFormatter.string(from: Date())
+        
+        let payload = "\(verb.lowercased())\n\(resourceType.lowercased())\n\(resourceLink)\n\(dateString.lowercased())\n\n"
+        
+        //        print(payload)
+        
+        let signiture = payload.hmac(algorithm: .SHA256, key: key)
+        
+        let authString = "type=\(keyType)&ver=\(tokenVersion)&sig=\(signiture)"
+        
+        let authStringEncoded = authString.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics)!
+        
+        return (authStringEncoded, dateString)
+    }
 }
 
 enum HMACAlgorithm {

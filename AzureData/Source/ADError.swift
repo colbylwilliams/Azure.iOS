@@ -28,12 +28,12 @@ public class ADError: Error /*:ADResource*/ {
         message = "unknown error"
     }
     
-    init(_ message: String) {
+    init (_ message: String) {
         code = "error"
         self.message = message
     }
     
-    init (error: Error) {
+    init (_ error: Error) {
         code = "error"
         message = error.localizedDescription
     }

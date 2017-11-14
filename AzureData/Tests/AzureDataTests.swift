@@ -17,9 +17,9 @@ class AzureDataTests: XCTestCase {
     var ensureCollection:   Bool = false
     var ensureDocument:     Bool = false
 
-    fileprivate(set) var database: ADDatabase?
-    fileprivate(set) var collection: ADCollection?
-    fileprivate(set) var document: ADDocument?
+    fileprivate(set) var database:  Database?
+    fileprivate(set) var collection:DocumentCollection?
+    fileprivate(set) var document:  Document?
     
     var resourceName: String?
     var resourceType: ADResourceType!
@@ -32,7 +32,7 @@ class AzureDataTests: XCTestCase {
     var resourceId:     String { return "\(rname)Tests\(rname)" }
     var replacedId:     String { return "\(rname)Replaced" }
 
-    
+
     let random: Int = 12
     
     let customStringKey = "customStringKey"
@@ -51,9 +51,6 @@ class AzureDataTests: XCTestCase {
     lazy var queryExpectation   = self.expectation(description: "should query \(rname)")
     lazy var replaceExpectation = self.expectation(description: "should replace \(rname)")    
 
-    var deleteSuccess = false
-    
-    
     override func setUp() {
         super.setUp()
         
@@ -70,10 +67,13 @@ class AzureDataTests: XCTestCase {
             }
         }
         
+        DocumentClient.default.dateEncoder = DocumentClient.roundTripIso8601Encoder
+        DocumentClient.default.dateDecoder = DocumentClient.roundTripIso8601Decoder
+        
         if ensureDatabase {
         
             let initGetDatabaseExpectation = self.expectation(description: "Should get database")
-            var initGetResponse: ADResponse<ADDatabase>?
+            var initGetResponse: Response<Database>?
             
 
             AzureData.get(databaseWithId: databaseId) { r in
@@ -88,7 +88,7 @@ class AzureDataTests: XCTestCase {
             if database == nil {
                 
                 let initCreateDatabaseExpectation = self.expectation(description: "Should initialize database")
-                var initCreateResponse: ADResponse<ADDatabase>?
+                var initCreateResponse: Response<Database>?
 
                 AzureData.create(databaseWithId: databaseId) { r in
                     initCreateResponse = r
@@ -105,7 +105,7 @@ class AzureDataTests: XCTestCase {
             if ensureCollection, let database = database {
                 
                 let initGetCollectionExpectation = self.expectation(description: "Should get collection")
-                var initGetCollectionResponse: ADResponse<ADCollection>?
+                var initGetCollectionResponse: Response<AzureData.DocumentCollection>?
                 
                 database.get(collectionWithId: collectionId) { r in
                     initGetCollectionResponse = r
@@ -119,7 +119,7 @@ class AzureDataTests: XCTestCase {
                 if collection == nil {
                     
                     let initCreateCollectionExpectation = self.expectation(description: "Should initialize collection")
-                    var initCreateCollectionResponse: ADResponse<ADCollection>?
+                    var initCreateCollectionResponse: Response<AzureData.DocumentCollection>?
 
                     database.create(collectionWithId: collectionId) { r in
                         initCreateCollectionResponse = r
@@ -136,9 +136,9 @@ class AzureDataTests: XCTestCase {
                 if ensureDocument, let collection = collection {
                     
                     let initGetDocumentExpectation = self.expectation(description: "Should get document")
-                    var initGetDocumentResponse: ADResponse<ADDocument>?
+                    var initGetDocumentResponse: Response<Document>?
                     
-                    AzureData.get(documentWithId: documentId, as: ADDocument.self, inCollection: collection.id, inDatabase: database.id) { r in
+                    AzureData.get(documentWithId: documentId, as: Document.self, inCollection: collection.id, inDatabase: database.id) { r in
                         initGetDocumentResponse = r
                         initGetDocumentExpectation.fulfill()
                     }
@@ -150,9 +150,9 @@ class AzureDataTests: XCTestCase {
                     if document == nil {
                         
                         let initCreateDocumentExpectation = self.expectation(description: "Should initialize document")
-                        var initCreateDocumentResponse: ADResponse<ADDocument>?
+                        var initCreateDocumentResponse: Response<Document>?
                         
-                        collection.create(ADDocument(documentId)) { r in
+                        collection.create(Document(documentId)) { r in
                             initCreateDocumentResponse = r
                             initCreateDocumentExpectation.fulfill()
                         }

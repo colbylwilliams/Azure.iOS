@@ -378,10 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				B52240341FB33CD000D0343F /* AzureData.swift */,
-				B5B6AC281FBA84C400B93106 /* CodableDictionary.swift */,
 				B583619E1FB78763001CEC66 /* DocumentClient.swift */,
-				B5B6AC231FBA4B3900B93106 /* Query.swift */,
-				B58361991FB779B6001CEC66 /* Response.swift */,
 				B55AEFE61FB34CF600F7BEED /* Domain */,
 				B55AEFE51FB34C5400F7BEED /* Extensions */,
 				B58361B71FBA1339001CEC66 /* Resources */,
@@ -465,10 +462,13 @@
 			children = (
 				B52240221FB33CD000D0343F /* ADError.swift */,
 				B52240361FB33CD000D0343F /* ADHttp.swift */,
+				B5B6AC281FBA84C400B93106 /* CodableDictionary.swift */,
+				B52240191FB33CD000D0343F /* NetworkReachabilityManager.swift */,
+				B5B6AC231FBA4B3900B93106 /* Query.swift */,
 				B522401D1FB33CD000D0343F /* ResourceType.swift */,
 				B52240281FB33CD000D0343F /* ResourceUri.swift */,
+				B58361991FB779B6001CEC66 /* Response.swift */,
 				B522401A1FB33CD000D0343F /* TokenProvider.swift */,
-				B52240191FB33CD000D0343F /* NetworkReachabilityManager.swift */,
 			);
 			name = Domain;
 			sourceTree = "<group>";

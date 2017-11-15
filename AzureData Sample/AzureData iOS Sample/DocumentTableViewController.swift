@@ -74,7 +74,7 @@ class DocumentTableViewController: UITableViewController {
         
         doc["testNumber"] = 1_000_000
         doc["testString"] = "Yeah baby\nRock n Roll"
-        doc["testDate"]   = Date().timeIntervalSince1970
+        doc["testDate"]   = Date()
         
         collection.create(doc) { r in
             debugPrint(r.result)
@@ -177,7 +177,7 @@ class DocumentTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let cell = sender as? UITableViewCell, let index = tableView.indexPath(for: cell), let destinationViewController = segue.destination as? DocumentDetailTableViewController {
-            //destinationViewController.documentDictionary = documents[index.row]
+            destinationViewController.document = documents[index.row]
         }
     }
 }

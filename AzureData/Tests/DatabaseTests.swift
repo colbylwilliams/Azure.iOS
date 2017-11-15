@@ -39,6 +39,7 @@ class DatabaseTests: AzureDataTests {
         
         XCTAssertNotNil(createResponse?.resource)
         
+
         
         // List
         AzureData.databases { r in
@@ -51,6 +52,7 @@ class DatabaseTests: AzureDataTests {
         XCTAssertNotNil(listResponse?.resource)
 
         
+        
         // Get
         AzureData.get(databaseWithId: databaseId) { r in
             getResponse = r
@@ -61,6 +63,7 @@ class DatabaseTests: AzureDataTests {
         
         XCTAssertNotNil(getResponse?.resource)
 
+        
         
         // Delete
         AzureData.delete(Database(databaseId)) { r in

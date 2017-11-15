@@ -99,3 +99,10 @@ public struct DocumentCollection : CodableResource {
         return resourceId.isNilOrEmpty ? String(selfLink!.split(separator: "/").last!).lowercased() : resourceId!.lowercased()
     }
 }
+
+extension DocumentCollection : CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return "DocumentCollection :\n\tid : \(self.id)\n\tresourceId : \(self.resourceId)\n\tselfLink : \(self.selfLink.valueOrNilString)\n\tetag : \(self.etag.valueOrNilString)\n\ttimestamp : \(self.timestamp.valueOrNilString)\n\tconflictsLink : \(self.conflictsLink.valueOrNilString)\n\tdocumentsLink : \(self.documentsLink.valueOrNilString)\n\tindexingPolicy : ..todo\n\tpartitionKey : ..todo\n\tstoredProceduresLink : \(self.storedProceduresLink.valueOrNilString)\n\ttriggersLink : \(self.triggersLink.valueOrNilString)\n\tuserDefinedFunctionsLink : \(self.userDefinedFunctionsLink.valueOrNilString)\n--"
+    }
+}
+

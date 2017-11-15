@@ -40,3 +40,10 @@ public struct Resources<T:CodableResource> : Decodable {
         init?(intValue: Int) { return nil }
     }
 }
+
+extension Resources : CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return "Resources :\n\tresourceId : \(self.resourceId)\n\tcount : \(self.count)\n\titems :\n\(self.items.map { "\($0)" }.joined(separator: "\n"))\n--"
+    }
+}
+

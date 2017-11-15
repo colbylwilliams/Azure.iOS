@@ -958,7 +958,7 @@ public class DocumentClient {
             
             var request = dataRequest(type.self, .post, resourceUri: resourceUri!)
             
-            request.httpBody = body == nil ? try jsonEncoder.encode([]) : try jsonEncoder.encode(body)
+            request.httpBody = body == nil ? try jsonEncoder.encode([String]()) : try jsonEncoder.encode(body)
 
             return self.sendRequest(request, callback: callback)
             
@@ -1005,64 +1005,64 @@ public class DocumentClient {
     fileprivate func sendRequest<T> (_ request: URLRequest, callback: @escaping (Response<T>) -> ()) {
         
         if verboseLogging {
-            print()
-            print("*** sending request for \(T.self)")
-            print("*** request.method: \(request.httpMethod ?? "none")")
-            print("*** request.url: \(request.url?.absoluteString ?? "")")
-            print("*** request.httpBody: \(request.httpBody != nil ? String(data: request.httpBody!, encoding: .utf8) ?? "nil" : "nil")")
+            print("***")
+            print("Sending \(request.httpMethod ?? "") request for \(T.self) to \(request.url?.absoluteString ?? "")")
+            print("\tBody : \(request.httpBody != nil ? String(data: request.httpBody!, encoding: .utf8) ?? "empty" : "empty")")
         }
         
         session.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
                 
-                if self.verboseLogging { print("*** error: \(error.localizedDescription)"); print() }
+                if self.verboseLogging { print("❌ error: \(error.localizedDescription)"); print() }
                 
                 callback(Response(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(error))))
             
             } else if let data = data {
                 
-                if self.verboseLogging { print("*** data: \(String(data: data, encoding: .utf8) ?? "nil")") }
+                //if self.verboseLogging { print("*** data: \(String(data: data, encoding: .utf8) ?? "nil")") }
                 
                 do {
                     
                     let resource = try self.jsonDecoder.decode(T.self, from: data)
                     
+                    if self.verboseLogging { print(resource); print() }
+                    
                     callback(Response(request: request, response: response as? HTTPURLResponse, data: data, result: .success(resource)))
                     
                 } catch DecodingError.typeMismatch(let type, let context) {
                     
-                    if self.verboseLogging { print("*** decodeError: typeMismatch (type: \(type), context: \(context)"); print() }
+                    if self.verboseLogging { print("❌ decodeError: typeMismatch (type: \(type), context: \(context)"); print() }
                     
                     callback(Response(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError("decodeError: typeMismatch (type: \(type), context: \(context)"))))
                     
                 } catch DecodingError.dataCorrupted(let context) {
                     
-                    if self.verboseLogging { print("*** decodeError: dataCorrupted (context: \(context)"); print() }
+                    if self.verboseLogging { print("❌ decodeError: dataCorrupted (context: \(context)"); print() }
                     
                     callback(Response(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError("decodeError: dataCorrupted (context: \(context)"))))
                     
                 } catch DecodingError.keyNotFound(let key, let context) {
                     
-                    if self.verboseLogging { print("*** decodeError: keyNotFound (key: \(key), context: \(context)"); print() }
+                    if self.verboseLogging { print("❌ decodeError: keyNotFound (key: \(key), context: \(context)"); print() }
                     
                     callback(Response(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError("decodeError: keyNotFound (key: \(key), context: \(context)"))))
                     
                 } catch DecodingError.valueNotFound(let type, let context) {
                     
-                    if self.verboseLogging { print("*** decodeError: valueNotFound (type: \(type), context: \(context)"); print() }
+                    if self.verboseLogging { print("❌ decodeError: valueNotFound (type: \(type), context: \(context)"); print() }
                     
                     callback(Response(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError("decodeError: valueNotFound (type: \(type), context: \(context)"))))
                     
                 } catch let e {
                     
-                    if self.verboseLogging { print("*** decodeError: \(e.localizedDescription)"); print() }
+                    if self.verboseLogging { print("❌ decodeError: \(e.localizedDescription)"); print() }
                     
                     callback(Response(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(e))))
                 }
             } else {
                 
-                if self.verboseLogging { print("*** error: \(self.unknownError.message)"); print() }
+                if self.verboseLogging { print("❌ error: \(self.unknownError.message)"); print() }
                 
                 callback(Response(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(self.unknownError)))
             }
@@ -1072,64 +1072,64 @@ public class DocumentClient {
     fileprivate func sendRequest<T> (_ request: URLRequest, callback: @escaping (ListResponse<T>) -> ()) {
         
         if verboseLogging {
-            print()
-            print("*** sending request for list \(T.self)")
-            print("*** request.method: \(request.httpMethod ?? "none")")
-            print("*** request.url: \(request.url?.absoluteString ?? "")")
-            print("*** request.httpBody: \(request.httpBody != nil ? String(data: request.httpBody!, encoding: .utf8) ?? "nil" : "nil")")
+            print("***")
+            print("Sending \(request.httpMethod ?? "") request for \(T.self) List to \(request.url?.absoluteString ?? "")")
+            print("\tBody : \(request.httpBody != nil ? String(data: request.httpBody!, encoding: .utf8) ?? "empty" : "empty")")
         }
 
         session.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
                 
-                if self.verboseLogging { print("*** error: \(error.localizedDescription)") }
+                if self.verboseLogging { print("❌ error: \(error.localizedDescription)") }
                 
                 callback(ListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(error))))
                 
             } else if let data = data {
                 
-                if self.verboseLogging { print("*** data: \(String(data: data, encoding: .utf8) ?? "nil")") }
+                //if self.verboseLogging { print("*** data: \(String(data: data, encoding: .utf8) ?? "nil")") }
                 
                 do {
                     
                     let resource = try self.jsonDecoder.decode(Resources<T>.self, from: data)
                     
+                    if self.verboseLogging { print(resource); print() }
+                    
                     callback(ListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .success(resource)))
                     
                 } catch DecodingError.typeMismatch(let type, let context) {
                     
-                    if self.verboseLogging { print("*** decodeError: typeMismatch (type: \(type), context: \(context)"); print() }
+                    if self.verboseLogging { print("❌ decodeError: typeMismatch (type: \(type), context: \(context)"); print() }
                  
                     callback(ListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError("decodeError: typeMismatch (type: \(type), context: \(context)"))))
                 
                 } catch DecodingError.dataCorrupted(let context) {
                     
-                    if self.verboseLogging { print("*** decodeError: dataCorrupted (context: \(context)"); print() }
+                    if self.verboseLogging { print("❌ decodeError: dataCorrupted (context: \(context)"); print() }
                     
                     callback(ListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError("decodeError: dataCorrupted (context: \(context)"))))
 
                 } catch DecodingError.keyNotFound(let key, let context) {
                     
-                    if self.verboseLogging { print("*** decodeError: keyNotFound (key: \(key), context: \(context)"); print() }
+                    if self.verboseLogging { print("❌ decodeError: keyNotFound (key: \(key), context: \(context)"); print() }
                     
                     callback(ListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError("decodeError: keyNotFound (key: \(key), context: \(context)"))))
 
                 } catch DecodingError.valueNotFound(let type, let context) {
                     
-                    if self.verboseLogging { print("*** decodeError: valueNotFound (type: \(type), context: \(context)"); print() }
+                    if self.verboseLogging { print("❌ decodeError: valueNotFound (type: \(type), context: \(context)"); print() }
                     
                     callback(ListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError("decodeError: valueNotFound (type: \(type), context: \(context)"))))
 
                 } catch let e {
                     
-                    if self.verboseLogging { print("*** decodeError: \(e.localizedDescription)"); print() }
+                    if self.verboseLogging { print("❌ decodeError: \(e.localizedDescription)"); print() }
                     
                     callback(ListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(e))))
                 }
             } else {
                 
-                if self.verboseLogging { print("*** error: \(self.unknownError.message)"); print() }
+                if self.verboseLogging { print("❌ error: \(self.unknownError.message)"); print() }
              
                 callback(ListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(self.unknownError)))
             }
@@ -1139,30 +1139,28 @@ public class DocumentClient {
     fileprivate func sendRequest (_ request: URLRequest, callback: @escaping (DataResponse) -> ()) {
         
         if verboseLogging {
-            print()
-            print("*** sending request")
-            print("*** request.method: \(request.httpMethod ?? "none")")
-            print("*** request.url: \(request.url?.absoluteString ?? "")")
-            print("*** request.httpBody: \(request.httpBody != nil ? String(data: request.httpBody!, encoding: .utf8) ?? "nil" : "nil")")
+            print("***")
+            print("Sending \(request.httpMethod ?? "") request for Data to \(request.url?.absoluteString ?? "")")
+            print("\tBody : \(request.httpBody != nil ? String(data: request.httpBody!, encoding: .utf8) ?? "empty" : "empty")")
         }
 
         session.dataTask(with: request) { (data, response, error) in
             
             if let error = error {
                 
-                if self.verboseLogging { print("*** error: \(error.localizedDescription)"); print() }
+                if self.verboseLogging { print("❌ error: \(error.localizedDescription)"); print() }
                 
                 callback(DataResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(error))))
 
             } else if let data = data {
                 
-                if self.verboseLogging { print("*** data: \(String(data: data, encoding: .utf8) ?? "nil")"); print() }
+                if self.verboseLogging { print("Data : \(String(data: data, encoding: .utf8) ?? "nil")"); print() }
 
                 callback(DataResponse.init(request: request, response: response as? HTTPURLResponse, data: data, result: .success(data)))
                 
             } else {
                 
-                if self.verboseLogging { print("*** error: \(self.unknownError.message)"); print() }
+                if self.verboseLogging { print("❌ error: \(self.unknownError.message)"); print() }
 
                 callback(DataResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(self.unknownError)))
             }

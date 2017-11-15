@@ -39,6 +39,7 @@ public struct Response<T:CodableResource> {
     }
 }
 
+
 public struct ListResponse<T:CodableResource> {
     
     public let request: URLRequest?
@@ -194,8 +195,8 @@ public enum ListResult<T:CodableResource> {
 extension Result: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .success: return "SUCCESS"
-        case .failure: return "FAILURE"
+        case .success: return "✅ SUCCESS"
+        case .failure: return "❌ FAILURE"
         }
     }
 }
@@ -203,8 +204,8 @@ extension Result: CustomStringConvertible {
 extension ListResult: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .success: return "SUCCESS"
-        case .failure: return "FAILURE"
+        case .success: return "✅ SUCCESS"
+        case .failure: return "❌ FAILURE"
         }
     }
 }
@@ -215,8 +216,8 @@ extension ListResult: CustomStringConvertible {
 extension Result: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
-        case .success(let value): return "SUCCESS: \(value)"
-        case .failure(let error): return "FAILURE: \(error)"
+        case .success(let value): return "✅ SUCCESS: \(value)"
+        case .failure(let error): return "❌ FAILURE: \(error)"
         }
     }
 }
@@ -224,8 +225,8 @@ extension Result: CustomDebugStringConvertible {
 extension ListResult: CustomDebugStringConvertible {
     public var debugDescription: String {
         switch self {
-        case .success(let value): return "SUCCESS: \(value)"
-        case .failure(let error): return "FAILURE: \(error)"
+        case .success(let value): return "✅ SUCCESS: \(value)"
+        case .failure(let error): return "❌ FAILURE: \(error)"
         }
     }
 }

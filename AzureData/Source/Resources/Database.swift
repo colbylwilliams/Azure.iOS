@@ -33,3 +33,9 @@ public struct Database : CodableResource {
     
     public init (_ id: String) { self.id = id; resourceId = "" }
 }
+
+extension Database : CustomDebugStringConvertible {
+    public var debugDescription: String {
+        return "Database :\n\tid : \(self.id)\n\tresourceId : \(self.resourceId)\n\tselfLink : \(self.selfLink.valueOrNilString)\n\tetag : \(self.etag.valueOrNilString)\n\ttimestamp : \(self.timestamp.valueOrNilString)\n\tcollectionsLink : \(self.collectionsLink.valueOrNilString)\n\tusersLink : \(self.usersLink.valueOrNilString)\n--"
+    }
+}

@@ -13,6 +13,10 @@ extension Optional where Wrapped == String {
         return self ?? ""
     }
     
+    var valueOrNilString: String {
+        return self ?? "nil"
+    }
+    
     var isNilOrEmpty: Bool {
         return self == nil || self!.isEmpty
     }
@@ -22,6 +26,17 @@ extension Optional where Wrapped == String {
     }
 }
 
+
+extension Optional where Wrapped == Date {
+    
+    var valueOrEmpty: String {
+        return self != nil ? "\(self!.timeIntervalSince1970)" : ""
+    }
+    
+    var valueOrNilString: String {
+        return self != nil ? "\(self!.timeIntervalSince1970)" : "nil"
+    }
+}
 
 extension String {
     

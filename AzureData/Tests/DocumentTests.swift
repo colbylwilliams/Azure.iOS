@@ -36,20 +36,14 @@ class DocumentTests: AzureDataTests {
             
             let data = try encoder.encode(doc)
             
-            print(String.init(data: data, encoding: .utf8)!)
-            
             let doc2 = try decoder.decode(Document.self, from: data)
         
-            print(doc2["dateTest"]!)
-            
             let date = doc2["dateTest"] as! Date
-            
-            print("now: \(now.timeIntervalSinceReferenceDate)")
-            print("date:\(date.timeIntervalSinceReferenceDate)")
             
             XCTAssertEqual (date.timeIntervalSinceReferenceDate, now.timeIntervalSinceReferenceDate)
             
         } catch {
+            
             print(error)
         }
     }
@@ -94,7 +88,6 @@ class DocumentTests: AzureDataTests {
         XCTAssertNotNil(createResponse?.resource)
         
         if let document = createResponse?.resource {
-            
             XCTAssertNotNil(document[customStringKey] as? String)
             XCTAssertEqual (document[customStringKey] as! String, customStringValue)
             XCTAssertNotNil(document[customNumberKey] as? Int)
@@ -113,7 +106,7 @@ class DocumentTests: AzureDataTests {
         
         XCTAssertNotNil(listResponse?.resource)
 
-        
+
         
         // Query
         let query = Query.select()
@@ -132,7 +125,6 @@ class DocumentTests: AzureDataTests {
         XCTAssertNotNil(queryResponse?.resource?.items.first)
         
         if let document = queryResponse?.resource?.items.first {
-            
             XCTAssertNotNil(document[customStringKey] as? String)
             XCTAssertEqual (document[customStringKey] as! String, customStringValue)
             XCTAssertNotNil(document[customNumberKey] as? Int)
@@ -155,7 +147,6 @@ class DocumentTests: AzureDataTests {
         XCTAssertNotNil(getResponse?.resource)
         
         if let document = getResponse?.resource {
-            
             XCTAssertNotNil(document[customStringKey] as? String)
             XCTAssertEqual (document[customStringKey] as! String, customStringValue)
             XCTAssertNotNil(document[customNumberKey] as? Int)

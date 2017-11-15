@@ -13,6 +13,8 @@ public struct StoredProcedure : CodableResource {
     public static var type = "sprocs"
     public static var list = "StoredProcedures"
 
+    public var _altLink: String? = nil
+
     public private(set) var id:         String
     public private(set) var resourceId: String
     public private(set) var selfLink:   String?

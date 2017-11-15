@@ -69,6 +69,7 @@ class DocumentTests: AzureDataTests {
         //var replaceResponse:    Response<Document>?
         var queryResponse:      ListResponse<Document>?
         var deleteResponse:     DataResponse?
+        var refreshResponse:    Response<Document>?
 
         
         let newDocument = Document(resourceId)
@@ -76,6 +77,8 @@ class DocumentTests: AzureDataTests {
         newDocument[customStringKey] = customStringValue
         newDocument[customNumberKey] = customNumberValue
         
+        
+        print("Create...")
         
         // Create
         AzureData.create(newDocument, inCollection: collectionId, inDatabase: databaseId) { r in
@@ -94,7 +97,12 @@ class DocumentTests: AzureDataTests {
             XCTAssertEqual (document[customNumberKey] as! Int, customNumberValue)
         }
 
+        print("altLink = \(createResponse?.resource?._altLink ?? "")")
+        createResponse?.response?.printHeaders()
+
         
+        
+        print("List...")
         
         // List
         AzureData.get(documentsAs: Document.self, inCollection: collectionId, inDatabase: databaseId) { r in
@@ -106,7 +114,10 @@ class DocumentTests: AzureDataTests {
         
         XCTAssertNotNil(listResponse?.resource)
 
+        listResponse?.response?.printHeaders()
 
+        
+        print("Query...")
         
         // Query
         let query = Query.select()
@@ -133,8 +144,9 @@ class DocumentTests: AzureDataTests {
         
         
         
+        print("Get...")
         // Get
-        if createResponse?.result.isSuccess ?? false {
+        //if createResponse?.result.isSuccess ?? false {
             
             AzureData.get(documentWithId: resourceId, as: Document.self, inCollection: collectionId, inDatabase: databaseId) { r in
                 getResponse = r
@@ -142,7 +154,7 @@ class DocumentTests: AzureDataTests {
             }
             
             wait(for: [getExpectation], timeout: timeout)
-        }
+        //}
         
         XCTAssertNotNil(getResponse?.resource)
         
@@ -153,18 +165,48 @@ class DocumentTests: AzureDataTests {
             XCTAssertEqual (document[customNumberKey] as! Int, customNumberValue)
         }
 
+        print("altLink = \(getResponse?.resource?._altLink ?? "")")
+        getResponse?.response?.printHeaders()
+
+        
+        
+        print("Refresh...")
+        // Refresh
+        if getResponse?.result.isSuccess ?? false {
+            
+            AzureData.refresh(getResponse!.resource!) { r in
+                refreshResponse = r
+                self.refreshExpectation.fulfill()
+            }
+            
+            wait(for: [refreshExpectation], timeout: timeout)
+        }
+        
+        XCTAssertNotNil(refreshResponse?.resource)
+        
+        if let document = refreshResponse?.resource {
+            XCTAssertNotNil(document[customStringKey] as? String)
+            XCTAssertEqual (document[customStringKey] as! String, customStringValue)
+            XCTAssertNotNil(document[customNumberKey] as? Int)
+            XCTAssertEqual (document[customNumberKey] as! Int, customNumberValue)
+        }
+        
+        print("altLink = \(refreshResponse?.resource?._altLink ?? "")")
+        refreshResponse?.response?.printHeaders()
+
+        
         
         
         // Delete
-        if createResponse?.result.isSuccess ?? false {
-         
-            AzureData.delete(createResponse!.resource!, fromCollection: collectionId, inDatabase: databaseId) { r in
-                deleteResponse = r
-                self.deleteExpectation.fulfill()
-            }
-            
-            wait(for: [deleteExpectation], timeout: timeout)
+        //if getResponse?.result.isSuccess ?? false {
+            //AzureData.delete(getResponse!.resource!, fromCollection: collectionId, inDatabase: databaseId) { r in
+        getResponse?.resource?.delete { r in
+            deleteResponse = r
+            self.deleteExpectation.fulfill()
         }
+        
+        wait(for: [deleteExpectation], timeout: timeout)
+        //}
         
         XCTAssert(deleteResponse?.result.isSuccess ?? false)
     }

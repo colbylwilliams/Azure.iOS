@@ -9,6 +9,7 @@
 import Foundation
 
 public struct Resources<T:CodableResource> : Decodable {
+    
     public private(set) var resourceId: String
     public private(set) var count:      Int
     public private(set) var items:      [T]

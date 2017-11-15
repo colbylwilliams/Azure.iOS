@@ -426,9 +426,18 @@ public func get (offerWithId offerId: String, callback: @escaping (Response<Offe
 
 
 
+// MARK: - Resources
+
+// Refresh
+public func refresh<T> (_ resource: T, callback: @escaping (Response<T>) -> ()) {
+    return DocumentClient.default.refresh(resource, callback: callback)
+}
 
 
-
+// Delete
+fileprivate func delete<T:CodableResource>(_ resource: T, callback: @escaping (DataResponse) -> ()) {
+    return DocumentClient.default.delete(resource, callback: callback)
+}
 
 
 

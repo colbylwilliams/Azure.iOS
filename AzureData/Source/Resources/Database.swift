@@ -12,6 +12,8 @@ public struct Database : CodableResource {
     
     public static var type = "dbs"
     public static var list = "Databases"
+
+    public var _altLink: String? = nil
     
     public private(set) var id:             String
     public private(set) var resourceId:     String

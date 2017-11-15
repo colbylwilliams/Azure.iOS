@@ -46,3 +46,12 @@ public class ADError: Error {
         print("")
     }
 }
+
+
+extension ADError {
+    static let unknownError = ADError("A unknown error occured.")
+    static let setupError = ADError("AzureData is not setup.  Must call AzureData.setup() before attempting CRUD operations on resources.")
+    static let invalidIdError = ADError("Cosmos DB Resource IDs must not exceed 255 characters and cannot contain whitespace")
+    static let jsonError = ADError("Error: Could not serialize document to JSON")
+    static let incompleteIds = ADError("This resource is missing the selfLink and/or resourceId properties.  Use an override that takes parent resource or ids instead.")
+}

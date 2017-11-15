@@ -49,7 +49,8 @@ class AzureDataTests: XCTestCase {
     lazy var getExpectation     = self.expectation(description: "should get and return \(rname)")
     lazy var deleteExpectation  = self.expectation(description: "should delete \(rname)")
     lazy var queryExpectation   = self.expectation(description: "should query \(rname)")
-    lazy var replaceExpectation = self.expectation(description: "should replace \(rname)")    
+    lazy var replaceExpectation = self.expectation(description: "should replace \(rname)")
+    lazy var refreshExpectation = self.expectation(description: "should refresh \(rname)")
 
     override func setUp() {
         super.setUp()

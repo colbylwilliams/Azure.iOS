@@ -13,13 +13,15 @@ public struct UserDefinedFunction : CodableResource {
     public static var type = "udfs"
     public static var list = "UserDefinedFunctions"
 
+    public var _altLink: String? = nil
+
     public private(set) var id:         String
     public private(set) var resourceId: String
     public private(set) var selfLink:   String?
     public private(set) var etag:       String?
     public private(set) var timestamp:  Date?
     public private(set) var body:       String?
-
+    
     private enum CodingKeys: String, CodingKey {
         case id
         case resourceId         = "_rid"

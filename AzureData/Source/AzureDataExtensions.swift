@@ -8,8 +8,19 @@
 
 import Foundation
 
+public extension CodableResource {
+    public func delete(_ callback: @escaping (DataResponse) -> ()) {
+        DocumentClient.default.delete(self, callback: callback)
+    }
+}
+
 
 public extension Database {
+    
+    public func refresh(_ callback: @escaping (Response<Database>) -> ()) {
+        DocumentClient.default.refresh(self, callback: callback)
+    }
+
     
     // MARK - Document Collection
     
@@ -66,6 +77,11 @@ public extension Database {
 
 
 public extension DocumentCollection {
+    
+    public func refresh(_ callback: @escaping (Response<DocumentCollection>) -> ()) {
+        DocumentClient.default.refresh(self, callback: callback)
+    }
+
     
     // MARK - Documents
     
@@ -181,6 +197,11 @@ public extension DocumentCollection {
 
 public extension Document {
     
+    public func refresh(_ callback: @escaping (Response<Document>) -> ()) {
+        DocumentClient.default.refresh(self, callback: callback)
+    }
+    
+    
     // MARK: - Attachments
     
     // create
@@ -215,6 +236,11 @@ public extension Document {
 
 
 public extension User {
+    
+    public func refresh(_ callback: @escaping (Response<User>) -> ()) {
+        DocumentClient.default.refresh(self, callback: callback)
+    }
+
     
     // MARK: - Permissions
     

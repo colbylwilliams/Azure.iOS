@@ -13,6 +13,8 @@ public struct Trigger : CodableResource {
     public static var type = "triggers"
     public static var list = "Triggers"
 
+    public var _altLink: String? = nil
+    
     public private(set) var id:                 String
     public private(set) var resourceId:         String
     public private(set) var selfLink:           String?
@@ -21,7 +23,6 @@ public struct Trigger : CodableResource {
     public private(set) var body:               String?
     public private(set) var triggerOperation:   TriggerOperation?
     public private(set) var triggerType:        TriggerType?
-
 
     private enum CodingKeys: String, CodingKey {
         case id
@@ -44,5 +45,13 @@ public struct Trigger : CodableResource {
     public enum TriggerType: String, Codable {
         case pre  = "Pre"
         case post = "Post"
+    }
+    
+    init(withId id: String, body: String, operation: TriggerOperation, type: TriggerType) {
+        self.id = id
+        self.resourceId = ""
+        self.body = body
+        self.triggerOperation = operation
+        self.triggerType = type
     }
 }

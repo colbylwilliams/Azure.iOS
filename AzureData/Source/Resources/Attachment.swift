@@ -17,6 +17,8 @@ public struct Attachment : CodableResource {
         return "\(Database.type)/\(parentIds[0])/\(DocumentCollection.type)/\(parentIds[2])/\(Document.type)/\(parentIds[3])"
     }
 
+    public var _altLink: String? = nil
+    
     public private(set) var id:         String
     public private(set) var resourceId: String
     public private(set) var selfLink:   String?
@@ -34,5 +36,11 @@ public struct Attachment : CodableResource {
         case contentType
         case mediaLink          = "media"
     }
+    
+    init(withId id: String, contentType: String, url: String) {
+        self.id = id
+        self.resourceId = ""
+        self.contentType = contentType
+        self.mediaLink = url
+    }
 }
-

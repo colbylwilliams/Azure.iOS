@@ -26,6 +26,7 @@ class OfferTests: AzureDataTests {
         var getResponse:        Response<Offer>?
         //var replaceResponse:    Response<Offer>?
         //var queryResponse:      ListResponse<Offer>?
+        //var refreshResponse:    Response<Offer>?
 
         
         // List
@@ -51,5 +52,19 @@ class OfferTests: AzureDataTests {
         }
         
         XCTAssertNotNil(getResponse?.resource)
+        
+        
+        // Refresh
+//        if getResponse?.result.isSuccess ?? false {
+//
+//            AzureData.refresh(getResponse!.resource!) { r in
+//                refreshResponse = r
+//                self.refreshExpectation.fulfill()
+//            }
+//
+//            wait(for: [refreshExpectation], timeout: timeout)
+//        }
+//
+//        XCTAssertNotNil(refreshResponse?.resource)
     }
 }

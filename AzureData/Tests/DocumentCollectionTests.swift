@@ -28,6 +28,7 @@ class DocumentCollectionTests: AzureDataTests {
         var deleteResponse:     DataResponse?
         //var replaceResponse:    Response<DocumentCollection>?
         //var queryResponse:      ListResponse<DocumentCollection>?
+        var refreshResponse:    Response<DocumentCollection>?
 
         
         // Create
@@ -66,16 +67,32 @@ class DocumentCollectionTests: AzureDataTests {
         XCTAssertNotNil(getResponse?.resource)
 
         
-        // Delete
-        if createResponse?.result.isSuccess ?? false {
         
-            AzureData.delete(DocumentCollection(resourceId), fromDatabase: databaseId) { r in
-                deleteResponse = r
-                self.deleteExpectation.fulfill()
+        // Refresh
+        if getResponse?.result.isSuccess ?? false {
+            
+            AzureData.refresh(getResponse!.resource!) { r in
+                refreshResponse = r
+                self.refreshExpectation.fulfill()
             }
             
-            wait(for: [deleteExpectation], timeout: timeout)
+            wait(for: [refreshExpectation], timeout: timeout)
         }
+        
+        XCTAssertNotNil(refreshResponse?.resource)
+
+        
+        
+        // Delete
+        //if getResponse?.result.isSuccess ?? false {
+            //AzureData.delete(DocumentCollection(resourceId), fromDatabase: databaseId) { r in
+        getResponse?.resource?.delete { r in
+            deleteResponse = r
+            self.deleteExpectation.fulfill()
+        }
+        
+        wait(for: [deleteExpectation], timeout: timeout)
+        //}
         
         XCTAssert(deleteResponse?.result.isSuccess ?? false)
     }

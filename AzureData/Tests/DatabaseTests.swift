@@ -25,6 +25,7 @@ class DatabaseTests: AzureDataTests {
         var listResponse:       ListResponse<Database>?
         var getResponse:        Response<Database>?
         var deleteResponse:     DataResponse?
+        var refreshResponse:    Response<Database>?
         //var replaceResponse:    Response<Database>?
         //var queryResponse:      ListResponse<Database>?
 
@@ -38,8 +39,12 @@ class DatabaseTests: AzureDataTests {
         wait(for: [createExpectation], timeout: timeout)
         
         XCTAssertNotNil(createResponse?.resource)
-        
 
+        print("Create")
+        print("altLink = \(createResponse?.resource?._altLink ?? "")")
+        createResponse?.response?.printHeaders()
+        
+        
         
         // List
         AzureData.databases { r in
@@ -50,6 +55,9 @@ class DatabaseTests: AzureDataTests {
         wait(for: [listExpectation], timeout: timeout)
         
         XCTAssertNotNil(listResponse?.resource)
+
+        print("List")
+        listResponse?.response?.printHeaders()
 
         
         
@@ -63,10 +71,31 @@ class DatabaseTests: AzureDataTests {
         
         XCTAssertNotNil(getResponse?.resource)
 
+        print("Get")
+        print("altLink = \(getResponse?.resource?._altLink ?? "")")
+        getResponse?.response?.printHeaders()
+
+        
+
+        // Refresh
+        if getResponse?.result.isSuccess ?? false {
+            
+            AzureData.refresh(getResponse!.resource!) { r in
+                refreshResponse = r
+                self.refreshExpectation.fulfill()
+            }
+            
+            wait(for: [refreshExpectation], timeout: timeout)
+        }
+        
+        XCTAssertNotNil(refreshResponse?.resource)
+
         
         
         // Delete
-        AzureData.delete(Database(databaseId)) { r in
+        
+        //AzureData.delete(Database(databaseId)) { r in
+        getResponse?.resource?.delete { r in
             deleteResponse = r
             self.deleteExpectation.fulfill()
         }
@@ -74,5 +103,8 @@ class DatabaseTests: AzureDataTests {
         wait(for: [deleteExpectation], timeout: timeout)
         
         XCTAssert(deleteResponse?.result.isSuccess ?? false)
+        
+        print("Delete")
+        deleteResponse?.response?.printHeaders()
     }
 }

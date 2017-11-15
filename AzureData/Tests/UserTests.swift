@@ -28,6 +28,7 @@ class UserTests: AzureDataTests {
         var replaceResponse:    Response<User>?
         var deleteResponse:     DataResponse?
         //var queryResponse:      ListResponse<User>?
+        var refreshResponse:    Response<User>?
 
 
         // Create
@@ -65,6 +66,20 @@ class UserTests: AzureDataTests {
         
         XCTAssertNotNil(getResponse?.resource)
         
+        
+        // Refresh
+        if getResponse?.result.isSuccess ?? false {
+            
+            AzureData.refresh(getResponse!.resource!) { r in
+                refreshResponse = r
+                self.refreshExpectation.fulfill()
+            }
+            
+            wait(for: [refreshExpectation], timeout: timeout)
+        }
+        
+        XCTAssertNotNil(refreshResponse?.resource)
+
         
         // Replace
         if let user = createResponse?.resource  {

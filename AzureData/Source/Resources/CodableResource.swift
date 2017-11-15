@@ -18,6 +18,8 @@ public protocol CodableResource : Codable {
     var selfLink:   String? { get }
     var etag:       String? { get }
     var timestamp:  Date?   { get }
+    
+    var _altLink:   String? { get set }
 }
 
 extension CodableResource {
@@ -37,6 +39,14 @@ extension CodableResource {
     public static func link (fromParentSelfLink parentSelf: String, resourceId: String? = nil) -> String {
         return resourceId.isNilOrEmpty ? String((parentSelf).split(separator: "/").last!).lowercased() : resourceId!.lowercased()
     }
+    
+    public func resourceUri (forHost host: String) -> (URL, String)? {
+        return self.selfLink.isNilOrEmpty ? nil : (URL(string: "\(host)/\(self.selfLink!)")!, self.resourceId.lowercased())
+    }
+//    public var link: String {
+//        self.selfLink?.split(separator: "/")
+//        // dbs/TC1AAA==/colls/TC1AAMDvwgA=/docs/TC1AAMDvwgBQAAAAAAAAAA==/
+//    }
     
     public static func url (atHost host: String, at path: String = Self.type) -> URL? {
         return URL(string: "https://\(host)/\(path)")

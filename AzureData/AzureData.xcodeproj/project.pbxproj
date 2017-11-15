@@ -378,9 +378,9 @@
 			isa = PBXGroup;
 			children = (
 				B52240341FB33CD000D0343F /* AzureData.swift */,
+				B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */,
 				B583619E1FB78763001CEC66 /* DocumentClient.swift */,
 				B55AEFE61FB34CF600F7BEED /* Domain */,
-				B55AEFE51FB34C5400F7BEED /* Extensions */,
 				B58361B71FBA1339001CEC66 /* Resources */,
 				B55AEFDF1FB34B7400F7BEED /* Supporting Files */,
 			);
@@ -448,15 +448,6 @@
 			name = ResourceExtensionTests;
 			sourceTree = "<group>";
 		};
-		B55AEFE51FB34C5400F7BEED /* Extensions */ = {
-			isa = PBXGroup;
-			children = (
-				B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */,
-				B52240381FB33CD000D0343F /* UtilityExtensions.swift */,
-			);
-			name = Extensions;
-			sourceTree = "<group>";
-		};
 		B55AEFE61FB34CF600F7BEED /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -469,6 +460,7 @@
 				B52240281FB33CD000D0343F /* ResourceUri.swift */,
 				B58361991FB779B6001CEC66 /* Response.swift */,
 				B522401A1FB33CD000D0343F /* TokenProvider.swift */,
+				B52240381FB33CD000D0343F /* UtilityExtensions.swift */,
 			);
 			name = Domain;
 			sourceTree = "<group>";

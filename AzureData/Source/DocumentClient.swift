@@ -28,10 +28,6 @@ public class DocumentClient {
         //commonInit(serverTrustPolicyManager: serverTrustPolicyManager)
     }
     
-    let unknownError = ADError("A unknown error occured.")
-    let setupError = ADError("AzureData is not setup.  Must call AzureData.setup() before attempting CRUD operations on resources.")
-    let invalidIdError = ADError("Cosmos DB Resource IDs must not exceed 255 characters and cannot contain whitespace")
-    let jsonError = ADError("Error: Could not serialize document to JSON")
     
     public var setup: Bool { return baseUri != nil }
     
@@ -342,6 +338,11 @@ public class DocumentClient {
         return self.resource(resourceUri: resourceUri, callback: callback)
     }
     
+//    public func refresh<T: Document> (_ document: T, callback: @escaping (Response<T>) -> ()) {
+//
+//        return self.refresh(document, callback: callback)
+//    }
+    
     // delete
     public func delete (_ document: Document, fromCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (DataResponse) -> ()) {
         
@@ -398,7 +399,7 @@ public class DocumentClient {
         
         let resourceUri = baseUri?.attachment(databaseId, collectionId: collectionId, documentId: documentId)
         
-        return self.create(Attachment(id: attachmentId, resourceId: "", selfLink: nil, etag: nil, timestamp: nil, contentType: contentType, mediaLink: mediaUrl.absoluteString), at: resourceUri, callback: callback)
+        return self.create(Attachment(withId: attachmentId, contentType: contentType, url: mediaUrl.absoluteString), at: resourceUri, callback: callback)
     }
     
     public func create(attachmentWithId attachmentId: String, contentType: String, name mediaName: String, with media: Data, onDocument documentId: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (Response<Attachment>) -> ()) {
@@ -412,7 +413,7 @@ public class DocumentClient {
         
         let resourceUri = baseUri?.attachment(atLink: document.selfLink!)
         
-        return self.create(Attachment(id: attachmentId, resourceId: "", selfLink: nil, etag: nil, timestamp: nil, contentType: contentType, mediaLink: mediaUrl.absoluteString), at: resourceUri, callback: callback)
+        return self.create(Attachment(withId: attachmentId, contentType: contentType, url: mediaUrl.absoluteString), at: resourceUri, callback: callback)
     }
     
     public func create(attachmentWithId attachmentId: String, contentType: String, name mediaName: String, with media: Data, onDocument document: Document, callback: @escaping (Response<Attachment>) -> ()) {
@@ -457,7 +458,7 @@ public class DocumentClient {
         
         let resourceUri = baseUri?.attachment(databaseId, collectionId: collectionId, documentId: documentId, attachmentId: attachmentId)
         
-        return self.replace(Attachment(id: attachmentId, resourceId: "", selfLink: nil, etag: nil, timestamp: nil, contentType: contentType, mediaLink: mediaUrl.absoluteString), at: resourceUri, callback: callback)
+        return self.replace(Attachment(withId: attachmentId, contentType: contentType, url: mediaUrl.absoluteString), at: resourceUri, callback: callback)
     }
     
     public func replace(attachmentWithId attachmentId: String, contentType: String, name mediaName: String, with media: Data, onDocument documentId: String, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (Response<Attachment>) -> ()) {
@@ -471,7 +472,8 @@ public class DocumentClient {
         
         let resourceUri = baseUri?.attachment(atLink: document.selfLink!, withResourceId: attachmentId)
         
-        return self.replace(Attachment(id: attachmentId, resourceId: "", selfLink: nil, etag: nil, timestamp: nil, contentType: contentType, mediaLink: mediaUrl.absoluteString), at: resourceUri, callback: callback)
+        
+        return self.replace(Attachment(withId: attachmentId, contentType: contentType, url: mediaUrl.absoluteString), at: resourceUri, callback: callback)
     }
     
     public func replace(attachmentWithId attachmentId: String, contentType: String, name mediaName: String, with media: Data, onDocument document: Document, callback: @escaping (Response<Attachment>) -> ()) {
@@ -639,14 +641,14 @@ public class DocumentClient {
         
         let resourceUri = baseUri?.trigger(databaseId, collectionId: collectionId)
         
-        return self.create(Trigger.init(id: triggerId, resourceId: "", selfLink: nil, etag: nil, timestamp: nil, body: triggerBody, triggerOperation: operation, triggerType: triggerType), at: resourceUri, callback: callback)
+        return self.create(Trigger(withId: triggerId, body: triggerBody, operation: operation, type: triggerType), at: resourceUri, callback: callback)
     }
     
     public func create (triggerWithId triggerId: String, operation: Trigger.TriggerOperation, type triggerType: Trigger.TriggerType, andBody triggerBody: String, in collection: DocumentCollection, callback: @escaping (Response<Trigger>) -> ()) {
         
         let resourceUri = baseUri?.trigger(atLink: collection.selfLink!, withResourceId: triggerId)
         
-        return self.create(Trigger.init(id: triggerId, resourceId: "", selfLink: nil, etag: nil, timestamp: nil, body: triggerBody, triggerOperation: operation, triggerType: triggerType), at: resourceUri, callback: callback)
+        return self.create(Trigger(withId: triggerId, body: triggerBody, operation: operation, type: triggerType), at: resourceUri, callback: callback)
     }
     
     // list
@@ -684,14 +686,14 @@ public class DocumentClient {
         
         let resourceUri = baseUri?.trigger(databaseId, collectionId: collectionId, triggerId: triggerId)
         
-        return self.replace(Trigger.init(id: triggerId, resourceId: "", selfLink: nil, etag: nil, timestamp: nil, body: triggerBody, triggerOperation: operation, triggerType: triggerType), at: resourceUri, callback: callback)
+        return self.replace(Trigger(withId: triggerId, body: triggerBody, operation: operation, type: triggerType), at: resourceUri, callback: callback)
     }
     
     public func replace (triggerWithId triggerId: String, operation: Trigger.TriggerOperation, type triggerType: Trigger.TriggerType, andBody triggerBody: String, in collection: DocumentCollection, callback: @escaping (Response<Trigger>) -> ()) {
         
         let resourceUri = baseUri?.trigger(atLink: collection.selfLink!, withResourceId: triggerId)
         
-        return self.replace(Trigger.init(id: triggerId, resourceId: "", selfLink: nil, etag: nil, timestamp: nil, body: triggerBody, triggerOperation: operation, triggerType: triggerType), at: resourceUri, callback: callback)
+        return self.replace(Trigger(withId: triggerId, body: triggerBody, operation: operation, type: triggerType), at: resourceUri, callback: callback)
     }
 
     
@@ -751,7 +753,7 @@ public class DocumentClient {
         
         let resourceUri = baseUri?.permission(databaseId, userId: userId)
         
-        let permission = Permission(id: permissionId, resourceId: "", selfLink: nil, etag: nil, timestamp: nil, permissionMode: permissionMode, resourceLink: resource.selfLink!, resourcePartitionKey: nil, token: nil)
+        let permission = Permission(withId: permissionId, mode: permissionMode, forResource: resource.selfLink!)
         
         return self.create(permission, at: resourceUri, callback: callback)
     }
@@ -760,7 +762,7 @@ public class DocumentClient {
         
         let resourceUri = baseUri?.permission(atLink: user.selfLink!, withResourceId: permissionId)
 
-        let permission = Permission(id: permissionId, resourceId: "", selfLink: nil, etag: nil, timestamp: nil, permissionMode: permissionMode, resourceLink: resource.selfLink!, resourcePartitionKey: nil, token: nil)
+        let permission = Permission(withId: permissionId, mode: permissionMode, forResource: resource.selfLink!)
         
         return self.create(permission, at: resourceUri, callback: callback)
     }
@@ -815,7 +817,7 @@ public class DocumentClient {
         
         let resourceUri = baseUri?.permission(databaseId, userId: userId, permissionId: permissionId)
         
-        let permission = Permission(id: permissionId, resourceId: "", selfLink: nil, etag: nil, timestamp: nil, permissionMode: permissionMode, resourceLink: resource.selfLink!, resourcePartitionKey: nil, token: nil)
+        let permission = Permission(withId: permissionId, mode: permissionMode, forResource: resource.selfLink!)
         
         return self.create(permission, at: resourceUri, callback: callback)
     }
@@ -824,7 +826,7 @@ public class DocumentClient {
         
         let resourceUri = baseUri?.permission(atLink: user.selfLink!, withResourceId: permissionId)
         
-        let permission = Permission(id: permissionId, resourceId: "", selfLink: nil, etag: nil, timestamp: nil, permissionMode: permissionMode, resourceLink: resource.selfLink!, resourcePartitionKey: nil, token: nil)
+        let permission = Permission(withId: permissionId, mode: permissionMode, forResource: resource.selfLink!)
         
         return self.create(permission, at: resourceUri, callback: callback)
     }
@@ -864,14 +866,14 @@ public class DocumentClient {
     // create
     fileprivate func create<T> (_ resource: T, at resourceUri: (URL, String)?, additionalHeaders: [String:HttpRequestHeader]? = nil, callback: @escaping (Response<T>) -> ()) {
         
-        guard resource.id.isValidResourceId else { callback(Response(invalidIdError)); return }
+        guard resource.id.isValidResourceId else { callback(Response(ADError.invalidIdError)); return }
         
         return self.createOrReplace(resource, at: resourceUri, additionalHeaders: additionalHeaders, callback: callback)
     }
 
     fileprivate func create<T> (resourceWithId resourceId: String, andData data: [String:String?]? = nil, at resourceUri: (URL, String)?, additionalHeaders: [String:HttpRequestHeader]? = nil, callback: @escaping (Response<T>) -> ()) {
         
-        guard resourceId.isValidResourceId else { callback(Response(invalidIdError)); return }
+        guard resourceId.isValidResourceId else { callback(Response(ADError.invalidIdError)); return }
         
         var dict = data ?? [:]
         
@@ -883,7 +885,7 @@ public class DocumentClient {
     // list
     fileprivate func resources<T> (resourceUri: (URL, String)?, callback: @escaping (ListResponse<T>) -> ()) {
         
-        guard setup else { callback(ListResponse<T>(setupError)); return }
+        guard setup else { callback(ListResponse<T>(ADError.setupError)); return }
         
         let request = dataRequest(T.self, .get, resourceUri: resourceUri!)
         
@@ -893,17 +895,44 @@ public class DocumentClient {
     // get
     fileprivate func resource<T>(resourceUri: (URL, String)?, callback: @escaping (Response<T>) -> ()) {
         
-        guard setup else { callback(Response<T>(setupError)); return }
+        guard setup else { callback(Response<T>(ADError.setupError)); return }
         
         let request = dataRequest(T.self, .get, resourceUri: resourceUri!)
         
         return self.sendRequest(request, callback: callback)
     }
     
+    // refresh
+    func refresh<T>(_ resource: T, callback: @escaping (Response<T>) -> ()) {
+        
+        guard setup else { callback(Response(ADError.setupError)); return }
+        
+        guard !resource.selfLink.isNilOrEmpty && !resource.resourceId.isEmpty else { callback(Response(ADError.incompleteIds)); return }
+        
+        let resourceUri = resource.resourceUri(forHost: baseUri!.baseUri)
+        
+        let request = dataRequest(T.self, .get, resourceUri: resourceUri!, additionalHeaders: [ resource.etag! : .ifNoneMatch ])
+        
+        return self.sendRequest(request, currentResource: resource, callback: callback)
+    }
+    
     // delete
     fileprivate func delete<T:CodableResource>(_ type: T.Type = T.self, resourceUri: (URL, String)?, callback: @escaping (DataResponse) -> ()) {
         
-        guard setup else { callback(DataResponse(setupError)); return }
+        guard setup else { callback(DataResponse(ADError.setupError)); return }
+        
+        let request = dataRequest(T.self, .delete, resourceUri: resourceUri!)
+        
+        return self.sendRequest(request, callback: callback)
+    }
+
+    func delete<T:CodableResource>(_ resource: T, callback: @escaping (DataResponse) -> ()) {
+        
+        guard setup else { callback(DataResponse(ADError.setupError)); return }
+        
+        guard !resource.selfLink.isNilOrEmpty && !resource.resourceId.isEmpty else { callback(DataResponse(ADError.incompleteIds)); return }
+        
+        let resourceUri = resource.resourceUri(forHost: baseUri!.baseUri)
         
         let request = dataRequest(T.self, .delete, resourceUri: resourceUri!)
         
@@ -913,14 +942,14 @@ public class DocumentClient {
     // replace
     fileprivate func replace<T> (_ resource: T, at resourceUri: (URL, String)?, additionalHeaders: [String:HttpRequestHeader]? = nil, callback: @escaping (Response<T>) -> ()) {
         
-        guard resource.id.isValidResourceId else { callback(Response(invalidIdError)); return }
+        guard resource.id.isValidResourceId else { callback(Response(ADError.invalidIdError)); return }
         
         return self.createOrReplace(resource, at: resourceUri, replacing: true, additionalHeaders: additionalHeaders, callback: callback)
     }
 
     fileprivate func replace<T> (resourceWithId resourceId: String, andData data: [String:String]? = nil, at resourceUri: (URL, String)?, additionalHeaders: [String:HttpRequestHeader]? = nil, callback: @escaping (Response<T>) -> ()) {
         
-        guard resourceId.isValidResourceId else { callback(Response(invalidIdError)); return }
+        guard resourceId.isValidResourceId else { callback(Response(ADError.invalidIdError)); return }
         
         var dict = data ?? [:]
         
@@ -932,7 +961,7 @@ public class DocumentClient {
     // query
     fileprivate func query<T> (_ query: Query, at resourceUri: (URL, String)?, callback: @escaping (ListResponse<T>) -> ()) {
         
-        guard setup else { callback(ListResponse<T>(setupError)); return }
+        guard setup else { callback(ListResponse<T>(ADError.setupError)); return }
         
         if self.verboseLogging { query.printQuery(); print() }
         
@@ -952,7 +981,7 @@ public class DocumentClient {
     // execute
     fileprivate func execute<T:CodableResource, R: Encodable>(_ type: T.Type, withBody body: R? = nil, resourceUri: (URL, String)?, callback: @escaping (DataResponse) -> ()) {
         
-        guard setup else { callback(DataResponse(setupError)); return }
+        guard setup else { callback(DataResponse(ADError.setupError)); return }
         
         do {
             
@@ -970,7 +999,7 @@ public class DocumentClient {
     // create or replace
     fileprivate func createOrReplace<T, R:Encodable> (_ body: R, at resourceUri: (URL, String)?, replacing: Bool = false, additionalHeaders: [String:HttpRequestHeader]? = nil, callback: @escaping (Response<T>) -> ()) {
         
-        guard setup else { callback(Response<T>(setupError)); return }
+        guard setup else { callback(Response<T>(ADError.setupError)); return }
         
         do {
             
@@ -987,7 +1016,7 @@ public class DocumentClient {
     
     fileprivate func createOrReplace<T> (_ body: Data, at resourceUri: (URL, String)?, replacing: Bool = false, additionalHeaders: [String:HttpRequestHeader]? = nil, callback: @escaping (Response<T>) -> ()) {
         
-        guard setup else { callback(Response<T>(setupError)); return }
+        guard setup else { callback(Response<T>(ADError.setupError)); return }
         
         var request = dataRequest(T.self, replacing ? .put : .post, resourceUri: resourceUri!, additionalHeaders: additionalHeaders)
         
@@ -1002,7 +1031,7 @@ public class DocumentClient {
     
     // MARK: - Request
     
-    fileprivate func sendRequest<T> (_ request: URLRequest, callback: @escaping (Response<T>) -> ()) {
+    fileprivate func sendRequest<T> (_ request: URLRequest, currentResource: T? = nil, callback: @escaping (Response<T>) -> ()) {
         
         if verboseLogging {
             print("***")
@@ -1012,59 +1041,72 @@ public class DocumentClient {
         
         session.dataTask(with: request) { (data, response, error) in
             
+            let httpResponse = response as! HTTPURLResponse
+            
             if let error = error {
                 
-                if self.verboseLogging { print("❌ error: \(error.localizedDescription)"); print() }
+                if self.verboseLogging { print("❌ error: \(error.localizedDescription)\n") }
                 
-                callback(Response(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(error))))
+                callback(Response(request: request, response: httpResponse, data: data, result: .failure(ADError(error))))
             
             } else if let data = data {
                 
                 //if self.verboseLogging { print("*** data: \(String(data: data, encoding: .utf8) ?? "nil")") }
                 
-                do {
+                if let current = currentResource, let statusCode = StatusCode(rawValue: httpResponse.statusCode), statusCode == .notModified {
                     
-                    let resource = try self.jsonDecoder.decode(T.self, from: data)
-                    
-                    if self.verboseLogging { print(resource); print() }
-                    
-                    callback(Response(request: request, response: response as? HTTPURLResponse, data: data, result: .success(resource)))
-                    
-                } catch DecodingError.typeMismatch(let type, let context) {
-                    
-                    if self.verboseLogging { print("❌ decodeError: typeMismatch (type: \(type), context: \(context)"); print() }
-                    
-                    callback(Response(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError("decodeError: typeMismatch (type: \(type), context: \(context)"))))
-                    
-                } catch DecodingError.dataCorrupted(let context) {
-                    
-                    if self.verboseLogging { print("❌ decodeError: dataCorrupted (context: \(context)"); print() }
-                    
-                    callback(Response(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError("decodeError: dataCorrupted (context: \(context)"))))
-                    
-                } catch DecodingError.keyNotFound(let key, let context) {
-                    
-                    if self.verboseLogging { print("❌ decodeError: keyNotFound (key: \(key), context: \(context)"); print() }
-                    
-                    callback(Response(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError("decodeError: keyNotFound (key: \(key), context: \(context)"))))
-                    
-                } catch DecodingError.valueNotFound(let type, let context) {
-                    
-                    if self.verboseLogging { print("❌ decodeError: valueNotFound (type: \(type), context: \(context)"); print() }
-                    
-                    callback(Response(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError("decodeError: valueNotFound (type: \(type), context: \(context)"))))
-                    
-                } catch let e {
-                    
-                    if self.verboseLogging { print("❌ decodeError: \(e.localizedDescription)"); print() }
-                    
-                    callback(Response(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(e))))
+                    callback(Response(request: request, response: httpResponse, data: data, result: .success(current)))
+                
+                } else {
+                
+                    do {
+                        
+                        var resource = try self.jsonDecoder.decode(T.self, from: data)
+                        
+                        if let altLink = httpResponse.headerString(for: .xMsAltContentPath) {
+                            resource._altLink = altLink
+                        }
+                        
+                        if self.verboseLogging { print(resource); print() }
+                        
+                        callback(Response(request: request, response: httpResponse, data: data, result: .success(resource)))
+                        
+                    } catch DecodingError.typeMismatch(let type, let context) {
+                        
+                        if self.verboseLogging { print("❌ decodeError: typeMismatch\n\ttype: \(type)\n\tcontext: \(context)\n\tresponse: \(String(data: data, encoding: .utf8) ?? "")\n") }
+                        
+                        callback(Response(request: request, response: httpResponse, data: data, result: .failure(ADError("decodeError: typeMismatch (type: \(type), context: \(context)"))))
+                        
+                    } catch DecodingError.dataCorrupted(let context) {
+                        
+                        if self.verboseLogging { print("❌ decodeError: dataCorrupted\n\tcontext: \(context)\n\tresponse: \(String(data: data, encoding: .utf8) ?? "")\n") }
+                        
+                        callback(Response(request: request, response: httpResponse, data: data, result: .failure(ADError("decodeError: dataCorrupted (context: \(context)"))))
+                        
+                    } catch DecodingError.keyNotFound(let key, let context) {
+                        
+                        if self.verboseLogging { print("❌ decodeError: keyNotFound\n\tkey: \(key)\n\tcontext: \(context)\n\tresponse: \(String(data: data, encoding: .utf8) ?? "")\n") }
+                        
+                        callback(Response(request: request, response: httpResponse, data: data, result: .failure(ADError("decodeError: keyNotFound (key: \(key), context: \(context)"))))
+                        
+                    } catch DecodingError.valueNotFound(let type, let context) {
+                        
+                        if self.verboseLogging { print("❌ decodeError: valueNotFound\n\ttype: \(type)\n\tcontext: \(context)\n\tresponse: \(String(data: data, encoding: .utf8) ?? "")\n") }
+                        
+                        callback(Response(request: request, response: httpResponse, data: data, result: .failure(ADError("decodeError: valueNotFound (type: \(type), context: \(context)"))))
+                        
+                    } catch let e {
+                        
+                        if self.verboseLogging { print("❌ decodeError: \(e.localizedDescription)\n") }
+                        
+                        callback(Response(request: request, response: httpResponse, data: data, result: .failure(ADError(e))))
+                    }
                 }
             } else {
                 
-                if self.verboseLogging { print("❌ error: \(self.unknownError.message)"); print() }
+                if self.verboseLogging { print("❌ error: \(ADError.unknownError.message)\n") }
                 
-                callback(Response(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(self.unknownError)))
+                callback(Response(request: request, response: httpResponse, data: data, result: .failure(ADError.unknownError)))
             }
         }.resume()
     }
@@ -1079,11 +1121,13 @@ public class DocumentClient {
 
         session.dataTask(with: request) { (data, response, error) in
             
+            let httpResponse = response as? HTTPURLResponse
+            
             if let error = error {
                 
                 if self.verboseLogging { print("❌ error: \(error.localizedDescription)") }
                 
-                callback(ListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(error))))
+                callback(ListResponse(request: request, response: httpResponse, data: data, result: .failure(ADError(error))))
                 
             } else if let data = data {
                 
@@ -1092,46 +1136,46 @@ public class DocumentClient {
                 do {
                     
                     let resource = try self.jsonDecoder.decode(Resources<T>.self, from: data)
-                    
+                
                     if self.verboseLogging { print(resource); print() }
                     
-                    callback(ListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .success(resource)))
+                    callback(ListResponse(request: request, response: httpResponse, data: data, result: .success(resource)))
                     
                 } catch DecodingError.typeMismatch(let type, let context) {
                     
-                    if self.verboseLogging { print("❌ decodeError: typeMismatch (type: \(type), context: \(context)"); print() }
+                    if self.verboseLogging { print("❌ decodeError: typeMismatch\n\ttype: \(type)\n\tcontext: \(context)\n\tresponse: \(String(data: data, encoding: .utf8) ?? "")\n") }
                  
-                    callback(ListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError("decodeError: typeMismatch (type: \(type), context: \(context)"))))
+                    callback(ListResponse(request: request, response: httpResponse, data: data, result: .failure(ADError("decodeError: typeMismatch (type: \(type), context: \(context)"))))
                 
                 } catch DecodingError.dataCorrupted(let context) {
                     
-                    if self.verboseLogging { print("❌ decodeError: dataCorrupted (context: \(context)"); print() }
+                    if self.verboseLogging { print("❌ decodeError: dataCorrupted\n\tcontext: \(context)\n\tresponse: \(String(data: data, encoding: .utf8) ?? "")\n") }
                     
-                    callback(ListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError("decodeError: dataCorrupted (context: \(context)"))))
+                    callback(ListResponse(request: request, response: httpResponse, data: data, result: .failure(ADError("decodeError: dataCorrupted (context: \(context)"))))
 
                 } catch DecodingError.keyNotFound(let key, let context) {
                     
-                    if self.verboseLogging { print("❌ decodeError: keyNotFound (key: \(key), context: \(context)"); print() }
+                    if self.verboseLogging { print("❌ decodeError: keyNotFound\n\tkey: \(key)\n\tcontext: \(context)\n\tresponse: \(String(data: data, encoding: .utf8) ?? "")\n") }
                     
-                    callback(ListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError("decodeError: keyNotFound (key: \(key), context: \(context)"))))
+                    callback(ListResponse(request: request, response: httpResponse, data: data, result: .failure(ADError("decodeError: keyNotFound (key: \(key), context: \(context)"))))
 
                 } catch DecodingError.valueNotFound(let type, let context) {
                     
-                    if self.verboseLogging { print("❌ decodeError: valueNotFound (type: \(type), context: \(context)"); print() }
+                    if self.verboseLogging { print("❌ decodeError: valueNotFound\n\ttype: \(type)\n\tcontext: \(context)\n\tresponse: \(String(data: data, encoding: .utf8) ?? "")\n") }
                     
-                    callback(ListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError("decodeError: valueNotFound (type: \(type), context: \(context)"))))
+                    callback(ListResponse(request: request, response: httpResponse, data: data, result: .failure(ADError("decodeError: valueNotFound (type: \(type), context: \(context)"))))
 
                 } catch let e {
                     
-                    if self.verboseLogging { print("❌ decodeError: \(e.localizedDescription)"); print() }
+                    if self.verboseLogging { print("❌ decodeError: \(e.localizedDescription)\n") }
                     
-                    callback(ListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(e))))
+                    callback(ListResponse(request: request, response: httpResponse, data: data, result: .failure(ADError(e))))
                 }
             } else {
                 
-                if self.verboseLogging { print("❌ error: \(self.unknownError.message)"); print() }
+                if self.verboseLogging { print("❌ error: \(ADError.unknownError.message)\n") }
              
-                callback(ListResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(self.unknownError)))
+                callback(ListResponse(request: request, response: httpResponse, data: data, result: .failure(ADError.unknownError)))
             }
         }.resume()
     }
@@ -1146,23 +1190,25 @@ public class DocumentClient {
 
         session.dataTask(with: request) { (data, response, error) in
             
+            let httpResponse = response as? HTTPURLResponse
+            
             if let error = error {
                 
-                if self.verboseLogging { print("❌ error: \(error.localizedDescription)"); print() }
+                if self.verboseLogging { print("❌ error: \(error.localizedDescription)\n") }
                 
-                callback(DataResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(ADError(error))))
+                callback(DataResponse(request: request, response: httpResponse, data: data, result: .failure(ADError(error))))
 
             } else if let data = data {
                 
-                if self.verboseLogging { print("Data : \(String(data: data, encoding: .utf8) ?? "nil")"); print() }
+                if self.verboseLogging { print("Data : \(String(data: data, encoding: .utf8) ?? "nil")\n") }
 
-                callback(DataResponse.init(request: request, response: response as? HTTPURLResponse, data: data, result: .success(data)))
+                callback(DataResponse.init(request: request, response: httpResponse, data: data, result: .success(data)))
                 
             } else {
                 
-                if self.verboseLogging { print("❌ error: \(self.unknownError.message)"); print() }
+                if self.verboseLogging { print("❌ error: \(ADError.unknownError.message)\n") }
 
-                callback(DataResponse(request: request, response: response as? HTTPURLResponse, data: data, result: .failure(self.unknownError)))
+                callback(DataResponse(request: request, response: httpResponse, data: data, result: .failure(ADError.unknownError)))
             }
         }.resume()
     }

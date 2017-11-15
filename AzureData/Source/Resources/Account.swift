@@ -13,6 +13,8 @@ public struct Account : CodableResource {
     public static var type = "account"
     public static var list = "Accounts"
     
+    public var _altLink: String? = nil
+
     public private(set) var id:                         String
     public private(set) var resourceId:                 String
     public private(set) var selfLink:                   String?

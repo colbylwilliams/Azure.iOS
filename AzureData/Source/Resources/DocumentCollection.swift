@@ -17,6 +17,8 @@ public struct DocumentCollection : CodableResource {
         return "\(Database.type)/\(parentIds[0])"
     }
     
+    public var _altLink: String? = nil
+    
     public private(set) var id:                         String
     public private(set) var resourceId:                 String
     public private(set) var selfLink:                   String?

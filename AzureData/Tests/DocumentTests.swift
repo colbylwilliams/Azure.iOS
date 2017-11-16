@@ -77,7 +77,7 @@ class DocumentTests: AzureDataTests {
         newDocument[customNumberKey] = customNumberValue
         
         
-        print("Create...")
+        
         
         // Create
         AzureData.create(newDocument, inCollection: collectionId, inDatabase: databaseId) { r in
@@ -100,7 +100,6 @@ class DocumentTests: AzureDataTests {
 
         
         
-        print("List...")
         
         // List
         AzureData.get(documentsAs: Document.self, inCollection: collectionId, inDatabase: databaseId) { r in
@@ -115,7 +114,7 @@ class DocumentTests: AzureDataTests {
         listResponse?.response?.printHeaders()
 
         
-        print("Query...")
+
         
         // Query
         let query = Query.select()

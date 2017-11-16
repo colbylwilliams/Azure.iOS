@@ -22,6 +22,7 @@
 		B55AEFD31FB3495100F7BEED /* CollectionResourceTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AEFCA1FB3495000F7BEED /* CollectionResourceTableViewController.swift */; };
 		B55AEFD41FB3495100F7BEED /* CollectionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AEFCB1FB3495100F7BEED /* CollectionTableViewController.swift */; };
 		B55AEFD51FB3495100F7BEED /* DatabaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AEFCC1FB3495100F7BEED /* DatabaseTableViewController.swift */; };
+		B5860EDC1FBD41AF003CB80A /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5860EDB1FBD41AF003CB80A /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		B55AEFCA1FB3495000F7BEED /* CollectionResourceTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionResourceTableViewController.swift; sourceTree = "<group>"; };
 		B55AEFCB1FB3495100F7BEED /* CollectionTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionTableViewController.swift; sourceTree = "<group>"; };
 		B55AEFCC1FB3495100F7BEED /* DatabaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseTableViewController.swift; sourceTree = "<group>"; };
+		B5860EDB1FBD41AF003CB80A /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 				B55AEF8C1FB3480400F7BEED /* Assets.xcassets */,
 				B55AEF8E1FB3480400F7BEED /* LaunchScreen.storyboard */,
 				B55AEF891FB3480400F7BEED /* Main.storyboard */,
+				B5860EDB1FBD41AF003CB80A /* Extensions.swift */,
 			);
 			path = "AzureData iOS Sample";
 			sourceTree = "<group>";
@@ -297,6 +300,7 @@
 				B55AEFD11FB3495100F7BEED /* DocumentDetailTableViewController.swift in Sources */,
 				B55AEFD21FB3495100F7BEED /* PermissionTableViewController.swift in Sources */,
 				B55AEF861FB3480300F7BEED /* AppDelegate.swift in Sources */,
+				B5860EDC1FBD41AF003CB80A /* Extensions.swift in Sources */,
 				B55AEFD31FB3495100F7BEED /* CollectionResourceTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

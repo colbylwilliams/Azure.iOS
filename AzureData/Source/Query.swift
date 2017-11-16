@@ -113,7 +113,7 @@ public class Query : Encodable {
 
 extension Query {
     
-    public func from(_ type: String) -> Query {
+    public func from(_ type: String) -> Self {
         assert(selectCalled, "must call `select` before calling `from`")
         assert(!fromCalled, "you can only call `from` once")
         fromCalled = true;
@@ -123,7 +123,7 @@ extension Query {
         return self
     }
     
-    public func `where`(_ property: String, is value: String) -> Query {
+    public func `where`(_ property: String, is value: String) -> Self {
         assert(!whereCalled, "you can only call `where` once, to add more constraints use `and`")
         whereCalled = true
         
@@ -132,7 +132,7 @@ extension Query {
         return self
     }
     
-    public func `where`(_ property: String, is value: Int) -> Query {
+    public func `where`(_ property: String, is value: Int) -> Self {
         assert(!whereCalled, "you can only call `where` once, to add more constraints use `and`")
         whereCalled = true
         
@@ -141,7 +141,7 @@ extension Query {
         return self
     }
     
-    public func `where`(_ property: String, isNot value: String) -> Query {
+    public func `where`(_ property: String, isNot value: String) -> Self {
         assert(!whereCalled, "you can only call `where` once, to add more constraints use `and`")
         whereCalled = true
         
@@ -150,7 +150,7 @@ extension Query {
         return self
     }
     
-    public func `where`(_ property: String, isNot value: Int) -> Query {
+    public func `where`(_ property: String, isNot value: Int) -> Self {
         assert(!whereCalled, "you can only call `where` once, to add more constraints use `and`")
         whereCalled = true
         
@@ -159,7 +159,7 @@ extension Query {
         return self
     }
     
-    public func `where`(_ property: String, isGreaterThan value: String) -> Query {
+    public func `where`(_ property: String, isGreaterThan value: String) -> Self {
         assert(!whereCalled, "you can only call `where` once, to add more constraints use `and`")
         whereCalled = true
         
@@ -168,7 +168,7 @@ extension Query {
         return self
     }
     
-    public func `where`(_ property: String, isGreaterThan value: Int) -> Query {
+    public func `where`(_ property: String, isGreaterThan value: Int) -> Self {
         assert(!whereCalled, "you can only call `where` once, to add more constraints use `and`")
         whereCalled = true
         
@@ -177,7 +177,7 @@ extension Query {
         return self
     }
     
-    public func `where`(_ property: String, isLessThan value: String) -> Query {
+    public func `where`(_ property: String, isLessThan value: String) -> Self {
         assert(!whereCalled, "you can only call `where` once, to add more constraints use `and`")
         whereCalled = true
         
@@ -186,7 +186,7 @@ extension Query {
         return self
     }
     
-    public func `where`(_ property: String, isLessThan value: Int) -> Query {
+    public func `where`(_ property: String, isLessThan value: Int) -> Self {
         assert(!whereCalled, "you can only call `where` once, to add more constraints use `and`")
         whereCalled = true
         
@@ -196,7 +196,7 @@ extension Query {
     }
     
     
-    public func and(_ property: String, is value: String) -> Query {
+    public func and(_ property: String, is value: String) -> Self {
         assert(whereCalled, "must call where before calling and")
         andCalled = true
         
@@ -205,7 +205,7 @@ extension Query {
         return self
     }
     
-    public func and(_ property: String, is value: Int) -> Query {
+    public func and(_ property: String, is value: Int) -> Self {
         assert(whereCalled, "must call where before calling and")
         andCalled = true
         
@@ -214,7 +214,7 @@ extension Query {
         return self
     }
     
-    public func and(_ property: String, isNot value: String) -> Query {
+    public func and(_ property: String, isNot value: String) -> Self {
         assert(whereCalled, "must call where before calling and")
         andCalled = true
         
@@ -223,7 +223,7 @@ extension Query {
         return self
     }
     
-    public func and(_ property: String, isNot value: Int) -> Query {
+    public func and(_ property: String, isNot value: Int) -> Self {
         assert(whereCalled, "must call where before calling and")
         andCalled = true
         
@@ -232,7 +232,7 @@ extension Query {
         return self
     }
     
-    public func and(_ property: String, isGreaterThan value: String) -> Query {
+    public func and(_ property: String, isGreaterThan value: String) -> Self {
         assert(whereCalled, "must call where before calling and")
         andCalled = true
         
@@ -241,7 +241,7 @@ extension Query {
         return self
     }
     
-    public func and(_ property: String, isGreaterThan value: Int) -> Query {
+    public func and(_ property: String, isGreaterThan value: Int) -> Self {
         assert(whereCalled, "must call where before calling and")
         andCalled = true
         
@@ -250,7 +250,7 @@ extension Query {
         return self
     }
     
-    public func and(_ property: String, isGreaterThanOrEqualTo value: String) -> Query {
+    public func and(_ property: String, isGreaterThanOrEqualTo value: String) -> Self {
         assert(whereCalled, "must call where before calling and")
         andCalled = true
         
@@ -259,7 +259,7 @@ extension Query {
         return self
     }
     
-    public func and(_ property: String, isGreaterThanOrEqualTo value: Int) -> Query {
+    public func and(_ property: String, isGreaterThanOrEqualTo value: Int) -> Self {
         assert(whereCalled, "must call where before calling and")
         andCalled = true
         
@@ -268,7 +268,7 @@ extension Query {
         return self
     }
     
-    public func and(_ property: String, isLessThan value: String) -> Query {
+    public func and(_ property: String, isLessThan value: String) -> Self {
         assert(whereCalled, "must call where before calling and")
         andCalled = true
         
@@ -277,7 +277,7 @@ extension Query {
         return self
     }
     
-    public func and(_ property: String, isLessThan value: Int) -> Query {
+    public func and(_ property: String, isLessThan value: Int) -> Self {
         assert(whereCalled, "must call where before calling and")
         andCalled = true
         
@@ -286,7 +286,7 @@ extension Query {
         return self
     }
     
-    public func and(_ property: String, isLessThanOrEqualTo value: String) -> Query {
+    public func and(_ property: String, isLessThanOrEqualTo value: String) -> Self {
         assert(whereCalled, "must call where before calling and")
         andCalled = true
         
@@ -295,7 +295,7 @@ extension Query {
         return self
     }
     
-    public func and(_ property: String, isLessThanOrEqualTo value: Int) -> Query {
+    public func and(_ property: String, isLessThanOrEqualTo value: Int) -> Self {
         assert(whereCalled, "must call where before calling and")
         andCalled = true
         
@@ -304,7 +304,7 @@ extension Query {
         return self
     }
     
-    public func orderBy(_ property: String, descending: Bool = false) -> Query {
+    public func orderBy(_ property: String, descending: Bool = false) -> Self {
         assert(!orderByCalled, "you can only call `orderBy` once, to order on an additional level use `thenBy`")
         orderByFragment = property
         

@@ -40,9 +40,7 @@ class DatabaseTests: AzureDataTests {
         
         XCTAssertNotNil(createResponse?.resource)
 
-        print("Create")
-        print("altLink = \(createResponse?.resource?._altLink ?? "")")
-        createResponse?.response?.printHeaders()
+        //createResponse?.response?.printHeaders()
         
         
         
@@ -56,8 +54,7 @@ class DatabaseTests: AzureDataTests {
         
         XCTAssertNotNil(listResponse?.resource)
 
-        print("List")
-        listResponse?.response?.printHeaders()
+        //listResponse?.response?.printHeaders()
 
         
         
@@ -71,9 +68,7 @@ class DatabaseTests: AzureDataTests {
         
         XCTAssertNotNil(getResponse?.resource)
 
-        print("Get")
-        print("altLink = \(getResponse?.resource?._altLink ?? "")")
-        getResponse?.response?.printHeaders()
+        //getResponse?.response?.printHeaders()
 
         
 
@@ -104,7 +99,6 @@ class DatabaseTests: AzureDataTests {
         
         XCTAssert(deleteResponse?.result.isSuccess ?? false)
         
-        print("Delete")
-        deleteResponse?.response?.printHeaders()
+        //deleteResponse?.response?.printHeaders()
     }
 }

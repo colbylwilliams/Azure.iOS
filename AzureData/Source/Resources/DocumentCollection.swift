@@ -13,12 +13,6 @@ public struct DocumentCollection : CodableResource {
     public static var type = "colls"
     public static var list = "DocumentCollections"
     
-    public static func parentPath (_ parentIds: String...) -> String {
-        return "\(Database.type)/\(parentIds[0])"
-    }
-    
-    public var _altLink: String? = nil
-    
     public private(set) var id:                         String
     public private(set) var resourceId:                 String
     public private(set) var selfLink:                   String?
@@ -61,9 +55,8 @@ public struct DocumentCollection : CodableResource {
         }
         
         public struct IncludedPath : Codable {
-            
-            public private(set) var path: String?
-            public private(set) var indexes: [Index] = []
+            public private(set) var path:   String?
+            public private(set) var indexes:[Index] = []
             
             public struct Index : Codable {
                 public private(set) var kind:       IndexKind?

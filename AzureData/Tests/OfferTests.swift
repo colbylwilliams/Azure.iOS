@@ -21,12 +21,8 @@ class OfferTests: AzureDataTests {
     
     func testOfferCrud() {
         
-        //var createResponse:     Response<Offer>?
         var listResponse:       ListResponse<Offer>?
         var getResponse:        Response<Offer>?
-        //var replaceResponse:    Response<Offer>?
-        //var queryResponse:      ListResponse<Offer>?
-        //var refreshResponse:    Response<Offer>?
 
         
         // List

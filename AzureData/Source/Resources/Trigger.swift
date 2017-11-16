@@ -13,8 +13,6 @@ public struct Trigger : CodableResource {
     public static var type = "triggers"
     public static var list = "Triggers"
 
-    public var _altLink: String? = nil
-    
     public private(set) var id:                 String
     public private(set) var resourceId:         String
     public private(set) var selfLink:           String?

@@ -66,10 +66,9 @@ class DocumentTests: AzureDataTests {
         var createResponse:     Response<Document>?
         var listResponse:       ListResponse<Document>?
         var getResponse:        Response<Document>?
-        //var replaceResponse:    Response<Document>?
         var queryResponse:      ListResponse<Document>?
-        var deleteResponse:     DataResponse?
         var refreshResponse:    Response<Document>?
+        var deleteResponse:     DataResponse?
 
         
         let newDocument = Document(resourceId)
@@ -97,8 +96,7 @@ class DocumentTests: AzureDataTests {
             XCTAssertEqual (document[customNumberKey] as! Int, customNumberValue)
         }
 
-        print("altLink = \(createResponse?.resource?._altLink ?? "")")
-        createResponse?.response?.printHeaders()
+        //createResponse?.response?.printHeaders()
 
         
         
@@ -144,7 +142,7 @@ class DocumentTests: AzureDataTests {
         
         
         
-        print("Get...")
+
         // Get
         //if createResponse?.result.isSuccess ?? false {
             
@@ -165,12 +163,11 @@ class DocumentTests: AzureDataTests {
             XCTAssertEqual (document[customNumberKey] as! Int, customNumberValue)
         }
 
-        print("altLink = \(getResponse?.resource?._altLink ?? "")")
-        getResponse?.response?.printHeaders()
+        //getResponse?.response?.printHeaders()
 
         
         
-        print("Refresh...")
+
         // Refresh
         if getResponse?.result.isSuccess ?? false {
             
@@ -191,8 +188,7 @@ class DocumentTests: AzureDataTests {
             XCTAssertEqual (document[customNumberKey] as! Int, customNumberValue)
         }
         
-        print("altLink = \(refreshResponse?.resource?._altLink ?? "")")
-        refreshResponse?.response?.printHeaders()
+        //refreshResponse?.response?.printHeaders()
 
         
         

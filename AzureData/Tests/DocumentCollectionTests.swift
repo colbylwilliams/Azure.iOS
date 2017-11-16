@@ -25,10 +25,8 @@ class DocumentCollectionTests: AzureDataTests {
         var createResponse:     Response<DocumentCollection>?
         var listResponse:       ListResponse<DocumentCollection>?
         var getResponse:        Response<DocumentCollection>?
-        var deleteResponse:     DataResponse?
-        //var replaceResponse:    Response<DocumentCollection>?
-        //var queryResponse:      ListResponse<DocumentCollection>?
         var refreshResponse:    Response<DocumentCollection>?
+        var deleteResponse:     DataResponse?
 
         
         // Create
@@ -42,6 +40,7 @@ class DocumentCollectionTests: AzureDataTests {
         XCTAssertNotNil(createResponse?.resource)
         
         
+        
         // List
         AzureData.get(collectionsIn: databaseId) { r in
             listResponse = r
@@ -51,6 +50,7 @@ class DocumentCollectionTests: AzureDataTests {
         wait(for: [listExpectation], timeout: timeout)
         
         XCTAssertNotNil(listResponse?.resource)
+        
         
         
         // Get

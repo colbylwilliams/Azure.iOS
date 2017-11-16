@@ -1061,11 +1061,7 @@ public class DocumentClient {
                 
                     do {
                         
-                        var resource = try self.jsonDecoder.decode(T.self, from: data)
-                        
-                        if let altLink = httpResponse.headerString(for: .xMsAltContentPath) {
-                            resource._altLink = altLink
-                        }
+                        let resource = try self.jsonDecoder.decode(T.self, from: data)
                         
                         if self.verboseLogging { print(resource); print() }
                         

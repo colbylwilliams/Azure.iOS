@@ -13,8 +13,6 @@ public struct Offer : CodableResource {
     public static var type = "offers"
     public static var list = "Offers"
     
-    public var _altLink: String? = nil
-    
     public private(set) var id:             String
     public private(set) var resourceId:     String
     public private(set) var selfLink:       String?

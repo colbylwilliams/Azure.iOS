@@ -13,8 +13,6 @@ public struct Permission : CodableResource {
     public static var type = "permissions"
     public static var list = "Permissions"
 
-    public var _altLink: String? = nil
-
     public private(set) var id:                     String
     public private(set) var resourceId:             String
     public private(set) var selfLink:               String?

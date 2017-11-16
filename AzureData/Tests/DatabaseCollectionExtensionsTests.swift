@@ -29,9 +29,8 @@ class DatabaseCollectionExtensionsTests: AzureDataTests {
             var listResponse:       ListResponse<DocumentCollection>?
             var getResponse:        Response<DocumentCollection>?
             var deleteResponse:     DataResponse?
-            //var replaceResponse:    Response<DocumentCollection>?
-            //var queryResponse:      ListResponse<DocumentCollection>?
 
+            
             
             // Create
             database.create(collectionWithId: collectionId) { r in

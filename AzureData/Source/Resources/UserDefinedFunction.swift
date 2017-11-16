@@ -13,8 +13,6 @@ public struct UserDefinedFunction : CodableResource {
     public static var type = "udfs"
     public static var list = "UserDefinedFunctions"
 
-    public var _altLink: String? = nil
-
     public private(set) var id:         String
     public private(set) var resourceId: String
     public private(set) var selfLink:   String?

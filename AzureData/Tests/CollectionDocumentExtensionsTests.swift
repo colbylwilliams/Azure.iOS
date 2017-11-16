@@ -28,7 +28,6 @@ class CollectionDocumentExtensionsTests: AzureDataTests {
         var listResponse:       ListResponse<Document>?
         var getResponse:        Response<Document>?
         var deleteResponse:     DataResponse?
-        //var replaceResponse:    Response<Document>?
         var queryResponse:      ListResponse<Document>?
 
         

@@ -13,12 +13,6 @@ public struct Attachment : CodableResource {
     public static var type = "attachments"
     public static var list = "Attachments"
     
-    public static func parentPath (_ parentIds: String...) -> String {
-        return "\(Database.type)/\(parentIds[0])/\(DocumentCollection.type)/\(parentIds[2])/\(Document.type)/\(parentIds[3])"
-    }
-
-    public var _altLink: String? = nil
-    
     public private(set) var id:         String
     public private(set) var resourceId: String
     public private(set) var selfLink:   String?

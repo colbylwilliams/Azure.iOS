@@ -111,7 +111,7 @@ class DocumentTests: AzureDataTests {
         
         XCTAssertNotNil(listResponse?.resource)
 
-        listResponse?.response?.printHeaders()
+        //listResponse?.response?.printHeaders()
 
         
 

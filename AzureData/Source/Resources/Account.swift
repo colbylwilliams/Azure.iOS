@@ -25,6 +25,10 @@ public struct Account : CodableResource {
     public private(set) var mediaStorageUsageInMB:      String?
     public private(set) var readableLocations:          String?
     public private(set) var writableLocation:           String?
+}
+
+
+private extension Account {
     
     private enum CodingKeys: String, CodingKey {
         case id

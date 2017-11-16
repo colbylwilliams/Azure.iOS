@@ -19,7 +19,11 @@ public struct User : CodableResource {
     public private(set) var etag:           String?
     public private(set) var timestamp:      Date?
     public private(set) var permissionsLink:String?
+}
 
+
+private extension User {
+    
     private enum CodingKeys: String, CodingKey {
         case id
         case resourceId         = "_rid"

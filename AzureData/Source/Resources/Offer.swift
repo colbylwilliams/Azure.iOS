@@ -24,6 +24,16 @@ public struct Offer : CodableResource {
     public private(set) var offerResourceId:String?
     public private(set) var content:        OfferContent?
 
+    
+    public struct OfferContent : Codable {
+        public private(set) var offerThroughput: Int = 1000
+        public private(set) var offerIsRUPerMinuteThroughputEnabled: Bool?
+    }
+}
+
+
+private extension Offer {
+    
     private enum CodingKeys: String, CodingKey {
         case id
         case resourceId         = "_rid"
@@ -35,10 +45,5 @@ public struct Offer : CodableResource {
         case resourceLink       = "resource"
         case offerResourceId
         case content
-    }
-
-    public struct OfferContent : Codable {
-        public private(set) var offerThroughput: Int = 1000
-        public private(set) var offerIsRUPerMinuteThroughputEnabled: Bool?
     }
 }

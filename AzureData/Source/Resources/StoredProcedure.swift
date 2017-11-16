@@ -19,6 +19,10 @@ public struct StoredProcedure : CodableResource {
     public private(set) var etag:       String?
     public private(set) var timestamp:  Date?
     public private(set) var body:       String?
+}
+
+
+private extension StoredProcedure {
     
     private enum CodingKeys: String, CodingKey {
         case id

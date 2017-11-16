@@ -26,25 +26,8 @@ public struct DocumentCollection : CodableResource {
     public private(set) var triggersLink:               String?
     public private(set) var userDefinedFunctionsLink:   String?
     
-    private enum CodingKeys: String, CodingKey {
-        case id
-        case resourceId                 = "_rid"
-        case selfLink                   = "_self"
-        case etag                       = "_etag"
-        case timestamp                  = "_ts"
-        case conflictsLink              = "_conflicts"
-        case documentsLink              = "_docs"
-        case indexingPolicy
-        case partitionKey
-        case storedProceduresLink       = "_sprocs"
-        case triggersLink               = "_triggers"
-        case userDefinedFunctionsLink   = "_udfs"
-    }
-    
-    public init (_ id: String) { self.id = id; resourceId = "" }
     
     public struct IndexingPolicy : Codable {
-        
         public private(set) var automatic:      Bool?
         public private(set) var excludedPaths:  [ExcludedPath] = []
         public private(set) var includedPaths:  [IncludedPath] = []
@@ -90,10 +73,29 @@ public struct DocumentCollection : CodableResource {
         public private(set) var paths: [String] = []
     }
     
-    public func childLink (_ resourceId: String? = nil) -> String {
-        return resourceId.isNilOrEmpty ? String(selfLink!.split(separator: "/").last!).lowercased() : resourceId!.lowercased()
+    
+    public init (_ id: String) { self.id = id; resourceId = "" }
+}
+
+
+private extension DocumentCollection {
+    
+    private enum CodingKeys: String, CodingKey {
+        case id
+        case resourceId                 = "_rid"
+        case selfLink                   = "_self"
+        case etag                       = "_etag"
+        case timestamp                  = "_ts"
+        case conflictsLink              = "_conflicts"
+        case documentsLink              = "_docs"
+        case indexingPolicy
+        case partitionKey
+        case storedProceduresLink       = "_sprocs"
+        case triggersLink               = "_triggers"
+        case userDefinedFunctionsLink   = "_udfs"
     }
 }
+
 
 extension DocumentCollection : CustomDebugStringConvertible {
     public var debugDescription: String {

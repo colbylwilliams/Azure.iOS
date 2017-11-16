@@ -21,6 +21,13 @@ public struct Database : CodableResource {
     public private(set) var collectionsLink:String?
     public private(set) var usersLink:      String?
     
+    
+    public init (_ id: String) { self.id = id; resourceId = "" }
+}
+
+
+private extension Database {
+    
     private enum CodingKeys: String, CodingKey {
         case id
         case resourceId         = "_rid"
@@ -30,9 +37,8 @@ public struct Database : CodableResource {
         case collectionsLink    = "_colls"
         case usersLink          = "_users"
     }
-    
-    public init (_ id: String) { self.id = id; resourceId = "" }
 }
+
 
 extension Database : CustomDebugStringConvertible {
     public var debugDescription: String {

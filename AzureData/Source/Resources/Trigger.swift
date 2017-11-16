@@ -22,6 +22,33 @@ public struct Trigger : CodableResource {
     public private(set) var triggerOperation:   TriggerOperation?
     public private(set) var triggerType:        TriggerType?
 
+
+    public enum TriggerOperation: String, Codable {
+        case all        = "All"
+        case insert     = "Insert"
+        case replace    = "Replace"
+        case delete     = "Delete"
+    }
+    
+    
+    public enum TriggerType: String, Codable {
+        case pre  = "Pre"
+        case post = "Post"
+    }
+    
+    
+    init(withId id: String, body: String, operation: TriggerOperation, type: TriggerType) {
+        self.id = id
+        self.resourceId = ""
+        self.body = body
+        self.triggerOperation = operation
+        self.triggerType = type
+    }
+}
+
+
+private extension Trigger {
+    
     private enum CodingKeys: String, CodingKey {
         case id
         case resourceId         = "_rid"
@@ -31,25 +58,5 @@ public struct Trigger : CodableResource {
         case body
         case triggerOperation
         case triggerType
-    }
-
-    public enum TriggerOperation: String, Codable {
-        case all        = "All"
-        case insert     = "Insert"
-        case replace    = "Replace"
-        case delete     = "Delete"
-    }
-    
-    public enum TriggerType: String, Codable {
-        case pre  = "Pre"
-        case post = "Post"
-    }
-    
-    init(withId id: String, body: String, operation: TriggerOperation, type: TriggerType) {
-        self.id = id
-        self.resourceId = ""
-        self.body = body
-        self.triggerOperation = operation
-        self.triggerType = type
     }
 }

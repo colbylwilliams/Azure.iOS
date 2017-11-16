@@ -21,6 +21,18 @@ public struct Attachment : CodableResource {
     public private(set) var contentType:String?
     public private(set) var mediaLink:  String?
 
+    
+    init(withId id: String, contentType: String, url: String) {
+        self.id = id
+        self.resourceId = ""
+        self.contentType = contentType
+        self.mediaLink = url
+    }
+}
+
+
+private extension Attachment {
+    
     private enum CodingKeys: String, CodingKey {
         case id
         case resourceId         = "_rid"
@@ -29,12 +41,5 @@ public struct Attachment : CodableResource {
         case timestamp          = "_ts"
         case contentType
         case mediaLink          = "media"
-    }
-    
-    init(withId id: String, contentType: String, url: String) {
-        self.id = id
-        self.resourceId = ""
-        self.contentType = contentType
-        self.mediaLink = url
     }
 }

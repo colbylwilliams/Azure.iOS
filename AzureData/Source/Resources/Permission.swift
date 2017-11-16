@@ -22,6 +22,24 @@ public struct Permission : CodableResource {
     public private(set) var resourceLink:           String?
     public private(set) var token:                  String?
 
+
+    public enum PermissionMode: String, Codable {
+        case read   = "Read"
+        case all    = "All"
+    }
+    
+    
+    init(withId id: String, mode: PermissionMode, forResource resource: String) {
+        self.id = id
+        self.resourceId = ""
+        self.permissionMode = mode
+        self.resourceLink = resource
+    }
+}
+
+
+private extension Permission {
+    
     private enum CodingKeys: String, CodingKey {
         case id
         case resourceId             = "_rid"
@@ -31,17 +49,5 @@ public struct Permission : CodableResource {
         case permissionMode
         case resourceLink           = "resource"
         case token                  = "_token"
-    }
-
-    public enum PermissionMode: String, Codable {
-        case read   = "Read"
-        case all    = "All"
-    }
-    
-    init(withId id: String, mode: PermissionMode, forResource resource: String) {
-        self.id = id
-        self.resourceId = ""
-        self.permissionMode = mode
-        self.resourceLink = resource
     }
 }

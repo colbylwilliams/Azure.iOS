@@ -20,21 +20,22 @@ public protocol CodableResource : Codable {
     var timestamp:  Date?   { get }
 }
 
+
 extension CodableResource {
     
-    public static func fragment (_ resourceId: String? = nil) -> String {
+    static func fragment (_ resourceId: String? = nil) -> String {
         return resourceId.isNilOrEmpty ? Self.type : "\(Self.type)/\(resourceId!)"
     }
     
-    public static func path (fromParent parentPath: String? = nil, resourceId: String? = nil) -> String {
+    static func path (fromParent parentPath: String? = nil, resourceId: String? = nil) -> String {
         return parentPath.isNilOrEmpty ? fragment(resourceId) : "\(parentPath!)/\(fragment(resourceId))"
     }
     
-    public static func link (fromParentPath parentPath: String? = nil, resourceId: String? = nil) -> String {
+    static func link (fromParentPath parentPath: String? = nil, resourceId: String? = nil) -> String {
         return resourceId.isNilOrEmpty ? parentPath ?? "" : path(fromParent: parentPath, resourceId: resourceId)
     }
     
-    public static func link (fromParentSelfLink parentSelf: String, resourceId: String? = nil) -> String {
+    static func link (fromParentSelfLink parentSelf: String, resourceId: String? = nil) -> String {
         return resourceId.isNilOrEmpty ? String((parentSelf).split(separator: "/").last!).lowercased() : resourceId!.lowercased()
     }
     
@@ -46,7 +47,7 @@ extension CodableResource {
 //        // dbs/TC1AAA==/colls/TC1AAMDvwgA=/docs/TC1AAMDvwgBQAAAAAAAAAA==/
 //    }
     
-    public static func url (atHost host: String, at path: String = Self.type) -> URL? {
+    static func url (atHost host: String, at path: String = Self.type) -> URL? {
         return URL(string: "https://\(host)/\(path)")
     }
 }

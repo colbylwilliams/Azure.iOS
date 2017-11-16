@@ -29,6 +29,7 @@ class UserDefinedFunctionTableViewController: UITableViewController {
     func refreshData() {
         AzureData.get(userDefinedFunctionsIn: collection.id, inDatabase: database.id) { r in
             debugPrint(r.result)
+            
             DispatchQueue.main.async {
                 if let items = r.resource?.items {
                     self.resources = items
@@ -36,27 +37,19 @@ class UserDefinedFunctionTableViewController: UITableViewController {
                 } else if let error = r.error {
                     self.showErrorAlert(error)
                 }
-                if self.refreshControl?.isRefreshing ?? false {
-                    self.refreshControl!.endRefreshing()
-                }
+                self.refreshControl?.endRefreshing()
             }
         }
     }
 
 
-    func showErrorAlert (_ error: ADError) {
-        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-        present(alertController, animated: true) { }
-    }
-
-    
     @IBAction func addButtonTouchUpInside(_ sender: Any) { }
     
     
     @IBAction func refreshControlValueChanged(_ sender: Any) { refreshData() }
     
 
+    
     // MARK: - Table view data source
     
     override func numberOfSections(in tableView: UITableView) -> Int { return 1 }

@@ -49,9 +49,7 @@ class DatabaseTableViewController: UITableViewController {
                     } else if let error = r.result.error {
                         self.showErrorAlert(error)
                     }
-                    if self.refreshControl?.isRefreshing ?? false {
-                        self.refreshControl!.endRefreshing()
-                    }
+                    self.refreshControl?.endRefreshing()
                 }
             }
         }
@@ -68,9 +66,7 @@ class DatabaseTableViewController: UITableViewController {
                     } else if let error = r.result.error {
                         self.showErrorAlert(error)
                     }
-                    if self.refreshControl?.isRefreshing ?? false {
-                        self.refreshControl!.endRefreshing()
-                    }
+                    self.refreshControl?.endRefreshing()
                 }
             }
         }
@@ -92,13 +88,11 @@ class DatabaseTableViewController: UITableViewController {
     
     @IBAction func logoutButtonTouchUpInside(_ sender: Any) {
         
-        presentingAlert = true
-        
         let alertController = UIAlertController(title: "Clear Database Account", message: "This will remove the stored database account name and key.", preferredStyle: .alert)
         
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel) { a in self.presentingAlert = false })
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel) { _ in })
         
-        alertController.addAction(UIAlertAction(title: "Clear", style: .destructive) { a in
+        alertController.addAction(UIAlertAction(title: "Clear", style: .destructive) { _ in
 
             self.offers = []
             self.databases = []
@@ -141,18 +135,6 @@ class DatabaseTableViewController: UITableViewController {
     }
     
     
-    var presentingAlert = false
-    
-    func showErrorAlert (_ error: ADError) {
-        if !presentingAlert {
-        
-            presentingAlert = true
-            let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "Dismiss", style: .cancel) { a in self.presentingAlert = false })
-            present(alertController, animated: true) { }
-        }
-    }
-
     
     // MARK: - Table view data source
 
@@ -197,6 +179,7 @@ class DatabaseTableViewController: UITableViewController {
                 }
             }
         }
+        
         action.backgroundColor = UIColor.blue
         
         return UISwipeActionsConfiguration(actions: [ action ] );
@@ -218,6 +201,7 @@ class DatabaseTableViewController: UITableViewController {
                 }
             }
         }
+        
         return UISwipeActionsConfiguration(actions: [ action ] );
     }
 

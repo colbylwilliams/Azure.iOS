@@ -18,6 +18,7 @@ class DocumentTableViewController: UITableViewController {
     
     var documents: [Document] = []
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -38,9 +39,7 @@ class DocumentTableViewController: UITableViewController {
                 } else if let error = response.error {
                     self.showErrorAlert(error)
                 }
-                if self.refreshControl?.isRefreshing ?? false {
-                    self.refreshControl!.endRefreshing()
-                }
+                self.refreshControl?.endRefreshing()
             }
         }
     }
@@ -90,12 +89,6 @@ class DocumentTableViewController: UITableViewController {
     }
     
     
-    func showErrorAlert (_ error: ADError) {
-        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-        present(alertController, animated: true) { }
-    }
-
     
     // MARK: - Table view data source
 
@@ -133,6 +126,7 @@ class DocumentTableViewController: UITableViewController {
                 }
             }
         }
+        
         action.backgroundColor = UIColor.blue
         
         return UISwipeActionsConfiguration(actions: [ action ] );

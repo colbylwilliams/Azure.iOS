@@ -39,20 +39,11 @@ class PermissionTableViewController: UITableViewController {
                 } else if let error = r.error {
                     self.showErrorAlert(error)
                 }
-                if self.refreshControl?.isRefreshing ?? false {
-                    self.refreshControl!.endRefreshing()
-                }
+                self.refreshControl?.endRefreshing()
             }
         }
     }
     
-    
-    func showErrorAlert (_ error: ADError) {
-        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-        present(alertController, animated: true) { }
-    }
-
     
     @IBAction func addButtonTouchUpInside(_ sender: Any) {
         
@@ -96,6 +87,7 @@ class PermissionTableViewController: UITableViewController {
     @IBAction func refreshControlValueChanged(_ sender: Any) { refreshData() }
     
     
+    
     // MARK: - Table view data source
     
     
@@ -127,6 +119,7 @@ class PermissionTableViewController: UITableViewController {
                 }
             }
         }
+        
         action.backgroundColor = UIColor.blue
         
         return UISwipeActionsConfiguration(actions: [ action ] );

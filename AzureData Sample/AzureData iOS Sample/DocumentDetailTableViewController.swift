@@ -13,6 +13,7 @@ class DocumentDetailTableViewController: UITableViewController {
 
     var document: Document? = nil
 
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int { return 2 }
@@ -20,7 +21,7 @@ class DocumentDetailTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: return 6
+        case 0: return 6 // system properties
         case 1: return document?.data?.count ?? 0
         default: return 0
         }
@@ -89,10 +90,12 @@ fileprivate extension Document {
     func itemAt(index i: Int) -> (title: String, detail: String) {
         var title = "nil"
         var detail = "nil"
+        
         if let data = self.data {
             title = Array(data.dictionary.keys)[i]
             if let d = Array(data.dictionary.values)[i] { detail = "\(d)" }
         }
+        
         return(title, detail)
     }
 

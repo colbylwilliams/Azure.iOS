@@ -50,6 +50,7 @@ class CollectionResourceTableViewController: UITableViewController {
     func refreshData() {
         collection.get(documentsAs: Document.self) { r in
             debugPrint(r.result)
+            
             DispatchQueue.main.async {
                 if let items = r.resource?.items {
                     self.documents = items
@@ -63,6 +64,7 @@ class CollectionResourceTableViewController: UITableViewController {
         
         collection.getStoredProcedures() { r in
             debugPrint(r.result)
+            
             DispatchQueue.main.async {
                 if let items = r.resource?.items {
                     self.storedProcedures = items
@@ -76,6 +78,7 @@ class CollectionResourceTableViewController: UITableViewController {
         
         collection.getTriggers() { r in
             debugPrint(r.result)
+            
             DispatchQueue.main.async {
                 if let items = r.resource?.items {
                     self.triggers = items
@@ -89,6 +92,7 @@ class CollectionResourceTableViewController: UITableViewController {
         
         collection.getUserDefinedFunctions() { r in
             debugPrint(r.result)
+            
             DispatchQueue.main.async {
                 if let items = r.resource?.items {
                     self.udfs = items
@@ -114,15 +118,10 @@ class CollectionResourceTableViewController: UITableViewController {
     }
     
 
-    func showErrorAlert (_ error: ADError) {
-        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-        present(alertController, animated: true) { }
-    }
-
-    
     @IBAction func refreshControlValueChanged(_ sender: Any) { refreshData() }
 
+    
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int { return 1 }
@@ -184,7 +183,8 @@ class CollectionResourceTableViewController: UITableViewController {
     }
 }
 
-enum collectionSegue: String {
+
+fileprivate enum collectionSegue: String {
     case document = "documentsSegue"
     case permission = "permissionSegue"
     case storedProcedure = "storedProcedureSegue"

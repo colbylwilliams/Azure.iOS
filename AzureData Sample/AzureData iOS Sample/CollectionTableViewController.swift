@@ -24,6 +24,7 @@ class CollectionTableViewController: UITableViewController {
     var collectionsSelected: Bool {
         return segmentedControl.selectedSegmentIndex == 0
     }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +42,7 @@ class CollectionTableViewController: UITableViewController {
             
             database.getCollections() { r in
                 debugPrint(r.result)
+                
                 DispatchQueue.main.async {
                     if let items = r.resource?.items {
                         self.collections = items
@@ -48,9 +50,7 @@ class CollectionTableViewController: UITableViewController {
                     } else if let error = r.error {
                         self.showErrorAlert(error)
                     }
-                    if self.refreshControl?.isRefreshing ?? false {
-                        self.refreshControl!.endRefreshing()
-                    }
+                    self.refreshControl?.endRefreshing()
                 }
             }
         }
@@ -58,6 +58,7 @@ class CollectionTableViewController: UITableViewController {
             
             database.getUsers() { r in
                 debugPrint(r.result)
+                
                 DispatchQueue.main.async {
                     if let items = r.resource?.items {
                         self.users = items
@@ -65,9 +66,7 @@ class CollectionTableViewController: UITableViewController {
                     } else if let error = r.error {
                         self.showErrorAlert(error)
                     }
-                    if self.refreshControl?.isRefreshing ?? false {
-                        self.refreshControl!.endRefreshing()
-                    }
+                    self.refreshControl?.endRefreshing()
                 }
             }
         }
@@ -104,6 +103,7 @@ class CollectionTableViewController: UITableViewController {
                     
                     self.database.create(collectionWithId: name) { r in
                         debugPrint(r.result)
+                        
                         DispatchQueue.main.async {
                             if let collection = r.resource {
                                 self.collections.append(collection)
@@ -117,6 +117,7 @@ class CollectionTableViewController: UITableViewController {
                     
                     self.database.create(userWithId: name) { r in
                         debugPrint(r.result)
+                        
                         DispatchQueue.main.async {
                             if let user = r.resource {
                                 self.users.append(user)
@@ -134,12 +135,6 @@ class CollectionTableViewController: UITableViewController {
     }
 
     
-    func showErrorAlert (_ error: ADError) {
-        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-        present(alertController, animated: true) { }
-    }
-
     
     // MARK: - Table view data source
 
@@ -164,8 +159,8 @@ class CollectionTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let action = UIContextualAction.init(style: .normal, title: "Get") { (action, view, callback) in
             if self.collectionsSelected {
-                
                 self.database.get(collectionWithId: self.collections[indexPath.row].id) { r in
+                    
                     DispatchQueue.main.async {
                         if r.result.isSuccess {
                             debugPrint(r.result)
@@ -178,8 +173,8 @@ class CollectionTableViewController: UITableViewController {
                     }
                 }
             } else {
-                
                 self.database.get(userWithId: self.users[indexPath.row].id) { r in
+                    
                     DispatchQueue.main.async {
                         if r.result.isSuccess {
                             debugPrint(r.result)
@@ -217,8 +212,8 @@ class CollectionTableViewController: UITableViewController {
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
         if collectionsSelected {
-
             database.delete(collections[indexPath.row]) { r in
+                
                 DispatchQueue.main.async {
                     if r.result.isSuccess {
                         self.collections.remove(at: indexPath.row)
@@ -228,8 +223,8 @@ class CollectionTableViewController: UITableViewController {
                 }
             }
         } else {
-            
             database.delete(users[indexPath.row]) { r in
+                
                 DispatchQueue.main.async {
                     if r.result.isSuccess {
                         self.users.remove(at: indexPath.row)
@@ -247,6 +242,7 @@ class CollectionTableViewController: UITableViewController {
     }
     
 
+    
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

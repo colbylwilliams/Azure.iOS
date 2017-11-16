@@ -27,7 +27,6 @@ class TriggerTableViewController: UITableViewController {
 
     
     func refreshData() {
-
         collection.getTriggers() { r in
             DispatchQueue.main.async {
                 debugPrint(r.result)
@@ -37,25 +36,17 @@ class TriggerTableViewController: UITableViewController {
                 } else if let error = r.error {
                     self.showErrorAlert(error)
                 }
-                if self.refreshControl?.isRefreshing ?? false {
-                    self.refreshControl!.endRefreshing()
-                }
+                self.refreshControl?.endRefreshing()
             }
         }
     }
     
     
-    func showErrorAlert (_ error: ADError) {
-        let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
-        present(alertController, animated: true) { }
-    }
-
-    
     @IBAction func addButtonTouchUpInside(_ sender: Any) { }
     
     
     @IBAction func refreshControlValueChanged(_ sender: Any) { refreshData() }
+    
     
     
     // MARK: - Table view data source
@@ -94,7 +85,6 @@ class TriggerTableViewController: UITableViewController {
     
     
     func deleteResource(at indexPath: IndexPath, from tableView: UITableView, callback: ((Bool) -> Void)? = nil) {
-
         collection.delete(self.resources[indexPath.row]) { r in
             DispatchQueue.main.async {
                 if r.result.isSuccess {

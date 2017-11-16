@@ -380,8 +380,8 @@
 				B52240341FB33CD000D0343F /* AzureData.swift */,
 				B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */,
 				B583619E1FB78763001CEC66 /* DocumentClient.swift */,
-				B55AEFE61FB34CF600F7BEED /* Domain */,
 				B58361B71FBA1339001CEC66 /* Resources */,
+				B55AEFE61FB34CF600F7BEED /* Domain */,
 				B55AEFDF1FB34B7400F7BEED /* Supporting Files */,
 			);
 			path = Source;

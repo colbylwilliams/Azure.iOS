@@ -20,19 +20,17 @@ public struct Permission : CodableResource {
     public private(set) var timestamp:              Date?
     public private(set) var permissionMode:         PermissionMode?
     public private(set) var resourceLink:           String?
-    public private(set) var resourcePartitionKey:   String?
     public private(set) var token:                  String?
 
     private enum CodingKeys: String, CodingKey {
         case id
-        case resourceId         = "_rid"
-        case selfLink           = "_self"
-        case etag               = "_etag"
-        case timestamp          = "_ts"
+        case resourceId             = "_rid"
+        case selfLink               = "_self"
+        case etag                   = "_etag"
+        case timestamp              = "_ts"
         case permissionMode
-        case resourceLink
-        case resourcePartitionKey
-        case token
+        case resourceLink           = "resource"
+        case token                  = "_token"
     }
 
     public enum PermissionMode: String, Codable {

@@ -26,6 +26,6 @@ public struct User : CodableResource {
         case selfLink           = "_self"
         case etag               = "_etag"
         case timestamp          = "_ts"
-        case permissionsLink
+        case permissionsLink    = "_permissions"
     }
 }

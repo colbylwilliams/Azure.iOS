@@ -52,6 +52,7 @@ class AzureDataTests: XCTestCase {
     lazy var replaceExpectation = self.expectation(description: "should replace \(rname)")
     lazy var refreshExpectation = self.expectation(description: "should refresh \(rname)")
 
+    
     override func setUp() {
         super.setUp()
         
@@ -61,8 +62,8 @@ class AzureDataTests: XCTestCase {
             
             let bundle = Bundle(for: type(of: self))
             
-            if let accountName = bundle.infoDictionary?["ADDatabaseAccountName"] as? String,
-                let accountKey = bundle.infoDictionary?["ADDatabaseAccountKey"]  as? String {
+            if let accountName = bundle.infoDictionary?["ADDatabaseAccountName"] as? String, accountName != "AZURE_COSMOS_DB_ACCOUNT_NAME",
+                let accountKey = bundle.infoDictionary?["ADDatabaseAccountKey"]  as? String, accountKey  != "AZURE_COSMOS_DB_ACCOUNT_Key" {
             
                 AzureData.setup(accountName, key: accountKey)
             }

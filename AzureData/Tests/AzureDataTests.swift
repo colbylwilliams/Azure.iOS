@@ -84,7 +84,7 @@ class AzureDataTests: XCTestCase {
             }
             
             wait(for: [initGetDatabaseExpectation], timeout: timeout)
-            
+             
             database = initGetResponse?.resource
             
             if database == nil {

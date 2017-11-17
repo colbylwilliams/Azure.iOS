@@ -11,6 +11,9 @@ import Foundation
 
 extension DocumentClient {
     
+    fileprivate static let timestamp = "_ts"
+    
+    
     fileprivate static let roundTripIso8601: DateFormatter = {
         let formatter = DateFormatter()
         formatter.calendar = Calendar(identifier: .iso8601)
@@ -20,13 +23,17 @@ extension DocumentClient {
         return formatter
     }()
     
+    
     static func roundTripIso8601Encoder(date: Date, encoder: Encoder) throws -> Void {
         
         var container = encoder.singleValueContainer()
         
-        if container.codingPath.last?.stringValue == "_ts" {
+        if container.codingPath.last?.stringValue == timestamp {
+        
             try container.encode(date.timeIntervalSince1970)
+
         } else {
+            
             var data = roundTripIso8601.string(from: date)
             
             if let fractionStart = data.range(of: "."),
@@ -41,13 +48,17 @@ extension DocumentClient {
         }
     }
     
+    
     static func roundTripIso8601Decoder(decoder: Decoder) throws -> Date {
         
         let container = try decoder.singleValueContainer()
         
-        if container.codingPath.last?.stringValue == "_ts" {
+        if container.codingPath.last?.stringValue == timestamp {
+            
             let dateDouble = try container.decode(Double.self)
+            
             return Date.init(timeIntervalSince1970: dateDouble)
+        
         } else {
             
             let dateString = try container.decode(String.self)
@@ -68,6 +79,7 @@ extension DocumentClient {
                     preliminaryDate.addTimeInterval(fraction)
                 }
             }
+            
             return preliminaryDate
         }
     }
@@ -92,11 +104,11 @@ extension DocumentClient {
             }.joined(separator: ", ")
         
         // User-Agent Header; see https://tools.ietf.org/html/rfc7231#section-5.5.3
-        // Example: `iOS Example/1.1.0 (com.colbylwilliams.azuredata; build:23; iOS 10.0.0) AzureData/2.0.0`
+        // Example: `iOS Example/1.1.0 (com.azure.data; build:23; iOS 10.0.0) AzureData/2.0.0`
         let userAgent: String = {
             if let info = Bundle.main.infoDictionary {
                 let executable =    info[kCFBundleExecutableKey as String]  as? String ?? "Unknown" // iOS Example
-                let bundle =        info[kCFBundleIdentifierKey as String]  as? String ?? "Unknown" // com.colbylwilliams.azuredata
+                let bundle =        info[kCFBundleIdentifierKey as String]  as? String ?? "Unknown" // com.azure.data
                 let appVersion =    info["CFBundleShortVersionString"]      as? String ?? "Unknown" // 1.1.0
                 let appBuild =      info[kCFBundleVersionKey as String]     as? String ?? "Unknown" // 23
                 

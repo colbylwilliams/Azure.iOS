@@ -28,7 +28,7 @@ public class Document : CodableResource {
     public init () { id = UUID().uuidString; resourceId = "" }
     public init (_ id: String) { self.id = id; resourceId = "" }
     
-    
+
     public subscript (key: String) -> Any? {
         get { return data?[key] }
         set {
@@ -40,25 +40,122 @@ public class Document : CodableResource {
             data![key] = newValue
         }
     }
-}
-
-
-private extension Document {
     
-    private enum CodingKeys: String, CodingKey {
+    private enum SysCodingKeys: String, CodingKey {
         case id
         case resourceId         = "_rid"
         case selfLink           = "_self"
         case etag               = "_etag"
         case timestamp          = "_ts"
         case attachmentsLink    = "_attachments"
-        case data
     }
+
+    public required init(from decoder: Decoder) throws {
+
+        let sysContainer = try decoder.container(keyedBy: SysCodingKeys.self)
+
+        id              = try sysContainer.decode(String.self, forKey: .id)
+        resourceId      = try sysContainer.decode(String.self, forKey: .resourceId)
+        selfLink        = try sysContainer.decode(String.self, forKey: .selfLink)
+        etag            = try sysContainer.decode(String.self, forKey: .etag)
+        timestamp       = try sysContainer.decode(Date.self,   forKey: .timestamp)
+        attachmentsLink = try sysContainer.decode(String.self, forKey: .attachmentsLink)
+        
+        let userContainer = try decoder.container(keyedBy: UserCodingKeys.self)
+        
+        data = CodableDictionary()
+        
+        let userKeys = userContainer.allKeys.filter { !sysKeys.contains($0.stringValue) }
+        
+        for key in userKeys {
+            data![key.stringValue] = (try userContainer.decode(CodableDictionaryValueType.self, forKey: key)).value
+        }
+    }
+
+    
+    public func encode(to encoder: Encoder) throws {
+        var sysContainer = encoder.container(keyedBy: SysCodingKeys.self)
+
+        try sysContainer.encode(id, forKey: .id)
+        try sysContainer.encode(resourceId, forKey: .resourceId)
+        try sysContainer.encode(selfLink, forKey: .selfLink)
+        try sysContainer.encode(etag, forKey: .etag)
+        try sysContainer.encode(timestamp, forKey: .timestamp)
+        try sysContainer.encode(attachmentsLink, forKey: .attachmentsLink)
+
+        var userContainer = encoder.container(keyedBy: UserCodingKeys.self)
+        
+        if let data = data {
+            
+            for (k, v) in data {
+                
+                let key = UserCodingKeys(stringValue: k)!
+                
+                switch v {
+                case .uuid(let value): try userContainer.encode(value, forKey: key)
+                case .bool(let value): try userContainer.encode(value, forKey: key)
+                case .int(let value): try userContainer.encode(value, forKey: key)
+                case .double(let value): try userContainer.encode(value, forKey: key)
+                case .float(let value): try userContainer.encode(value, forKey: key)
+                case .date(let value): try userContainer.encode(value, forKey: key)
+                case .string(let value): try userContainer.encode(value, forKey: key)
+                case .dictionary(let value): try userContainer.encode(value, forKey: key)
+                case .array(let value): try userContainer.encode(value, forKey: key)
+                default: break
+                }
+            }
+        }
+    }
+    
+    private struct UserCodingKeys : CodingKey {
+
+        let key: String
+
+        var stringValue: String {
+            return key
+        }
+
+        init?(stringValue: String) {
+            key = stringValue
+        }
+
+        var intValue: Int? { return nil }
+
+
+        init?(intValue: Int) { return nil }
+    }
+}
+
+public extension Document {
+    
+    public static var testDocument: Document {
+        let document = Document()
+        document.resourceId = "TC1AAMDvwgB4AAAAAAAAAA=="
+        document.selfLink = "dbs/TC1AAA==/colls/TC1AAMDvwgA=/docs/TC1AAMDvwgB4AAAAAAAAAA==/"
+        document.etag = "\"88005b65-0000-0000-0000-5a0dfabb0000\""
+        document.attachmentsLink = "attachments/"
+        document.timestamp = Date(timeIntervalSince1970: 1510865595)
+        document["customNumberKey"] = 82
+        document["customStringKey"] = "customStringValue"
+        document["customBoolKey"] = true
+        return document
+    }
+
+//    "id":"DocumentTestsDocument",
+//    "_rid":"TC1AAMDvwgB4AAAAAAAAAA==",
+//    "customNumberKey":86,
+//    "customStringKey":"customStringValue",
+//    "customBoolKey":true,
+//    "_self":"dbs/TC1AAA==/colls/TC1AAMDvwgA=/docs/TC1AAMDvwgB4AAAAAAAAAA==/",
+//    "_etag":"\\\"88005b65-0000-0000-0000-5a0dfabb0000\\\"",
+//    "_attachments":"attachments/",
+//    "_ts":1510865595
+
 }
 
 
 extension Document : CustomDebugStringConvertible {
     public var debugDescription: String {
-        return "Document :\n\tid : \(self.id)\n\tresourceId : \(self.resourceId)\n\tselfLink : \(self.selfLink.valueOrNilString)\n\tetag : \(self.etag.valueOrNilString)\n\ttimestamp : \(self.timestamp.valueOrNilString)\n\tattachmentsLink : \(self.attachmentsLink.valueOrNilString)\n\tdata : \n\t\t\(self.data?.dictionary.map { "\($0) : \($1 ?? "nil")" }.joined(separator: "\n\t\t") ?? "nil")\n--"
+        return "Document :\n\tid : \(self.id)\n\tresourceId : \(self.resourceId)\n\tselfLink : \(self.selfLink.valueOrNilString)\n\tetag : \(self.etag.valueOrNilString)\n\ttimestamp : \(self.timestamp.valueOrNilString)\n\tattachmentsLink : \(self.attachmentsLink.valueOrNilString)\n\t\(self.data?.dictionary.map { "\($0) : \($1 ?? "nil")" }.joined(separator: "\n\t") ?? "nil")\n--"
     }
 }

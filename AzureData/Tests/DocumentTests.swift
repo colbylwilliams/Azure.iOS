@@ -119,8 +119,8 @@ class DocumentTests: AzureDataTests {
         // Query
         let query = Query.select()
             .from(collectionId)
-            .where("data.\(customStringKey)", is: customStringValue)
-            .and("data.\(customNumberKey)", is: customNumberValue)
+            .where("\(customStringKey)", is: customStringValue)
+            .and("\(customNumberKey)", is: customNumberValue)
             .orderBy("_etag", descending: true)
         
         AzureData.query(documentsIn: collectionId, inDatabase: databaseId, with: query) { r in

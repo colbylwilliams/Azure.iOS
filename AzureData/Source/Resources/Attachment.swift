@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Represents a document attachment in the Azure Cosmos DB service.
 public struct Attachment : CodableResource {
     
     public static var type = "attachments"
@@ -18,8 +19,13 @@ public struct Attachment : CodableResource {
     public private(set) var selfLink:   String?
     public private(set) var etag:       String?
     public private(set) var timestamp:  Date?
-    public private(set) var contentType:String?
-    public private(set) var mediaLink:  String?
+    
+    
+    /// Gets or sets the MIME content type of the attachment in the Azure Cosmos DB service.
+    public private(set) var contentType: String?
+    
+    /// Gets or sets the media link associated with the attachment content in the Azure Cosmos DB service.
+    public private(set) var mediaLink: String?
 
     
     init(withId id: String, contentType: String, url: String) {

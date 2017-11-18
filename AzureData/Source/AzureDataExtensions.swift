@@ -8,12 +8,18 @@
 
 import Foundation
 
+// MARK: -
+
 public extension CodableResource {
+    
     public func delete(_ callback: @escaping (DataResponse) -> ()) {
         DocumentClient.default.delete(self, callback: callback)
     }
 }
 
+
+
+// MARK: -
 
 public extension Database {
     
@@ -22,7 +28,7 @@ public extension Database {
     }
 
     
-    // MARK - Document Collection
+    // MARK: Document Collection
     
     //create
     public func create (collectionWithId id: String, callback: @escaping (Response<DocumentCollection>) -> ()) {
@@ -46,7 +52,7 @@ public extension Database {
     
     
     
-    // MARK - Users
+    // MARK: Users
     
     //create
     public func create (userWithId id: String, callback: @escaping (Response<User>) -> ()) {
@@ -76,6 +82,8 @@ public extension Database {
 
 
 
+// MARK: -
+
 public extension DocumentCollection {
     
     public func refresh(_ callback: @escaping (Response<DocumentCollection>) -> ()) {
@@ -83,7 +91,7 @@ public extension DocumentCollection {
     }
 
     
-    // MARK - Documents
+    // MARK: Documents
     
     // create
     public func create<T: Document> (_ document: T, callback: @escaping (Response<T>) -> ()) {
@@ -117,7 +125,7 @@ public extension DocumentCollection {
     
     
     
-    // MARK: - Stored Procedures
+    // MARK: Stored Procedures
     
     // create
     public func create (storedProcedureWithId id: String, andBody body: String, callback: @escaping (Response<StoredProcedure>) -> ()) {
@@ -146,7 +154,7 @@ public extension DocumentCollection {
     
     
     
-    // MARK: - User Defined Functions
+    // MARK: User Defined Functions
     
     // create
     public func create (userDefinedFunctionWithId id: String, andBody body: String, callback: @escaping (Response<UserDefinedFunction>) -> ()) {
@@ -170,7 +178,7 @@ public extension DocumentCollection {
     
     
     
-    // MARK: - Triggers
+    // MARK: Triggers
     
     // create
     public func create (triggerWithId id: String, operation: Trigger.TriggerOperation, type: Trigger.TriggerType, andBody body: String, callback: @escaping (Response<Trigger>) -> ()) {
@@ -195,6 +203,8 @@ public extension DocumentCollection {
 
 
 
+// MARK: -
+
 public extension Document {
     
     public func refresh(_ callback: @escaping (Response<Document>) -> ()) {
@@ -202,7 +212,7 @@ public extension Document {
     }
     
     
-    // MARK: - Attachments
+    // MARK: Attachments
     
     // create
     public func create (attachmentWithId attachmentId: String, contentType: String, andMediaUrl mediaUrl: URL, callback: @escaping (Response<Attachment>) -> ()) {
@@ -235,6 +245,8 @@ public extension Document {
 
 
 
+// MARK: -
+
 public extension User {
     
     public func refresh(_ callback: @escaping (Response<User>) -> ()) {
@@ -242,7 +254,7 @@ public extension User {
     }
 
     
-    // MARK: - Permissions
+    // MARK: Permissions
     
     // create
     public func create (permissionWithId permissionId: String, mode permissionMode: Permission.PermissionMode, in resource: CodableResource, callback: @escaping (Response<Permission>) -> ()) {

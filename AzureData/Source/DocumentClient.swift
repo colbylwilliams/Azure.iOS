@@ -15,38 +15,33 @@ public class DocumentClient {
         configuration.httpAdditionalHeaders = DocumentClient.defaultHTTPHeaders
         
         return DocumentClient(configuration: configuration)
-        //return SessionManager()
     }()
     
+
+    fileprivate var baseUri: ResourceUri?
+    
+    fileprivate var tokenProvider: TokenProvider!
+
+    
+    
+    /// The underlying session.
+    open let session: URLSession
+
+    /// Print responses, resources, etc. to output log
+    public var verboseLogging = false
+
     
     public init(configuration: URLSessionConfiguration = URLSessionConfiguration.default/*, delegate: SessionDelegate = SessionDelegate(), serverTrustPolicyManager: ServerTrustPolicyManager? = nil*/)
     {
         //self.delegate = delegate
         self.session = URLSession.init(configuration: configuration)
         //self.session = URLSession(configuration: configuration, delegate: delegate, delegateQueue: nil)
-        
-        //commonInit(serverTrustPolicyManager: serverTrustPolicyManager)
     }
     
     
-    public var setup: Bool { return baseUri != nil }
     
-    public var verboseLogging = false
     
-    var baseUri: ResourceUri?
-    
-    var tokenProvider: TokenProvider!
-    
-    public func setup (_ name: String, key: String, keyType: TokenType, verboseLogging verbose: Bool = false) {
-        baseUri = ResourceUri(name)
-        tokenProvider = TokenProvider(key: key, keyType: keyType, tokenVersion: "1.0")
-        verboseLogging = verbose
-    }
-    
-    public func reset () {
-        baseUri = nil
-        tokenProvider = nil
-    }
+    // MARK: - JSONEncoder & JSONDecoder
     
     public var dateDecoder: ((Decoder) throws -> Date)? = nil
     
@@ -75,12 +70,31 @@ public class DocumentClient {
         
         return decoder
     }()
+
     
     
     
     
-    /// The underlying session.
-    open let session: URLSession
+    // MARK: - Setup
+    
+    public var setup: Bool { return baseUri != nil }
+    
+    public func setup (forAccountNamed name: String, withKey key: String, ofType keyType: TokenType) {
+        baseUri = ResourceUri(forAccountNamed: name)
+        tokenProvider = TokenProvider(key: key, keyType: keyType, tokenVersion: "1.0")
+    }
+    
+    public func setup (forAccountAt url: URL, withKey key: String, ofType keyType: TokenType) {
+        baseUri = ResourceUri(forAccountAt: url)
+        tokenProvider = TokenProvider(key: key, keyType: keyType, tokenVersion: "1.0")
+    }
+    
+    public func reset () {
+        baseUri = nil
+        tokenProvider = nil
+    }
+    
+    
     
     
     
@@ -157,6 +171,7 @@ public class DocumentClient {
     }
     
     // replace
+    // TODO: replace
     
     
     
@@ -208,11 +223,6 @@ public class DocumentClient {
         
         return self.resource(resourceUri: resourceUri, callback: callback)
     }
-    
-//    public func refresh<T: Document> (_ document: T, callback: @escaping (Response<T>) -> ()) {
-//
-//        return self.refresh(document, callback: callback)
-//    }
     
     // delete
     public func delete (_ document: Document, fromCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (DataResponse) -> ()) {
@@ -725,8 +735,10 @@ public class DocumentClient {
     }
     
     // replace
+    // TODO: replace
     
     // query
+    // TODO: query
     
     
     

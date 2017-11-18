@@ -8,6 +8,12 @@
 
 import Foundation
 
+/// Represents a document in the Azure Cosmos DB service.
+///
+/// - Remark:
+///   A document is a structured JSON document. There is no set schema for the JSON documents,
+///   and a document may contain any number of custom properties as well as an optional list of attachments.
+///   Document is an application resource and can be authorized using the master key or resource keys.
 public class Document : CodableResource {
     
     let sysKeys = ["id", "_rid", "_self", "_etag", "_ts", "_attachments"]
@@ -15,14 +21,21 @@ public class Document : CodableResource {
     public static var type = "docs"
     public static var list = "Documents"
     
-    public private(set) var id:             String
-    public private(set) var resourceId:     String
-    public private(set) var selfLink:       String?
-    public private(set) var etag:           String?
-    public private(set) var timestamp:      Date?
-    public private(set) var attachmentsLink:String?
+    public private(set) var id:         String
+    public private(set) var resourceId: String
+    public private(set) var selfLink:   String?
+    public private(set) var etag:       String?
+    public private(set) var timestamp:  Date?
     
-    public private(set) var data: CodableDictionary?
+    
+    /// Gets the self-link corresponding to attachments of the document from the Azure Cosmos DB service.
+    public private(set) var attachmentsLink: String?
+    
+    /// Gets or sets the time to live in seconds of the document in the Azure Cosmos DB service.
+    public var timeToLive: Int? = nil
+    
+    
+    fileprivate var data: CodableDictionary?
     
     
     public init () { id = UUID().uuidString; resourceId = "" }

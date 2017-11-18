@@ -8,16 +8,27 @@
 
 import Foundation
 
+/// Represents a resource type in the Azure Cosmos DB service.
+/// All Azure Cosmos DB resources, such as `Database`, `DocumentCollection`, and `Document` implement this protocal.
 public protocol CodableResource : Codable {
     
     static var type:String  { get }
     static var list:String  { get }
     
-    var id:         String  { get }
+    /// Gets or sets the Id of the resource in the Azure Cosmos DB service.
+    var id: String  { get }
+    
+    /// Gets or sets the Resource Id associated with the resource in the Azure Cosmos DB service.
     var resourceId: String  { get }
-    var selfLink:   String? { get }
-    var etag:       String? { get }
-    var timestamp:  Date?   { get }
+    
+    /// Gets the self-link associated with the resource from the Azure Cosmos DB service.
+    var selfLink: String? { get }
+    
+    /// Gets the entity tag associated with the resource from the Azure Cosmos DB service.
+    var etag: String? { get }
+    
+    /// Gets the last modified timestamp associated with the resource from the Azure Cosmos DB service.
+    var timestamp: Date?   { get }
 }
 
 

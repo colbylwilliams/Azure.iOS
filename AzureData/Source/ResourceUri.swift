@@ -14,8 +14,12 @@ public struct ResourceUri {
     
     let baseUri: String
     
-    init(_ databaseaccount: String) {
+    init(forAccountNamed databaseaccount: String) {
         baseUri = "https://\(databaseaccount).documents.azure.com"
+    }
+
+    init(forAccountAt databaseurl: URL) {
+        baseUri = databaseurl.absoluteString
     }
     
     func database(_ resourceId: String? = nil) -> (URL, String) {

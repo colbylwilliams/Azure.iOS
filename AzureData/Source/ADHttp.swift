@@ -125,7 +125,11 @@ extension HTTPURLResponse {
     func headerInt(for header: HttpResponseHeader) -> Int? {
         return self.allHeaderFields[header.rawValue] as? Int
     }
+    func headerDouble(for header: HttpResponseHeader) -> Double? {
+        return self.allHeaderFields[header.rawValue] as? Double
+    }
 
+    
     
     func printHeaders() {
         print("--")

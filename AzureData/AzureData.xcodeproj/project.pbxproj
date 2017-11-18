@@ -28,6 +28,14 @@
 		931EA5C41FBE6920003CCFF4 /* DocumentClientExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EA5BE1FBE201F003CCFF4 /* DocumentClientExtensions.swift */; };
 		931EA5C51FBE6922003CCFF4 /* DocumentClientExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EA5BE1FBE201F003CCFF4 /* DocumentClientExtensions.swift */; };
 		931EA5C61FBE6922003CCFF4 /* DocumentClientExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EA5BE1FBE201F003CCFF4 /* DocumentClientExtensions.swift */; };
+		93F9ACCC1FC0CA4800AC240C /* DocumentClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9ACCB1FC0CA4800AC240C /* DocumentClientError.swift */; };
+		93F9ACCD1FC0CA4800AC240C /* DocumentClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9ACCB1FC0CA4800AC240C /* DocumentClientError.swift */; };
+		93F9ACCE1FC0CA4800AC240C /* DocumentClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9ACCB1FC0CA4800AC240C /* DocumentClientError.swift */; };
+		93F9ACCF1FC0CA4800AC240C /* DocumentClientError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9ACCB1FC0CA4800AC240C /* DocumentClientError.swift */; };
+		93F9ACD11FC0D01400AC240C /* ResourceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9ACD01FC0D01400AC240C /* ResourceError.swift */; };
+		93F9ACD21FC0D01400AC240C /* ResourceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9ACD01FC0D01400AC240C /* ResourceError.swift */; };
+		93F9ACD31FC0D01400AC240C /* ResourceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9ACD01FC0D01400AC240C /* ResourceError.swift */; };
+		93F9ACD41FC0D01400AC240C /* ResourceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9ACD01FC0D01400AC240C /* ResourceError.swift */; };
 		B507D4F11FBB722000B2D18D /* Conflict.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507D4F01FBB722000B2D18D /* Conflict.swift */; };
 		B507D4F21FBB722000B2D18D /* Conflict.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507D4F01FBB722000B2D18D /* Conflict.swift */; };
 		B507D4F31FBB722000B2D18D /* Conflict.swift in Sources */ = {isa = PBXBuildFile; fileRef = B507D4F01FBB722000B2D18D /* Conflict.swift */; };
@@ -197,10 +205,10 @@
 		B58361EC1FBA17E8001CEC66 /* UserDefinedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58361EA1FBA17E8001CEC66 /* UserDefinedFunction.swift */; };
 		B58361ED1FBA17E8001CEC66 /* UserDefinedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58361EA1FBA17E8001CEC66 /* UserDefinedFunction.swift */; };
 		B58361EE1FBA17E8001CEC66 /* UserDefinedFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58361EA1FBA17E8001CEC66 /* UserDefinedFunction.swift */; };
-		B58361F01FBA19A7001CEC66 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58361EF1FBA19A7001CEC66 /* Account.swift */; };
-		B58361F11FBA19A7001CEC66 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58361EF1FBA19A7001CEC66 /* Account.swift */; };
-		B58361F21FBA19A7001CEC66 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58361EF1FBA19A7001CEC66 /* Account.swift */; };
-		B58361F31FBA19A7001CEC66 /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58361EF1FBA19A7001CEC66 /* Account.swift */; };
+		B58361F01FBA19A7001CEC66 /* DatabaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58361EF1FBA19A7001CEC66 /* DatabaseAccount.swift */; };
+		B58361F11FBA19A7001CEC66 /* DatabaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58361EF1FBA19A7001CEC66 /* DatabaseAccount.swift */; };
+		B58361F21FBA19A7001CEC66 /* DatabaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58361EF1FBA19A7001CEC66 /* DatabaseAccount.swift */; };
+		B58361F31FBA19A7001CEC66 /* DatabaseAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = B58361EF1FBA19A7001CEC66 /* DatabaseAccount.swift */; };
 		B5B6AC241FBA4B3900B93106 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B6AC231FBA4B3900B93106 /* Query.swift */; };
 		B5B6AC251FBA4B3900B93106 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B6AC231FBA4B3900B93106 /* Query.swift */; };
 		B5B6AC261FBA4B3900B93106 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5B6AC231FBA4B3900B93106 /* Query.swift */; };
@@ -267,6 +275,8 @@
 /* Begin PBXFileReference section */
 		931EA5BE1FBE201F003CCFF4 /* DocumentClientExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentClientExtensions.swift; sourceTree = "<group>"; };
 		931EA5C01FBE2775003CCFF4 /* CodableResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableResourceTests.swift; sourceTree = "<group>"; };
+		93F9ACCB1FC0CA4800AC240C /* DocumentClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentClientError.swift; sourceTree = "<group>"; };
+		93F9ACD01FC0D01400AC240C /* ResourceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceError.swift; sourceTree = "<group>"; };
 		B507D4F01FBB722000B2D18D /* Conflict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conflict.swift; sourceTree = "<group>"; };
 		B5223FB71FB33A9F00D0343F /* AzureData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AzureData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5223FBF1FB33A9F00D0343F /* AzureData macOS Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "AzureData macOS Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -320,7 +330,7 @@
 		B58361E01FBA17C8001CEC66 /* Trigger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trigger.swift; sourceTree = "<group>"; };
 		B58361E51FBA17D8001CEC66 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		B58361EA1FBA17E8001CEC66 /* UserDefinedFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefinedFunction.swift; sourceTree = "<group>"; };
-		B58361EF1FBA19A7001CEC66 /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		B58361EF1FBA19A7001CEC66 /* DatabaseAccount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseAccount.swift; sourceTree = "<group>"; };
 		B5B6AC231FBA4B3900B93106 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		B5B6AC281FBA84C400B93106 /* CodableDictionary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableDictionary.swift; sourceTree = "<group>"; };
 		B5F76C391F96A7AF001E8B11 /* AzureData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AzureData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -393,6 +403,7 @@
 				B58361B71FBA1339001CEC66 /* Resources */,
 				B55AEFE61FB34CF600F7BEED /* Domain */,
 				B55AEFDF1FB34B7400F7BEED /* Supporting Files */,
+				93F9ACCB1FC0CA4800AC240C /* DocumentClientError.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -488,16 +499,17 @@
 		B58361B71FBA1339001CEC66 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B583619C1FB77A70001CEC66 /* Resources.swift */,
-				B58361B81FBA1384001CEC66 /* CodableResource.swift */,
-				B58361EF1FBA19A7001CEC66 /* Account.swift */,
 				B58361CC1FBA1439001CEC66 /* Attachment.swift */,
+				B58361B81FBA1384001CEC66 /* CodableResource.swift */,
 				B507D4F01FBB722000B2D18D /* Conflict.swift */,
 				B58361C71FBA13D8001CEC66 /* Database.swift */,
+				B58361EF1FBA19A7001CEC66 /* DatabaseAccount.swift */,
 				B58361BD1FBA13A0001CEC66 /* Document.swift */,
 				B58361C21FBA13B0001CEC66 /* DocumentCollection.swift */,
 				B58361D11FBA15A8001CEC66 /* Offer.swift */,
 				B58361D61FBA16F9001CEC66 /* Permission.swift */,
+				93F9ACD01FC0D01400AC240C /* ResourceError.swift */,
+				B583619C1FB77A70001CEC66 /* Resources.swift */,
 				B58361DB1FBA17B5001CEC66 /* StoredProcedure.swift */,
 				B58361E01FBA17C8001CEC66 /* Trigger.swift */,
 				B58361E51FBA17D8001CEC66 /* User.swift */,
@@ -861,14 +873,16 @@
 				B58361CE1FBA1439001CEC66 /* Attachment.swift in Sources */,
 				B52240951FB3407C00D0343F /* TokenProvider.swift in Sources */,
 				B58361B31FB78F7A001CEC66 /* Resources.swift in Sources */,
+				93F9ACCD1FC0CA4800AC240C /* DocumentClientError.swift in Sources */,
 				B58361D81FBA16F9001CEC66 /* Permission.swift in Sources */,
+				93F9ACD21FC0D01400AC240C /* ResourceError.swift in Sources */,
 				B58361C41FBA13B0001CEC66 /* DocumentCollection.swift in Sources */,
 				B5B6AC251FBA4B3900B93106 /* Query.swift in Sources */,
 				931EA5C41FBE6920003CCFF4 /* DocumentClientExtensions.swift in Sources */,
 				B58361B41FB78F7A001CEC66 /* Response.swift in Sources */,
 				B52241021FB3409F00D0343F /* AzureData.swift in Sources */,
 				B52240B21FB3409000D0343F /* ResourceType.swift in Sources */,
-				B58361F11FBA19A7001CEC66 /* Account.swift in Sources */,
+				B58361F11FBA19A7001CEC66 /* DatabaseAccount.swift in Sources */,
 				B58361E71FBA17D8001CEC66 /* User.swift in Sources */,
 				B52241051FB3409F00D0343F /* UtilityExtensions.swift in Sources */,
 				B58361EC1FBA17E8001CEC66 /* UserDefinedFunction.swift in Sources */,
@@ -925,14 +939,16 @@
 				B58361CF1FBA1439001CEC66 /* Attachment.swift in Sources */,
 				B52240981FB3407D00D0343F /* TokenProvider.swift in Sources */,
 				B58361AE1FB78F7A001CEC66 /* Resources.swift in Sources */,
+				93F9ACCE1FC0CA4800AC240C /* DocumentClientError.swift in Sources */,
 				B58361D91FBA16F9001CEC66 /* Permission.swift in Sources */,
+				93F9ACD31FC0D01400AC240C /* ResourceError.swift in Sources */,
 				B58361C51FBA13B0001CEC66 /* DocumentCollection.swift in Sources */,
 				B5B6AC261FBA4B3900B93106 /* Query.swift in Sources */,
 				931EA5C61FBE6922003CCFF4 /* DocumentClientExtensions.swift in Sources */,
 				B58361AF1FB78F7A001CEC66 /* Response.swift in Sources */,
 				B52240FD1FB3409E00D0343F /* AzureData.swift in Sources */,
 				B52240C71FB3409100D0343F /* ResourceType.swift in Sources */,
-				B58361F21FBA19A7001CEC66 /* Account.swift in Sources */,
+				B58361F21FBA19A7001CEC66 /* DatabaseAccount.swift in Sources */,
 				B58361E81FBA17D8001CEC66 /* User.swift in Sources */,
 				B52241001FB3409E00D0343F /* UtilityExtensions.swift in Sources */,
 				B58361ED1FBA17E8001CEC66 /* UserDefinedFunction.swift in Sources */,
@@ -989,14 +1005,16 @@
 				B58361D01FBA1439001CEC66 /* Attachment.swift in Sources */,
 				B522409B1FB3407E00D0343F /* TokenProvider.swift in Sources */,
 				B58361A91FB78F78001CEC66 /* Resources.swift in Sources */,
+				93F9ACCF1FC0CA4800AC240C /* DocumentClientError.swift in Sources */,
 				B58361DA1FBA16F9001CEC66 /* Permission.swift in Sources */,
+				93F9ACD41FC0D01400AC240C /* ResourceError.swift in Sources */,
 				B58361C61FBA13B0001CEC66 /* DocumentCollection.swift in Sources */,
 				B5B6AC271FBA4B3900B93106 /* Query.swift in Sources */,
 				931EA5C51FBE6922003CCFF4 /* DocumentClientExtensions.swift in Sources */,
 				B58361AA1FB78F78001CEC66 /* Response.swift in Sources */,
 				B52240F81FB3409D00D0343F /* AzureData.swift in Sources */,
 				B52240DC1FB3409200D0343F /* ResourceType.swift in Sources */,
-				B58361F31FBA19A7001CEC66 /* Account.swift in Sources */,
+				B58361F31FBA19A7001CEC66 /* DatabaseAccount.swift in Sources */,
 				B58361E91FBA17D8001CEC66 /* User.swift in Sources */,
 				B52240FB1FB3409D00D0343F /* UtilityExtensions.swift in Sources */,
 				B58361EE1FBA17E8001CEC66 /* UserDefinedFunction.swift in Sources */,
@@ -1024,13 +1042,15 @@
 				B58361CD1FBA1439001CEC66 /* Attachment.swift in Sources */,
 				B52240921FB3407900D0343F /* TokenProvider.swift in Sources */,
 				B58361D71FBA16F9001CEC66 /* Permission.swift in Sources */,
+				93F9ACCC1FC0CA4800AC240C /* DocumentClientError.swift in Sources */,
 				B58361C31FBA13B0001CEC66 /* DocumentCollection.swift in Sources */,
+				93F9ACD11FC0D01400AC240C /* ResourceError.swift in Sources */,
 				B583619A1FB779B6001CEC66 /* Response.swift in Sources */,
 				B5B6AC241FBA4B3900B93106 /* Query.swift in Sources */,
 				931EA5BF1FBE201F003CCFF4 /* DocumentClientExtensions.swift in Sources */,
 				B583619D1FB77A70001CEC66 /* Resources.swift in Sources */,
 				B52241071FB3409F00D0343F /* AzureData.swift in Sources */,
-				B58361F01FBA19A7001CEC66 /* Account.swift in Sources */,
+				B58361F01FBA19A7001CEC66 /* DatabaseAccount.swift in Sources */,
 				B522409D1FB3408E00D0343F /* ResourceType.swift in Sources */,
 				B58361E61FBA17D8001CEC66 /* User.swift in Sources */,
 				B58361EB1FBA17E8001CEC66 /* UserDefinedFunction.swift in Sources */,

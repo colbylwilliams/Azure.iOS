@@ -144,7 +144,7 @@ extension DocumentClient {
                     return "AzureData/\(build)" // AzureData/2.0.0
                 }()
                 
-                print("\(executable)/\(appVersion) (\(bundle); build:\(appBuild); \(osNameVersion)) \(azureDataVersion)"); print()
+                print("\(executable)/\(appVersion) (\(bundle); build:\(appBuild); \(osNameVersion)) \(azureDataVersion)\n");
                 return "\(executable)/\(appVersion) (\(bundle); build:\(appBuild); \(osNameVersion)) \(azureDataVersion)"
             }
             

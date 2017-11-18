@@ -8,18 +8,29 @@
 
 import Foundation
 
+/// Represents a database in the Azure Cosmos DB account.
+///
+/// - Remark:
+///   Each Azure Cosmos DB database account can have zero or more databases.
+///   A database in Azure Cosmos DB is a logical container for document collections and users.
+///   Refer to [databases](http://azure.microsoft.com/documentation/articles/documentdb-resources/#databases) for more details on databases.
 public struct Database : CodableResource {
     
     public static var type = "dbs"
     public static var list = "Databases"
 
-    public private(set) var id:             String
-    public private(set) var resourceId:     String
-    public private(set) var selfLink:       String?
-    public private(set) var etag:           String?
-    public private(set) var timestamp:      Date?
-    public private(set) var collectionsLink:String?
-    public private(set) var usersLink:      String?
+    public private(set) var id:         String
+    public private(set) var resourceId: String
+    public private(set) var selfLink:   String?
+    public private(set) var etag:       String?
+    public private(set) var timestamp:  Date?
+    
+    
+    /// Gets the self-link for collections from the Azure Cosmos DB service.
+    public private(set) var collectionsLink: String?
+    
+    /// Gets the self-link for users from the Azure Cosmos DB service.
+    public private(set) var usersLink: String?
     
     
     public init (_ id: String) { self.id = id; resourceId = "" }

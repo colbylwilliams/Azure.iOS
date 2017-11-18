@@ -9,14 +9,41 @@
 import Foundation
 
 
+// MARK: - Setup
+
+/// Print responses, resources, etc. to output log
+public var verboseLogging: Bool {
+    get { return DocumentClient.default.verboseLogging }
+    set { DocumentClient.default.verboseLogging = newValue }
+}
+
+
+/// Whether or not `setup` has been called on the client
 public func isSetup() -> Bool { return DocumentClient.default.setup }
 
 
-// setup
-public func setup (_ name: String, key: String, keyType: TokenType = .master, verboseLogging: Bool = false) {
-    return DocumentClient.default.setup (name, key: key, keyType: keyType, verboseLogging: verboseLogging)
+/// Sets up the client.  This should be called before performing any CRUD operations
+///
+/// - Parameters:
+///   - name:       The name of the Cosmos DB account - used to create resource urls
+///   - key:        A master read/read-write key for the account, or a permission token for a resource
+///   - keyType:    The type of key - `.master` read/read-write key or a `.resource` permission token
+public func setup (forAccountNamed name: String, withKey key: String, ofType keyType: TokenType) {
+    return DocumentClient.default.setup (forAccountNamed: name, withKey: key, ofType: keyType)
 }
 
+/// Sets up the client.  This should be called before performing any CRUD operations
+///
+/// - Parameters:
+///   - name:       The custom domain of the Cosmos DB account - used to create resource urls
+///   - key:        A master read/read-write key for the account, or a permission token for a resource
+///   - keyType:    The type of key - `.master` read/read-write key or a `.resource` permission token
+public func setup (forAccountAt url: URL, withKey key: String, ofType keyType: TokenType) {
+    return DocumentClient.default.setup (forAccountAt: url, withKey: key, ofType: keyType)
+}
+
+
+// Resets the client
 public func reset () {
     return DocumentClient.default.reset()
 }
@@ -26,22 +53,22 @@ public func reset () {
 
 // MARK: - Databases
 
-// create
+/// Create a new Database
 public func create (databaseWithId databaseId: String, callback: @escaping (Response<Database>) -> ()) {
     return DocumentClient.default.create (databaseWithId: databaseId, callback: callback)
 }
 
-// list
+/// List all Databases
 public func databases (callback: @escaping (ListResponse<Database>) -> ()) {
     return DocumentClient.default.databases (callback: callback)
 }
 
-// get
+/// Get a Database
 public func get (databaseWithId databaseId: String, callback: @escaping (Response<Database>) -> ()) {
     return DocumentClient.default.get (databaseWithId: databaseId, callback: callback)
 }
 
-// delete
+/// Delete a Database
 public func delete (_ database: Database, callback: @escaping (DataResponse) -> ()) {
     return DocumentClient.default.delete (database, callback: callback)
 }
@@ -72,6 +99,7 @@ public func delete (_ collection: DocumentCollection, fromDatabase databaseId: S
 }
 
 // replace
+// TODO: replace
 
 
 
@@ -87,7 +115,6 @@ public func create<T: Document> (_ document: T, in collection: DocumentCollectio
     return DocumentClient.default.create (document, in: collection, callback: callback)
 }
 
-
 // list
 public func get<T: Document> (documentsAs documentType: T.Type, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (ListResponse<T>) -> ()) {
     return DocumentClient.default.get (documentsAs: documentType, inCollection: collectionId, inDatabase: databaseId, callback: callback)
@@ -96,7 +123,6 @@ public func get<T: Document> (documentsAs documentType: T.Type, inCollection col
 public func get<T: Document> (documentsAs documentType: T.Type, in collection: DocumentCollection, callback: @escaping (ListResponse<T>) -> ()) {
     return DocumentClient.default.get (documentsAs: documentType, in: collection, callback: callback)
 }
-
 
 // get
 public func get<T: Document> (documentWithId documentId: String, as documentType:T.Type, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (Response<T>) -> ()) {
@@ -107,7 +133,6 @@ public func get<T: Document> (documentWithId documentId: String, as documentType
     return DocumentClient.default.get (documentWithId: documentId, as: documentType, in: collection, callback: callback)
 }
 
-
 // delete
 public func delete (_ document: Document, fromCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (DataResponse) -> ()) {
     return DocumentClient.default.delete (document, fromCollection: collectionId, inDatabase: databaseId, callback: callback)
@@ -117,7 +142,6 @@ public func delete (_ document: Document, from collection: DocumentCollection, c
     return DocumentClient.default.delete (document, from: collection, callback: callback)
 }
 
-
 // replace
 public func replace<T: Document> (_ document: T, inCollection collectionId: String, inDatabase databaseId: String, callback: @escaping (Response<T>) -> ()) {
     return DocumentClient.default.replace (document, inCollection: collectionId, inDatabase: databaseId, callback: callback)
@@ -126,7 +150,6 @@ public func replace<T: Document> (_ document: T, inCollection collectionId: Stri
 public func replace<T: Document> (_ document: T, in collection: DocumentCollection, callback: @escaping (Response<T>) -> ()) {
     return DocumentClient.default.replace (document, in: collection, callback: callback)
 }
-
 
 // query
 public func query (documentsIn collectionId: String, inDatabase databaseId: String, with query: Query, callback: @escaping (ListResponse<Document>) -> ()) {
@@ -421,8 +444,10 @@ public func get (offerWithId offerId: String, callback: @escaping (Response<Offe
 }
 
 // replace
+// TODO: replace
 
 // query
+// TODO: query
 
 
 

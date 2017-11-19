@@ -86,7 +86,8 @@ open class Document : CodableResource {
     }
 
     
-    public func encode(to encoder: Encoder) throws {
+    open func encode(to encoder: Encoder) throws {
+        
         var sysContainer = encoder.container(keyedBy: SysCodingKeys.self)
 
         try sysContainer.encode(id, forKey: .id)

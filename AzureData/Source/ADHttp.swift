@@ -30,6 +30,7 @@ public enum StatusCode : Int {
     case serviceUnavailable     = 503
 }
 
+
 public enum HttpMethod : String {
     case get     = "GET"
     case head    = "HEAD"
@@ -37,6 +38,7 @@ public enum HttpMethod : String {
     case put     = "PUT"
     case delete  = "DELETE"
 }
+
 
 // https://docs.microsoft.com/en-us/rest/api/documentdb/common-documentdb-rest-request-headers
 public enum HttpRequestHeader : String {
@@ -115,6 +117,7 @@ public enum HttpResponseHeader : String {
     }
 }
 
+
 extension HTTPURLResponse {
     func headerString(for header: HttpResponseHeader) -> String? {
         return self.allHeaderFields[header.rawValue] as? String
@@ -129,8 +132,6 @@ extension HTTPURLResponse {
         return self.allHeaderFields[header.rawValue] as? Double
     }
 
-    
-    
     func printHeaders() {
         print("--")
         print("Headers:")

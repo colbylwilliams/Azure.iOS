@@ -12,10 +12,9 @@ import AzureData
 
 extension UITableViewController {
     
-    func showErrorAlert (_ error: ADError) {
+    func showErrorAlert (_ error: DocumentClientError) {
         let alertController = UIAlertController(title: "Error: \(error.code)", message: error.message, preferredStyle: .alert)
         alertController.addAction(UIAlertAction.init(title: "Dismiss", style: .cancel, handler: nil))
         self.present(alertController, animated: true) { }
     }
-
 }

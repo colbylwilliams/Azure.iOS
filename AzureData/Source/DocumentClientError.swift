@@ -10,42 +10,79 @@ import Foundation
 
 public struct DocumentClientError : Error {
     
-    /// Gets the activity ID associated with the request from the Azure Cosmos DB service.
-    public let activityId: String?
+    public enum ErrorKind {
+        case unknownError
+        case internalError
+        case setupError
+        case invalidId
+        case incompleteIds
+        case badRequest
+        case unauthorized
+        case forbidden
+        case notFound
+        case requestTimeout
+        case conflict
+        case preconditionFailure
+        case entityTooLarge
+        case tooManyRequests
+        case retryWith
+        case internalServerError
+        case serviceUnavailable
 
-    /// Gets the error code associated with the exception in the Azure Cosmos DB service.
-    public let resourceError: ResourceError?
-    
-    /// Gets a message that describes the current exception from the Azure Cosmos DB service.
-    public let message: String?
-    
-    /// Cost of the request in the Azure Cosmos DB service.
-    public let requestCharge: Double?
-    
-    /// Gets the headers associated with the response from the Azure Cosmos DB service.
-    public let responseHeaders: [HttpResponseHeader:Any]?
-    
-    /// Gets the recommended time interval after which the client can retry failed requests from the Azure Cosmos DB service
-    public let retryAfter: TimeInterval?
-    
-    /// Gets or sets the request status code in the Azure Cosmos DB service.
-    public let statusCode: StatusCode?
-    
-    
-    init(withMessage message: String?) {
-        self.activityId = nil
-        self.resourceError = nil
-        self.message = message
-        self.requestCharge = nil
-        self.responseHeaders = nil
-        self.retryAfter = nil
-        self.statusCode = nil
+        var message: String {
+            switch self {
+            case .unknownError:     return "An unknown error occured."
+            case .internalError:    return "An internal error occured."
+            case .setupError:       return "AzureData is not setup.  Must call AzureData.setup() before attempting CRUD operations on resources."
+            case .invalidId:        return "Cosmos DB Resource IDs must not exceed 255 characters and cannot contain whitespace"
+            case .incompleteIds:    return "This resource is missing the selfLink and/or resourceId properties.  Use an override that takes parent resource or ids instead."
+            default: return ""
+            }
+        }
     }
     
+    /// Gets the activity ID associated with the request from the Azure Cosmos DB service.
+    public private(set) var activityId: String? = nil
+
+    /// Gets the error code associated with the exception in the Azure Cosmos DB service.
+    public private(set) var resourceError: ResourceError? = nil
     
-    init(withData data: Data?, response: URLResponse?, andError error: Error?) {
+    /// Gets a message that describes the current exception from the Azure Cosmos DB service.
+    public var message: String? {
+        return baseError?.localizedDescription ?? resourceError?.message ?? kind.message
+    }
+    
+    /// Cost of the request in the Azure Cosmos DB service.
+    public private(set) var requestCharge: Double? = nil
+    
+    /// Gets the headers associated with the response from the Azure Cosmos DB service.
+    public private(set) var responseHeaders: [HttpResponseHeader:Any]? = nil
+    
+    /// Gets the recommended time interval after which the client can retry failed requests from
+    /// the Azure Cosmos DB service
+    public private(set) var retryAfter: TimeInterval? = nil
+    
+    /// Gets or sets the request status code in the Azure Cosmos DB service.
+    public private(set) var statusCode: StatusCode? = nil
+    
+    /// Kind of error.
+    public private(set) var kind: ErrorKind = .unknownError
+    
+    /// A nested error.
+    public private(set) var baseError: Error? = nil
+    
+    
+    init(withError error: Error) {
+        self.baseError = error
+    }
+
+    init(withKind kind: ErrorKind) {
+        self.kind = kind
+    }
+    
+    init(withData data: Data?, response: HTTPURLResponse?, error: Error? = nil) {
         
-        if let response = response as? HTTPURLResponse {
+        if let response = response {
             
             var headers = [HttpResponseHeader:Any]()
             
@@ -60,30 +97,62 @@ public struct DocumentClientError : Error {
             self.activityId = headers[.xMsActivityId] as? String
             self.requestCharge = headers[.xMsRequestCharge] as? Double
             self.retryAfter = headers[.xMsRetryAfterMs] as? Double
-            self.statusCode = StatusCode(rawValue: response.statusCode)
-        } else {
-            self.activityId = nil
-            self.requestCharge = nil
-            self.responseHeaders = nil
-            self.retryAfter = nil
-            self.statusCode = nil
+            
+            if let code = StatusCode(rawValue: response.statusCode) {                
+                self.statusCode = code
+                self.kind = code.errorKind
+            }
         }
 
         if let data = data, let resourceError = try? ResourceError.decode(data: data) {
             self.resourceError = resourceError
-            self.message = resourceError.message
-        } else {
-            self.resourceError = nil
-            self.message = nil
+        }
+        
+        self.baseError = error
+    }
+}
+
+
+extension StatusCode {
+    public var errorKind: DocumentClientError.ErrorKind {
+        switch self {
+        case .badRequest:           return .badRequest
+        case .unauthorized:         return .unauthorized
+        case .forbidden:            return .forbidden
+        case .notFound:             return .notFound
+        case .requestTimeout:       return .requestTimeout
+        case .conflict:             return .conflict
+        case .preconditionFailure:  return .preconditionFailure
+        case .entityTooLarge:       return .entityTooLarge
+        case .tooManyRequests:      return .tooManyRequests
+        case .retryWith:            return .retryWith
+        case .internalServerError:  return .internalServerError
+        case .serviceUnavailable:   return .serviceUnavailable
+        default:                    return .unknownError
         }
     }
 }
 
 
+extension DocumentClientError : CustomStringConvertible {
+    public var description: String {
+        let baseErrorDescription = self.baseError != nil ? "\n\t baseError: \(self.baseError!.localizedDescription)" : ""
+        return "\(self.localizedDescription)\(baseErrorDescription)\n"
+    }
+}
+
+extension DocumentClientError : CustomDebugStringConvertible {
+    public var debugDescription: String {
+        let baseErrorDescription = self.baseError != nil ? "\n\t baseError: \(self.baseError!.localizedDescription)" : ""
+        return "\(self.localizedDescription)\(baseErrorDescription)\n"
+    }
+}
+
+
 extension DocumentClientError {
-    static let unknownError     = DocumentClientError(withMessage: "A unknown error occured.")
-    static let setupError       = DocumentClientError(withMessage: "AzureData is not setup.  Must call AzureData.setup() before attempting CRUD operations on resources.")
-    static let invalidIdError   = DocumentClientError(withMessage: "Cosmos DB Resource IDs must not exceed 255 characters and cannot contain whitespace")
-    static let jsonError        = DocumentClientError(withMessage: "Error: Could not serialize document to JSON")
-    static let incompleteIds    = DocumentClientError(withMessage: "This resource is missing the selfLink and/or resourceId properties.  Use an override that takes parent resource or ids instead.")
+    
+    
+    
+    
+    
 }

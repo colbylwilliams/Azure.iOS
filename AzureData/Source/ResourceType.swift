@@ -9,16 +9,16 @@
 import Foundation
 
 public enum ResourceType : String {
-    case database               = "dbs"
-    case user                   = "users"
-    case permission             = "permissions"
-    case collection             = "colls"
-    case storedProcedure        = "sprocs"
-    case trigger                = "triggers"
-    case udf                    = "udfs"
-    case document               = "docs"
-    case attachment             = "attachments"
-    case offer                  = "offers"
+    case database           = "dbs"
+    case user               = "users"
+    case permission         = "permissions"
+    case collection         = "colls"
+    case storedProcedure    = "sprocs"
+    case trigger            = "triggers"
+    case udf                = "udfs"
+    case document           = "docs"
+    case attachment         = "attachments"
+    case offer              = "offers"
     
     var path: String {
         switch self {

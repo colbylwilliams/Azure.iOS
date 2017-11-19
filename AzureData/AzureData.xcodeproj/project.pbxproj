@@ -118,16 +118,12 @@
 		B522409B1FB3407E00D0343F /* TokenProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401A1FB33CD000D0343F /* TokenProvider.swift */; };
 		B522409C1FB3407E00D0343F /* AzureDataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */; };
 		B522409D1FB3408E00D0343F /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401D1FB33CD000D0343F /* ResourceType.swift */; };
-		B52240A21FB3408E00D0343F /* ADError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240221FB33CD000D0343F /* ADError.swift */; };
 		B52240A81FB3408E00D0343F /* ResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240281FB33CD000D0343F /* ResourceUri.swift */; };
 		B52240B21FB3409000D0343F /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401D1FB33CD000D0343F /* ResourceType.swift */; };
-		B52240B71FB3409000D0343F /* ADError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240221FB33CD000D0343F /* ADError.swift */; };
 		B52240BD1FB3409000D0343F /* ResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240281FB33CD000D0343F /* ResourceUri.swift */; };
 		B52240C71FB3409100D0343F /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401D1FB33CD000D0343F /* ResourceType.swift */; };
-		B52240CC1FB3409100D0343F /* ADError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240221FB33CD000D0343F /* ADError.swift */; };
 		B52240D21FB3409100D0343F /* ResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240281FB33CD000D0343F /* ResourceUri.swift */; };
 		B52240DC1FB3409200D0343F /* ResourceType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B522401D1FB33CD000D0343F /* ResourceType.swift */; };
-		B52240E11FB3409200D0343F /* ADError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240221FB33CD000D0343F /* ADError.swift */; };
 		B52240E71FB3409200D0343F /* ResourceUri.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240281FB33CD000D0343F /* ResourceUri.swift */; };
 		B52240F71FB3409D00D0343F /* AzureData.h in Headers */ = {isa = PBXBuildFile; fileRef = B52240331FB33CD000D0343F /* AzureData.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		B52240F81FB3409D00D0343F /* AzureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = B52240341FB33CD000D0343F /* AzureData.swift */; };
@@ -287,7 +283,6 @@
 		B522401A1FB33CD000D0343F /* TokenProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenProvider.swift; sourceTree = "<group>"; };
 		B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureDataExtensions.swift; sourceTree = "<group>"; };
 		B522401D1FB33CD000D0343F /* ResourceType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceType.swift; sourceTree = "<group>"; };
-		B52240221FB33CD000D0343F /* ADError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ADError.swift; sourceTree = "<group>"; };
 		B52240281FB33CD000D0343F /* ResourceUri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceUri.swift; sourceTree = "<group>"; };
 		B52240331FB33CD000D0343F /* AzureData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AzureData.h; sourceTree = "<group>"; };
 		B52240341FB33CD000D0343F /* AzureData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AzureData.swift; sourceTree = "<group>"; };
@@ -400,10 +395,10 @@
 				B522401B1FB33CD000D0343F /* AzureDataExtensions.swift */,
 				B583619E1FB78763001CEC66 /* DocumentClient.swift */,
 				931EA5BE1FBE201F003CCFF4 /* DocumentClientExtensions.swift */,
+				93F9ACCB1FC0CA4800AC240C /* DocumentClientError.swift */,
 				B58361B71FBA1339001CEC66 /* Resources */,
 				B55AEFE61FB34CF600F7BEED /* Domain */,
 				B55AEFDF1FB34B7400F7BEED /* Supporting Files */,
-				93F9ACCB1FC0CA4800AC240C /* DocumentClientError.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -473,7 +468,6 @@
 		B55AEFE61FB34CF600F7BEED /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				B52240221FB33CD000D0343F /* ADError.swift */,
 				B52240361FB33CD000D0343F /* ADHttp.swift */,
 				B5B6AC281FBA84C400B93106 /* CodableDictionary.swift */,
 				B52240191FB33CD000D0343F /* NetworkReachabilityManager.swift */,
@@ -869,7 +863,6 @@
 				B507D4F21FBB722000B2D18D /* Conflict.swift in Sources */,
 				B52241041FB3409F00D0343F /* ADHttp.swift in Sources */,
 				B52240941FB3407C00D0343F /* NetworkReachabilityManager.swift in Sources */,
-				B52240B71FB3409000D0343F /* ADError.swift in Sources */,
 				B58361CE1FBA1439001CEC66 /* Attachment.swift in Sources */,
 				B52240951FB3407C00D0343F /* TokenProvider.swift in Sources */,
 				B58361B31FB78F7A001CEC66 /* Resources.swift in Sources */,
@@ -935,7 +928,6 @@
 				B507D4F31FBB722000B2D18D /* Conflict.swift in Sources */,
 				B52240FF1FB3409E00D0343F /* ADHttp.swift in Sources */,
 				B52240971FB3407D00D0343F /* NetworkReachabilityManager.swift in Sources */,
-				B52240CC1FB3409100D0343F /* ADError.swift in Sources */,
 				B58361CF1FBA1439001CEC66 /* Attachment.swift in Sources */,
 				B52240981FB3407D00D0343F /* TokenProvider.swift in Sources */,
 				B58361AE1FB78F7A001CEC66 /* Resources.swift in Sources */,
@@ -1001,7 +993,6 @@
 				B507D4F41FBB722000B2D18D /* Conflict.swift in Sources */,
 				B52240FA1FB3409D00D0343F /* ADHttp.swift in Sources */,
 				B522409A1FB3407E00D0343F /* NetworkReachabilityManager.swift in Sources */,
-				B52240E11FB3409200D0343F /* ADError.swift in Sources */,
 				B58361D01FBA1439001CEC66 /* Attachment.swift in Sources */,
 				B522409B1FB3407E00D0343F /* TokenProvider.swift in Sources */,
 				B58361A91FB78F78001CEC66 /* Resources.swift in Sources */,
@@ -1038,7 +1029,6 @@
 				B507D4F11FBB722000B2D18D /* Conflict.swift in Sources */,
 				B52241091FB3409F00D0343F /* ADHttp.swift in Sources */,
 				B52240911FB3407900D0343F /* NetworkReachabilityManager.swift in Sources */,
-				B52240A21FB3408E00D0343F /* ADError.swift in Sources */,
 				B58361CD1FBA1439001CEC66 /* Attachment.swift in Sources */,
 				B52240921FB3407900D0343F /* TokenProvider.swift in Sources */,
 				B58361D71FBA16F9001CEC66 /* Permission.swift in Sources */,

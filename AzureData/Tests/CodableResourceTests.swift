@@ -89,5 +89,4 @@ class CodableResourceTests: XCTestCase {
         
         XCTAssertNotNil(doc)
     }
-
 }

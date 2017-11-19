@@ -35,7 +35,7 @@ public class Document : CodableResource {
     public var timeToLive: Int? = nil
     
     
-    fileprivate var data: CodableDictionary?
+    public private(set) var data: CodableDictionary?
     
     
     public init () { id = UUID().uuidString; resourceId = "" }

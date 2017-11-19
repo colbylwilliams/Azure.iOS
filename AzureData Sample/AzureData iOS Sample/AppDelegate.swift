@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(key, forKey: databaseAccountKeyKey)
 
         if let n = name, let k = key {
-            if callSetup { AzureData.setup(n, key: k) }
+            if callSetup { AzureData.setup(forAccountNamed: n, withKey: k, ofType: .master) }
         } else {
             AzureData.reset()
         }

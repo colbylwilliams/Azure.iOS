@@ -45,7 +45,7 @@ open class Document : CodableResource {
     public subscript (key: String) -> Any? {
         get { return data?[key] }
         set {
-            
+            assert(Swift.type(of: self) == Document.self, "Error: Subscript cannot be used on children of Document\n")
             assert(!sysKeys.contains(key), "Error: Subscript cannot be used to set the following system generated properties: \(sysKeys.joined(separator: ", "))\n")
             
             if data == nil { data = CodableDictionary() }
@@ -74,14 +74,17 @@ open class Document : CodableResource {
         timestamp       = try sysContainer.decode(Date.self,   forKey: .timestamp)
         attachmentsLink = try sysContainer.decode(String.self, forKey: .attachmentsLink)
         
-        let userContainer = try decoder.container(keyedBy: UserCodingKeys.self)
+        if Swift.type(of: self) == Document.self {
         
-        data = CodableDictionary()
+            let userContainer = try decoder.container(keyedBy: UserCodingKeys.self)
         
-        let userKeys = userContainer.allKeys.filter { !sysKeys.contains($0.stringValue) }
-        
-        for key in userKeys {
-            data![key.stringValue] = (try userContainer.decode(CodableDictionaryValueType.self, forKey: key)).value
+            data = CodableDictionary()
+
+            let userKeys = userContainer.allKeys.filter { !sysKeys.contains($0.stringValue) }
+            
+            for key in userKeys {
+                data![key.stringValue] = (try? userContainer.decode(CodableDictionaryValueType.self, forKey: key))?.value
+            }
         }
     }
 
@@ -97,25 +100,28 @@ open class Document : CodableResource {
         try sysContainer.encode(timestamp, forKey: .timestamp)
         try sysContainer.encode(attachmentsLink, forKey: .attachmentsLink)
 
-        var userContainer = encoder.container(keyedBy: UserCodingKeys.self)
+        if Swift.type(of: self) == Document.self {
         
-        if let data = data {
+            var userContainer = encoder.container(keyedBy: UserCodingKeys.self)
             
-            for (k, v) in data {
+            if let data = data {
                 
-                let key = UserCodingKeys(stringValue: k)!
-                
-                switch v {
-                case .uuid(let value): try userContainer.encode(value, forKey: key)
-                case .bool(let value): try userContainer.encode(value, forKey: key)
-                case .int(let value): try userContainer.encode(value, forKey: key)
-                case .double(let value): try userContainer.encode(value, forKey: key)
-                case .float(let value): try userContainer.encode(value, forKey: key)
-                case .date(let value): try userContainer.encode(value, forKey: key)
-                case .string(let value): try userContainer.encode(value, forKey: key)
-                case .dictionary(let value): try userContainer.encode(value, forKey: key)
-                case .array(let value): try userContainer.encode(value, forKey: key)
-                default: break
+                for (k, v) in data {
+                    
+                    let key = UserCodingKeys(stringValue: k)!
+                    
+                    switch v {
+                    case .uuid(let value): try userContainer.encode(value, forKey: key)
+                    case .bool(let value): try userContainer.encode(value, forKey: key)
+                    case .int(let value): try userContainer.encode(value, forKey: key)
+                    case .double(let value): try userContainer.encode(value, forKey: key)
+                    case .float(let value): try userContainer.encode(value, forKey: key)
+                    case .date(let value): try userContainer.encode(value, forKey: key)
+                    case .string(let value): try userContainer.encode(value, forKey: key)
+                    case .dictionary(let value): try userContainer.encode(value, forKey: key)
+                    case .array(let value): try userContainer.encode(value, forKey: key)
+                    default: break
+                    }
                 }
             }
         }

@@ -14,6 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     let databaseAccountNameKey     = "ADDatabaseAccountName"
     let databaseAccountKeyKey      = "ADDatabaseAccountKey"
+    
+    let databaseAccountNameDefault = "AZURE_COSMOS_DB_ACCOUNT_NAME"
+    let databaseAccountKeyDefault  = "AZURE_COSMOS_DB_ACCOUNT_Key"
 
 
     var window: UIWindow?
@@ -39,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(name, forKey: databaseAccountNameKey)
         UserDefaults.standard.set(key, forKey: databaseAccountKeyKey)
 
-        if let n = name, let k = key {
+        if let n = name, n != databaseAccountNameDefault, let k = key, k != databaseAccountKeyDefault {
             if callSetup { AzureData.setup(forAccountNamed: n, withKey: k, ofType: .master) }
         } else {
             AzureData.reset()

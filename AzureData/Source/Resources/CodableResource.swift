@@ -31,7 +31,6 @@ public protocol CodableResource : Codable {
     var timestamp: Date?   { get }
 }
 
-
 extension CodableResource {
     
     static func fragment (_ resourceId: String? = nil) -> String {

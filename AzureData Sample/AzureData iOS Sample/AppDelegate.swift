@@ -31,11 +31,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let accountName = UserDefaults.standard.string(forKey: databaseAccountNameKey)  ?? Bundle.main.infoDictionary?[databaseAccountNameKey]  as? String
         let accountKey  = UserDefaults.standard.string(forKey: databaseAccountKeyKey)   ?? Bundle.main.infoDictionary?[databaseAccountKeyKey]   as? String
             
-        storeDatabaseAccount(name: accountName, key: accountKey, andCallSetup: true)
+        storeDatabaseAccount(name: accountName, key: accountKey, andConfigure: true)
     }
     
 
-    func storeDatabaseAccount(name: String?, key: String?, andCallSetup callSetup: Bool = false) {
+    func storeDatabaseAccount(name: String?, key: String?, andConfigure configure: Bool = false) {
         
         print("storeDatabaseAccount name: \(name ?? "nil") key: \(key ?? "nil")")
         
@@ -43,7 +43,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.set(key, forKey: databaseAccountKeyKey)
 
         if let n = name, n != databaseAccountNameDefault, let k = key, k != databaseAccountKeyDefault {
-            if callSetup { AzureData.setup(forAccountNamed: n, withKey: k, ofType: .master) }
+            if configure { AzureData.configure(forAccountNamed: n, withKey: k, ofType: .master) }
         } else {
             AzureData.reset()
         }
@@ -54,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func showApiKeyAlert(_ application: UIApplication) {
         
-        if AzureData.isSetup() {
+        if AzureData.isConfigured() {
             
             if let navController = window?.rootViewController as? UINavigationController, let databaseController = navController.topViewController as? DatabaseTableViewController {
                 databaseController.refreshData()
@@ -84,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             alertController.addAction(UIAlertAction(title: "Done", style: .default) { a in
                 
-                self.storeDatabaseAccount(name: alertController.textFields?.first?.text, key: alertController.textFields?.last?.text, andCallSetup: true)
+                self.storeDatabaseAccount(name: alertController.textFields?.first?.text, key: alertController.textFields?.last?.text, andConfigure: true)
             })
             
             window?.rootViewController?.present(alertController, animated: true) { }

@@ -56,18 +56,19 @@ class AzureDataTests: XCTestCase {
     override func setUp() {
         super.setUp()
         
-        // AzureData.setup(forAccountNamed: "<Database Name>", withKey: "<Database Master Key OR Resource Permission Token>", ofType: "<Master Key or Resource Token>")
+        // AzureData.configure(forAccountNamed: "<Database Name>", withKey: "<Database Master Key OR Resource Permission Token>", ofType: "<Master Key or Resource Token>")
+        
         
         AzureData.verboseLogging = true
         
-        if !AzureData.isSetup() {
+        if !AzureData.isConfigured() {
             
             let bundle = Bundle(for: type(of: self))
             
             if let accountName = bundle.infoDictionary?["ADDatabaseAccountName"] as? String, accountName != "AZURE_COSMOS_DB_ACCOUNT_NAME",
                 let accountKey = bundle.infoDictionary?["ADDatabaseAccountKey"]  as? String, accountKey  != "AZURE_COSMOS_DB_ACCOUNT_Key" {
             
-                AzureData.setup(forAccountNamed: accountName, withKey: accountKey, ofType: .master)
+                AzureData.configure(forAccountNamed: accountName, withKey: accountKey, ofType: .master)
             }
         }
         
@@ -172,7 +173,7 @@ class AzureDataTests: XCTestCase {
             }
         }
         
-        XCTAssert(AzureData.isSetup(), "AzureData setup failed")
+        XCTAssert(AzureData.isConfigured(), "AzureData configure failed")
     }
     
     

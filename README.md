@@ -1,4 +1,4 @@
-# Azure.iOS [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/colbylwilliams/Azure.iOS/master/LICENSE.md) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+# Azure.iOS [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](LICENSE) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 
 
 | Target               | OS      | Status                                                                                                |
@@ -13,10 +13,10 @@
 | AzureData Sample App | watchOS | _coming soon_                                                                                         |
 
 
-# Setup
+# Configure
 
 ```swift
-AzureData.setup("cosmosDb name", key: "read-write key", keyType: .master)
+AzureData.configure (forAccountNamed: "cosmosDb name", withKey: "read-write key", ofType: .master)
 ```
 
 

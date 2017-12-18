@@ -77,14 +77,14 @@ public class DocumentClient {
     
     // MARK: - Setup
     
-    public var setup: Bool { return baseUri != nil }
+    public var isConfigured: Bool { return baseUri != nil }
     
-    public func setup (forAccountNamed name: String, withKey key: String, ofType keyType: TokenType) {
+    public func configure (forAccountNamed name: String, withKey key: String, ofType keyType: TokenType) {
         baseUri = ResourceUri(forAccountNamed: name)
         tokenProvider = TokenProvider(key: key, keyType: keyType, tokenVersion: "1.0")
     }
     
-    public func setup (forAccountAt url: URL, withKey key: String, ofType keyType: TokenType) {
+    public func configure (forAccountAt url: URL, withKey key: String, ofType keyType: TokenType) {
         baseUri = ResourceUri(forAccountAt: url)
         tokenProvider = TokenProvider(key: key, keyType: keyType, tokenVersion: "1.0")
     }
@@ -768,7 +768,7 @@ public class DocumentClient {
     // list
     fileprivate func resources<T> (resourceUri: (URL, String)?, callback: @escaping (ListResponse<T>) -> ()) {
         
-        guard setup else { callback(ListResponse<T>(DocumentClientError(withKind: .setupError))); return }
+        guard isConfigured else { callback(ListResponse<T>(DocumentClientError(withKind: .configureError))); return }
         
         let request = dataRequest(T.self, .get, resourceUri: resourceUri!)
         
@@ -778,7 +778,7 @@ public class DocumentClient {
     // get
     fileprivate func resource<T>(resourceUri: (URL, String)?, callback: @escaping (Response<T>) -> ()) {
         
-        guard setup else { callback(Response<T>(DocumentClientError(withKind: .setupError))); return }
+        guard isConfigured else { callback(Response<T>(DocumentClientError(withKind: .configureError))); return }
         
         let request = dataRequest(T.self, .get, resourceUri: resourceUri!)
         
@@ -788,7 +788,7 @@ public class DocumentClient {
     // refresh
     func refresh<T>(_ resource: T, callback: @escaping (Response<T>) -> ()) {
         
-        guard setup else { callback(Response(DocumentClientError(withKind: .setupError))); return }
+        guard isConfigured else { callback(Response(DocumentClientError(withKind: .configureError))); return }
         
         guard !resource.selfLink.isNilOrEmpty && !resource.resourceId.isEmpty else { callback(Response(DocumentClientError(withKind: .incompleteIds))); return }
         
@@ -802,7 +802,7 @@ public class DocumentClient {
     // delete
     fileprivate func delete<T:CodableResource>(_ type: T.Type = T.self, resourceUri: (URL, String)?, callback: @escaping (DataResponse) -> ()) {
         
-        guard setup else { callback(DataResponse(DocumentClientError(withKind: .setupError))); return }
+        guard isConfigured else { callback(DataResponse(DocumentClientError(withKind: .configureError))); return }
         
         let request = dataRequest(T.self, .delete, resourceUri: resourceUri!)
         
@@ -811,7 +811,7 @@ public class DocumentClient {
 
     func delete<T:CodableResource>(_ resource: T, callback: @escaping (DataResponse) -> ()) {
         
-        guard setup else { callback(DataResponse(DocumentClientError(withKind: .setupError))); return }
+        guard isConfigured else { callback(DataResponse(DocumentClientError(withKind: .configureError))); return }
         
         guard !resource.selfLink.isNilOrEmpty && !resource.resourceId.isEmpty else { callback(DataResponse(DocumentClientError(withKind: .incompleteIds))); return }
         
@@ -844,7 +844,7 @@ public class DocumentClient {
     // query
     fileprivate func query<T> (_ query: Query, at resourceUri: (URL, String)?, callback: @escaping (ListResponse<T>) -> ()) {
         
-        guard setup else { callback(ListResponse<T>(DocumentClientError(withKind: .setupError))); return }
+        guard isConfigured else { callback(ListResponse<T>(DocumentClientError(withKind: .configureError))); return }
         
         if self.verboseLogging { query.printQuery(); print() }
         
@@ -864,7 +864,7 @@ public class DocumentClient {
     // execute
     fileprivate func execute<T:CodableResource, R: Encodable>(_ type: T.Type, withBody body: R? = nil, resourceUri: (URL, String)?, callback: @escaping (DataResponse) -> ()) {
         
-        guard setup else { callback(DataResponse(DocumentClientError(withKind: .setupError))); return }
+        guard isConfigured else { callback(DataResponse(DocumentClientError(withKind: .configureError))); return }
         
         do {
             
@@ -882,7 +882,7 @@ public class DocumentClient {
     // create or replace
     fileprivate func createOrReplace<T, R:Encodable> (_ body: R, at resourceUri: (URL, String)?, replacing: Bool = false, additionalHeaders: [String:HttpRequestHeader]? = nil, callback: @escaping (Response<T>) -> ()) {
         
-        guard setup else { callback(Response<T>(DocumentClientError(withKind: .setupError))); return }
+        guard isConfigured else { callback(Response<T>(DocumentClientError(withKind: .configureError))); return }
         
         do {
             
@@ -900,7 +900,7 @@ public class DocumentClient {
     
     fileprivate func createOrReplace<T> (_ body: Data, at resourceUri: (URL, String)?, replacing: Bool = false, additionalHeaders: [String:HttpRequestHeader]? = nil, callback: @escaping (Response<T>) -> ()) {
         
-        guard setup else { callback(Response<T>(DocumentClientError(withKind: .setupError))); return }
+        guard isConfigured else { callback(Response<T>(DocumentClientError(withKind: .configureError))); return }
         
         var request = dataRequest(T.self, replacing ? .put : .post, resourceUri: resourceUri!, additionalHeaders: additionalHeaders)
         

@@ -13,7 +13,7 @@ public struct DocumentClientError : Error {
     public enum ErrorKind {
         case unknownError
         case internalError
-        case setupError
+        case configureError
         case invalidId
         case incompleteIds
         case badRequest
@@ -33,7 +33,7 @@ public struct DocumentClientError : Error {
             switch self {
             case .unknownError:     return "An unknown error occured."
             case .internalError:    return "An internal error occured."
-            case .setupError:       return "AzureData is not setup.  Must call AzureData.setup() before attempting CRUD operations on resources."
+            case .configureError:   return "AzureData is not configured.  Must call AzureData.configure() before attempting CRUD operations on resources."
             case .invalidId:        return "Cosmos DB Resource IDs must not exceed 255 characters and cannot contain whitespace"
             case .incompleteIds:    return "This resource is missing the selfLink and/or resourceId properties.  Use an override that takes parent resource or ids instead."
             default: return ""

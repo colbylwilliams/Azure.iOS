@@ -128,8 +128,8 @@ database.delete (collection) { s in
 
 There are two different classes you can use to interact with documents:
 
-### `Document`
-`Document` is intended to be inherited by your custom model types. Subclasses must conform to the `Codable` protocal and require minimal boilerplate code for successful serialization/deserialization.
+### Document
+The `Document` type is intended to be inherited by your custom model types. Subclasses must conform to the `Codable` protocal and require minimal boilerplate code for successful serialization/deserialization.
 
 Here is an example of a class `CustomDocument` that inherits from `Document`:
 
@@ -167,8 +167,8 @@ class CustomDocument: Document {
 }
 ```
 
-### `DictionaryDocument` 
-`DictionaryDocument` behaves very much like a `[String:Any]` dictionary while handling all properties required by the database.  This allows you to interact with the document directly using subscript syntax.  `DictionaryDocument` cannot be subclassed.
+### DictionaryDocument
+The `DictionaryDocument` type behaves very much like a `[String:Any]` dictionary while handling all properties required by the database.  This allows you to interact with the document directly using subscript syntax.  `DictionaryDocument` cannot be subclassed.
 
 Here is an example of using `DictionaryDocument` to create a document with the same properties as the `CustomDocument` above:
 

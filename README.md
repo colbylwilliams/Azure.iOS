@@ -1,16 +1,12 @@
-# Azure.iOS [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](LICENSE) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
+# Azure.iOS [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](LICENSE) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Build status][azuredata-ios-sample-build-master-badge]][azuredata-ios-sample-build-master]
 
 
-| Target               | OS      | Status                                                                                                |
-| -------------------- | ------- | ----------------------------------------------------------------------------------------------------- |
-| AzureData.framework  | iOS     | [![Build status][azuredata-ios-build-master-badge]][azuredata-ios-build-master]                       |
-| AzureData.framework  | macOS   | [![Build status][azuredata-macos-build-master-badge]][azuredata-macos-build-master]                   |
-| AzureData.framework  | tvOS    | [![Build status][azuredata-tvos-build-master-badge]][azuredata-tvos-build-master]                     |
-| AzureData.framework  | watchOS | [![Build status][azuredata-watchos-build-master-badge]][azuredata-watchos-build-master]               |
-| AzureData Sample App | iOS     | [![Build status][azuredata-ios-sample-build-master-badge]][azuredata-ios-sample-build-master]         |
-| AzureData Sample App | macOS   | _coming soon_                                                                                         |
-| AzureData Sample App | tvOS    | _coming soon_                                                                                         |
-| AzureData Sample App | watchOS | _coming soon_                                                                                         |
+| OS      | Support  |
+| ------- | -------- |
+| iOS     | 10.0+    |
+| macOS   | 10.0+    |
+| tvOS    | 10.0+    |
+| watchOS | 3.0+     |
 
 
 # Configure

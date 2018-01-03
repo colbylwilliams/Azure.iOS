@@ -15,8 +15,6 @@ import Foundation
 ///   and a document may contain any number of custom properties as well as an optional list of attachments.
 ///   Document is an application resource and can be authorized using the master key or resource keys.
 open class Document : CodableResource, CustomDebugStringConvertible {
-    
-//    let sysKeys = ["id", "_rid", "_self", "_etag", "_ts", "_attachments"]
 
     public static var type = "docs"
     public static var list = "Documents"
@@ -39,32 +37,7 @@ open class Document : CodableResource, CustomDebugStringConvertible {
     public init (_ id: String) { self.id = id; resourceId = "" }
     
     
-//    public required init(from decoder: Decoder) throws {
-//
-//        let container = try decoder.container(keyedBy: CodingKeys.self)
-//
-//        id              = try container.decode(String.self, forKey: .id)
-//        resourceId      = try container.decode(String.self, forKey: .resourceId)
-//        selfLink        = try container.decode(String.self, forKey: .selfLink)
-//        etag            = try container.decode(String.self, forKey: .etag)
-//        timestamp       = try container.decode(Date.self,   forKey: .timestamp)
-//        attachmentsLink = try container.decode(String.self, forKey: .attachmentsLink)
-//    }
-//
-//
-//    open func encode(to encoder: Encoder) throws {
-//
-//        var container = encoder.container(keyedBy: CodingKeys.self)
-//
-//        try container.encode(id, forKey: .id)
-//        try container.encode(resourceId, forKey: .resourceId)
-//        try container.encode(selfLink, forKey: .selfLink)
-//        try container.encode(etag, forKey: .etag)
-//        try container.encode(timestamp, forKey: .timestamp)
-//        try container.encode(attachmentsLink, forKey: .attachmentsLink)
-//    }
-    
-    public var debugDescription: String {
+    open var debugDescription: String {
         return "Document :\n\tid : \(self.id)\n\tresourceId : \(self.resourceId)\n\tselfLink : \(self.selfLink.valueOrNilString)\n\tetag : \(self.etag.valueOrNilString)\n\ttimestamp : \(self.timestamp.valueOrNilString)\n\tattachmentsLink : \(self.attachmentsLink.valueOrNilString)\n--"
     }
 }

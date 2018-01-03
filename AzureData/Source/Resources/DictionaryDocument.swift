@@ -18,23 +18,7 @@ public class DictionaryDocument : Document {
     
     let sysKeys = ["id", "_rid", "_self", "_etag", "_ts", "_attachments"]
     
-    //public static var type = "docs"
-    //public static var list = "Documents"
-    
-//    public private(set) var id:         String
-//    public private(set) var resourceId: String
-//    public private(set) var selfLink:   String?
-//    public private(set) var etag:       String?
-//    public private(set) var timestamp:  Date?
-    
-    
-    /// Gets the self-link corresponding to attachments of the document from the Azure Cosmos DB service.
-//    public private(set) var attachmentsLink: String?
-    
-    /// Gets or sets the time to live in seconds of the document in the Azure Cosmos DB service.
-//    public var timeToLive: Int? = nil
-    
-    
+
     public private(set) var data: CodableDictionary?
     
     
@@ -54,27 +38,9 @@ public class DictionaryDocument : Document {
         }
     }
     
-//    private enum SysCodingKeys: String, CodingKey {
-//        case id
-//        case resourceId         = "_rid"
-//        case selfLink           = "_self"
-//        case etag               = "_etag"
-//        case timestamp          = "_ts"
-//        case attachmentsLink    = "_attachments"
-//    }
-    
     public required init(from decoder: Decoder) throws {
         
         try super.init(from: decoder)
-        
-//        let sysContainer = try decoder.container(keyedBy: SysCodingKeys.self)
-//
-//        id              = try sysContainer.decode(String.self, forKey: .id)
-//        resourceId      = try sysContainer.decode(String.self, forKey: .resourceId)
-//        selfLink        = try sysContainer.decode(String.self, forKey: .selfLink)
-//        etag            = try sysContainer.decode(String.self, forKey: .etag)
-//        timestamp       = try sysContainer.decode(Date.self,   forKey: .timestamp)
-//        attachmentsLink = try sysContainer.decode(String.self, forKey: .attachmentsLink)
         
         if Swift.type(of: self) == DictionaryDocument.self {
             
@@ -94,15 +60,6 @@ public class DictionaryDocument : Document {
     public override func encode(to encoder: Encoder) throws {
         
         try super.encode(to: encoder)
-        
-//        var sysContainer = encoder.container(keyedBy: SysCodingKeys.self)
-//
-//        try sysContainer.encode(id, forKey: .id)
-//        try sysContainer.encode(resourceId, forKey: .resourceId)
-//        try sysContainer.encode(selfLink, forKey: .selfLink)
-//        try sysContainer.encode(etag, forKey: .etag)
-//        try sysContainer.encode(timestamp, forKey: .timestamp)
-//        try sysContainer.encode(attachmentsLink, forKey: .attachmentsLink)
         
         if Swift.type(of: self) == DictionaryDocument.self {
             

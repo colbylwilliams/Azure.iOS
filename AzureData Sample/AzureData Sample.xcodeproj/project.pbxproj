@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		930B2F4D1FFD61FD00F86BF1 /* CustomDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930B2F4C1FFD61FD00F86BF1 /* CustomDocument.swift */; };
 		B53401511FB386890063BCC7 /* AzureData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B53401501FB386890063BCC7 /* AzureData.framework */; };
 		B55AEF861FB3480300F7BEED /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B55AEF851FB3480300F7BEED /* AppDelegate.swift */; };
 		B55AEF8B1FB3480400F7BEED /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B55AEF891FB3480400F7BEED /* Main.storyboard */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		930B2F4C1FFD61FD00F86BF1 /* CustomDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDocument.swift; sourceTree = "<group>"; };
 		B53401501FB386890063BCC7 /* AzureData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AzureData.framework; path = Carthage/Build/iOS/AzureData.framework; sourceTree = "<group>"; };
 		B55AEF831FB3480300F7BEED /* AzureData iOS Sample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AzureData iOS Sample.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B55AEF851FB3480300F7BEED /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -114,6 +116,7 @@
 				B55AEF8E1FB3480400F7BEED /* LaunchScreen.storyboard */,
 				B55AEF891FB3480400F7BEED /* Main.storyboard */,
 				B5860EDB1FBD41AF003CB80A /* Extensions.swift */,
+				930B2F4C1FFD61FD00F86BF1 /* CustomDocument.swift */,
 			);
 			path = "AzureData iOS Sample";
 			sourceTree = "<group>";
@@ -292,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B55AEFD01FB3495100F7BEED /* DocumentTableViewController.swift in Sources */,
+				930B2F4D1FFD61FD00F86BF1 /* CustomDocument.swift in Sources */,
 				B55AEFD41FB3495100F7BEED /* CollectionTableViewController.swift in Sources */,
 				B55AEFCE1FB3495100F7BEED /* StoredProcedureTableViewController.swift in Sources */,
 				B55AEFCD1FB3495100F7BEED /* UserDefinedFunctionTableViewController.swift in Sources */,

@@ -16,7 +16,7 @@ class DocumentTableViewController: UITableViewController {
     var database: Database!
     var collection: DocumentCollection!
     
-    var documents: [DictionaryDocument] = []
+    var documents: [documentType] = []
     
     
     override func viewDidLoad() {
@@ -30,8 +30,7 @@ class DocumentTableViewController: UITableViewController {
     
     func refreshData() {
         
-        //collection.get(documentsAs: Document.self) { response in
-        collection.get(documentsAs: DictionaryDocument.self) { response in
+        collection.get(documentsAs: documentType.self) { response in
             debugPrint(response.result)
             DispatchQueue.main.async {
                 if let items = response.resource?.items {
@@ -70,11 +69,11 @@ class DocumentTableViewController: UITableViewController {
 //        
 //        return
         
-        let doc = DictionaryDocument()
+        let doc = documentType()
         
-        doc["testNumber"] = 1_000_000
-        doc["testString"] = "Yeah baby\nRock n Roll"
-        doc["testDate"]   = Date()
+//        doc["testNumber"] = 1_000_000
+//        doc["testString"] = "Yeah baby\nRock n Roll"
+//        doc["testDate"]   = Date()
         
         collection.create(doc) { r in
             debugPrint(r.result)

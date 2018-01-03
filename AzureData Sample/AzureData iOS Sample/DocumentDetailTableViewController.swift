@@ -11,7 +11,7 @@ import AzureData
 
 class DocumentDetailTableViewController: UITableViewController {
 
-    var document: DictionaryDocument? = nil
+    var document: documentType? = nil
 
     
     // MARK: - Table view data source
@@ -22,7 +22,7 @@ class DocumentDetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0: return 6 // system properties
-        case 1: return document?.data?.count ?? 0
+        case 1: return document?.extraItemCount ?? 0
         default: return 0
         }
     }
@@ -50,7 +50,7 @@ class DocumentDetailTableViewController: UITableViewController {
 }
 
 
-fileprivate extension DictionaryDocument {
+fileprivate extension documentType {
     
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -87,21 +87,39 @@ fileprivate extension DictionaryDocument {
         return (title, detail)
     }
     
-    func itemAt(index i: Int) -> (title: String, detail: String) {
-        var title = "nil"
-        var detail = "nil"
+    var extraItemCount: Int {
         
-        if let data = self.data {
-            title = Array(data.dictionary.keys)[i]
-            if let d = Array(data.dictionary.values)[i] { detail = "\(d)" }
-        }
+        //return self.data?.count ?? 0
         
-        return(title, detail)
+        return 3
     }
+    
+    func itemAt(index i: Int) -> (title: String, detail: String) {
+        switch i {
+        case 0: return ("testNumber", "\(testNumber ?? 0)")
+        case 1: return ("testDate", "\(testDate?.description ?? "nil")")
+        case 2: return ("testString", "\(testString ?? "nil")")
+        default: return("nil", "nil")
+        }
+    }
+    
+//    func itemAt(index i: Int) -> (title: String, detail: String) {
+//        var title = "nil"
+//        var detail = "nil"
+//
+//        if let data = self.data {
+//            title = Array(data.dictionary.keys)[i]
+//            if let d = Array(data.dictionary.values)[i] {
+//                detail = "\(d)"
+//            }
+//        }
+//
+//        return(title, detail)
+//    }
 
     var timestampString: String {
         if let ts = self.timestamp {
-            return DictionaryDocument.dateFormatter.string(from: ts)
+            return documentType.dateFormatter.string(from: ts)
         }
         return "nil"
     }

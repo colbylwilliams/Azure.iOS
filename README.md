@@ -126,13 +126,74 @@ database.delete (collection) { s in
 
 ## Documents
 
+There are two different classes you can use to interact with documents:
+
+### `Document`
+`Document` is intended to be inherited by your custom model types. Subclasses must conform to the `Codable` protocal and require minimal boilerplate code for successful serialization/deserialization.
+
+Here is an example of a class `CustomDocument` that inherits from `Document`:
+
+```swift
+class CustomDocument: Document {
+    
+    var testDate:   Date?
+    var testNumber: Double?
+    
+    public override init () { super.init() }
+    public override init (_ id: String) { super.init(id) }
+    
+    public required init(from decoder: Decoder) throws {
+        try super.init(from: decoder)
+        
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        
+        testDate    = try container.decode(Date.self,   forKey: .testDate)
+        testNumber  = try container.decode(Double.self, forKey: .testNumber)
+    }
+    
+    public override func encode(to encoder: Encoder) throws {
+        try super.encode(to: encoder)
+
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        try container.encode(testDate,      forKey: .testDate)
+        try container.encode(testNumber,    forKey: .testNumber)
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case testDate
+        case testNumber
+    }
+}
+```
+
+### `DictionaryDocument` 
+`DictionaryDocument` behaves very much like a `[String:Any]` dictionary while handling all properties required by the database.  This allows you to interact with the document directly using subscript syntax.  `DictionaryDocument` cannot be subclassed.
+
+Here is an example of using `DictionaryDocument` to create a document with the same properties as the `CustomDocument` above:
+
+```swift
+let newDocument = DictionaryDocument()
+
+newDocument["testDate"]   = Date(timeIntervalSince1970: 1510865595)         
+newDocument["testNumber"] = 1_000_000
+```
+
 #### Create
 ```swift
-let newDocument = ADDocument()
-            
-newDocument["aNumber"] = 1_500_000
-newDocument["aString"] = "Hello!"
-            
+let document = CustomDocument()
+
+document.testDate   = Date(timeIntervalSince1970: 1510865595)
+document.testNumber = 1_000_000
+
+// or
+
+let document = DictionaryDocument()
+
+document["testDate"]   = Date(timeIntervalSince1970: 1510865595)         
+document["testNumber"] = 1_000_000
+
+
 AzureData.create (document, inCollection: collectionId, inDatabase: databaseId) { r in
     // document = r.resource
 }
@@ -148,30 +209,30 @@ collection.create (document) { r in
 
 #### List
 ```swift
-AzureData.get (documentsAs: ADDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
+AzureData.get (documentsAs: CustomDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
     // documents = r.resource?.items
 }
 
-AzureData.get (documentsAs: ADDocument.self, in: collection) { r in
+AzureData.get (documentsAs: CustomDocument.self, in: collection) { r in
     // documents = r.resource?.items
 }
 
-collection.get (documentsAs: ADDocument.self) { r in
+collection.get (documentsAs: CustomDocument.self) { r in
     // documents in r.resource?.list
 }
 ```
 
 #### Get
 ```swift
-AzureData.get (documentWithId: id, as: ADDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
+AzureData.get (documentWithId: id, as: CustomDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
     // document = r.resource
 }
 
-AzureData.get (documentWithId: id, as: ADDocument.self, in: collection) { r in
+AzureData.get (documentWithId: id, as: CustomDocument.self, in: collection) { r in
     // document = r.resource
 }
 
-collection.get (documentWithResourceId: id: as: ADDocument.self) { r in
+collection.get (documentWithResourceId: id: as: CustomDocument.self) { r in
     // document = r.resource
 }
 ```

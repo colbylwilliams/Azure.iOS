@@ -1,13 +1,15 @@
 # Azure.iOS [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](LICENSE) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Build status][azuredata-ios-sample-build-master-badge]][azuredata-ios-sample-build-master]
 
 
-| OS      | Support  |
-| ------- | -------- |
-| iOS     | 10.0+    |
-| macOS   | 10.0+    |
-| tvOS    | 10.0+    |
-| watchOS | 3.0+     |
+_**This SDK was originally created as part of [Azure.Mobile][azure-mobile] - a framework for rapidly creating iOS and android apps with modern, highly-scalable backends on Azure.**_
 
+_We're building Azure.Mobile with two simple objectives:_
+
+1. _Enable developers to create, configure, deploy all necessary backend services fast — ideally under 10 minutes with only a few clicks_
+2. _Provide native iOS and android SDKs with delightful APIs to interact with the services_
+
+
+----
 
 # Configure
 
@@ -684,3 +686,5 @@ AzureData.get (offerWithId: id) { r in
 [azuredata-watchos-build-master-badge]:https://build.mobile.azure.com/v0.1/apps/8deac5ea-505c-4d94-821a-cb1f8165198e/branches/master/badge
 [azuredata-watchos-sample-build-master]:https://mobile.azure.com/orgs/Azure.Mobile/apps/AzureData-iOS-Sample/build/branches/master
 [azuredata-watchos-sample-build-master-badge]:https://build.mobile.azure.com/v0.1/apps/5ba90a44-853c-4bb1-9a18-eab19fb79e34/branches/master/badge
+
+[azure-mobile]:https://aka.ms/mobile

@@ -21,6 +21,10 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		930B2F481FFD56AB00F86BF1 /* DictionaryDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930B2F471FFD56AB00F86BF1 /* DictionaryDocument.swift */; };
+		930B2F491FFD56AB00F86BF1 /* DictionaryDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930B2F471FFD56AB00F86BF1 /* DictionaryDocument.swift */; };
+		930B2F4A1FFD56AB00F86BF1 /* DictionaryDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930B2F471FFD56AB00F86BF1 /* DictionaryDocument.swift */; };
+		930B2F4B1FFD56AB00F86BF1 /* DictionaryDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930B2F471FFD56AB00F86BF1 /* DictionaryDocument.swift */; };
 		931EA5BF1FBE201F003CCFF4 /* DocumentClientExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EA5BE1FBE201F003CCFF4 /* DocumentClientExtensions.swift */; };
 		931EA5C11FBE2775003CCFF4 /* CodableResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EA5C01FBE2775003CCFF4 /* CodableResourceTests.swift */; };
 		931EA5C21FBE2775003CCFF4 /* CodableResourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 931EA5C01FBE2775003CCFF4 /* CodableResourceTests.swift */; };
@@ -273,6 +277,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		930B2F471FFD56AB00F86BF1 /* DictionaryDocument.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryDocument.swift; sourceTree = "<group>"; };
 		931EA5BE1FBE201F003CCFF4 /* DocumentClientExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentClientExtensions.swift; sourceTree = "<group>"; };
 		931EA5C01FBE2775003CCFF4 /* CodableResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableResourceTests.swift; sourceTree = "<group>"; };
 		93F9ACCB1FC0CA4800AC240C /* DocumentClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentClientError.swift; sourceTree = "<group>"; };
@@ -504,6 +509,7 @@
 				B507D4F01FBB722000B2D18D /* Conflict.swift */,
 				B58361C71FBA13D8001CEC66 /* Database.swift */,
 				B58361EF1FBA19A7001CEC66 /* DatabaseAccount.swift */,
+				930B2F471FFD56AB00F86BF1 /* DictionaryDocument.swift */,
 				B58361BD1FBA13A0001CEC66 /* Document.swift */,
 				B58361C21FBA13B0001CEC66 /* DocumentCollection.swift */,
 				B58361D11FBA15A8001CEC66 /* Offer.swift */,
@@ -871,6 +877,7 @@
 				B52240941FB3407C00D0343F /* NetworkReachabilityManager.swift in Sources */,
 				B58361CE1FBA1439001CEC66 /* Attachment.swift in Sources */,
 				B52240951FB3407C00D0343F /* TokenProvider.swift in Sources */,
+				930B2F491FFD56AB00F86BF1 /* DictionaryDocument.swift in Sources */,
 				B58361B31FB78F7A001CEC66 /* Resources.swift in Sources */,
 				93F9ACCD1FC0CA4800AC240C /* DocumentClientError.swift in Sources */,
 				B58361D81FBA16F9001CEC66 /* Permission.swift in Sources */,
@@ -937,6 +944,7 @@
 				B52240971FB3407D00D0343F /* NetworkReachabilityManager.swift in Sources */,
 				B58361CF1FBA1439001CEC66 /* Attachment.swift in Sources */,
 				B52240981FB3407D00D0343F /* TokenProvider.swift in Sources */,
+				930B2F4A1FFD56AB00F86BF1 /* DictionaryDocument.swift in Sources */,
 				B58361AE1FB78F7A001CEC66 /* Resources.swift in Sources */,
 				93F9ACCE1FC0CA4800AC240C /* DocumentClientError.swift in Sources */,
 				B58361D91FBA16F9001CEC66 /* Permission.swift in Sources */,
@@ -1003,6 +1011,7 @@
 				B522409A1FB3407E00D0343F /* NetworkReachabilityManager.swift in Sources */,
 				B58361D01FBA1439001CEC66 /* Attachment.swift in Sources */,
 				B522409B1FB3407E00D0343F /* TokenProvider.swift in Sources */,
+				930B2F4B1FFD56AB00F86BF1 /* DictionaryDocument.swift in Sources */,
 				B58361A91FB78F78001CEC66 /* Resources.swift in Sources */,
 				93F9ACCF1FC0CA4800AC240C /* DocumentClientError.swift in Sources */,
 				B58361DA1FBA16F9001CEC66 /* Permission.swift in Sources */,
@@ -1040,6 +1049,7 @@
 				B52240911FB3407900D0343F /* NetworkReachabilityManager.swift in Sources */,
 				B58361CD1FBA1439001CEC66 /* Attachment.swift in Sources */,
 				B52240921FB3407900D0343F /* TokenProvider.swift in Sources */,
+				930B2F481FFD56AB00F86BF1 /* DictionaryDocument.swift in Sources */,
 				B58361D71FBA16F9001CEC66 /* Permission.swift in Sources */,
 				93F9ACCC1FC0CA4800AC240C /* DocumentClientError.swift in Sources */,
 				B58361C31FBA13B0001CEC66 /* DocumentCollection.swift in Sources */,

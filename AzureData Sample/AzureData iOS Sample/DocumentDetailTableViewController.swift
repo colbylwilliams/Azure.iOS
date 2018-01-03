@@ -11,7 +11,7 @@ import AzureData
 
 class DocumentDetailTableViewController: UITableViewController {
 
-    var document: Document? = nil
+    var document: DictionaryDocument? = nil
 
     
     // MARK: - Table view data source
@@ -50,7 +50,7 @@ class DocumentDetailTableViewController: UITableViewController {
 }
 
 
-fileprivate extension Document {
+fileprivate extension DictionaryDocument {
     
     static let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -101,7 +101,7 @@ fileprivate extension Document {
 
     var timestampString: String {
         if let ts = self.timestamp {
-            return Document.dateFormatter.string(from: ts)
+            return DictionaryDocument.dateFormatter.string(from: ts)
         }
         return "nil"
     }

@@ -1,18 +1,29 @@
-# Azure.iOS [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](LICENSE) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Build status][azuredata-ios-sample-build-master-badge]][azuredata-ios-sample-build-master]
-
-
-_This SDK was originally created as part of **[Azure.Mobile][azure-mobile]** - a framework for rapidly creating iOS and android apps with modern, highly-scalable backends on Azure. We're building Azure.Mobile with two simple objectives:_
+_This SDK was originally created as part of **[Azure.Mobile](https://aka.ms/mobile)** — a framework for rapidly creating iOS and android apps with modern, highly-scalable backends on Azure. Azure.Mobile has two simple objectives:_
 
 1. _Enable developers to create, configure, deploy all necessary backend services fast — ideally under 10 minutes with only a few clicks_
 2. _Provide native iOS and android SDKs with delightful APIs to interact with the services_
 
 
----
+# Azure.iOS [![GitHub license](https://img.shields.io/badge/license-MIT-lightgrey.svg)](LICENSE) [![Carthage compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage) [![Build status][azuredata-ios-sample-build-master-badge]][azuredata-ios-sample-build-master] 
+
+
 
 # Configure
 
+Before making calls to AzureData, you'll need to call `AzureData.configure`.  We recommend doing this in `application(_:didFinishLaunchingWithOptions:)`.
+
 ```swift
-AzureData.configure (forAccountNamed: "cosmosDb name", withKey: "read-write key", ofType: .master)
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    
+    AzureData.configure (forAccountNamed: "cosmosDb name", withKey: "read-write key", ofType: .master)
+    
+    // uncomment to enable verbose logging
+    // AzureData.verboseLogging = true
+
+    // ...
+
+    return true
+}
 ```
 
 
@@ -125,6 +136,7 @@ database.delete (collection) { s in
 There are two different classes you can use to interact with documents:
 
 ### Document
+
 The `Document` type is intended to be inherited by your custom model types. Subclasses must conform to the `Codable` protocal and require minimal boilerplate code for successful serialization/deserialization.
 
 Here is an example of a class `CustomDocument` that inherits from `Document`:
@@ -164,16 +176,18 @@ class CustomDocument: Document {
 ```
 
 ### DictionaryDocument
+
 The `DictionaryDocument` type behaves very much like a `[String:Any]` dictionary while handling all properties required by the database.  This allows you to interact with the document directly using subscript syntax.  `DictionaryDocument` cannot be subclassed.
 
 Here is an example of using `DictionaryDocument` to create a document with the same properties as the `CustomDocument` above:
 
 ```swift
-let newDocument = DictionaryDocument()
+let document = DictionaryDocument()
 
-newDocument["testDate"]   = Date(timeIntervalSince1970: 1510865595)         
-newDocument["testNumber"] = 1_000_000
+document["testDate"]   = Date(timeIntervalSince1970: 1510865595)         
+document["testNumber"] = 1_000_000
 ```
+
 
 #### Create
 ```swift

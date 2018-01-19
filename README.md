@@ -1,3 +1,5 @@
+![azure-loves-swift](assets/azure_loves_swift4.png?raw=true "azure loves swift")
+
 _This SDK was originally created as part of **[Azure.Mobile](https://aka.ms/mobile)** — a framework for rapidly creating iOS and android apps with modern, highly-scalable backends on Azure. Azure.Mobile has two simple objectives:_
 
 1. _Enable developers to create, configure, deploy all necessary backend services fast — ideally under 10 minutes with only a few clicks_

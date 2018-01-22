@@ -28,7 +28,7 @@ class DocumentTests: AzureDataTests {
         
         let now = Date()
         
-        let doc = Document()
+        let doc = DictionaryDocument()
         
         doc["dateTest"] = now
     
@@ -36,7 +36,7 @@ class DocumentTests: AzureDataTests {
             
             let data = try encoder.encode(doc)
             
-            let doc2 = try decoder.decode(Document.self, from: data)
+            let doc2 = try decoder.decode(DictionaryDocument.self, from: data)
         
             let date = doc2["dateTest"] as! Date
             
@@ -51,11 +51,11 @@ class DocumentTests: AzureDataTests {
     
     func testThatCreateValidatesId() {
         
-        AzureData.create(Document(idWith256Chars), inCollection: collectionId, inDatabase: databaseId) { r in
+        AzureData.create(DictionaryDocument(idWith256Chars), inCollection: collectionId, inDatabase: databaseId) { r in
             XCTAssertNotNil(r.error)
         }
         
-        AzureData.create(Document(idWithWhitespace), inCollection: collectionId, inDatabase: databaseId) { r in
+        AzureData.create(DictionaryDocument(idWithWhitespace), inCollection: collectionId, inDatabase: databaseId) { r in
             XCTAssertNotNil(r.error)
         }
     }
@@ -63,15 +63,15 @@ class DocumentTests: AzureDataTests {
     
     func testDocumentCrud() {
         
-        var createResponse:     Response<Document>?
-        var listResponse:       ListResponse<Document>?
-        var getResponse:        Response<Document>?
-        var queryResponse:      ListResponse<Document>?
-        var refreshResponse:    Response<Document>?
+        var createResponse:     Response<DictionaryDocument>?
+        var listResponse:       ListResponse<DictionaryDocument>?
+        var getResponse:        Response<DictionaryDocument>?
+        var queryResponse:      ListResponse<DictionaryDocument>?
+        var refreshResponse:    Response<DictionaryDocument>?
         var deleteResponse:     DataResponse?
 
         
-        let newDocument = Document(resourceId)
+        let newDocument = DictionaryDocument(resourceId)
         
         newDocument[customStringKey] = customStringValue
         newDocument[customNumberKey] = customNumberValue
@@ -102,7 +102,7 @@ class DocumentTests: AzureDataTests {
         
         
         // List
-        AzureData.get(documentsAs: Document.self, inCollection: collectionId, inDatabase: databaseId) { r in
+        AzureData.get(documentsAs: DictionaryDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
             listResponse = r
             self.listExpectation.fulfill()
         }
@@ -123,7 +123,7 @@ class DocumentTests: AzureDataTests {
             .and("\(customNumberKey)", is: customNumberValue)
             .orderBy("_etag", descending: true)
         
-        AzureData.query(documentsIn: collectionId, inDatabase: databaseId, with: query) { r in
+        AzureData.query(documentsIn: collectionId, inDatabase: databaseId, with: query) { (r:ListResponse<DictionaryDocument>?) in
             queryResponse = r
             self.queryExpectation.fulfill()
         }
@@ -145,7 +145,7 @@ class DocumentTests: AzureDataTests {
         // Get
         //if createResponse?.result.isSuccess ?? false {
             
-            AzureData.get(documentWithId: resourceId, as: Document.self, inCollection: collectionId, inDatabase: databaseId) { r in
+            AzureData.get(documentWithId: resourceId, as: DictionaryDocument.self, inCollection: collectionId, inDatabase: databaseId) { r in
                 getResponse = r
                 self.getExpectation.fulfill()
             }

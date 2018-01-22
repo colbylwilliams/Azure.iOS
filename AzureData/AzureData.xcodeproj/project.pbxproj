@@ -6,20 +6,6 @@
 	objectVersion = 48;
 	objects = {
 
-/* Begin PBXAggregateTarget section */
-		B5F76C571F96A848001E8B11 /* CommonCryptoModuleMap */ = {
-			isa = PBXAggregateTarget;
-			buildConfigurationList = B5F76C581F96A848001E8B11 /* Build configuration list for PBXAggregateTarget "CommonCryptoModuleMap" */;
-			buildPhases = (
-				B5F76C5B1F96A884001E8B11 /* ShellScript */,
-			);
-			dependencies = (
-			);
-			name = CommonCryptoModuleMap;
-			productName = CommonCryptoModuleMap;
-		};
-/* End PBXAggregateTarget section */
-
 /* Begin PBXBuildFile section */
 		930B2F481FFD56AB00F86BF1 /* DictionaryDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930B2F471FFD56AB00F86BF1 /* DictionaryDocument.swift */; };
 		930B2F491FFD56AB00F86BF1 /* DictionaryDocument.swift in Sources */ = {isa = PBXBuildFile; fileRef = 930B2F471FFD56AB00F86BF1 /* DictionaryDocument.swift */; };
@@ -40,6 +26,14 @@
 		93F9ACD21FC0D01400AC240C /* ResourceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9ACD01FC0D01400AC240C /* ResourceError.swift */; };
 		93F9ACD31FC0D01400AC240C /* ResourceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9ACD01FC0D01400AC240C /* ResourceError.swift */; };
 		93F9ACD41FC0D01400AC240C /* ResourceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93F9ACD01FC0D01400AC240C /* ResourceError.swift */; };
+		93FA99F72003C0E200D3B3F8 /* NSData+CCHmac.h in Headers */ = {isa = PBXBuildFile; fileRef = 93FA99F52003C0E200D3B3F8 /* NSData+CCHmac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		93FA99F82003C0E200D3B3F8 /* NSData+CCHmac.h in Headers */ = {isa = PBXBuildFile; fileRef = 93FA99F52003C0E200D3B3F8 /* NSData+CCHmac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		93FA99F92003C0E200D3B3F8 /* NSData+CCHmac.h in Headers */ = {isa = PBXBuildFile; fileRef = 93FA99F52003C0E200D3B3F8 /* NSData+CCHmac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		93FA99FA2003C0E200D3B3F8 /* NSData+CCHmac.h in Headers */ = {isa = PBXBuildFile; fileRef = 93FA99F52003C0E200D3B3F8 /* NSData+CCHmac.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		93FA99FB2003C0E200D3B3F8 /* NSData+CCHmac.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FA99F62003C0E200D3B3F8 /* NSData+CCHmac.m */; };
+		93FA99FC2003C0E200D3B3F8 /* NSData+CCHmac.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FA99F62003C0E200D3B3F8 /* NSData+CCHmac.m */; };
+		93FA99FD2003C0E200D3B3F8 /* NSData+CCHmac.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FA99F62003C0E200D3B3F8 /* NSData+CCHmac.m */; };
+		93FA99FE2003C0E200D3B3F8 /* NSData+CCHmac.m in Sources */ = {isa = PBXBuildFile; fileRef = 93FA99F62003C0E200D3B3F8 /* NSData+CCHmac.m */; };
 		93FDD37C1FC1368000BD1CC3 /* ResourceCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FDD37B1FC1368000BD1CC3 /* ResourceCache.swift */; };
 		93FDD37D1FC1368000BD1CC3 /* ResourceCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FDD37B1FC1368000BD1CC3 /* ResourceCache.swift */; };
 		93FDD37E1FC1368000BD1CC3 /* ResourceCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93FDD37B1FC1368000BD1CC3 /* ResourceCache.swift */; };
@@ -239,40 +233,12 @@
 			remoteGlobalIDString = B5223FD21FB33B0F00D0343F;
 			remoteInfo = "AzureData tvOS";
 		};
-		B522410F1FB3411100D0343F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5F76C301F96A7AF001E8B11 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B5F76C571F96A848001E8B11;
-			remoteInfo = CommonCryptoModuleMap;
-		};
-		B52241111FB3411900D0343F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5F76C301F96A7AF001E8B11 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B5F76C571F96A848001E8B11;
-			remoteInfo = CommonCryptoModuleMap;
-		};
-		B52241131FB3412100D0343F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5F76C301F96A7AF001E8B11 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B5F76C571F96A848001E8B11;
-			remoteInfo = CommonCryptoModuleMap;
-		};
 		B5F76C441F96A7AF001E8B11 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B5F76C301F96A7AF001E8B11 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = B5F76C381F96A7AF001E8B11;
 			remoteInfo = AzureData;
-		};
-		B5F76C5C1F96A8E5001E8B11 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B5F76C301F96A7AF001E8B11 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B5F76C571F96A848001E8B11;
-			remoteInfo = CommonCryptoModuleMap;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -282,6 +248,8 @@
 		931EA5C01FBE2775003CCFF4 /* CodableResourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodableResourceTests.swift; sourceTree = "<group>"; };
 		93F9ACCB1FC0CA4800AC240C /* DocumentClientError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentClientError.swift; sourceTree = "<group>"; };
 		93F9ACD01FC0D01400AC240C /* ResourceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceError.swift; sourceTree = "<group>"; };
+		93FA99F52003C0E200D3B3F8 /* NSData+CCHmac.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSData+CCHmac.h"; sourceTree = "<group>"; };
+		93FA99F62003C0E200D3B3F8 /* NSData+CCHmac.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSData+CCHmac.m"; sourceTree = "<group>"; };
 		93FDD37B1FC1368000BD1CC3 /* ResourceCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourceCache.swift; sourceTree = "<group>"; };
 		B507D4F01FBB722000B2D18D /* Conflict.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Conflict.swift; sourceTree = "<group>"; };
 		B5223FB71FB33A9F00D0343F /* AzureData.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AzureData.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -410,6 +378,8 @@
 				B58361B71FBA1339001CEC66 /* Resources */,
 				B55AEFE61FB34CF600F7BEED /* Domain */,
 				B55AEFDF1FB34B7400F7BEED /* Supporting Files */,
+				93FA99F52003C0E200D3B3F8 /* NSData+CCHmac.h */,
+				93FA99F62003C0E200D3B3F8 /* NSData+CCHmac.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -563,6 +533,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B52240511FB33DAB00D0343F /* AzureData.h in Headers */,
+				93FA99F82003C0E200D3B3F8 /* NSData+CCHmac.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -571,6 +542,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B52240501FB33DA900D0343F /* AzureData.h in Headers */,
+				93FA99F92003C0E200D3B3F8 /* NSData+CCHmac.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,6 +551,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B52240F71FB3409D00D0343F /* AzureData.h in Headers */,
+				93FA99FA2003C0E200D3B3F8 /* NSData+CCHmac.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -587,6 +560,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B52240521FB33DAD00D0343F /* AzureData.h in Headers */,
+				93FA99F72003C0E200D3B3F8 /* NSData+CCHmac.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,7 +579,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				B52241101FB3411100D0343F /* PBXTargetDependency */,
 			);
 			name = "AzureData macOS";
 			productName = "AzureData macOS";
@@ -642,7 +615,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				B52241121FB3411900D0343F /* PBXTargetDependency */,
 			);
 			name = "AzureData tvOS";
 			productName = "AzureData tvOS";
@@ -679,7 +651,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				B52241141FB3412100D0343F /* PBXTargetDependency */,
 			);
 			name = "AzureData watchOS";
 			productName = "AzureData watchOS";
@@ -698,7 +669,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				B5F76C5D1F96A8E5001E8B11 /* PBXTargetDependency */,
 			);
 			name = "AzureData iOS";
 			productName = AzureData;
@@ -735,6 +705,7 @@
 				TargetAttributes = {
 					B5223FB61FB33A9F00D0343F = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Manual;
 					};
 					B5223FBE1FB33A9F00D0343F = {
@@ -743,6 +714,7 @@
 					};
 					B5223FD21FB33B0F00D0343F = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					B5223FDA1FB33B0F00D0343F = {
@@ -751,18 +723,15 @@
 					};
 					B5223FEE1FB33B2600D0343F = {
 						CreatedOnToolsVersion = 9.0;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					B5F76C381F96A7AF001E8B11 = {
 						CreatedOnToolsVersion = 9.0;
-						LastSwiftMigration = 0900;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					B5F76C411F96A7AF001E8B11 = {
-						CreatedOnToolsVersion = 9.0;
-						ProvisioningStyle = Automatic;
-					};
-					B5F76C571F96A848001E8B11 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
 					};
@@ -783,7 +752,6 @@
 			targets = (
 				B5F76C381F96A7AF001E8B11 /* AzureData iOS */,
 				B5F76C411F96A7AF001E8B11 /* AzureData iOS Tests */,
-				B5F76C571F96A848001E8B11 /* CommonCryptoModuleMap */,
 				B5223FB61FB33A9F00D0343F /* AzureData macOS */,
 				B5223FBE1FB33A9F00D0343F /* AzureData macOS Tests */,
 				B5223FD21FB33B0F00D0343F /* AzureData tvOS */,
@@ -849,23 +817,6 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		B5F76C5B1F96A884001E8B11 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# This if-statement means we'll only run the main script if the CommonCryptoModuleMap directory doesn't exist\n# Because otherwise the rest of the script causes a full recompile for anything where CommonCrypto is a dependency\n# Do a \"Clean Build Folder\" to remove this directory and trigger the rest of the script to run\nif [ -d \"${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap\" ]; then\necho \"${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap directory already exists, so skipping the rest of the script.\"\nexit 0\nfi\n\nmkdir -p \"${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap\"\ncat <<EOF > \"${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap/module.modulemap\"\nmodule CommonCrypto [system] {\n    header \"${SDKROOT}/usr/include/CommonCrypto/CommonCrypto.h\"\n    export *\n}\nEOF\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		B5223FB21FB33A9F00D0343F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -885,6 +836,7 @@
 				B58361C41FBA13B0001CEC66 /* DocumentCollection.swift in Sources */,
 				B5B6AC251FBA4B3900B93106 /* Query.swift in Sources */,
 				93FDD37D1FC1368000BD1CC3 /* ResourceCache.swift in Sources */,
+				93FA99FC2003C0E200D3B3F8 /* NSData+CCHmac.m in Sources */,
 				931EA5C41FBE6920003CCFF4 /* DocumentClientExtensions.swift in Sources */,
 				B58361B41FB78F7A001CEC66 /* Response.swift in Sources */,
 				B52241021FB3409F00D0343F /* AzureData.swift in Sources */,
@@ -952,6 +904,7 @@
 				B58361C51FBA13B0001CEC66 /* DocumentCollection.swift in Sources */,
 				B5B6AC261FBA4B3900B93106 /* Query.swift in Sources */,
 				93FDD37E1FC1368000BD1CC3 /* ResourceCache.swift in Sources */,
+				93FA99FD2003C0E200D3B3F8 /* NSData+CCHmac.m in Sources */,
 				931EA5C61FBE6922003CCFF4 /* DocumentClientExtensions.swift in Sources */,
 				B58361AF1FB78F7A001CEC66 /* Response.swift in Sources */,
 				B52240FD1FB3409E00D0343F /* AzureData.swift in Sources */,
@@ -1019,6 +972,7 @@
 				B58361C61FBA13B0001CEC66 /* DocumentCollection.swift in Sources */,
 				B5B6AC271FBA4B3900B93106 /* Query.swift in Sources */,
 				93FDD37F1FC1368000BD1CC3 /* ResourceCache.swift in Sources */,
+				93FA99FE2003C0E200D3B3F8 /* NSData+CCHmac.m in Sources */,
 				931EA5C51FBE6922003CCFF4 /* DocumentClientExtensions.swift in Sources */,
 				B58361AA1FB78F78001CEC66 /* Response.swift in Sources */,
 				B52240F81FB3409D00D0343F /* AzureData.swift in Sources */,
@@ -1057,6 +1011,7 @@
 				B583619A1FB779B6001CEC66 /* Response.swift in Sources */,
 				B5B6AC241FBA4B3900B93106 /* Query.swift in Sources */,
 				93FDD37C1FC1368000BD1CC3 /* ResourceCache.swift in Sources */,
+				93FA99FB2003C0E200D3B3F8 /* NSData+CCHmac.m in Sources */,
 				931EA5BF1FBE201F003CCFF4 /* DocumentClientExtensions.swift in Sources */,
 				B583619D1FB77A70001CEC66 /* Resources.swift in Sources */,
 				B52241071FB3409F00D0343F /* AzureData.swift in Sources */,
@@ -1119,30 +1074,10 @@
 			target = B5223FD21FB33B0F00D0343F /* AzureData tvOS */;
 			targetProxy = B5223FDD1FB33B0F00D0343F /* PBXContainerItemProxy */;
 		};
-		B52241101FB3411100D0343F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B5F76C571F96A848001E8B11 /* CommonCryptoModuleMap */;
-			targetProxy = B522410F1FB3411100D0343F /* PBXContainerItemProxy */;
-		};
-		B52241121FB3411900D0343F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B5F76C571F96A848001E8B11 /* CommonCryptoModuleMap */;
-			targetProxy = B52241111FB3411900D0343F /* PBXContainerItemProxy */;
-		};
-		B52241141FB3412100D0343F /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B5F76C571F96A848001E8B11 /* CommonCryptoModuleMap */;
-			targetProxy = B52241131FB3412100D0343F /* PBXContainerItemProxy */;
-		};
 		B5F76C451F96A7AF001E8B11 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B5F76C381F96A7AF001E8B11 /* AzureData iOS */;
 			targetProxy = B5F76C441F96A7AF001E8B11 /* PBXContainerItemProxy */;
-		};
-		B5F76C5D1F96A8E5001E8B11 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B5F76C571F96A848001E8B11 /* CommonCryptoModuleMap */;
-			targetProxy = B5F76C5C1F96A8E5001E8B11 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1151,6 +1086,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1170,6 +1106,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -1178,6 +1115,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -1239,6 +1177,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -1254,6 +1193,7 @@
 				PRODUCT_NAME = AzureData;
 				SDKROOT = appletvos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 3;
 				TVOS_DEPLOYMENT_TARGET = 11.1;
@@ -1264,6 +1204,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -1320,6 +1261,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -1335,6 +1277,7 @@
 				PRODUCT_NAME = AzureData;
 				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 4;
 				WATCHOS_DEPLOYMENT_TARGET = 4.0;
@@ -1345,6 +1288,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -1491,7 +1435,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				HEADER_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap";
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1519,7 +1462,6 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				HEADER_SEARCH_PATHS = "${BUILT_PRODUCTS_DIR}/CommonCryptoModuleMap";
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -1559,26 +1501,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		B5F76C591F96A848001E8B11 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N7C38P267Q;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx watchsimulator watchos appletvsimulator appletvos";
-			};
-			name = Debug;
-		};
-		B5F76C5A1F96A848001E8B11 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N7C38P267Q;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos macosx watchsimulator watchos appletvsimulator appletvos";
 			};
 			name = Release;
 		};
@@ -1653,15 +1575,6 @@
 			buildConfigurations = (
 				B5F76C511F96A7AF001E8B11 /* Debug */,
 				B5F76C521F96A7AF001E8B11 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
-		};
-		B5F76C581F96A848001E8B11 /* Build configuration list for PBXAggregateTarget "CommonCryptoModuleMap" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B5F76C591F96A848001E8B11 /* Debug */,
-				B5F76C5A1F96A848001E8B11 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

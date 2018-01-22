@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 /// Represents a document collection in the Azure Cosmos DB service.
 /// A collection is a named logical container for documents.
 ///

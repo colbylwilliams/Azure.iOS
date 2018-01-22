@@ -122,7 +122,11 @@ public extension DocumentCollection {
     public func query (documentsWith query: Query, callback: @escaping (ListResponse<Document>) -> ()) {
         return DocumentClient.default.query(documentsIn: self, with: query, callback: callback)
     }
-    
+
+    public func query (documentsWith query: Query, callback: @escaping (ListResponse<DictionaryDocument>) -> ()) {
+        return DocumentClient.default.query(documentsIn: self, with: query, callback: callback)
+    }
+
     
     
     // MARK: Stored Procedures

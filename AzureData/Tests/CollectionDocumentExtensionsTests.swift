@@ -24,16 +24,16 @@ class CollectionDocumentExtensionsTests: AzureDataTests {
     
     func testCollectionCrud() {
         
-        var createResponse:     Response<Document>?
-        var listResponse:       ListResponse<Document>?
-        var getResponse:        Response<Document>?
+        var createResponse:     Response<DictionaryDocument>?
+        var listResponse:       ListResponse<DictionaryDocument>?
+        var getResponse:        Response<DictionaryDocument>?
         var deleteResponse:     DataResponse?
-        var queryResponse:      ListResponse<Document>?
+        var queryResponse:      ListResponse<DictionaryDocument>?
 
         
         if let collection = self.collection {
         
-            let newDocument = Document(resourceId)
+            let newDocument = DictionaryDocument(resourceId)
             
             newDocument[customStringKey] = customStringValue
             newDocument[customNumberKey] = customNumberValue
@@ -59,7 +59,7 @@ class CollectionDocumentExtensionsTests: AzureDataTests {
             
             
             // List
-            collection.get(documentsAs: Document.self) { r in
+            collection.get(documentsAs: DictionaryDocument.self) { r in
                 listResponse = r
                 self.listExpectation.fulfill()
             }
@@ -76,7 +76,7 @@ class CollectionDocumentExtensionsTests: AzureDataTests {
                 .and("\(customNumberKey)", is: customNumberValue)
                 .orderBy("_etag", descending: true)
             
-            collection.query(documentsWith: query) { r in
+            collection.query(documentsWith: query) { (r:ListResponse<DictionaryDocument>?) in
                 queryResponse = r
                 self.queryExpectation.fulfill()
             }
@@ -97,7 +97,7 @@ class CollectionDocumentExtensionsTests: AzureDataTests {
             // Get
             if let document = createResponse?.resource {
                 
-                collection.get(documentWithResourceId: document.resourceId, as: Document.self) { r in
+                collection.get(documentWithResourceId: document.resourceId, as: DictionaryDocument.self) { r in
                     getResponse = r
                     self.getExpectation.fulfill()
                 }

@@ -270,6 +270,20 @@ public class DocumentClient {
     }
 
     
+    public func query (documentsIn collectionId: String, inDatabase databaseId: String, with query: Query, callback: @escaping (ListResponse<DictionaryDocument>) -> ()) {
+        
+        let resourceUri = baseUri?.document(inDatabase: databaseId, inCollection: collectionId)
+        
+        return self.query(query, at: resourceUri, callback: callback)
+    }
+    
+    public func query (documentsIn collection: DocumentCollection, with query: Query, callback: @escaping (ListResponse<DictionaryDocument>) -> ()) {
+        
+        let resourceUri = baseUri?.document(atLink: collection.selfLink!)
+        
+        return self.query(query, at: resourceUri, callback: callback)
+    }
+    
     
 
     
@@ -953,7 +967,7 @@ public class DocumentClient {
                         
                     } catch let decodeError as DecodingError {
                         
-                        if self.verboseLogging { decodeError.printLog() }
+                        if self.verboseLogging { decodeError.printLog(); print(String(data: data, encoding: .utf8) ?? "nil") }
                         
                         let docError = DocumentClientError(withData: data, response: httpResponse, error: decodeError)
                         
@@ -1012,7 +1026,7 @@ public class DocumentClient {
                     
                 } catch let decodeError as DecodingError {
                     
-                    if self.verboseLogging { decodeError.printLog() }
+                    if self.verboseLogging { decodeError.printLog(); print(String(data: data, encoding: .utf8) ?? "nil") }
                     
                     let docError = DocumentClientError(withData: data, response: httpResponse, error: decodeError)
                     

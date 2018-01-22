@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 extension DocumentClient {
     
     fileprivate static let timestamp = "_ts"

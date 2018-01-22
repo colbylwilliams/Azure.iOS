@@ -160,6 +160,13 @@ public func query (documentsIn collection: DocumentCollection, with query: Query
     return DocumentClient.default.query (documentsIn: collection, with: query, callback: callback)
 }
 
+public func query (documentsIn collectionId: String, inDatabase databaseId: String, with query: Query, callback: @escaping (ListResponse<DictionaryDocument>) -> ()) {
+    return DocumentClient.default.query (documentsIn: collectionId, inDatabase: databaseId, with: query, callback: callback)
+}
+
+public func query (documentsIn collection: DocumentCollection, with query: Query, callback: @escaping (ListResponse<DictionaryDocument>) -> ()) {
+    return DocumentClient.default.query (documentsIn: collection, with: query, callback: callback)
+}
 
 
 

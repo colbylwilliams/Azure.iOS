@@ -43,8 +43,6 @@ public class TokenProvider {
     // https://docs.microsoft.com/en-us/rest/api/documentdb/access-control-on-documentdb-resources#constructkeytoken
     public func getToken(verb v: HttpMethod, resourceType type: ResourceType, resourceLink link: String) -> (String, String) {
         
-        print("getToken")
-        
         let verb = v.rawValue
         let resourceType = type.rawValue
         let resourceLink = link
@@ -53,20 +51,11 @@ public class TokenProvider {
         
         let payload = "\(verb.lowercased())\n\(resourceType.lowercased())\n\(resourceLink)\n\(dateString.lowercased())\n\n"
         
-        print("payload:\n\(payload)")
-        
         let signiture = payload.hmac(key: key)
-        // let signiture = payload.hmac(algorithm: .SHA256, key: key)
-        
-        print("signiture:\n\(signiture)")
         
         let authString = "type=\(keyType)&ver=\(tokenVersion)&sig=\(signiture)"
         
-        print("authString:\n\(authString)")
-        
         let authStringEncoded = authString.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics)!
-        
-        print("authStringEncoded:\n\(authStringEncoded)")
         
         return (authStringEncoded, dateString)
     }
@@ -74,36 +63,19 @@ public class TokenProvider {
     
     public func getToken<T:CodableResource>(_ type: T.Type = T.self, verb v: HttpMethod, resourceLink link: String) -> (String, String) {
         
-        print("getToken T")
-        
         let verb = v.rawValue
         let resourceType = type.type
         let resourceLink = link
 
         let dateString = dateFormatter.string(from: Date())
 
-//        let verb = "post"
-//        let resourceType = "dbs"
-//        let resourceLink = ""
-//
-//        let dateString = "mon, 08 jan 2018 22:25:43 gmt"
-
         let payload = "\(verb.lowercased())\n\(resourceType.lowercased())\n\(resourceLink)\n\(dateString.lowercased())\n\n"
         
-        print("payload:\n\(payload)")
-        
         let signiture = payload.hmac(key: key)
-        // let signiture = payload.hmac(algorithm: .SHA256, key: key)
-        
-        print("signiture: \(signiture)")
         
         let authString = "type=\(keyType)&ver=\(tokenVersion)&sig=\(signiture)"
         
-        print("authString: \(authString)")
-        
         let authStringEncoded = authString.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics)!
-        
-        print("authStringEncoded: \(authStringEncoded)")
         
         return (authStringEncoded, dateString)
     }

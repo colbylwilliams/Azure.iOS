@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0910"
+   LastUpgradeVersion = "0920"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B55AEF821FB3480300F7BEED"
-               BuildableName = "AzureData iOS Sample.app"
-               BlueprintName = "AzureData iOS Sample"
-               ReferencedContainer = "container:AzureData Sample.xcodeproj">
+               BlueprintIdentifier = "93F80547202BB20300D0B4F4"
+               BuildableName = "AzureCore.framework"
+               BlueprintName = "AzureCore iOS"
+               ReferencedContainer = "container:AzureCore.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,20 +33,20 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "B55AEF951FB3480400F7BEED"
-               BuildableName = "AzureData iOS Sample UITests.xctest"
-               BlueprintName = "AzureData iOS Sample UITests"
-               ReferencedContainer = "container:AzureData Sample.xcodeproj">
+               BlueprintIdentifier = "93F80550202BB20300D0B4F4"
+               BuildableName = "AzureCore iOS Tests.xctest"
+               BlueprintName = "AzureCore iOS Tests"
+               ReferencedContainer = "container:AzureCore.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B55AEF821FB3480300F7BEED"
-            BuildableName = "AzureData iOS Sample.app"
-            BlueprintName = "AzureData iOS Sample"
-            ReferencedContainer = "container:AzureData Sample.xcodeproj">
+            BlueprintIdentifier = "93F80547202BB20300D0B4F4"
+            BuildableName = "AzureCore.framework"
+            BlueprintName = "AzureCore iOS"
+            ReferencedContainer = "container:AzureCore.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -63,16 +63,15 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B55AEF821FB3480300F7BEED"
-            BuildableName = "AzureData iOS Sample.app"
-            BlueprintName = "AzureData iOS Sample"
-            ReferencedContainer = "container:AzureData Sample.xcodeproj">
+            BlueprintIdentifier = "93F80547202BB20300D0B4F4"
+            BuildableName = "AzureCore.framework"
+            BlueprintName = "AzureCore iOS"
+            ReferencedContainer = "container:AzureCore.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -82,16 +81,15 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <BuildableProductRunnable
-         runnableDebuggingMode = "0">
+      <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "B55AEF821FB3480300F7BEED"
-            BuildableName = "AzureData iOS Sample.app"
-            BlueprintName = "AzureData iOS Sample"
-            ReferencedContainer = "container:AzureData Sample.xcodeproj">
+            BlueprintIdentifier = "93F80547202BB20300D0B4F4"
+            BuildableName = "AzureCore.framework"
+            BlueprintName = "AzureCore iOS"
+            ReferencedContainer = "container:AzureCore.xcodeproj">
          </BuildableReference>
-      </BuildableProductRunnable>
+      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

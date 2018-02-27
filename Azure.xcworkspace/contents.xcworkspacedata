@@ -2,7 +2,19 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:AzureCore/AzureCore.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:AzureAuth/AzureAuth.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:AzureData/AzureData.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:AzurePush/AzurePush.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:AzureStorage/AzureStorage.xcodeproj">
    </FileRef>
    <FileRef
       location = "group:AzureData Sample/AzureData Sample.xcodeproj">

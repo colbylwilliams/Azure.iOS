@@ -2,8 +2,8 @@
 //  Extensions.swift
 //  AzureData iOS Sample
 //
-//  Created by Colby Williams on 11/15/17.
-//  Copyright © 2017 Colby Williams. All rights reserved.
+//  Copyright (c) Microsoft Corporation. All rights reserved.
+//  Licensed under the MIT License.
 //
 
 import Foundation

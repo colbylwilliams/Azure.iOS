@@ -187,7 +187,7 @@
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
 				LastUpgradeCheck = 0900;
-				ORGANIZATIONNAME = "Colby Williams";
+				ORGANIZATIONNAME = "Microsoft";
 				TargetAttributes = {
 					B55AEF821FB3480300F7BEED = {
 						CreatedOnToolsVersion = 9.0;
